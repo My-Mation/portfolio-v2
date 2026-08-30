@@ -150,14 +150,14 @@ html.fine #cursor{display:block}
 .srclink:hover{color:var(--red)}
 
 /* ============ PINNED HORIZONTAL SIDE SCROLLING SECTION ============ */
-.h-scroll-wrapper{position:relative;height:240vh;border-top:3px solid var(--paper)}
+.h-scroll-wrapper{position:relative;height:520vh;border-top:3px solid var(--paper)}
 .h-scroll-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;background:var(--black);color:var(--paper)}
-.h-scroll-track{display:flex;gap:36px;padding:0 6vw;will-change:transform}
-.h-card{flex:0 0 clamp(320px,46vw,620px);border:1px solid rgba(241,237,226,.25);padding:36px;background:rgba(20,19,17,.95);display:flex;flex-direction:column;justify-content:space-between;position:relative;transition:border-color .3s, transform .3s}
-.h-card:hover{border-color:var(--red);transform:translateY(-4px)}
-.h-card .hc-tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--yellow);text-transform:uppercase}
-.h-card h3{font-weight:900;font-stretch:75%;font-size:clamp(28px,4vw,52px);line-height:.92;text-transform:uppercase;margin:18px 0 12px}
-.h-card p{font-size:15px;line-height:1.5;color:var(--pdim)}
+.h-scroll-track{display:flex;gap:44px;padding:0 8vw;will-change:transform}
+.h-card{flex:0 0 clamp(340px,46vw,640px);border:1px solid rgba(241,237,226,.18);padding:44px 40px;background:rgba(18,17,14,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;flex-direction:column;justify-content:space-between;position:relative;border-radius:4px;box-shadow:0 14px 40px rgba(0,0,0,.5);transition:border-color .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s cubic-bezier(.16,1,.3,1)}
+.h-card:hover{border-color:var(--red);transform:translateY(-6px);box-shadow:0 20px 50px rgba(191,48,22,.2)}
+.h-card .hc-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--yellow);text-transform:uppercase;font-weight:700}
+.h-card h3{font-weight:900;font-stretch:75%;font-size:clamp(28px,3.8vw,50px);line-height:.94;text-transform:uppercase;margin:20px 0 14px;letter-spacing:-.01em}
+.h-card p{font-size:15.5px;line-height:1.6;color:var(--pdim);font-weight:400}
 
 /* BLUEPRINT SVG - FIXING SVG BOXES FILL AND STROKE */
 .bp .ln{stroke:var(--ink);stroke-width:2.5;fill:none;stroke-linecap:round}

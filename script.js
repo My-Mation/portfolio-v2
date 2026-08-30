@@ -125,23 +125,42 @@ if (!REDUCED) {
   shift();
 }
 
-/* ============ PINNED HORIZONTAL SCROLL ANIMATION ============ */
+/* ============ PINNED HORIZONTAL SCROLL ANIMATION (SMOOTH EASED LERP) ============ */
 const hWrapper = $('.h-scroll-wrapper');
 const hTrack = $('.h-scroll-track');
 if (hWrapper && hTrack && !REDUCED) {
-  let hTicking = false;
+  let targetX = 0;
+  let currentX = 0;
+
   const updateHScroll = () => {
-    hTicking = false;
     const rect = hWrapper.getBoundingClientRect();
     const totalDist = hWrapper.offsetHeight - innerHeight;
     if (rect.top <= 0 && rect.bottom >= innerHeight) {
       const p = Math.abs(rect.top) / totalDist;
-      const maxTranslate = hTrack.scrollWidth - innerWidth + 140;
-      hTrack.style.transform = `translateX(${-p * Math.max(0, maxTranslate)}px)`;
+      const maxTranslate = hTrack.scrollWidth - innerWidth + 180;
+      targetX = -p * Math.max(0, maxTranslate);
+    } else if (rect.top > 0) {
+      targetX = 0;
+    } else if (rect.bottom < innerHeight) {
+      const maxTranslate = hTrack.scrollWidth - innerWidth + 180;
+      targetX = -maxTranslate;
     }
   };
-  addEventListener('scroll', () => { if (!hTicking) { hTicking = true; requestAnimationFrame(updateHScroll); } }, {passive:true});
+
+  addEventListener('scroll', updateHScroll, { passive: true });
+  addEventListener('resize', updateHScroll, { passive: true });
   updateHScroll();
+
+  (function smoothHLoop() {
+    // Luxurious smooth deceleration factor (0.075 lerp)
+    currentX += (targetX - currentX) * 0.025;
+    if (Math.abs(targetX - currentX) > 0.05) {
+      hTrack.style.transform = `translate3d(${currentX.toFixed(2)}px, 0, 0)`;
+    } else {
+      hTrack.style.transform = `translate3d(${targetX.toFixed(2)}px, 0, 0)`;
+    }
+    requestAnimationFrame(smoothHLoop);
+  })();
 }
 
 /* ============ HERO TYPESET ============ */
