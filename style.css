@@ -23,7 +23,8 @@ img,svg,canvas{display:block;max-width:100%}
 .mdim{color:var(--ink2)}
 .dark .mdim{color:var(--pdim)}
 .wcond{font-stretch:66%}.wexp{font-stretch:120%}
-.outline{-webkit-text-stroke:2px currentColor;color:transparent}
+.outline{color:var(--ink);font-weight:900}
+.dark .outline{color:var(--paper)}
 .h-giant{font-weight:900;line-height:.85;letter-spacing:-.02em;text-transform:uppercase}
 .stamp{display:inline-block;border:2px solid var(--red);color:var(--red);font-family:var(--mono);font-weight:600;font-size:10px;letter-spacing:.16em;padding:.35em .6em;transform:rotate(-3deg);text-transform:uppercase}
 .stamp.ok{border-color:var(--ink);color:var(--ink)}
