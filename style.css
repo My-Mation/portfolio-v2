@@ -75,7 +75,23 @@ img,svg,canvas{display:block;max-width:100%}
   animation: c-shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
 }
 
-/* ============ FIXED CHROME ============ */
+/* REFINED RESTRAINED TYPOGRAPHY FOR INTERNSHIP AND HACKATHON PAGES */
+#pintern .h-giant, #phack .h-giant {
+  font-size: clamp(34px, 5.2vw, 68px);
+  line-height: .92;
+}
+#pintern .thesis, #phack .thesis {
+  font-size: clamp(14px, 1.6vw, 19px);
+  max-width: 38em;
+}
+#pintern .readout, #phack .readout {
+  font-size: 11.5px;
+}
+#pintern h3, #phack h3 {
+  font-size: clamp(20px, 2.6vw, 28px);
+}
+
+/* ============ MOBILE MEDIA QUERY (≤ 768px) ============ */
 #noise{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E")}
 #trail{position:fixed;inset:0;z-index:65;pointer-events:none}
 #cursor{position:fixed;top:0;left:0;z-index:100;width:14px;height:14px;margin:-7px 0 0 -7px;border:1.5px solid #fff;border-radius:50%;mix-blend-mode:difference;pointer-events:none;display:none;transition:width .18s,height .18s,margin .18s}
@@ -197,7 +213,8 @@ html.fine #cursor{display:block}
 @keyframes drop{to{top:26px}}
 
 /* ============ PHASES ============ */
-.chain{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:34px 0 18px;scroll-snap-type:x proximity}
+.chain{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:34px 0 18px;scroll-snap-type:x proximity;-ms-overflow-style:none;scrollbar-width:none}
+.chain::-webkit-scrollbar{display:none !important}
 .chain .node{flex:none;scroll-snap-align:start;border:1px solid var(--line2);background:var(--paper2);padding:16px 18px;min-width:210px;max-width:250px;position:relative;transition:border-color .2s}
 .chain .node:hover{border-color:var(--red)}
 .chain .node h4{font-weight:900;font-stretch:80%;text-transform:uppercase;font-size:17px;letter-spacing:0;line-height:1.1;color:var(--ink)}
@@ -272,13 +289,164 @@ a.cv:hover{color:var(--red)}
 .end-lines li{padding:9px 0;border-bottom:none !important;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .end-lines .mdim{color:var(--pdim)}
 
-@media(max-width:760px){
-  .spread{padding:56px 6vw 90px}
-  #pageBar .r{display:none}
-  .widx a{grid-template-columns:44px 1fr auto}
-  .widx .hook{display:none}
-  .side-vert{display:none}
-  .hero-stamp{right:4%;bottom:20%}
+@media(max-width:768px){
+  .hide-mobile{display:none !important}
+
+  /* WHITE COVERED MOBILE HEADER & FOOTER */
+  #siteNav{
+    mix-blend-mode:normal !important;
+    background:#ffffff !important;
+    color:var(--ink) !important;
+    border-bottom:1px solid rgba(23,21,18,.2);
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    padding:10px 14px !important;
+  }
+  #siteNav .brand{
+    color:var(--ink) !important;
+    font-weight:700;
+    font-size:11.5px;
+    letter-spacing:.08em;
+  }
+  #siteNav .tag.live{
+    display:none !important;
+  }
+  #tocBtn{
+    color:var(--paper) !important;
+    background:var(--ink) !important;
+    border:1px solid var(--ink) !important;
+    font-weight:700;
+    padding:5px 10px;
+    font-size:10px;
+  }
+
+  #pageBar{
+    mix-blend-mode:normal !important;
+    background:#ffffff !important;
+    color:var(--ink) !important;
+    border-top:1px solid rgba(23,21,18,.2);
+    box-shadow:0 -2px 10px rgba(0,0,0,.08);
+    padding:8px 14px !important;
+    font-size:9.5px;
+    font-weight:600;
+    pointer-events:auto;
+  }
+  #pageBar #pgL{
+    color:var(--ink) !important;
+    font-weight:700;
+  }
+  #pageBar .r{
+    display:none !important;
+  }
+
+  /* MOBILE CONTAINERS & MAIN COVER SCREEN LAYOUT */
+  .spread{padding:46px 16px 60px !important;min-height:auto !important}
+  #cover{
+    padding:84px 20px 50px !important;
+    min-height:100vh !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:space-between !important;
+  }
+  
+  /* TYPOGRAPHY ON MOBILE */
+  .h-giant{font-size:clamp(28px,7.8vw,44px) !important;line-height:.95 !important;word-break:break-word}
+  .hero-name{font-size:clamp(75px,28vw,135px) !important;line-height:.78 !important}
+  .hero-sub{font-size:13px !important;letter-spacing:.2em !important;margin-top:18px !important}
+  .hero-roles{font-size:10px !important;letter-spacing:.08em !important;margin-top:10px !important}
+  .hero-rule{margin-top:22px !important;width:90% !important}
+  .thesis{font-size:15px !important;line-height:1.45 !important;margin-top:18px !important}
+  .kisor-thesis{font-size:16.5px !important;margin-top:18px !important}
+  .body-col{font-size:13.5px !important;margin-top:14px !important}
+  .kicker{font-size:9.5px !important;letter-spacing:.08em !important;margin-bottom:14px !important}
+  .meta-row{font-size:9.5px !important;letter-spacing:.06em !important;gap:6px 12px !important;margin:18px 0 0 !important;padding:8px 0 !important}
+  .big-num{display:none !important}
+  .side-vert{display:none !important}
+  .hero-stamp{position:static !important;transform:none !important;margin:12px auto 0 !important}
+
+  /* WORK INDEX */
+  .widx a{grid-template-columns:32px 1fr auto !important;padding:12px 0 !important}
+  .widx .ti{font-size:16px !important}
+  .widx a.feat{padding:18px 0 !important}
+  .widx a.feat .ti{font-size:19px !important}
+  .widx .hook{display:none !important}
+
+  /* CHAIN & CARDS */
+  .chain{padding:18px 0 10px !important}
+  .chain .node{min-width:160px !important;max-width:190px !important;padding:10px 12px !important}
+  .chain .node h4{font-size:13.5px !important}
+  .chain .arr{padding:0 6px !important;font-size:12px !important}
+
+  /* REMOVE EXPERIMENT HORIZONTAL CARDS SECTION ENTIRELY ON MOBILE */
+  #p-horizontal, .h-scroll-wrapper{display:none !important}
+
+  /* CARTRIDGE & GAME MONITOR FIX (SARBANASH) */
+  .cartridge{padding:14px !important;margin-bottom:16px !important}
+  .cartridge .ctl-dark, .cartridge .ctl{
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:10px !important;
+    margin-top:14px !important;
+  }
+  .cartridge button, #foxVisionBtn{
+    width:100% !important;
+    padding:10px 14px !important;
+    font-size:10.5px !important;
+    text-align:center !important;
+  }
+  .cartridge span.mdim{
+    text-align:center !important;
+    display:block !important;
+    font-size:9.5px !important;
+  }
+  #foxCv,#repCv,#visoCv,#quad3dCv{max-width:100% !important}
+
+  /* READOUTS & GRID */
+  .gr{gap:24px !important}
+  .readout{font-size:10.5px !important;padding:14px !important}
+  .facts{font-size:10px !important}
+
+  /* CONTACT & LINKS — ONE SINGLE LINE PER ITEM ON MOBILE */
+  .c-row{
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:nowrap !important;
+    justify-content:space-between !important;
+    align-items:center !important;
+    gap:10px !important;
+    padding:14px 0 !important;
+  }
+  .c-row .cl{
+    width:auto !important;
+    flex:0 0 auto !important;
+    font-size:9px !important;
+    letter-spacing:.06em !important;
+    white-space:nowrap !important;
+  }
+  .c-row .cv{
+    flex:0 1 auto !important;
+    font-size:clamp(11px,3.2vw,14.5px) !important;
+    text-align:right !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+    word-break:normal !important;
+  }
+
+  #end{padding:50px 16px 80px !important}
+  #end .fin{font-size:56px !important}
+  .end-lines{font-size:9.5px !important;margin-top:20px !important}
+
+  /* OSAMU FLOWCHART MOBILE CLEANUP */
+  #p01 figure {
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    margin: 16px 0 !important;
+  }
+  #p01 .bp {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}

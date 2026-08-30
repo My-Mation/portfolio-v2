@@ -105,6 +105,12 @@ if (!REDUCED) {
   let ticking = false;
   const shift = () => {
     ticking = false;
+    if (innerWidth <= 768) {
+      for (const s of spreads) {
+        if (s.inner) s.inner.style.transform = 'none';
+      }
+      return;
+    }
     const vh = innerHeight;
     for (const s of spreads) {
       if (!s.inner) continue;
@@ -115,6 +121,7 @@ if (!REDUCED) {
     }
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(shift); } }, {passive:true});
+  addEventListener('resize', shift);
   shift();
 }
 
@@ -349,50 +356,50 @@ if (pc) {
   function getPose(exercise, b) {
     const j = {};
     if (exercise === 'push') {
-      const bodyY = 325 - 65 * b;
+      const bodyY = 382 - 65 * b;
       j.head = [150, bodyY - 10];
       j.sho = [210, bodyY];
       j.hip = [360, bodyY + 5];
       j.kne = [440, bodyY + 10];
-      j.ank = [520, 345];
-      j.wri = [210, 345];
-      j.elb = [210 + 35 * (1 - b), (bodyY + 345) / 2 + 12 * (1 - b)];
+      j.ank = [520, 405];
+      j.wri = [210, 405];
+      j.elb = [210 + 35 * (1 - b), (bodyY + 405) / 2 + 12 * (1 - b)];
     } else if (exercise === 'pull') {
-      const barY = 70;
-      const headY = 210 - 130 * b;
-      const shoY = 250 - 130 * b;
-      const hipY = 340 - 120 * b;
+      const barY = 105;
+      const headY = 245 - 110 * b;
+      const shoY = 285 - 110 * b;
+      const hipY = 375 - 100 * b;
       j.head = [320, headY];
       j.sho = [320, shoY];
       j.hip = [320, hipY];
-      j.kne = [320, hipY + 50];
-      j.ank = [320, hipY + 95];
+      j.kne = [320, Math.min(405, hipY + 38)];
+      j.ank = [320, Math.min(410, hipY + 70)];
       j.wri = [270, barY];
       j.wriR = [370, barY];
       j.elb = [240 - 30 * b, (shoY + barY) / 2];
       j.elbR = [400 + 30 * b, (shoY + barY) / 2];
     } else if (exercise === 'squat') {
-      const headY = 60 + 105 * (1 - b);
-      const shoY = 100 + 105 * (1 - b);
-      const hipY = 185 + 95 * (1 - b);
+      const headY = 120 + 105 * (1 - b);
+      const shoY = 160 + 105 * (1 - b);
+      const hipY = 245 + 95 * (1 - b);
       const kneX = 320 + 50 * (1 - b);
-      const kneY = 270 + 35 * (1 - b);
+      const kneY = 330 + 35 * (1 - b);
       j.head = [320, headY];
       j.sho = [320, shoY];
       j.hip = [300 - 20 * (1 - b), hipY];
       j.kne = [kneX, kneY];
-      j.ank = [320, 345];
+      j.ank = [320, 405];
       j.wri = [410, shoY + 10];
       j.elb = [365, shoY + 5];
     } else if (exercise === 'curl') {
-      j.head = [320, 60];
-      j.sho = [320, 100];
-      j.hip = [320, 190];
-      j.kne = [320, 270];
-      j.ank = [320, 345];
-      j.elb = [335, 165];
+      j.head = [320, 120];
+      j.sho = [320, 160];
+      j.hip = [320, 250];
+      j.kne = [320, 330];
+      j.ank = [320, 405];
+      j.elb = [335, 225];
       const angle = 0.2 + 2.3 * b;
-      j.wri = [335 + Math.sin(angle) * 50, 165 + Math.cos(angle) * 50];
+      j.wri = [335 + Math.sin(angle) * 50, 225 + Math.cos(angle) * 50];
     }
     return j;
   }
@@ -408,10 +415,10 @@ if (pc) {
 
     pctx.strokeStyle = 'rgba(241,237,226,.25)'; pctx.lineWidth = 1.5;
     if (ex === 'pull') {
-      pctx.beginPath(); pctx.moveTo(220, 70); pctx.lineTo(420, 70); pctx.stroke();
-      pctx.fillStyle = '#bf3016'; pctx.fillRect(220, 66, 200, 8);
+      pctx.beginPath(); pctx.moveTo(220, 105); pctx.lineTo(420, 105); pctx.stroke();
+      pctx.fillStyle = '#bf3016'; pctx.fillRect(220, 101, 200, 8);
     } else {
-      pctx.beginPath(); pctx.moveTo(40, 350); pctx.lineTo(600, 350); pctx.stroke();
+      pctx.beginPath(); pctx.moveTo(40, 410); pctx.lineTo(600, 410); pctx.stroke();
     }
 
     let minX = 640, maxX = 0, minY = 440, maxY = 0;
@@ -419,15 +426,16 @@ if (pc) {
       if (x < minX) minX = x; if (x > maxX) maxX = x;
       if (y < minY) minY = y; if (y > maxY) maxY = y;
     });
-    minX = Math.max(20, minX - 35); maxX = Math.min(620, maxX + 35);
-    minY = Math.max(20, minY - 35); maxY = Math.min(420, maxY + 25);
+    minX = Math.max(20, Math.min(460, minX - 35)); 
+    maxX = Math.min(620, Math.max(minX + 140, maxX + 35));
+    minY = Math.max(45, minY - 35); maxY = Math.min(430, maxY + 20);
 
     pctx.strokeStyle = 'rgba(191,48,22,.65)'; pctx.lineWidth = 1; pctx.setLineDash([6, 6]);
     pctx.strokeRect(minX, minY, maxX - minX, maxY - minY);
     pctx.setLineDash([]);
 
     pctx.fillStyle = '#bf3016'; pctx.fillRect(minX, minY - 18, 140, 18);
-    pctx.font = '600 9px "IBM Plex Mono"'; pctx.fillStyle = '#f1ede2';
+    pctx.font = '600 9px "IBM Plex Mono"'; pctx.fillStyle = '#f1ede2'; pctx.textAlign = 'left';
     pctx.fillText(`POSE TRACKED · 98.6%`, minX + 6, minY - 5);
 
     const bones = ex === 'pull' ? [
@@ -460,17 +468,20 @@ if (pc) {
 
     if (j.elb && j.sho && j.wri) {
       const deg = Math.round(70 + 80 * b);
+      const tagX = Math.min(580, j.elb[0] + 12);
       pctx.fillStyle = 'rgba(23,21,18,.85)';
-      pctx.fillRect(j.elb[0] + 12, j.elb[1] - 12, 44, 20);
+      pctx.fillRect(tagX, j.elb[1] - 12, 44, 20);
       pctx.strokeStyle = '#bf3016'; pctx.lineWidth = 1;
-      pctx.strokeRect(j.elb[0] + 12, j.elb[1] - 12, 44, 20);
-      pctx.font = '600 10px "IBM Plex Mono"'; pctx.fillStyle = '#f1ede2';
-      pctx.fillText(`${deg}°`, j.elb[0] + 18, j.elb[1] + 2);
+      pctx.strokeRect(tagX, j.elb[1] - 12, 44, 20);
+      pctx.font = '600 10px "IBM Plex Mono"'; pctx.fillStyle = '#f1ede2'; pctx.textAlign = 'left';
+      pctx.fillText(`${deg}°`, tagX + 6, j.elb[1] + 2);
     }
 
-    pctx.font = '600 11px "IBM Plex Mono"'; pctx.fillStyle = 'rgba(241,237,226,.7)';
+    pctx.font = '600 11px "IBM Plex Mono"'; pctx.fillStyle = 'rgba(241,237,226,.7)'; pctx.textAlign = 'left';
     pctx.fillText(`EXERCISE: ${ex.toUpperCase()}`, 24, 30);
-    pctx.fillText(`AUTO-COUNTING: ACTIVE`, 460, 30);
+    pctx.textAlign = 'right';
+    pctx.fillText(`AUTO-COUNTING: ACTIVE`, 616, 30);
+    pctx.textAlign = 'left';
   }
 
   loopWhen(pc, () => {
