@@ -161,7 +161,7 @@ function fit(c){
 }
 
 /* ============ 01 OSAMU DEMO ============ */
-const pushBtn = $('#pushBtn'), pkt = $('#pkt'), oLog = $('#osamuLog');
+const pushBtn = $('#pushBtn'), oLog = $('#osamuLog');
 let oBusy = false;
 if (pushBtn) {
   pushBtn.addEventListener('click', () => {
@@ -183,7 +183,7 @@ if (pushBtn) {
   });
 }
 
-/* ============ 02 QUADRUPED 3D ENGINE (THREE.JS + STLLOADER) ============ */
+/* ============ 02 QUADRUPED 3D ENGINE (BRIGHT LIGHTING + PROPER CENTERING) ============ */
 (function initQuad3D() {
   const container = $('#quad3dContainer');
   const canvas = $('#quad3dCv');
@@ -191,35 +191,39 @@ if (pushBtn) {
   if (!container || !canvas || typeof THREE === 'undefined') return;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0d0c0a);
-  scene.fog = new THREE.FogExp2(0x0d0c0a, 0.008);
+  scene.background = new THREE.Color(0x181614);
+  scene.fog = new THREE.FogExp2(0x181614, 0.005);
 
   const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-  camera.position.set(0, 70, 190);
+  camera.position.set(0, 50, 165);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-  // Lights
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  // HIGH INTENSITY LIGHTS FOR EXCELLENT VISIBILITY
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
   scene.add(ambientLight);
 
-  const redLight = new THREE.DirectionalLight(0xbf3016, 2.8);
-  redLight.position.set(120, 150, 120);
+  const topLight = new THREE.DirectionalLight(0xffffff, 3.5);
+  topLight.position.set(0, 250, 150);
+  scene.add(topLight);
+
+  const redLight = new THREE.DirectionalLight(0xbf3016, 2.5);
+  redLight.position.set(150, 150, 120);
   scene.add(redLight);
 
-  const keyLight = new THREE.DirectionalLight(0xf1ede2, 2.0);
-  keyLight.position.set(-120, 160, -100);
+  const keyLight = new THREE.DirectionalLight(0xf1ede2, 2.8);
+  keyLight.position.set(-150, 160, -100);
   scene.add(keyLight);
 
-  const fillLight = new THREE.PointLight(0xe6c229, 1.8, 250);
-  fillLight.position.set(0, -40, 100);
+  const fillLight = new THREE.PointLight(0xe6c229, 2.2, 300);
+  fillLight.position.set(0, -20, 120);
   scene.add(fillLight);
 
   // Technical Floor Grid
-  const gridHelper = new THREE.GridHelper(300, 20, 0xbf3016, 0x33322e);
-  gridHelper.position.y = -45;
+  const gridHelper = new THREE.GridHelper(320, 20, 0xbf3016, 0x44403a);
+  gridHelper.position.y = -55;
   scene.add(gridHelper);
 
   let dogMesh = null;
@@ -234,23 +238,23 @@ if (pushBtn) {
       geometry.center();
       geometry.computeVertexNormals();
 
-      // Shaded metallic material
+      // Bright metallic material
       const material = new THREE.MeshStandardMaterial({
-        color: 0x1f1d1a,
-        metalness: 0.85,
-        roughness: 0.25
+        color: 0x888278,
+        metalness: 0.5,
+        roughness: 0.3
       });
 
       dogMesh = new THREE.Mesh(geometry, material);
 
       // Blueprint Wireframe Overlay
       const wireGeo = new THREE.WireframeGeometry(geometry);
-      const wireMat = new THREE.LineBasicMaterial({ color: 0xbf3016, opacity: 0.42, transparent: true });
+      const wireMat = new THREE.LineBasicMaterial({ color: 0xbf3016, opacity: 0.55, transparent: true });
       const wireframe = new THREE.LineSegments(wireGeo, wireMat);
       dogMesh.add(wireframe);
 
-      dogMesh.scale.set(0.55, 0.55, 0.55);
-      dogMesh.position.set(0, 5, 0);
+      dogMesh.scale.set(0.52, 0.52, 0.52);
+      dogMesh.position.set(0, 24, 0); // MOVED UP SO LEGS ARE NOT CUT OFF!
       dogMesh.rotation.x = -Math.PI / 2; // Orient upright
       scene.add(dogMesh);
 
@@ -259,12 +263,12 @@ if (pushBtn) {
     undefined, 
     (err) => {
       console.warn('STL Loader warning:', err);
-      // Construct fallback mechanical geometry
       const group = new THREE.Group();
-      const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1f1d1a, wireframe: true });
+      const bodyMat = new THREE.MeshStandardMaterial({ color: 0x888278, wireframe: true });
       const body = new THREE.Mesh(new THREE.BoxGeometry(70, 30, 40), bodyMat);
       group.add(body);
       dogMesh = group;
+      dogMesh.position.set(0, 24, 0);
       scene.add(dogMesh);
       if (loaderEl) loaderEl.style.display = 'none';
     });
@@ -298,7 +302,7 @@ if (pushBtn) {
 
       dogMesh.rotation.z += (targetRotY - dogMesh.rotation.z) * 0.08;
       dogMesh.rotation.y += (targetRotX - dogMesh.rotation.y) * 0.08;
-      dogMesh.position.y = Math.sin(Date.now() * 0.0035) * 5;
+      dogMesh.position.y = 24 + Math.sin(Date.now() * 0.0035) * 5;
     }
     renderer.render(scene, camera);
   });
@@ -389,7 +393,6 @@ if (pc) {
   function getPose(exercise, b) {
     const j = {};
     if (exercise === 'push') {
-      // HORIZONTAL FLAT PARALLEL PLANK PUSHUP
       const bodyY = 325 - 65 * b;
       j.head = [150, bodyY - 10];
       j.sho = [210, bodyY];
@@ -572,7 +575,7 @@ if (vc) {
   if (REDUCED) drawViso();
 }
 
-/* ============ 07 SARBANASH SURVIVAL HORROR CRT CANVAS ============ */
+/* ============ 07 SARBANASH SURVIVAL HORROR CRT CANVAS WITH SCREEN SHAKE ============ */
 const fc = $('#foxCv');
 if (fc) {
   fit(fc);
@@ -600,6 +603,10 @@ if (fc) {
       monsterVision = !monsterVision;
       mBtn.setAttribute('aria-pressed', monsterVision);
       mBtn.textContent = monsterVision ? 'NORMAL VISION 👁' : 'MONSTER VISION 👁';
+
+      // TRIGGER SCREEN SHAKE ON TOGGLE
+      fc.classList.add('shake');
+      setTimeout(() => fc.classList.remove('shake'), 420);
     });
   }
 
@@ -608,7 +615,7 @@ if (fc) {
     const s = 16, ox = 60, oy = 48 + ((ft >> 4) % 2);
 
     // Dark Horror Grid Background
-    fctx.strokeStyle = monsterVision ? 'rgba(191,48,22,.15)' : 'rgba(241,237,226,.05)';
+    fctx.strokeStyle = monsterVision ? 'rgba(191,48,22,.25)' : 'rgba(241,237,226,.08)';
     fctx.lineWidth = 1;
     for (let x = 0; x < 480; x += 30) { fctx.beginPath(); fctx.moveTo(x,0); fctx.lineTo(x,320); fctx.stroke(); }
     for (let y = 0; y < 320; y += 30) { fctx.beginPath(); fctx.moveTo(0,y); fctx.lineTo(480,y); fctx.stroke(); }
@@ -626,12 +633,12 @@ if (fc) {
 
     // Monster Radar Sweep
     const sweepX = (ft * 4) % 480;
-    fctx.fillStyle = monsterVision ? 'rgba(191,48,22,.25)' : 'rgba(230,194,41,.12)';
-    fctx.fillRect(sweepX, 0, 8, 320);
+    fctx.fillStyle = monsterVision ? 'rgba(191,48,22,.35)' : 'rgba(230,194,41,.18)';
+    fctx.fillRect(sweepX, 0, 10, 320);
 
     // CRT Telemetry Overlay
-    fctx.font = '600 10px "IBM Plex Mono"';
-    fctx.fillStyle = monsterVision ? '#bf3016' : 'rgba(241,237,226,.6)';
+    fctx.font = '600 11px "IBM Plex Mono"';
+    fctx.fillStyle = monsterVision ? '#bf3016' : '#f1ede2';
     fctx.fillText(`SARBANASH // ${monsterVision ? 'ALERT: MONSTER DETECTED' : 'FOX SPRITE ACTIVE'}`, 40, 290);
   }
 
