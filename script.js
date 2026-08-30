@@ -183,7 +183,7 @@ if (pushBtn) {
   });
 }
 
-/* ============ 02 QUADRUPED 3D ENGINE (BRIGHT LIGHTING + PROPER CENTERING) ============ */
+/* ============ 02 QUADRUPED 3D ENGINE (ZOOMED OUT & PRECISELY CENTERED) ============ */
 (function initQuad3D() {
   const container = $('#quad3dContainer');
   const canvas = $('#quad3dCv');
@@ -192,38 +192,39 @@ if (pushBtn) {
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x181614);
-  scene.fog = new THREE.FogExp2(0x181614, 0.005);
+  scene.fog = new THREE.FogExp2(0x181614, 0.004);
 
+  // ZOOMED OUT CAMERA (z: 210)
   const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-  camera.position.set(0, 50, 165);
+  camera.position.set(0, 45, 210);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
   // HIGH INTENSITY LIGHTS FOR EXCELLENT VISIBILITY
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.6);
   scene.add(ambientLight);
 
-  const topLight = new THREE.DirectionalLight(0xffffff, 3.5);
+  const topLight = new THREE.DirectionalLight(0xffffff, 3.8);
   topLight.position.set(0, 250, 150);
   scene.add(topLight);
 
-  const redLight = new THREE.DirectionalLight(0xbf3016, 2.5);
+  const redLight = new THREE.DirectionalLight(0xbf3016, 2.8);
   redLight.position.set(150, 150, 120);
   scene.add(redLight);
 
-  const keyLight = new THREE.DirectionalLight(0xf1ede2, 2.8);
+  const keyLight = new THREE.DirectionalLight(0xf1ede2, 3.0);
   keyLight.position.set(-150, 160, -100);
   scene.add(keyLight);
 
-  const fillLight = new THREE.PointLight(0xe6c229, 2.2, 300);
+  const fillLight = new THREE.PointLight(0xe6c229, 2.4, 320);
   fillLight.position.set(0, -20, 120);
   scene.add(fillLight);
 
   // Technical Floor Grid
-  const gridHelper = new THREE.GridHelper(320, 20, 0xbf3016, 0x44403a);
-  gridHelper.position.y = -55;
+  const gridHelper = new THREE.GridHelper(360, 24, 0xbf3016, 0x44403a);
+  gridHelper.position.y = -45;
   scene.add(gridHelper);
 
   let dogMesh = null;
@@ -249,12 +250,13 @@ if (pushBtn) {
 
       // Blueprint Wireframe Overlay
       const wireGeo = new THREE.WireframeGeometry(geometry);
-      const wireMat = new THREE.LineBasicMaterial({ color: 0xbf3016, opacity: 0.55, transparent: true });
+      const wireMat = new THREE.LineBasicMaterial({ color: 0xbf3016, opacity: 0.6, transparent: true });
       const wireframe = new THREE.LineSegments(wireGeo, wireMat);
       dogMesh.add(wireframe);
 
-      dogMesh.scale.set(0.52, 0.52, 0.52);
-      dogMesh.position.set(0, 24, 0); // MOVED UP SO LEGS ARE NOT CUT OFF!
+      // SMALLER MODEL SCALE (0.36) SO IT'S COMPACT & ZOOMED OUT
+      dogMesh.scale.set(0.36, 0.36, 0.36);
+      dogMesh.position.set(0, 15, 0);
       dogMesh.rotation.x = -Math.PI / 2; // Orient upright
       scene.add(dogMesh);
 
@@ -265,10 +267,10 @@ if (pushBtn) {
       console.warn('STL Loader warning:', err);
       const group = new THREE.Group();
       const bodyMat = new THREE.MeshStandardMaterial({ color: 0x888278, wireframe: true });
-      const body = new THREE.Mesh(new THREE.BoxGeometry(70, 30, 40), bodyMat);
+      const body = new THREE.Mesh(new THREE.BoxGeometry(50, 22, 30), bodyMat);
       group.add(body);
       dogMesh = group;
-      dogMesh.position.set(0, 24, 0);
+      dogMesh.position.set(0, 15, 0);
       scene.add(dogMesh);
       if (loaderEl) loaderEl.style.display = 'none';
     });
@@ -302,7 +304,7 @@ if (pushBtn) {
 
       dogMesh.rotation.z += (targetRotY - dogMesh.rotation.z) * 0.08;
       dogMesh.rotation.y += (targetRotX - dogMesh.rotation.y) * 0.08;
-      dogMesh.position.y = 24 + Math.sin(Date.now() * 0.0035) * 5;
+      dogMesh.position.y = 15 + Math.sin(Date.now() * 0.0035) * 4;
     }
     renderer.render(scene, camera);
   });
@@ -314,54 +316,6 @@ if (pushBtn) {
     renderer.setSize(container.clientWidth, container.clientHeight);
   });
 })();
-
-/* ============ 02 QUADRUPED TELEMETRY CONTROLS ============ */
-const qVals = {rh:$('#qv1'), rk:$('#qv2'), fh:$('#qv3'), fk:$('#qv4')};
-let qWalkSim = false, qWalkStep = 0, qWalkTimer = null;
-const QPOSES = {
-  stand: [0, 0, 0, 0],
-  sit: [-45, 60, -10, 15],
-  walk: [
-    [-18, 26, 10, -6],
-    [6, 8, -14, 26],
-    [14, -6, 6, 8],
-    [-6, 12, 12, -8]
-  ]
-};
-
-function updateQTelemetry(arr) {
-  if (qVals.rh) qVals.rh.textContent = arr[0].toFixed(1) + '°';
-  if (qVals.rk) qVals.rk.textContent = arr[1].toFixed(1) + '°';
-  if (qVals.fh) qVals.fh.textContent = arr[2].toFixed(1) + '°';
-  if (qVals.fk) qVals.fk.textContent = arr[3].toFixed(1) + '°';
-}
-
-$$('#p02 [data-qp]').forEach(b => b.addEventListener('click', () => {
-  if (qWalkSim) { qWalkSim = false; clearInterval(qWalkTimer); }
-  $$('#p02 [data-qp]').forEach(x => x.setAttribute('aria-pressed', x === b));
-  if ($('#qWalkBtn')) $('#qWalkBtn').setAttribute('aria-pressed', 'false');
-  updateQTelemetry(QPOSES[b.dataset.qp] || [0,0,0,0]);
-}));
-
-if ($('#qWalkBtn')) {
-  $('#qWalkBtn').addEventListener('click', function() {
-    if (qWalkSim) {
-      qWalkSim = false; clearInterval(qWalkTimer);
-      this.setAttribute('aria-pressed', 'false');
-      updateQTelemetry(QPOSES.stand);
-    } else {
-      qWalkSim = true;
-      this.setAttribute('aria-pressed', 'true');
-      $$('#p02 [data-qp]').forEach(x => x.setAttribute('aria-pressed', 'false'));
-      qWalkStep = 0;
-      updateQTelemetry(QPOSES.walk[0]);
-      qWalkTimer = setInterval(() => {
-        qWalkStep = (qWalkStep + 1) % QPOSES.walk.length;
-        updateQTelemetry(QPOSES.walk[qWalkStep]);
-      }, 550);
-    }
-  });
-}
 
 /* ============ 03 HOMELAB MAP ============ */
 $$('.hn').forEach(g => {

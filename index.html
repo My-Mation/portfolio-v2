@@ -69,9 +69,17 @@
     <p class="hero-sub">Still building</p>
     <p class="hero-roles">SOFTWARE × HARDWARE × SYSTEMS — STUDENT / BUILDER / SYSTEMS EXPLORER</p>
     <div class="hero-rule" aria-hidden="true"></div>
-    <div style="margin-top:20px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+    
+    <!-- FRONT PAGE LINKS (INSTAGRAM, GITHUB, LINKEDIN) -->
+    <div style="margin-top:24px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:10">
       <a class="hero-stamp" href="https://www.instagram.com/local_first_lab/" target="_blank" rel="noopener" style="position:relative;right:auto;bottom:auto;transform:rotate(-2deg);display:inline-block;text-decoration:none">
         LOCAL_FIRST_LAB / 13K+<br>FOLLOW THE LAB ↗
+      </a>
+      <a class="ctl button" href="https://github.com/My-Mation" target="_blank" rel="noopener" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink)">
+        GITHUB ↗
+      </a>
+      <a class="ctl button" href="https://www.linkedin.com/in/debargha-sarkar-72575937/" target="_blank" rel="noopener" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
+        LINKEDIN ↗
       </a>
     </div>
   </div>
@@ -175,7 +183,7 @@
   </div>
 </section>
 
-<!-- ============ 02 / QUADRUPED ROBOT (3D MODEL REPLACEMENT) ============ -->
+<!-- ============ 02 / QUADRUPED ROBOT (ZOOMED OUT 3D MODEL FEATURE) ============ -->
 <section id="p02" class="spread" data-page="P.005" data-name="QUADRUPED ROBOT" aria-labelledby="h-p02">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">02</div>
@@ -188,10 +196,10 @@
     </div>
     <p class="thesis rv" style="--d:.2s">A physical quadruped robot. Move your cursor over the 3D model below or scroll through to trigger cinematic rotation and joint inspection.</p>
 
-    <div class="gr gr-2" style="margin-top:40px">
-      <!-- 3D CANVAS MODEL REPLACEMENT -->
-      <figure class="rv" style="--d:.1s">
-        <div id="quad3dContainer" class="cvp scan" style="height:480px;position:relative;border:1px solid var(--red)">
+    <div style="margin-top:40px">
+      <!-- 3D CANVAS MODEL REPLACEMENT (FULL WIDTH & ZOOMED OUT) -->
+      <figure class="rv" style="--d:.1s;max-width:980px;margin:0 auto">
+        <div id="quad3dContainer" class="cvp scan" style="height:520px;position:relative;border:1px solid var(--red)">
           <canvas id="quad3dCv"></canvas>
           <div id="quad3dLoader" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--yellow);background:rgba(19,18,16,.92)">
             <div>INITIALIZING 3D ENGINE …</div>
@@ -203,26 +211,6 @@
         </div>
         <figcaption class="fig-label"><span>FIG. 002 — 3D CAD MESH (DOG02_WEB.STL)</span><span>INTERACTIVE 3D VIEWPORT</span></figcaption>
       </figure>
-
-      <div class="rv" style="--d:.2s">
-        <p class="note-marg" style="margin-bottom:14px">INTERACTIVE POSE TESTER — GAIT TELEMETRY</p>
-        <div class="ctl" role="group" aria-label="Quadruped controls" style="display:flex;gap:10px;flex-wrap:wrap">
-          <button data-qp="stand" aria-pressed="true">STAND POSE</button>
-          <button data-qp="sit" aria-pressed="false">SIT POSE</button>
-          <button id="qWalkBtn" aria-pressed="false">STEP CYCLE</button>
-        </div>
-        <div class="readout" style="margin-top:16px">
-          <div><span>S1 HIP·REAR</span><span class="v" id="qv1">0.0°</span></div>
-          <div><span>S2 KNEE·REAR</span><span class="v" id="qv2">0.0°</span></div>
-          <div><span>S5 HIP·FRONT</span><span class="v" id="qv3">0.0°</span></div>
-          <div><span>S7 KNEE·FRONT</span><span class="v" id="qv4">0.0°</span></div>
-        </div>
-        
-        <div class="readout" style="margin-top:16px;padding:16px;background:rgba(191,48,22,.06);border-color:var(--red)">
-          <span class="mono" style="color:var(--red);display:block;margin-bottom:8px">KINEMATIC NOTES:</span>
-          <p style="font-size:14px;line-height:1.45;color:var(--ink)">Inverse kinematics solver calculates joint angles per gait frame. Real-time pitch/roll balancing keeps the chassis stable over irregular surfaces.</p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -373,7 +361,7 @@
   </div>
 </section>
 
-<!-- ============ 07 / SARBANASH (HIGH CONTRAST SURVIVAL-HORROR DISPLAY) ============ -->
+<!-- ============ 07 / SARBANASH (ULTRA READABLE CRT BUTTON DISPLAY) ============ -->
 <section id="p07" class="spread dark" data-page="P.010" data-name="SARBANASH" aria-labelledby="h-p07">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">07</div>
@@ -395,7 +383,7 @@
         </div>
         <canvas id="foxCv" width="480" height="320" aria-label="Pixel art fox and monster sprite canvas"></canvas>
         <div class="ctl ctl-dark" style="margin-top:16px;display:flex;justify-content:space-between;align-items:center">
-          <button id="foxVisionBtn" aria-pressed="false" style="border-color:var(--red);color:var(--red)">TOGGLE MONSTER VISION 👁</button>
+          <button id="foxVisionBtn" aria-pressed="false" style="background:var(--red);color:#ffffff;border:1px solid var(--red);font-weight:700;font-size:11.5px;padding:10px 18px;letter-spacing:.12em;cursor:pointer">TOGGLE MONSTER VISION 👁</button>
           <span class="mono mdim" style="font-size:10px">PISKEL SPRITE RENDER</span>
         </div>
       </figure>
@@ -518,7 +506,7 @@
   </div>
 </section>
 
-<!-- ============ ABOUT ============ -->
+<!-- ============ ABOUT (CLEAN NO-BOX NAME DISPLAY) ============ -->
 <section id="p17" class="spread" data-page="P.014" data-name="ABOUT" aria-labelledby="h-p17">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">—</div>

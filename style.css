@@ -163,9 +163,8 @@ html.fine #cursor{display:block}
 .ctl button{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--ink);padding:9px 15px;background:var(--paper2);color:var(--ink);transition:background .15s,color .15s}
 .ctl button:hover{background:var(--ink);color:var(--paper)}
 .ctl button[aria-pressed="true"]{background:var(--yellow);color:var(--ink);font-weight:700}
-.ctl-dark button{border-color:var(--paper);background:transparent;color:var(--paper)}
-.ctl-dark button:hover{background:var(--paper);color:var(--black)}
-.ctl-dark button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:var(--paper)}
+.ctl-dark button{border-color:var(--red);background:var(--red);color:#ffffff !important;font-weight:700;padding:10px 18px;letter-spacing:.12em}
+.ctl-dark button:hover{background:var(--ink);border-color:var(--paper);color:#ffffff !important}
 
 /* ============ 00 COVER ============ */
 #cover{min-height:100vh;border-top:0;display:flex;flex-direction:column;justify-content:space-between;padding:86px 5.5vw 64px;position:relative;overflow:hidden}
@@ -252,9 +251,9 @@ html.fine #cursor{display:block}
 .klight{font-weight:300;letter-spacing:.06em}
 .kisor-thesis{font-weight:300;font-size:clamp(19px,2.4vw,29px);line-height:1.45;max-width:30em;margin-top:34px}
 
-/* ============ ABOUT / CONTACT / END ============ */
+/* ============ ABOUT / CONTACT / END (NO BORDER BOX AROUND NAME) ============ */
 .facts{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
-.facts div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.facts div{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:none}
 .facts b{font-weight:600;text-align:right}
 .c-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding:22px 0;border-bottom:1px solid var(--line2);margin-top:8px}
 .c-row .cl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink2);width:110px;flex:none;text-transform:uppercase}
@@ -267,7 +266,7 @@ a.cv:hover{color:var(--red)}
 #end .fin{font-weight:900;font-stretch:66%;font-size:clamp(70px,14vw,220px);line-height:.8;text-transform:uppercase;letter-spacing:-.02em}
 #end .fin span{color:var(--red)}
 .end-lines{list-style:none;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-top:34px}
-.end-lines li{padding:9px 0;border-bottom:1px solid var(--pline);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.end-lines li{padding:9px 0;border-bottom:none;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .end-lines .mdim{color:var(--pdim)}
 
 @media(max-width:760px){
