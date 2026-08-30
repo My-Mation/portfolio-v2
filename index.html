@@ -116,7 +116,7 @@
     <header class="kicker rv"><span>TABLE OF PROJECTS</span><span class="mdim">FEATURED / LIVE / SYSTEMS / CREATIVE</span></header>
     <h2 id="h-pidx" class="h-giant rv" style="--d:.05s">THE WORK<span style="color:var(--red)">.</span></h2>
     <nav class="widx rv" style="--d:.15s" aria-label="Project index">
-      <a class="feat" href="#p01"><span class="no">01</span><span class="ti">OSAMU</span><span class="hook">Adaptive exam system on ESP32. Aveenir Hackathon 1st Prize Winner.</span><span class="tg"><span class="tag win">1ST PRIZE 🏆</span><span class="tag team">TEAM PROJECT</span></span></a>
+      <a class="feat" href="#p01"><span class="no">01</span><span class="ti">OSAMU</span><span class="hook">Adaptive anti-cheat exam hardware on ESP32. Aveenir Hackathon 1st Prize Winner.</span><span class="tg"><span class="tag win">1ST PRIZE 🏆</span><span class="tag team">TEAM PROJECT</span></span></a>
       <a class="feat" href="#p02"><span class="no">02</span><span class="ti">QUADRUPED ROBOT</span><span class="hook">Interactive 3D mechanical model (dog02_web.stl) &amp; gait kinematics.</span><span class="tg"><span class="tag exp">3D MODEL</span><span class="tag arch">IN PROGRESS</span></span></a>
       <a class="feat" href="#p03"><span class="no">03</span><span class="ti">PHONE HOMELAB</span><span class="hook">A server in my pocket. Termux, media servers, local 32-bit LLM &amp; network scanner.</span><span class="tg"><span class="tag exp">FEATURED</span><span class="tag live">SYSTEMS</span></span></a>
       <a href="#p04"><span class="no">04</span><span class="ti">STUDIVA</span><span class="hook">What if knowledge didn't get lost? Live academic resource platform.</span><span class="tg"><span class="tag live">LIVE</span><span class="tag team">TEAM PROJECT</span></span></a>
@@ -128,41 +128,55 @@
   </div>
 </section>
 
-<!-- ============ 01 / OSAMU ============ -->
+<!-- ============ 01 / OSAMU (COMPREHENSIVE HARDWARE ANTI-CHEAT & ADAPTIVE EXAM SYSTEM) ============ -->
 <section id="p01" class="spread" data-page="P.004" data-name="OSAMU" aria-labelledby="h-p01">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">01</div>
     <header class="kicker rv"><span>FEATURED 01 — AVEENIR HACKATHON</span><span class="tag win">🥇 1ST PRIZE WINNER</span><span class="tag team">TEAM PROJECT</span></header>
-    <h2 id="h-p01" class="h-giant rv" style="--d:.05s">WE DIDN'T MAKE<br>EXAMS HARDER<span style="color:var(--red)">.</span><br><span class="outline wcond">WE MADE</span><br>CHEATING<br>IRRELEVANT<span style="color:var(--red)">.</span></h2>
+    <h2 id="h-p01" class="h-giant rv" style="--d:.05s">CHEAT-PROOF<span style="color:var(--red)">.</span><br><span class="outline wcond">UNBIASED</span><br>EXAMINATION<br>HARDWARE<span style="color:var(--red)">.</span></h2>
     <div class="meta-row rv" style="--d:.15s">
       <span><b>AWARD:</b> 🏆 1ST PRIZE WINNER — AVEENIR HACKATHON</span>
       <span><b>TIME BIND:</b> BUILT IN 48 HOURS</span>
-      <span><b>TYPE:</b> TEAM PROJECT</span>
-      <span><b>STACK:</b> ESP32 + HARDWARE + LOCAL WEB + AI PARSER</span>
+      <span><b>TYPE:</b> HARDWARE + EMBEDDED C++ + LOCAL WEB AP + AI ENGINE</span>
+      <span><b>TEAM:</b> TEAM PROJECT</span>
     </div>
-    <p class="thesis rv" style="--d:.2s">A teacher uploads a PDF → the system processes it → generates structured questions → sends them to ESP32-based student devices. <em>Measure understanding, not simply scores.</em></p>
+    <p class="thesis rv" style="--d:.2s">OSAMU is an anti-cheat hardware terminal system that replaces vulnerable online exams. It broadcasts encrypted questions to ESP32 student keypads, evaluates responses with zero bias, and adaptively generates deep-dive questions when students struggle.</p>
 
-    <div class="gr gr-2" style="margin-top:40px">
+    <!-- EXPLANATORY ARCHITECTURE CARDS -->
+    <div class="gr gr-2" style="margin-top:36px">
+      <div class="readout rv" style="padding:22px;background:var(--paper2);border:1px solid var(--line2)">
+        <span class="mono" style="color:var(--red);display:block;margin-bottom:8px;font-weight:700">01 / HARDWARE ISOLATION (ANTI-CHEAT)</span>
+        <p style="color:var(--ink);font-size:14.5px;line-height:1.55">Standard digital exams fail because students switch tabs, use secondary phones, or consult AI tools. OSAMU runs on isolated, standalone ESP32 physical hardware terminals equipped with tactile keypads, timers, buzzers, and offline Wi-Fi access points. No internet access, no tab switching, no cheating possible.</p>
+      </div>
+
+      <div class="readout rv" style="padding:22px;background:var(--paper2);border:1px solid var(--line2);--d:.15s">
+        <span class="mono" style="color:var(--red);display:block;margin-bottom:8px;font-weight:700">02 / UNBIASED ADAPTIVE DEEP-DIVES</span>
+        <p style="color:var(--ink);font-size:14.5px;line-height:1.55">Grading is 100% objective without teacher bias or favoritism. The system tracks response latency, key hesitations, and answer accuracy in real time. If a student shows hesitation on a concept, OSAMU dynamically generates targeted follow-up questions to test deep understanding rather than surface memory.</p>
+      </div>
+    </div>
+
+    <!-- DIAGRAM & INTERACTIVE TESTER -->
+    <div class="gr gr-2" style="margin-top:36px">
       <figure class="rv" style="--d:.1s">
         <svg class="bp" viewBox="0 0 360 620" role="img" aria-label="OSAMU architecture diagram">
           <g font-family="IBM Plex Mono">
             <rect class="flowbox draw" pathLength="1" x="90" y="10" width="180" height="44"/>
-            <text class="flowlab" x="128" y="37">PDF UPLOAD</text>
+            <text class="flowlab" x="124" y="37">PDF SYLLABUS</text>
             <path class="ln thin draw d1" pathLength="1" d="M180,54 V92 M172,84 L180,92 L188,84"/>
             <rect class="flowbox draw d1" pathLength="1" x="90" y="94" width="180" height="44"/>
-            <text class="flowlab" x="128" y="121">PROCESSING</text>
+            <text class="flowlab" x="110" y="121">AI PARSER &amp; JSON</text>
             <path class="ln thin draw d2" pathLength="1" d="M180,138 V176 M172,168 L180,176 L188,168"/>
             <rect class="flowbox draw d2" pathLength="1" x="90" y="178" width="180" height="44"/>
-            <text class="flowlab" x="110" y="198">QUESTION GENERATION</text>
+            <text class="flowlab" x="104" y="198">ESP32 LOCAL BROADCAST</text>
             <path class="ln thin draw d3" pathLength="1" d="M180,222 V260 M172,252 L180,260 L188,252"/>
             <rect class="flowbox draw d3" pathLength="1" x="90" y="262" width="180" height="44"/>
-            <text class="flowlab" x="152" y="289">JSON SET</text>
+            <text class="flowlab" x="108" y="289">HARDWARE KEYPAD</text>
             <path class="rs draw d4" pathLength="1" d="M180,306 V348 M170,340 L180,348 L190,340"/>
             <rect class="flowbox draw d4" pathLength="1" x="90" y="350" width="180" height="52"/>
-            <text class="flowlab" x="118" y="372">ESP32 DEVICES</text>
+            <text class="flowlab" x="100" y="372">HESITATION ANALYZER</text>
             <path class="ln thin draw d5" pathLength="1" d="M180,402 V440 M172,432 L180,440 L188,432"/>
             <rect class="flowbox draw d5" pathLength="1" x="90" y="442" width="180" height="44"/>
-            <text class="flowlab" x="124" y="469">BEHAVIOUR ANALYZER</text>
+            <text class="flowlab" x="98" y="469">ADAPTIVE PROBE Qs</text>
           </g>
         </svg>
       </figure>
@@ -170,20 +184,26 @@
       <div class="rv" style="--d:.2s">
         <div class="stamp gold" style="margin-bottom:16px">🏆 1ST PLACE WINNER — AVEENIR HACKATHON</div>
         <div class="readout" style="padding:16px">
-          <p class="mono" style="margin-bottom:12px;color:var(--red)">DEB'S CONTRIBUTION:</p>
-          <p style="color:var(--ink)">Collaborated on hardware integration, ESP32 web interface, response behavior parsing, and system logic during the 48-hour build window.</p>
+          <p class="mono" style="margin-bottom:8px;color:var(--red)">DEB'S CONTRIBUTION:</p>
+          <p style="color:var(--ink);font-size:14px">Collaborated on physical ESP32 hardware integration, local AP web interface, response behavior parsing, and system logic during the 48-hour build window.</p>
         </div>
-        <div class="ctl" style="margin-top:20px"><button id="pushBtn">TEST QUESTION BROADCAST →</button></div>
-        <div class="readout" id="osamuLog" style="margin-top:14px" aria-live="polite">
-          <div><span>STATUS</span><span class="v">1ST PRIZE WINNER</span></div>
-          <div><span>TELEMETRY</span><span class="v">SYSTEM READY</span></div>
+        
+        <div class="ctl" style="margin-top:20px">
+          <button id="pushBtn" style="font-weight:700;padding:12px 20px">SIMULATE ADAPTIVE HARDWARE TEST →</button>
+        </div>
+
+        <div class="readout" id="osamuLog" style="margin-top:14px;padding:16px" aria-live="polite">
+          <div><span>STATUS</span><span class="v">ESP32 KEYPAD READY</span></div>
+          <div><span>QUESTION 01</span><span class="v">"WHAT IS THE TIME COMPLEXITY OF HEAPSORT?"</span></div>
+          <div><span>STUDENT INPUT</span><span class="v">WAITING FOR KEYPAD INPUT…</span></div>
+          <div><span>AI DEEP-DIVE</span><span class="v">STANDBY FOR BEHAVIOR ANALYZER</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 02 / QUADRUPED ROBOT (ZOOMED OUT 3D MODEL FEATURE) ============ -->
+<!-- ============ 02 / QUADRUPED ROBOT (RESIZED TO PREVIOUS COMPACT SIZE) ============ -->
 <section id="p02" class="spread" data-page="P.005" data-name="QUADRUPED ROBOT" aria-labelledby="h-p02">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">02</div>
@@ -196,10 +216,10 @@
     </div>
     <p class="thesis rv" style="--d:.2s">A physical quadruped robot. Move your cursor over the 3D model below or scroll through to trigger cinematic rotation and joint inspection.</p>
 
-    <div style="margin-top:40px">
-      <!-- 3D CANVAS MODEL REPLACEMENT (FULL WIDTH & ZOOMED OUT) -->
-      <figure class="rv" style="--d:.1s;max-width:980px;margin:0 auto">
-        <div id="quad3dContainer" class="cvp scan" style="height:520px;position:relative;border:1px solid var(--red)">
+    <div style="margin-top:36px">
+      <!-- 3D CANVAS MODEL REPLACEMENT (COMPACT PREVIOUS SLIM SIZE) -->
+      <figure class="rv" style="--d:.1s;max-width:760px;margin:0 auto">
+        <div id="quad3dContainer" class="cvp scan" style="height:380px;position:relative;border:1px solid var(--red)">
           <canvas id="quad3dCv"></canvas>
           <div id="quad3dLoader" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--yellow);background:rgba(19,18,16,.92)">
             <div>INITIALIZING 3D ENGINE …</div>
@@ -290,7 +310,7 @@
 </section>
 
 <!-- ============ 05 / REPBOT ============ -->
-<section id="p05" class="spread dark" data-page="P.008" data-name="REPBOT" aria-labelledby="h-p05">
+<section id="p05" class="spread dark" data-page="P.008" data-name="REPBOT" aria-labelledby="h-p08">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">05</div>
     <header class="kicker rv"><span>LIVE PRODUCT 05 — FLUTTER POSE TRACKING</span><span class="tag live">LIVE</span></header>
@@ -506,7 +526,7 @@
   </div>
 </section>
 
-<!-- ============ ABOUT (CLEAN NO-BOX NAME DISPLAY) ============ -->
+<!-- ============ ABOUT (CLEAN NO-BOX NAME DISPLAY WITH VAL CLASS) ============ -->
 <section id="p17" class="spread" data-page="P.014" data-name="ABOUT" aria-labelledby="h-p17">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">—</div>
@@ -518,12 +538,12 @@
         <p>Software × hardware × systems. Finding out what happens when software leaves the screen and enters physical devices, servers, and machines.</p>
       </div>
       <div class="facts rv" style="--d:.25s">
-        <div><span>NAME</span><b>DEBARGHA SARKAR</b></div>
-        <div><span>GOES BY</span><b>DEB</b></div>
-        <div><span>PROGRAM</span><b>B.TECH CSE</b></div>
-        <div><span>LOCATION</span><b>KOLKATA, INDIA</b></div>
-        <div><span>FOCUS</span><b>SOFTWARE × HARDWARE × SYSTEMS</b></div>
-        <div><span>TAGLINE</span><b style="color:var(--red)">STILL BUILDING</b></div>
+        <div><span>NAME</span><span class="val">DEBARGHA SARKAR</span></div>
+        <div><span>GOES BY</span><span class="val">DEB</span></div>
+        <div><span>PROGRAM</span><span class="val">B.TECH CSE</span></div>
+        <div><span>LOCATION</span><span class="val">KOLKATA, INDIA</span></div>
+        <div><span>FOCUS</span><span class="val">SOFTWARE × HARDWARE × SYSTEMS</span></div>
+        <div><span>TAGLINE</span><span class="val" style="color:var(--red)">STILL BUILDING</span></div>
       </div>
     </div>
   </div>

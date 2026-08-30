@@ -160,30 +160,33 @@ function fit(c){
   if (c.id === 'foxCv') fitCanvas(c, 320/480);
 }
 
-/* ============ 01 OSAMU DEMO ============ */
+/* ============ 01 OSAMU DEMO & ADAPTIVE QUESTION SIMULATOR ============ */
 const pushBtn = $('#pushBtn'), oLog = $('#osamuLog');
 let oBusy = false;
-if (pushBtn) {
+if (pushBtn && oLog) {
+  const steps = [
+    { s: "ENCRYPTING & BROADCASTING...", q: '"WHAT IS THE TIME COMPLEXITY OF HEAPSORT?"', i: "ESP32 KEYPAD PRESSED: [O(N LOG N)]", a: "RESPONSE TIME: 1.2s (FAST) — ACCURATE" },
+    { s: "EVALUATING BEHAVIOR...", q: '"EXPLAIN DYNAMIC MEMORY IN EMBEDDED C++"', i: "ESP32 KEYPAD PRESSED: HESITATION DETECTED (5.4s)", a: "TRIGGERING ADAPTIVE DEEP-DIVE PROBE..." },
+    { s: "ADAPTIVE PROBE LIVE ⚡", q: '"WHY DOES HEAP ALLOCATION CAUSE FRAGMENTATION IN ESP32?"', i: "ESP32 KEYPAD PRESSED: [CORRECT PROBE ANSWER]", a: "ZERO-BIAS EVALUATION: 96.8% CONCEPT MASTERY" }
+  ];
+  let stepIdx = 0;
+
   pushBtn.addEventListener('click', () => {
-    if (oBusy) return; oBusy = true;
-    if (oLog) {
-      oLog.children[0].querySelector('.v').textContent = 'RANDOMISED QUESTION SET GENERATED';
-      oLog.children[1].querySelector('.v').textContent = 'BROADCASTING TO ESP32 DEVICES …';
-    }
-    setTimeout(() => {
-      if (oLog) oLog.children[1].querySelector('.v').textContent = 'RESPONSE 0.87s · HESITATION LOW · PATTERN CLEAN';
-    }, 1800);
-    setTimeout(() => {
-      if (oLog) {
-        oLog.children[0].querySelector('.v').textContent = '1ST PRIZE WINNER — AVEENIR HACKATHON';
-        oLog.children[1].querySelector('.v').textContent = 'SYSTEM STANDBY';
-      }
-      oBusy = false;
-    }, 3200);
+    if (oBusy) return;
+    oBusy = true;
+    const cur = steps[stepIdx % steps.length];
+    stepIdx++;
+
+    oLog.children[0].querySelector('.v').textContent = cur.s;
+    oLog.children[1].querySelector('.v').textContent = cur.q;
+    oLog.children[2].querySelector('.v').textContent = cur.i;
+    oLog.children[3].querySelector('.v').textContent = cur.a;
+
+    setTimeout(() => { oBusy = false; }, 600);
   });
 }
 
-/* ============ 02 QUADRUPED 3D ENGINE (ZOOMED OUT & PRECISELY CENTERED) ============ */
+/* ============ 02 QUADRUPED 3D ENGINE (COMPACT SIZE) ============ */
 (function initQuad3D() {
   const container = $('#quad3dContainer');
   const canvas = $('#quad3dCv');
@@ -194,15 +197,15 @@ if (pushBtn) {
   scene.background = new THREE.Color(0x181614);
   scene.fog = new THREE.FogExp2(0x181614, 0.004);
 
-  // ZOOMED OUT CAMERA (z: 210)
-  const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-  camera.position.set(0, 45, 210);
+  // CAMERA SETTINGS FOR COMPACT 380PX VIEWPORT
+  const camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 1000);
+  camera.position.set(0, 38, 190);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-  // HIGH INTENSITY LIGHTS FOR EXCELLENT VISIBILITY
+  // LIGHTING
   const ambientLight = new THREE.AmbientLight(0xffffff, 1.6);
   scene.add(ambientLight);
 
@@ -232,14 +235,13 @@ if (pushBtn) {
   let targetRotX = 0;
   let scrollProgress = 0;
 
-  // Load user's dog02_web.stl
+  // Load dog02_web.stl
   if (typeof THREE.STLLoader !== 'undefined') {
     const loader = new THREE.STLLoader();
     loader.load('model/dog02_web.stl', (geometry) => {
       geometry.center();
       geometry.computeVertexNormals();
 
-      // Bright metallic material
       const material = new THREE.MeshStandardMaterial({
         color: 0x888278,
         metalness: 0.5,
@@ -254,10 +256,10 @@ if (pushBtn) {
       const wireframe = new THREE.LineSegments(wireGeo, wireMat);
       dogMesh.add(wireframe);
 
-      // SMALLER MODEL SCALE (0.36) SO IT'S COMPACT & ZOOMED OUT
-      dogMesh.scale.set(0.36, 0.36, 0.36);
-      dogMesh.position.set(0, 15, 0);
-      dogMesh.rotation.x = -Math.PI / 2; // Orient upright
+      // COMPACT SCALE
+      dogMesh.scale.set(0.32, 0.32, 0.32);
+      dogMesh.position.set(0, 10, 0);
+      dogMesh.rotation.x = -Math.PI / 2;
       scene.add(dogMesh);
 
       if (loaderEl) loaderEl.style.display = 'none';
@@ -270,7 +272,7 @@ if (pushBtn) {
       const body = new THREE.Mesh(new THREE.BoxGeometry(50, 22, 30), bodyMat);
       group.add(body);
       dogMesh = group;
-      dogMesh.position.set(0, 15, 0);
+      dogMesh.position.set(0, 10, 0);
       scene.add(dogMesh);
       if (loaderEl) loaderEl.style.display = 'none';
     });
@@ -304,7 +306,7 @@ if (pushBtn) {
 
       dogMesh.rotation.z += (targetRotY - dogMesh.rotation.z) * 0.08;
       dogMesh.rotation.y += (targetRotX - dogMesh.rotation.y) * 0.08;
-      dogMesh.position.y = 15 + Math.sin(Date.now() * 0.0035) * 4;
+      dogMesh.position.y = 10 + Math.sin(Date.now() * 0.0035) * 3;
     }
     renderer.render(scene, camera);
   });
