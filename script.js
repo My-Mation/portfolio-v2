@@ -186,7 +186,7 @@ if (pushBtn && oLog) {
   });
 }
 
-/* ============ 02 QUADRUPED 3D ENGINE (COMPACT SIZE) ============ */
+/* ============ 02 QUADRUPED 3D ENGINE (RIGHT COLUMN VIEWPORT) ============ */
 (function initQuad3D() {
   const container = $('#quad3dContainer');
   const canvas = $('#quad3dCv');
@@ -197,7 +197,7 @@ if (pushBtn && oLog) {
   scene.background = new THREE.Color(0x181614);
   scene.fog = new THREE.FogExp2(0x181614, 0.004);
 
-  // CAMERA SETTINGS FOR COMPACT 380PX VIEWPORT
+  // CAMERA SETTINGS FOR RIGHT-COLUMN VIEWPORT
   const camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 1000);
   camera.position.set(0, 38, 190);
 
@@ -491,42 +491,71 @@ if (pc) {
   }));
 }
 
-/* ============ 06 VISO PANEL ============ */
+/* ============ 06 VISO FULL-HEIGHT 4-CHANNEL TELEMETRY PANEL ============ */
 const vc = $('#visoCv');
 if (vc) {
   fit(vc);
   const vctx = vc.getContext('2d');
   let vt = 0;
-  const bars = Array.from({length: 22}, () => .3);
-  setInterval(() => { for (let i = 0; i < 22; i++) bars[i] = Math.max(.05, Math.min(1, bars[i] + (Math.random() - .48) * .3)); }, 160);
+  const bars = Array.from({length: 24}, () => .3);
+  setInterval(() => { for (let i = 0; i < 24; i++) bars[i] = Math.max(.08, Math.min(1, bars[i] + (Math.random() - .48) * .35)); }, 140);
+  
   function drawViso(){
     vctx.clearRect(0, 0, 640, 420);
-    vt += .06;
-    vctx.font = '600 10px "IBM Plex Mono"';
-    vctx.strokeStyle = 'rgba(241,237,226,.85)'; vctx.lineWidth = 1.6; vctx.beginPath();
+    vt += .05;
+
+    // CHANNEL 01: VIBRATION TELEMETRY (MPU6050)
+    vctx.font = '600 9.5px "IBM Plex Mono"';
+    vctx.fillStyle = 'rgba(241,237,226,.6)';
+    vctx.fillText('CHANNEL 01 / VIBRATION SPECTRUM (MPU6050 ACCELEROMETER)', 20, 24);
+    
+    vctx.strokeStyle = 'rgba(241,237,226,.85)'; vctx.lineWidth = 1.5; vctx.beginPath();
     for (let x = 0; x <= 600; x += 4) {
-      const y = 120 + Math.sin(x * .045 + vt * 3) * (7 + 5 * Math.sin(vt)) + Math.sin(x * .13 + vt * 7) * 3;
+      const y = 60 + Math.sin(x * .045 + vt * 3) * (8 + 5 * Math.sin(vt)) + Math.sin(x * .13 + vt * 7) * 3;
       x === 0 ? vctx.moveTo(20 + x, y) : vctx.lineTo(20 + x, y);
     }
     vctx.stroke();
-    vctx.fillStyle = 'rgba(241,237,226,.5)'; vctx.fillText('VIBRATION — ACCELEROMETER TELEMETRY', 20, 34);
-    const bw = 600 / 22;
-    for (let i = 0; i < 22; i++) {
-      vctx.fillStyle = i === 17 ? 'rgba(191,48,22,.9)' : 'rgba(241,237,226,.55)';
-      vctx.fillRect(20 + i * bw + 2, 232 - bars[i] * 60, bw - 5, bars[i] * 60);
+
+    // CHANNEL 02: ACOUSTIC SPECTRUM (24 FFT BANDS)
+    vctx.fillStyle = 'rgba(241,237,226,.6)';
+    vctx.fillText('CHANNEL 02 / ACOUSTIC SPECTRUM (24 FREQUENCY BANDS)', 20, 115);
+    const bw = 600 / 24;
+    for (let i = 0; i < 24; i++) {
+      vctx.fillStyle = (i === 18 || i === 19) ? 'rgba(191,48,22,.95)' : 'rgba(241,237,226,.55)';
+      vctx.fillRect(20 + i * bw + 2, 195 - bars[i] * 58, bw - 4, bars[i] * 58);
     }
-    vctx.fillText('ACOUSTIC SPECTRUM — 22 FREQUENCY BANDS', 20, 154);
-    const smoke = 190 + Math.sin(vt * .35) * 26 + Math.sin(vt * .11) * 14;
-    vctx.strokeStyle = 'rgba(191,48,22,.9)'; vctx.setLineDash([5, 5]);
-    vctx.beginPath(); vctx.moveTo(20, 300); vctx.lineTo(620, 300); vctx.stroke(); vctx.setLineDash([]);
-    vctx.strokeStyle = 'rgba(241,237,226,.8)';
-    vctx.beginPath(); vctx.moveTo(20, 340);
-    for (let x = 0; x <= 600; x += 6) vctx.lineTo(20 + x, 340 - Math.max(0, Math.sin(x * .012 + vt * .4)) * (smoke - 150) * .9);
+
+    // CHANNEL 03: SMOKE & THERMAL DENSITY (MQ-2 SENSOR)
+    vctx.fillStyle = 'rgba(241,237,226,.6)';
+    vctx.fillText('CHANNEL 03 / SMOKE DENSITY & THERMALS (MQ-2 THRESHOLD)', 20, 230);
+    
+    const smokeVal = 265 + Math.sin(vt * .35) * 18 + Math.sin(vt * .11) * 10;
+    vctx.strokeStyle = 'rgba(191,48,22,.9)'; vctx.setLineDash([4, 4]);
+    vctx.beginPath(); vctx.moveTo(20, 255); vctx.lineTo(620, 255); vctx.stroke(); vctx.setLineDash([]);
+    
+    vctx.strokeStyle = 'rgba(241,237,226,.8)'; vctx.lineWidth = 1.5;
+    vctx.beginPath(); vctx.moveTo(20, 290);
+    for (let x = 0; x <= 600; x += 6) vctx.lineTo(20 + x, 290 - Math.max(0, Math.sin(x * .012 + vt * .4)) * (smokeVal - 240) * .85);
     vctx.stroke();
-    vctx.fillStyle = 'rgba(241,237,226,.5)';
-    vctx.fillText('SMOKE DENSITY — SENSOR THRESHOLD MARKED', 20, 272);
-    vctx.fillStyle = '#bf3016'; vctx.fillText('ALERT', 580, 296);
+    vctx.fillStyle = '#bf3016'; vctx.fillText('ALERT THRESHOLD', 525, 250);
+
+    // CHANNEL 04: AI PREDICTIVE ANOMALY PROBABILITY INDEX
+    vctx.fillStyle = 'rgba(241,237,226,.6)';
+    vctx.fillText('CHANNEL 04 / PREDICTIVE ANOMALY PROBABILITY INDEX (AI ENGINE)', 20, 325);
+
+    const probVal = (2.8 + Math.sin(vt * .8) * 1.4).toFixed(1);
+    vctx.strokeStyle = '#e6c229'; vctx.lineWidth = 1.8;
+    vctx.beginPath(); vctx.moveTo(20, 385);
+    for (let x = 0; x <= 600; x += 5) {
+      const pY = 385 - Math.sin(x * .03 + vt * 2) * 12 * Math.cos(x * .01 + vt);
+      vctx.lineTo(20 + x, pY);
+    }
+    vctx.stroke();
+
+    vctx.fillStyle = '#e6c229'; vctx.font = '700 11px "IBM Plex Mono"';
+    vctx.fillText(`ANOMALY PROBABILITY: ${probVal}% [OPERATIONAL STATE: HEALTHY]`, 20, 408);
   }
+
   loopWhen(vc, drawViso);
   if (REDUCED) drawViso();
 }

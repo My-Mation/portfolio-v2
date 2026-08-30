@@ -203,7 +203,7 @@
   </div>
 </section>
 
-<!-- ============ 02 / QUADRUPED ROBOT (RESIZED TO PREVIOUS COMPACT SIZE) ============ -->
+<!-- ============ 02 / QUADRUPED ROBOT (BALANCED 2-COLUMN LAYOUT WITH MODEL ON RIGHT) ============ -->
 <section id="p02" class="spread" data-page="P.005" data-name="QUADRUPED ROBOT" aria-labelledby="h-p02">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">02</div>
@@ -214,11 +214,24 @@
       <span><b>DISCIPLINE:</b> MECHANICAL CAD · SERVOS · EMBEDDED GAIT KINEMATICS</span>
       <span><b>DOF:</b> 8 SERVOS</span>
     </div>
-    <p class="thesis rv" style="--d:.2s">A physical quadruped robot. Move your cursor over the 3D model below or scroll through to trigger cinematic rotation and joint inspection.</p>
 
-    <div style="margin-top:36px">
-      <!-- 3D CANVAS MODEL REPLACEMENT (COMPACT PREVIOUS SLIM SIZE) -->
-      <figure class="rv" style="--d:.1s;max-width:760px;margin:0 auto">
+    <!-- 2-COLUMN LAYOUT: TEXT ON LEFT, 3D MODEL BOX ON RIGHT -->
+    <div class="gr gr-2" style="margin-top:36px">
+      <!-- LEFT COLUMN: THESIS TEXT & TELEMETRY SPECS -->
+      <div class="rv" style="--d:.2s">
+        <p class="thesis" style="margin-top:0">A physical quadruped robot. Move your cursor over the 3D viewport on the right or scroll through to trigger cinematic rotation and joint inspection.</p>
+        
+        <div class="readout" style="margin-top:24px;padding:20px">
+          <span class="mono" style="color:var(--red);display:block;margin-bottom:12px;font-weight:700">GAIT KINEMATICS &amp; HARDWARE SPECS</span>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>KINEMATIC SOLVER</span><span class="v">8 SERVO IK FRAME</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>BALANCE SYSTEM</span><span class="v">PITCH / ROLL GYRO</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>CAD GEOMETRY</span><span class="v">CUSTOM DOG02 STL</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0"><span>INTERACTION</span><span class="v">CINEMATIC SCROLL ROTATION</span></div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: 3D MODEL FIGURE -->
+      <figure class="rv" style="--d:.1s">
         <div id="quad3dContainer" class="cvp scan" style="height:380px;position:relative;border:1px solid var(--red)">
           <canvas id="quad3dCv"></canvas>
           <div id="quad3dLoader" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--yellow);background:rgba(19,18,16,.92)">
@@ -353,24 +366,37 @@
   </div>
 </section>
 
-<!-- ============ 06 / VISO & FSOCIETY ============ -->
+<!-- ============ 06 / VISO & FSOCIETY (FULL CANVAS TELEMETRY UTILIZATION) ============ -->
 <section id="p06" class="spread dark" data-page="P.009" data-name="VISO" aria-labelledby="h-p06">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">06</div>
     <header class="kicker rv"><span>SYSTEMS 06 — MACHINE HEALTH HACKATHON</span><span class="tag team">TEAM PROJECT</span><span class="tag win">HACKATHON BUILD</span></header>
     <h2 id="h-p06" class="h-giant rv" style="--d:.05s">MACHINES<br>SPEAK BEFORE<br><span class="outline wcond">THEY BREAK<span style="color:var(--red)">.</span></span></h2>
     <div class="meta-row rv" style="--d:.15s">
-      <span><b>SENSORS:</b> VIBRATION · ACOUSTIC SOUND · SMOKE DETECTION · ESP32</span>
-      <span><b>ANALYSIS:</b> AI-ASSISTED ANOMALY INTERPRETATION</span>
+      <span><b>SENSORS:</b> VIBRATION · ACOUSTIC SOUND · SMOKE DENSITY · THERMAL ANOMALY</span>
+      <span><b>ANALYSIS:</b> AI-ASSISTED PREDICTIVE ANOMALY INTERPRETATION</span>
       <span><b>REPOSITORY:</b> FSOCIETY (GITHUB)</span>
       <span><b>TYPE:</b> TEAM PROJECT</span>
     </div>
+    
     <div class="gr gr-2" style="margin-top:40px">
+      <!-- FULL-HEIGHT 4-CHANNEL CANVAS TELEMETRY -->
       <figure class="cvp rv" style="--d:.1s">
-        <canvas id="visoCv" width="640" height="420" aria-label="VISO telemetry visualization"></canvas>
+        <canvas id="visoCv" width="640" height="420" aria-label="VISO 4-channel real-time telemetry visualization"></canvas>
       </figure>
+
+      <!-- ENRICHED SPECS & HACKATHON READOUT -->
       <div class="rv" style="--d:.2s">
-        <p class="body-col" style="margin-top:0">Detecting mechanical failures before breakdown using acoustic, vibration, and smoke telemetry processed by ESP32 hardware microcontrollers and AI models.</p>
+        <p class="body-col" style="margin-top:0">Detecting mechanical failures before structural breakdown using acoustic sound, vibration, smoke density, and thermal telemetry processed by ESP32 microcontrollers and AI models.</p>
+        
+        <div class="readout" style="margin-top:20px;padding:20px;background:#141311;border:1px solid var(--pline)">
+          <span class="mono" style="color:var(--red);display:block;margin-bottom:10px;font-weight:700">ESP32 SENSOR CHANNELS &amp; AI MODEL</span>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--pline)"><span>VIBRATION SENSOR</span><span class="v" style="color:var(--paper)">MPU6050 ACCELEROMETER</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--pline)"><span>ACOUSTIC SPECTRUM</span><span class="v" style="color:var(--paper)">24 FFT FREQUENCY BANDS</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--pline)"><span>SMOKE &amp; THERMAL</span><span class="v" style="color:var(--paper)">MQ-2 GAS &amp; THERMOCOUPLE</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0"><span>PREDICTIVE ENGINE</span><span class="v" style="color:var(--yellow)">EDGE ANOMALY INDEX (AI)</span></div>
+        </div>
+
         <div style="margin-top:24px">
           <a class="srclink" href="https://github.com/My-Mation/FSociety" target="_blank" rel="noopener" style="color:var(--paper);border-color:var(--red)">
             VIEW FSOCIETY / VISO HACKATHON REPO ↗
@@ -509,7 +535,7 @@
     <h2 id="h-pinsta" class="h-giant rv" style="--d:.05s">LOCAL_FIRST_LAB<br><span class="outline wcond">/ 13K+ FOLLOWERS</span><span style="color:var(--red)">.</span></h2>
     
     <div class="gr gr-2" style="margin-top:40px">
-      <div class="rv" style="--d:.1s">
+      <div class="rv" style="--d:.10s">
         <p class="thesis" style="margin-top:0">The experimental tech channel where Deb documents real-time hardware builds, mobile Linux servers, local AI, and robotics prototypes.</p>
         <p class="body-col" style="color:var(--pdim)">An extension of the portfolio's engineering notebook identity — documenting iterations, failures, and breakthroughs live for a community of over 13,000 builders.</p>
       </div>
