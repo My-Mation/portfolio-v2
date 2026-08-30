@@ -354,9 +354,9 @@ if (pc) {
       j.sho = [210, bodyY];
       j.hip = [360, bodyY + 5];
       j.kne = [440, bodyY + 10];
-      j.ank = [520, 335];
+      j.ank = [520, 345];
       j.wri = [210, 345];
-      j.elb = [170 + 40 * b, (bodyY + 345) / 2 + 10 * (1 - b)];
+      j.elb = [210 + 35 * (1 - b), (bodyY + 345) / 2 + 12 * (1 - b)];
     } else if (exercise === 'pull') {
       const barY = 70;
       const headY = 210 - 130 * b;
@@ -372,27 +372,27 @@ if (pc) {
       j.elb = [240 - 30 * b, (shoY + barY) / 2];
       j.elbR = [400 + 30 * b, (shoY + barY) / 2];
     } else if (exercise === 'squat') {
-      const headY = 80 + 130 * (1 - b);
-      const shoY = 120 + 130 * (1 - b);
-      const hipY = 210 + 120 * (1 - b);
-      const kneX = 320 + 55 * (1 - b);
-      const kneY = 290 + 50 * (1 - b);
+      const headY = 60 + 105 * (1 - b);
+      const shoY = 100 + 105 * (1 - b);
+      const hipY = 185 + 95 * (1 - b);
+      const kneX = 320 + 50 * (1 - b);
+      const kneY = 270 + 35 * (1 - b);
       j.head = [320, headY];
       j.sho = [320, shoY];
       j.hip = [300 - 20 * (1 - b), hipY];
       j.kne = [kneX, kneY];
-      j.ank = [320, 370];
+      j.ank = [320, 345];
       j.wri = [410, shoY + 10];
       j.elb = [365, shoY + 5];
     } else if (exercise === 'curl') {
-      j.head = [320, 80];
-      j.sho = [320, 120];
-      j.hip = [320, 220];
-      j.kne = [320, 300];
-      j.ank = [320, 375];
-      j.elb = [335, 185];
+      j.head = [320, 60];
+      j.sho = [320, 100];
+      j.hip = [320, 190];
+      j.kne = [320, 270];
+      j.ank = [320, 345];
+      j.elb = [335, 165];
       const angle = 0.2 + 2.3 * b;
-      j.wri = [335 + Math.sin(angle) * 50, 185 + Math.cos(angle) * 50];
+      j.wri = [335 + Math.sin(angle) * 50, 165 + Math.cos(angle) * 50];
     }
     return j;
   }

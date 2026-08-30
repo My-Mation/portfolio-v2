@@ -162,7 +162,7 @@ html.fine #cursor{display:block}
 /* BUTTONS */
 .ctl button{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--ink);padding:9px 15px;background:var(--paper2);color:var(--ink);transition:background .15s,color .15s}
 .ctl button:hover{background:var(--ink);color:var(--paper)}
-.ctl button[aria-pressed="true"]{background:var(--yellow);color:var(--ink);font-weight:700}
+.ctl button[aria-pressed="true"]{background:var(--red);color:var(--paper);font-weight:700;border-color:var(--red)}
 .ctl-dark button{border-color:var(--red);background:var(--red);color:#ffffff !important;font-weight:700;padding:10px 18px;letter-spacing:.12em}
 .ctl-dark button:hover{background:var(--ink);border-color:var(--paper);color:#ffffff !important}
 
