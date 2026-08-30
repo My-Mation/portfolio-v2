@@ -119,7 +119,7 @@
       <a class="feat" href="#p01"><span class="no">01</span><span class="ti">OSAMU</span><span class="hook">Adaptive anti-cheat exam hardware on ESP32. Aveenir Hackathon 1st Prize Winner.</span><span class="tg"><span class="tag win">1ST PRIZE 🏆</span><span class="tag team">TEAM PROJECT</span></span></a>
       <a class="feat" href="#p02"><span class="no">02</span><span class="ti">QUADRUPED ROBOT</span><span class="hook">Interactive 3D mechanical model (dog02_web.stl) &amp; gait kinematics.</span><span class="tg"><span class="tag exp">3D MODEL</span><span class="tag arch">IN PROGRESS</span></span></a>
       <a class="feat" href="#p03"><span class="no">03</span><span class="ti">PHONE HOMELAB</span><span class="hook">A server in my pocket. Termux, media servers, local 32-bit LLM &amp; network scanner.</span><span class="tg"><span class="tag exp">FEATURED</span><span class="tag live">SYSTEMS</span></span></a>
-      <a href="#p04"><span class="no">04</span><span class="ti">STUDIVA</span><span class="hook">What if knowledge didn't get lost? Live academic resource platform.</span><span class="tg"><span class="tag live">LIVE</span><span class="tag team">TEAM PROJECT</span></span></a>
+      <a href="#p04"><span class="no">04</span><span class="ti">STUDIVA</span><span class="hook">Need notes for Makaut? Live academic resource platform.</span><span class="tg"><span class="tag live">LIVE</span><span class="tag team">TEAM PROJECT</span></span></a>
       <a href="#p05"><span class="no">05</span><span class="ti">REPBOT</span><span class="hook">Stop counting. Let the camera count. Real-time pose tracking.</span><span class="tg"><span class="tag live">LIVE</span></span></a>
       <a href="#p06"><span class="no">06</span><span class="ti">VISO</span><span class="hook">Machines speak before they break. Predictive hardware health (FSociety hackathon build).</span><span class="tg"><span class="tag team">TEAM PROJECT</span></span></a>
       <a href="#p07"><span class="no">07</span><span class="ti">SARBANASH</span><span class="hook">Before the robots, there were monsters. Survival horror pixel art indie game.</span><span class="tg"><span class="tag win">SURVIVAL HORROR</span><span class="tag">CREATIVE</span></span></a>
@@ -155,28 +155,75 @@
       </div>
     </div>
 
-    <!-- DIAGRAM & INTERACTIVE TESTER -->
+    <!-- HIGH-FIDELITY BRANCHING ARCHITECTURE DIAGRAM -->
     <div class="gr gr-2" style="margin-top:36px">
       <figure class="rv" style="--d:.1s">
-        <svg class="bp" viewBox="0 0 360 620" role="img" aria-label="OSAMU architecture diagram">
+        <svg class="bp" viewBox="0 0 420 620" role="img" aria-label="OSAMU adaptive branching architecture flowchart">
           <g font-family="IBM Plex Mono">
-            <rect class="flowbox draw" pathLength="1" x="90" y="10" width="180" height="44"/>
-            <text class="flowlab" x="124" y="37">PDF SYLLABUS</text>
-            <path class="ln thin draw d1" pathLength="1" d="M180,54 V92 M172,84 L180,92 L188,84"/>
-            <rect class="flowbox draw d1" pathLength="1" x="90" y="94" width="180" height="44"/>
-            <text class="flowlab" x="110" y="121">AI PARSER &amp; JSON</text>
-            <path class="ln thin draw d2" pathLength="1" d="M180,138 V176 M172,168 L180,176 L188,168"/>
-            <rect class="flowbox draw d2" pathLength="1" x="90" y="178" width="180" height="44"/>
-            <text class="flowlab" x="104" y="198">ESP32 LOCAL BROADCAST</text>
-            <path class="ln thin draw d3" pathLength="1" d="M180,222 V260 M172,252 L180,260 L188,252"/>
-            <rect class="flowbox draw d3" pathLength="1" x="90" y="262" width="180" height="44"/>
-            <text class="flowlab" x="108" y="289">HARDWARE KEYPAD</text>
-            <path class="rs draw d4" pathLength="1" d="M180,306 V348 M170,340 L180,348 L190,340"/>
-            <rect class="flowbox draw d4" pathLength="1" x="90" y="350" width="180" height="52"/>
-            <text class="flowlab" x="100" y="372">HESITATION ANALYZER</text>
-            <path class="ln thin draw d5" pathLength="1" d="M180,402 V440 M172,432 L180,440 L188,432"/>
-            <rect class="flowbox draw d5" pathLength="1" x="90" y="442" width="180" height="44"/>
-            <text class="flowlab" x="98" y="469">ADAPTIVE PROBE Qs</text>
+            <!-- Node 1: PDF Syllabus Input -->
+            <rect class="flowbox draw" pathLength="1" x="120" y="10" width="180" height="34" rx="3"/>
+            <text class="flowlab" x="156" y="31">📄 PDF SYLLABUS</text>
+
+            <path class="ln thin draw d1" pathLength="1" d="M210,44 V68 M204,62 L210,68 L216,62"/>
+
+            <!-- Node 2: AI Parser & JSON Structurer -->
+            <rect class="flowbox draw d1" pathLength="1" x="120" y="70" width="180" height="34" rx="3"/>
+            <text class="flowlab" x="142" y="91">⚡ AI PARSER &amp; JSON</text>
+
+            <path class="ln thin draw d2" pathLength="1" d="M210,104 V128 M204,122 L210,128 L216,122"/>
+
+            <!-- Node 3: ESP32 Local AP Broadcast -->
+            <rect class="flowbox draw d2" pathLength="1" x="110" y="130" width="200" height="34" rx="3"/>
+            <text class="flowlab" x="126" y="151">📡 ESP32 AP BROADCAST</text>
+
+            <path class="ln thin draw d3" pathLength="1" d="M210,164 V188 M204,182 L210,188 L216,182"/>
+
+            <!-- Node 4: Hardware Keypad Terminal -->
+            <rect class="flowbox draw d3" pathLength="1" x="110" y="190" width="200" height="34" rx="3"/>
+            <text class="flowlab" x="128" y="211">⌨️ HARDWARE KEYPAD</text>
+
+            <path class="ln thin draw d4" pathLength="1" d="M210,224 V248 M204,242 L210,248 L216,242"/>
+
+            <!-- DECISION DIAMOND: HESITATION > 3.0s? -->
+            <polygon points="210,250 310,285 210,320 110,285" fill="var(--paper2)" stroke="var(--red)" stroke-width="1.5"/>
+            <text x="145" y="282" fill="var(--ink)" font-weight="700" font-size="10">HESITATION &gt; 3.0s?</text>
+            <text x="156" y="295" fill="var(--red)" font-size="8.5">BEHAVIOR ANALYZER</text>
+
+            <!-- BRANCH 1: YES (Right -> Down) -->
+            <path class="rs draw d5" pathLength="1" d="M310,285 H360 V340 M354,334 L360,340 L366,334"/>
+            <text x="318" y="278" fill="var(--red)" font-weight="700" font-size="9.5">YES ⚡</text>
+
+            <!-- Node 5A: Adaptive Probe Generator -->
+            <rect class="flowbox draw d5" pathLength="1" x="270" y="342" width="140" height="42" rx="3" stroke="var(--red)"/>
+            <text x="280" y="360" fill="var(--red)" font-weight="700" font-size="9">AI ADAPTIVE PROBE</text>
+            <text x="280" y="374" fill="var(--ink2)" font-size="8">GENERATES DEEP Qs</text>
+
+            <path class="ln thin draw d5" pathLength="1" d="M340,384 V418 M334,412 L340,418 L346,412"/>
+
+            <!-- Node 6A: Broadcast Probe Question -->
+            <rect class="flowbox draw d5" pathLength="1" x="270" y="420" width="140" height="38" rx="3"/>
+            <text x="278" y="436" fill="var(--ink)" font-weight="600" font-size="8.5">BROADCAST PROBE</text>
+            <text x="278" y="449" fill="var(--ink2)" font-size="8">TO KEYPAD UNIT</text>
+
+            <!-- Rejoin Path from 6A to final eval -->
+            <path class="ln thin draw d5" pathLength="1" d="M340,458 V510 H210 M216,504 L210,510 L216,516"/>
+
+            <!-- BRANCH 2: NO (Left -> Down) -->
+            <path class="ln thin draw d4" pathLength="1" d="M110,285 H60 V340 M54,334 L60,340 L66,334"/>
+            <text x="66" y="278" fill="var(--ink2)" font-size="9.5">NO (FAST)</text>
+
+            <!-- Node 5B: Direct Score Evaluator -->
+            <rect class="flowbox draw d4" pathLength="1" x="10" y="342" width="115" height="42" rx="3"/>
+            <text x="18" y="360" fill="var(--ink)" font-weight="600" font-size="8.5">DIRECT SCORE</text>
+            <text x="18" y="374" fill="var(--ink2)" font-size="8">LOG ACCURACY</text>
+
+            <path class="ln thin draw d4" pathLength="1" d="M67,384 V510 H210"/>
+
+            <!-- FINAL NODE: ZERO-BIAS EVALUATION REPORT -->
+            <path class="ln thin draw d5" pathLength="1" d="M210,480 V510 M204,504 L210,510 L216,504"/>
+            <rect class="flowbox draw d5" pathLength="1" x="110" y="512" width="200" height="42" rx="3" stroke="var(--red)"/>
+            <text x="126" y="531" fill="var(--red)" font-weight="700" font-size="9.5">ZERO-BIAS EVALUATION</text>
+            <text x="135" y="544" fill="var(--ink2)" font-size="8.5">FINAL MASTERY REPORT</text>
           </g>
         </svg>
       </figure>
@@ -203,7 +250,7 @@
   </div>
 </section>
 
-<!-- ============ 02 / QUADRUPED ROBOT (BALANCED 2-COLUMN LAYOUT WITH MODEL ON RIGHT) ============ -->
+<!-- ============ 02 / QUADRUPED ROBOT (BALANCED 2-COLUMN LAYOUT WITH HARDWARE SENSOR BOM) ============ -->
 <section id="p02" class="spread" data-page="P.005" data-name="QUADRUPED ROBOT" aria-labelledby="h-p02">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">02</div>
@@ -217,16 +264,30 @@
 
     <!-- 2-COLUMN LAYOUT: TEXT ON LEFT, 3D MODEL BOX ON RIGHT -->
     <div class="gr gr-2" style="margin-top:36px">
-      <!-- LEFT COLUMN: THESIS TEXT & TELEMETRY SPECS -->
+      <!-- LEFT COLUMN: THESIS TEXT & FULL HARDWARE SENSOR BOM -->
       <div class="rv" style="--d:.2s">
         <p class="thesis" style="margin-top:0">A physical quadruped robot. Move your cursor over the 3D viewport on the right or scroll through to trigger cinematic rotation and joint inspection.</p>
         
-        <div class="readout" style="margin-top:24px;padding:20px">
-          <span class="mono" style="color:var(--red);display:block;margin-bottom:12px;font-weight:700">GAIT KINEMATICS &amp; HARDWARE SPECS</span>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>KINEMATIC SOLVER</span><span class="v">8 SERVO IK FRAME</span></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>BALANCE SYSTEM</span><span class="v">PITCH / ROLL GYRO</span></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>CAD GEOMETRY</span><span class="v">CUSTOM DOG02 STL</span></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0"><span>INTERACTION</span><span class="v">CINEMATIC SCROLL ROTATION</span></div>
+        <div class="readout" style="margin-top:20px;padding:18px">
+          <span class="mono" style="color:var(--red);display:block;margin-bottom:10px;font-weight:700">GAIT KINEMATICS &amp; HARDWARE SPECS</span>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span>KINEMATIC SOLVER</span><span class="v">8 SERVO IK FRAME</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span>BALANCE SYSTEM</span><span class="v">PITCH / ROLL GYRO</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span>CAD GEOMETRY</span><span class="v">CUSTOM DOG02 STL</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0"><span>INTERACTION</span><span class="v">CINEMATIC SCROLL ROTATION</span></div>
+        </div>
+
+        <!-- DETAILED HARDWARE & SENSOR LIST -->
+        <div class="readout" style="margin-top:16px;padding:18px;background:var(--paper2)">
+          <span class="mono" style="color:var(--red);display:block;margin-bottom:8px;font-weight:700">HARDWARE COMPONENTS &amp; SENSOR BOM</span>
+          <div style="font-size:12.5px;line-height:1.65;color:var(--ink)">
+            • <b>6x MG995 Metal-Gear Servos</b> (High-torque leg articulation)<br>
+            • <b>1x Micro Servo</b> (Pan axis for sensor array)<br>
+            • <b>MPU6050 6-DOF IMU</b> (Accelerometer &amp; gyro posture feedback)<br>
+            • <b>Time-of-Flight (ToF) Sensor</b> (Makeshift 2D lidar panning)<br>
+            • <b>ESP32 Microcontroller</b> (Gait kinematics &amp; local web AP)<br>
+            • <b>2x High-Current Buck Converters</b> &amp; Li-ion battery pack<br>
+            • <b>Peripherals:</b> Buzzer, Status LEDs, Perfboards, Resistors &amp; Capacitors
+          </div>
         </div>
       </div>
 
@@ -301,12 +362,12 @@
   </div>
 </section>
 
-<!-- ============ 04 / STUDIVA ============ -->
+<!-- ============ 04 / STUDIVA (UPDATED HEADING: NEED NOTES FOR MAKAUT?) ============ -->
 <section id="p04" class="spread" data-page="P.007" data-name="STUDIVA" aria-labelledby="h-p04">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">04</div>
     <header class="kicker rv"><span>LIVE PRODUCT 04</span><span class="tag team">TEAM PROJECT</span><span class="tag live">LIVE</span></header>
-    <h2 id="h-p04" class="h-giant rv" style="--d:.05s">WHAT IF<br>KNOWLEDGE<br><span class="outline wcond">DIDN'T</span><br>GET LOST<span style="color:var(--red)">?</span></h2>
+    <h2 id="h-p04" class="h-giant rv" style="--d:.05s">NEED NOTES<br><span class="outline wcond">FOR MAKAUT</span><span style="color:var(--red)">?</span></h2>
     <div class="meta-row rv" style="--d:.15s">
       <span><b>STATUS:</b> TEAM PROJECT</span>
       <span><b>MY CONTRIBUTION:</b> DEVELOPMENT</span>
@@ -366,7 +427,7 @@
   </div>
 </section>
 
-<!-- ============ 06 / VISO & FSOCIETY (FULL CANVAS TELEMETRY UTILIZATION) ============ -->
+<!-- ============ 06 / VISO & FSOCIETY ============ -->
 <section id="p06" class="spread dark" data-page="P.009" data-name="VISO" aria-labelledby="h-p06">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">06</div>
@@ -407,7 +468,7 @@
   </div>
 </section>
 
-<!-- ============ 07 / SARBANASH (ULTRA READABLE CRT BUTTON DISPLAY) ============ -->
+<!-- ============ 07 / SARBANASH ============ -->
 <section id="p07" class="spread dark" data-page="P.010" data-name="SARBANASH" aria-labelledby="h-p07">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">07</div>
@@ -552,7 +613,7 @@
   </div>
 </section>
 
-<!-- ============ ABOUT (CLEAN BORDERLESS & NO-BOX DISPLAY) ============ -->
+<!-- ============ ABOUT (CLEAN BORDERLESS DISPLAY WITH HIDDEN BACKGROUND SHAPE) ============ -->
 <section id="p17" class="spread" data-page="P.014" data-name="ABOUT" aria-labelledby="h-p17">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">—</div>
