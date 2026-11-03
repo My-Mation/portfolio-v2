@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEB — Anime Dimension / Dragon Ball Super, Attack on Titan &amp; More</title>
+<meta name="description" content="Debargha Sarkar — anime sanctuary: Dragon Ball Super in authentic Goku Orange & Saiyan Blue, Colossal Titan, Evangelion Unit-01, Monster, Vinland Saga.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+  /* ============ AUTHENTIC ANIME DIMENSION COLOR SCHEMES ============ */
+
+  /* SECTION 01: DRAGON BALL SUPER (VIBRANT GOKU GI ORANGE & SAIYAN BLUE) */
+  .section-db {
+    background: radial-gradient(circle at 50% 10%, #1a0800 0%, #08020a 60%, #000000 100%);
+    color: #fff7ed;
+    border-top: 4px solid #ff5500;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+  .db-orange { color: #ff5500; }
+  .db-blue { color: #0066ff; }
+  .db-gold { color: #ffcc00; }
+  
+  /* ULTRA INSTINCT PULSING ENERGY AURA */
+  .ui-aura-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70vw;
+    height: 480px;
+    background: radial-gradient(ellipse at center, rgba(255, 85, 0, 0.22) 0%, rgba(0, 102, 255, 0.16) 40%, transparent 75%);
+    pointer-events: none;
+    animation: aura-pulse 2.8s infinite alternate ease-in-out;
+    z-index: 1;
+  }
+  @keyframes aura-pulse {
+    0% { transform: translateX(-50%) scale(0.92); opacity: 0.7; filter: drop-shadow(0 0 20px #ff5500); }
+    100% { transform: translateX(-50%) scale(1.08); opacity: 1; filter: drop-shadow(0 0 50px #0066ff); }
+  }
+
+  /* SECTION 02: ATTACK ON TITAN (COLOSSAL TITAN BLOOD CRIMSON & SCOUT GREEN) */
+  .section-aot {
+    background: #0d0505;
+    color: #fef2f2;
+    border-top: 4px solid #dc2626;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+
+  /* SECTION 03: NEON GENESIS EVANGELION (UNIT-01 NEON PURPLE & ACID TOXIC GREEN) */
+  .section-eva {
+    background: #090214;
+    color: #f5f3ff;
+    border-top: 4px solid #9333ea;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+
+  /* SECTION 04: MONSTER (JOHAN LIEBERT PSYCHOLOGICAL NOIR) */
+  .section-monster {
+    background: #0c0808;
+    color: #f5ebe6;
+    border-top: 4px solid #b91c1c;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+
+  /* SECTION 05: VINLAND SAGA (NORTHERN ICE & BLOOD) */
+  .section-vinland {
+    background: #030a12;
+    color: #e0f2fe;
+    border-top: 4px solid #0284c7;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+
+  /* SECTION 06: SPY X FAMILY & MHA */
+  .section-spy {
+    background: #14050d;
+    color: #fdf2f8;
+    border-top: 4px solid #ec4899;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+
+  /* MEDIA IMAGE FRAME WITH POLISHED PLACEHOLDER FALLBACK */
+  .media-img-frame {
+    width: 100%;
+    min-height: 400px;
+    background: #111827;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .media-img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .media-img-frame:hover img {
+    transform: scale(1.03);
+  }
+  .media-placeholder-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    background: repeating-linear-gradient(45deg, rgba(0,0,0,0.5) 0 10px, rgba(20,20,20,0.5) 10px 20px);
+    font-family: var(--mono);
+    color: rgba(255, 255, 255, 0.75);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* NATURAL DOCUMENT FLOW CARDS (ZERO OVERLAPPING TEXT) */
+  .anime-header-card {
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+<a class="skiplink" href="#anime-content">Skip to content</a>
+<div id="noise" aria-hidden="true"></div>
+<canvas id="trail" aria-hidden="true"></canvas>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursorTag" aria-hidden="true">OPEN</div>
+
+<!-- NAVIGATION -->
+<nav id="siteNav" aria-label="Site">
+  <a class="brand" href="index.html">← DEB <span class="hide-mobile">— BACK TO HOME</span></a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="tag hide-mobile" href="projects.html" style="text-decoration:none;border-color:var(--yellow);color:var(--yellow)">PROJECTS</a>
+    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
+    <a class="tag hide-mobile" href="music.html" style="text-decoration:none">MUSIC</a>
+    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
+    <a class="tag hide-mobile" href="gaming.html" style="text-decoration:none">GAMES</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  </div>
+</nav>
+
+<!-- TOC -->
+<div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-head"><h2>Anime Index</h2><button id="tocClose">CLOSE ×</button></div>
+  <ul class="toc-list">
+    <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Main Junction</span><span class="leader"></span><span class="t-pg">HOME ↗</span></a></li>
+    <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Anime Cover</span><span class="leader"></span><span class="t-pg">P.A00</span></a></li>
+    <li><a href="#m-db"><span class="t-no">01</span><span class="t-title">Dragon Ball Super (#1 All-Time / Goku Gi Orange &amp; Blue)</span><span class="leader"></span><span class="t-pg">P.A01</span></a></li>
+    <li><a href="#m-aot"><span class="t-no">02</span><span class="t-title">Attack on Titan (Colossal Titan on the Right)</span><span class="leader"></span><span class="t-pg">P.A02</span></a></li>
+    <li><a href="#m-eva"><span class="t-no">03</span><span class="t-title">Neon Genesis Evangelion (Unit-01 &amp; A.T. Field)</span><span class="leader"></span><span class="t-pg">P.A03</span></a></li>
+    <li><a href="#m-monster"><span class="t-no">04</span><span class="t-title">Monster (Johan Liebert Psychological Noir)</span><span class="leader"></span><span class="t-pg">P.A04</span></a></li>
+    <li><a href="#m-vinland"><span class="t-no">05</span><span class="t-title">Vinland Saga (“I Have No Enemies”)</span><span class="leader"></span><span class="t-pg">P.A05</span></a></li>
+    <li><a href="#m-spy"><span class="t-no">06</span><span class="t-title">Spy × Family &amp; My Hero Academia</span><span class="leader"></span><span class="t-pg">P.A06</span></a></li>
+  </ul>
+  <p class="toc-foot">DEBARGHA SARKAR / 2026 — ANIME REALM</p>
+</div>
+
+<main id="anime-content">
+
+<!-- ============ 00 / COVER ============ -->
+<section id="cover" aria-label="Anime Cover" data-page="P.A00" data-name="ANIME OVERVIEW" style="min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:86px 5.5vw 64px;position:relative;">
+  <div class="crops" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="topline">
+    <div>DEBARGHA SARKAR <span class="hide-mobile">— MEDIA ARCHIVES &amp; POP-CULTURE INFLUENCE</span></div>
+    <div class="hide-mobile">CHAPTER 01 // ANIME</div>
+    <div>2026 ARCHIVE</div>
+  </div>
+  <div class="hero-center">
+    <div class="crosshair" aria-hidden="true"></div>
+    <div class="side-vert">SAIYAN KI · ELDIAN WALLS · A.T. FIELDS · NOIR</div>
+    <h1 class="hero-name" aria-label="ANIME.">
+      <span class="ln" style="--fx:-140px;--fy:30px;--fr:-9deg;--d:.15s">A</span><span class="ln" style="--fx:40px;--fy:-160px;--fr:6deg;--d:.32s">N</span><span class="ln" style="--fx:150px;--fy:60px;--fr:-5deg;--d:.5s">I</span><span class="ln" style="--fx:-60px;--fy:90px;--fr:7deg;--d:.65s">M</span><span class="ln dot" style="--fx:0;--fy:-90px;--fr:0deg;--d:.78s">E.</span>
+    </h1>
+    <p class="hero-sub">The Anime Dimension</p>
+    <p class="hero-roles">DRAGON BALL SUPER #1 · ATTACK ON TITAN · EVANGELION · MONSTER · VINLAND SAGA · MHA</p>
+    <div class="hero-rule" aria-hidden="true"></div>
+    
+    <div style="margin-top:24px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:10">
+      <a class="ctl button" href="#m-db" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:#ff5500;color:#000;border:1px solid #ff5500">
+        ENTER DRAGON BALL TRIBUTE ↓
+      </a>
+      <a class="ctl button" href="index.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink)">
+        ← HOME JUNCTION
+      </a>
+    </div>
+  </div>
+  <div class="botline">
+    <div>INDEX 01 / ANIME</div>
+    <div class="hide-mobile">ORIGINAL MEDIA COLOR PALETTES · UNHURRIED SCROLL</div>
+    <div class="scroll-cue">SCROLL <i aria-hidden="true"></i></div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     01 / DRAGON BALL SUPER (#1 ALL-TIME FAVORITE)
+     AUTHENTIC GOKU TURTLE GI ORANGE & SAIYAN BLUE
+     ===================================================================== -->
+<section id="m-db" class="section-db" data-page="P.A01" data-name="DRAGON BALL" aria-labelledby="h-db">
+  <div class="ui-aura-glow" aria-hidden="true"></div>
+
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(255,85,0,0.3)">01</div>
+    
+    <div class="anime-header-card">
+      <header class="kicker rv">
+        <span class="db-orange">🔥 #1 ALL-TIME FAVORITE ANIME</span>
+        <span class="tag win" style="background:#ff5500;color:#000;border-color:#ff5500;font-weight:900">ドラゴンボール超 // GOD KI</span>
+        <span class="tag" style="background:#0038a8;color:#fff;border-color:#0066ff">SUPER SAIYAN BLUE</span>
+      </header>
+      <h2 id="h-db" class="h-giant rv" style="--d:.05s">
+        DRAGON BALL<br>
+        <span style="color:#ff5500">SUPER</span><span style="color:#0066ff">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:rgba(255,85,0,0.4)">
+        <span><b>RANK:</b> #1 ALL-TIME FAVORITE ANIME</span>
+        <span><b>HERO COLORS:</b> GOKU TURTLE GI ORANGE (#FF5500) × SAIYAN BLUE (#0066FF)</span>
+        <span><b>PEAK FORM:</b> ULTRA INSTINCT (身勝手の極意)</span>
+        <span><b>STUDIO:</b> TOEI ANIMATION · AKIRA TORIYAMA</span>
+      </div>
+    </div>
+
+    <!-- MAIN THESIS -->
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#ffedd5">
+      Dragon Ball is my bedrock. Super took everything legendary about DBZ and elevated it to cosmic scale. <em>The relentless philosophy: there is no limit that cannot be broken.</em> When Goku broke his limits against Jiren to reach Ultra Instinct, it was the pinnacle of martial arts hype.
+    </p>
+
+    <!-- PICTURE SHOWCASE -->
+    <div class="gr gr-2" style="margin-top:44px">
+      <div class="rv" style="--d:.1s">
+        <div class="media-img-frame" style="border-color:#ff5500;box-shadow:0 0 35px rgba(255,85,0,0.2)">
+          <img src="images/dragonball-hero.jpg" alt="Dragon Ball Super - Goku Ultra Instinct" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#ff5500;font-size:32px;margin-bottom:8px">⚡</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: GOKU ULTRA INSTINCT / SUPER SAIYAN BLUE</span>
+            <span style="font-size:11px;color:#fed7aa;margin-top:6px">Place image file in: <code>images/dragonball-hero.jpg</code></span>
+          </div>
+        </div>
+        <div class="fig-label" style="color:#fed7aa">
+          <span>FIG. A01 — SON GOKU // GOD KI &amp; SILVER-EYED ULTRA INSTINCT</span>
+          <span>TOURNAMENT OF POWER</span>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s;display:flex;flex-direction:column;gap:20px">
+        <div class="readout" style="padding:28px;background:rgba(255,85,0,0.06);border:2px solid #ff5500">
+          <span class="mono" style="color:#ff5500;display:block;margin-bottom:12px;font-weight:700;letter-spacing:.14em">THE SAIYAN CREED</span>
+          <p style="color:#ffedd5;font-size:16px;line-height:1.6;font-weight:700;margin-bottom:12px">
+            "I'd rather be a brainless monkey than a heartless monster."
+          </p>
+          <p style="color:#fed7aa;font-size:14px;line-height:1.65;margin:0">
+            Dragon Ball taught me perseverance before anything else. It's why I don't give up when an ESP32 microcontroller won't flash or a kinematic equation breaks down at 3 AM.
+          </p>
+        </div>
+
+        <div class="readout" style="padding:24px;background:#0d0614;border:1px solid #0066ff">
+          <span class="mono" style="color:#0066ff;display:block;margin-bottom:10px;font-weight:700;letter-spacing:.14em">// TOURNAMENT OF POWER STATS</span>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,102,255,0.25);font-size:13px">
+            <span>UNIVERSES FOUGHT</span><span class="v" style="color:#ff5500">8 MULTIVERSAL REALMS</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,102,255,0.25);font-size:13px">
+            <span>ULTIMATE ANTAGONIST</span><span class="v" style="color:#fff">JIREN THE GRAY</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:13px">
+            <span>CLIMAX ALLIANCE</span><span class="v" style="color:#ffcc00">GOKU × FRIEZA × ANDROID 17</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     02 / ATTACK ON TITAN (COLOSSAL TITAN ON THE RIGHT)
+     BLOOD RED & ELDIAN SCOUT REGIMENT GREEN
+     ===================================================================== -->
+<section id="m-aot" class="section-aot" data-page="P.A02" data-name="ATTACK ON TITAN" aria-labelledby="h-aot">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(220,38,38,0.25)">02</div>
+    
+    <div class="anime-header-card">
+      <header class="kicker rv">
+        <span style="color:#dc2626">SCOUT REGIMENT // WALL MARIA</span>
+        <span class="tag win" style="background:#991b1b;color:#fff;border-color:#dc2626">SHINGEKI NO KYOJIN</span>
+      </header>
+      <h2 id="h-aot" class="h-giant rv" style="--d:.05s">
+        ATTACK ON<br>
+        <span style="color:#dc2626">TITAN</span><span style="color:#16a34a">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:rgba(220,38,38,0.3)">
+        <span><b>THEME:</b> FREEDOM · WARFARE · TRAGIC DETERMINATION</span>
+        <span><b>MOTIF:</b> THE COLOSSAL TITAN OVER WALL MARIA</span>
+        <span><b>AUTHOR:</b> HAJIME ISAYAMA</span>
+      </div>
+    </div>
+
+    <!-- MAIN THESIS -->
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#fee2e2">
+      A masterclass in tension, foreshadowing, and the horrifying moral cost of survival. <em>"If you win, you live. If you lose, you die. If you don't fight, you cannot win!"</em>
+    </p>
+
+    <!-- CONTENT WITH COLOSSAL TITAN ON THE RIGHT-HAND SIDE -->
+    <div class="gr gr-2" style="margin-top:44px;align-items:start">
+      <!-- LEFT COLUMN: EDITORIAL ANALYSIS -->
+      <div class="rv" style="--d:.1s">
+        <div class="readout" style="padding:28px;background:#140808;border:2px solid #dc2626">
+          <span class="mono" style="color:#dc2626;display:block;margin-bottom:12px;font-weight:700">01 / THE WALLS &amp; THE REMINDER</span>
+          <p style="color:#fee2e2;font-size:14.5px;line-height:1.65;margin-bottom:16px">
+            "On that day, mankind received a grim reminder. We lived in fear of the Titans and were disgraced to live in these cages we called walls."
+          </p>
+          <p style="color:#fca5a5;font-size:13.5px;line-height:1.6;margin:0">
+            The transition from horror mystery to complex global geopolitical conflict is one of the greatest narrative evolutions in modern storytelling.
+          </p>
+        </div>
+
+        <div class="readout" style="margin-top:20px;padding:24px;background:#0d140e;border:1px solid #16a34a">
+          <span class="mono" style="color:#16a34a;display:block;margin-bottom:10px;font-weight:700">// SCOUT REGIMENT WINGS OF FREEDOM</span>
+          <p style="color:#dcfce7;font-size:13.5px;line-height:1.6;margin:0">
+            ODM gear aerial combat, Commander Erwin's final charge, and the unwavering dedication to uncover the truth of the basement.
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: COLOSSAL TITAN IMAGE FRAME -->
+      <div class="rv" style="--d:.2s">
+        <div class="media-img-frame" style="border:2px solid #dc2626;box-shadow:0 0 35px rgba(220,38,38,0.25);min-height:460px">
+          <img src="images/aot-colossal-titan.jpg" alt="Attack on Titan - Colossal Titan on the Right" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#dc2626;font-size:36px;margin-bottom:8px">🧱</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: COLOSSAL TITAN ON THE RIGHT</span>
+            <span style="font-size:11px;color:#fca5a5;margin-top:6px">Place image in: <code>images/aot-colossal-titan.jpg</code></span>
+            <span style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px">Peering over the 50-meter Eldian stone wall</span>
+          </div>
+        </div>
+        <div class="fig-label" style="color:#fca5a5">
+          <span>FIG. A02 — BERTHOLDT / ARMIN COLOSSAL TITAN GUEST SHOT</span>
+          <span>WALL MARIA BREACH</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     03 / NEON GENESIS EVANGELION
+     UNIT-01 NEON PURPLE & ACID TOXIC GREEN
+     ===================================================================== -->
+<section id="m-eva" class="section-eva" data-page="P.A03" data-name="EVANGELION" aria-labelledby="h-eva">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(147,51,234,0.3)">03</div>
+    
+    <div class="anime-header-card">
+      <header class="kicker rv">
+        <span style="color:#9333ea">NERV HEADQUARTERS // TOKYO-3</span>
+        <span class="tag win" style="background:#581c87;color:#fff;border-color:#9333ea">UNIT-01 BERSERK</span>
+      </header>
+      <h2 id="h-eva" class="h-giant rv" style="--d:.05s">
+        NEON GENESIS<br>
+        <span style="color:#9333ea">EVANGELION</span><span style="color:#22c55e">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:rgba(147,51,234,0.3)">
+        <span><b>MECHA:</b> EVANGELION TEST TYPE-01 (SYNCHRONIZATION RATE 100%)</span>
+        <span><b>COLORS:</b> NEON EVA PURPLE (#9333EA) × ACID TOXIC GREEN (#22C55E)</span>
+        <span><b>BARRIER:</b> A.T. FIELD (ABSOLUTE TERROR FIELD)</span>
+      </div>
+    </div>
+
+    <!-- MAIN THESIS -->
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#f3e8ff">
+      The ultimate psychological mecha masterpiece. Hideaki Anno explored depression, isolation, and the Hedgehog's Dilemma through biomechanical cyborgs and apocalyptic angels.
+    </p>
+
+    <!-- CONTENT GRID -->
+    <div class="gr gr-2" style="margin-top:44px">
+      <div class="rv" style="--d:.1s">
+        <div class="media-img-frame" style="border:2px solid #9333ea;box-shadow:0 0 35px rgba(147,51,234,0.25)">
+          <img src="images/evangelion-unit01.jpg" alt="Neon Genesis Evangelion - Unit-01" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#22c55e;font-size:32px;margin-bottom:8px">⚠️</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: EVA UNIT-01 &amp; A.T. FIELD</span>
+            <span style="font-size:11px;color:#d8b4fe;margin-top:6px">Place image in: <code>images/evangelion-unit01.jpg</code></span>
+          </div>
+        </div>
+        <div class="fig-label" style="color:#d8b4fe">
+          <span>FIG. A03 — EVA-01 WITH FLUORESCENT GREEN ACCENTS</span>
+          <span>GEOFRONT TOKYO-3</span>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s">
+        <div class="readout" style="padding:28px;background:#130624;border:2px solid #9333ea">
+          <span class="mono" style="color:#22c55e;display:block;margin-bottom:12px;font-weight:700">01 / A.T. FIELD &amp; HUMAN ISOLATION</span>
+          <p style="color:#f3e8ff;font-size:14.5px;line-height:1.65;margin-bottom:14px">
+            The Absolute Terror Field is not merely an energy shield — it is the physical boundary of the human ego separating oneself from others. To let down your A.T. Field is to risk pain, but to keep it forever is to live in complete isolation.
+          </p>
+          <span class="stamp warn" style="border-color:#22c55e;color:#22c55e">EMERGENCY STATE: BERSERK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     04 / MONSTER (JOHAN LIEBERT)
+     ===================================================================== -->
+<section id="m-monster" class="section-monster" data-page="P.A04" data-name="MONSTER" aria-labelledby="h-monster">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(185,28,28,0.25)">04</div>
+    
+    <div class="anime-header-card">
+      <header class="kicker rv">
+        <span style="color:#b91c1c">PSYCHOLOGICAL NOIR // GERMANY &amp; CZECH</span>
+        <span class="tag win" style="background:#7f1d1d;color:#fff;border-color:#b91c1c">NAOKI URASAWA</span>
+      </header>
+      <h2 id="h-monster" class="h-giant rv" style="--d:.05s">
+        MONSTER<span style="color:#b91c1c">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:rgba(185,28,28,0.3)">
+        <span><b>ANTAGONIST:</b> JOHAN LIEBERT</span>
+        <span><b>PROTAGONIST:</b> DR. KENZO TENMA</span>
+        <span><b>GENRE:</b> SLOW-BURN PSYCHOLOGICAL CRIME NOIR</span>
+      </div>
+    </div>
+
+    <!-- MAIN THESIS -->
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#fce7e7">
+      The greatest psychological anime ever written. Johan Liebert doesn't have superpowers or laser beams — he kills through conversation, whispering into human vulnerability until people pull the trigger themselves.
+    </p>
+
+    <!-- CONTENT GRID -->
+    <div class="gr gr-2" style="margin-top:44px">
+      <div class="rv" style="--d:.1s">
+        <div class="media-img-frame" style="border:2px solid #b91c1c">
+          <img src="images/monster-johan.jpg" alt="Monster - Johan Liebert" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#b91c1c;font-size:32px;margin-bottom:8px">🩸</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: JOHAN LIEBERT &amp; DR. TENMA</span>
+            <span style="font-size:11px;color:#fca5a5;margin-top:6px">Place image in: <code>images/monster-johan.jpg</code></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s">
+        <div class="readout" style="padding:28px;background:#180b0b;border:2px solid #b91c1c">
+          <span class="mono" style="color:#b91c1c;display:block;margin-bottom:12px;font-weight:700">01 / THE NAMELESS MONSTER</span>
+          <p style="color:#fce7e7;font-size:14.5px;line-height:1.65">
+            "Doctor Tenma, for you all lives were created equal. That is why I came back to life. But you've finally realized it now, haven't you? Only one thing is equal for all... and that is death."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     05 / VINLAND SAGA
+     ===================================================================== -->
+<section id="m-vinland" class="section-vinland" data-page="P.A05" data-name="VINLAND SAGA" aria-labelledby="h-vinland">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(2,132,199,0.25)">05</div>
+    
+    <div class="anime-header-card">
+      <header class="kicker rv">
+        <span style="color:#0284c7">VIKING EPIC // HISTORICAL SEINEN</span>
+        <span class="tag win" style="background:#075985;color:#fff;border-color:#0284c7">MAKOTO YUKIMURA</span>
+      </header>
+      <h2 id="h-vinland" class="h-giant rv" style="--d:.05s">
+        VINLAND<br>
+        <span style="color:#0284c7">SAGA</span><span style="color:#e0f2fe">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:rgba(2,132,199,0.3)">
+        <span><b>PROTAGONIST:</b> THORFINN KARLSEFNI</span>
+        <span><b>CORE CREED:</b> "I HAVE NO ENEMIES"</span>
+        <span><b>SEASONS:</b> SEASON 1 (WARRIOR) → SEASON 2 (FARMLAND RECOVERY)</span>
+      </div>
+    </div>
+
+    <!-- MAIN THESIS -->
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#e0f2fe">
+      Season 2 is the greatest redemption arc in anime history. Watching a revenge-consumed killer drop his blades and declare: <em>"A true warrior needs no sword"</em> is breathtakingly profound.
+    </p>
+
+    <!-- CONTENT GRID -->
+    <div class="gr gr-2" style="margin-top:44px">
+      <div class="rv" style="--d:.1s">
+        <div class="media-img-frame" style="border:2px solid #0284c7">
+          <img src="images/vinland-thorfinn.jpg" alt="Vinland Saga - Thorfinn" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#0284c7;font-size:32px;margin-bottom:8px">❄️</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: THORFINN "I HAVE NO ENEMIES"</span>
+            <span style="font-size:11px;color:#bae6fd;margin-top:6px">Place image in: <code>images/vinland-thorfinn.jpg</code></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s">
+        <div class="readout" style="padding:28px;background:#051422;border:2px solid #0284c7">
+          <span class="mono" style="color:#0284c7;display:block;margin-bottom:12px;font-weight:700">01 / THOR'S LESSON TO THORFINN</span>
+          <p style="color:#e0f2fe;font-size:14.5px;line-height:1.65">
+            "Listen to me, Thorfinn. You have no enemies. No one in this world has any enemies. There is no one that it is okay to hurt."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     06 / SPY X FAMILY & MY HERO ACADEMIA
+     ===================================================================== -->
+<section id="m-spy" class="section-spy" data-page="P.A06" data-name="SPY & MHA" aria-labelledby="h-spy">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(236,72,153,0.25)">06</div>
+    
+    <div class="anime-header-card">
+      <header class="kicker rv">
+        <span style="color:#ec4899">COMFORT &amp; HEROISM</span>
+        <span class="tag live" style="background:#be185d;color:#fff;border-color:#ec4899">PLUS ULTRA</span>
+      </header>
+      <h2 id="h-spy" class="h-giant rv" style="--d:.05s">
+        SPY × FAMILY<br>
+        <span style="color:#ec4899">&amp; MHA</span><span style="color:#eab308">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:rgba(236,72,153,0.3)">
+        <span><b>SPY × FAMILY:</b> ANYA · LOID · YOR (COLD WAR COMEDY &amp; WARMTH)</span>
+        <span><b>MY HERO ACADEMIA:</b> ALL MIGHT · DEKU (PLUS ULTRA SPIRIT)</span>
+      </div>
+    </div>
+
+    <!-- MAIN THESIS -->
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#fce7f3">
+      The balance to the dark seinen psychological stories. Anya's hilarious telepathic reactions bring pure joy, while All Might's final stand at Kamino Ward gives goosebumps every single time.
+    </p>
+
+    <!-- CONTENT GRID -->
+    <div class="gr gr-2" style="margin-top:44px">
+      <div class="rv" style="--d:.1s">
+        <div class="media-img-frame" style="border:2px solid #ec4899">
+          <img src="images/spy-mha.jpg" alt="Spy x Family and MHA" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#ec4899;font-size:32px;margin-bottom:8px">🥜</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: ANYA FORGER &amp; ALL MIGHT</span>
+            <span style="font-size:11px;color:#fbcfe8;margin-top:6px">Place image in: <code>images/spy-mha.jpg</code></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s">
+        <div class="readout" style="padding:28px;background:#1a0712;border:2px solid #ec4899">
+          <span class="mono" style="color:#ec4899;display:block;margin-bottom:12px;font-weight:700">01 / UNITED STATES OF SMASH</span>
+          <p style="color:#fce7f3;font-size:14.5px;line-height:1.65">
+            "Now for a lesson. You may have heard these words before, but I'll teach you what they really mean! Go beyond... PLUS ULTRA!"
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="pageBar" aria-hidden="true">
+  <span id="pgL">P.A00 — OVERVIEW</span>
+  <span class="r">DEB / 2026 — ANIME REALM</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

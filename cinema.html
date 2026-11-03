@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEB — Cinema &amp; Series Archive / Fight Club, Se7en, Interstellar</title>
+<meta name="description" content="Debargha Sarkar — personal cinema & series sanctuary: Fight Club, Se7en, Interstellar, Project Hail Mary, Nightcrawler, Shawshank, Loki, Moon Knight.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+  /* ============ CINEMA SECTIONS COLOR SCHEMES ============ */
+
+  /* SECTION 01: FIGHT CLUB (INDUSTRIAL CONCRETE & SHOCKING NEON PINK SOAP) */
+  .section-fightclub {
+    background: radial-gradient(circle at 50% 20%, #200414 0%, #08080a 75%);
+    color: #fce7f3;
+    border-top: 4px solid #ff007f;
+    min-height: auto;
+    position: relative;
+    padding: 100px 5.5vw 120px;
+  }
+  .fc-header-card {
+    margin-bottom: 36px;
+  }
+  .fc-pink { color: #ff007f; text-shadow: 0 0 12px rgba(255, 0, 127, 0.4); }
+  .fc-amber { color: #fbbf24; }
+
+  /* SECTION 02: SE7EN (RAIN-SOAKED SOMBER SEPIA & CRIME SCENE NOIR) */
+  .section-se7en {
+    background: radial-gradient(circle at 50% 20%, #1c1308 0%, #080706 75%);
+    color: #fef3c7;
+    border-top: 3px solid #d97706;
+    min-height: auto;
+    position: relative;
+    padding: 100px 5.5vw 120px;
+  }
+  .se7en-header-card {
+    margin-bottom: 36px;
+  }
+  .se7en-gold { color: #f59e0b; }
+  .se7en-crimson { color: #ef4444; }
+
+  /* SECTION 03: INTERSTELLAR & HAIL MARY (COSMIC VOID & RELATIVITY GOLD) */
+  .section-space {
+    background: radial-gradient(circle at 50% 20%, #081b33 0%, #01040a 75%);
+    color: #e0f2fe;
+    border-top: 3px solid #38bdf8;
+    min-height: auto;
+    position: relative;
+    padding: 100px 5.5vw 120px;
+  }
+  .space-header-card {
+    margin-bottom: 36px;
+  }
+  .space-cyan { color: #38bdf8; }
+  .space-amber { color: #f59e0b; }
+
+  /* SECTION 04: NIGHTCRAWLER & SHAWSHANK (NOCTURNAL AMBER VS FREEDOM BLUE) */
+  .section-night-shaw {
+    background: radial-gradient(circle at 50% 20%, #1f1807 0%, #080809 75%);
+    color: #fef9c3;
+    border-top: 3px solid #eab308;
+    min-height: auto;
+    position: relative;
+    padding: 100px 5.5vw 120px;
+  }
+  .ns-header-card {
+    margin-bottom: 36px;
+  }
+  .ns-gold { color: #eab308; }
+  .ns-cyan { color: #38bdf8; }
+
+  /* SECTION 05: LOKI & MOON KNIGHT (TVA SACRED TIMELINE GREEN & KHONSHU SILVER) */
+  .section-loki-moon {
+    background: radial-gradient(circle at 50% 20%, #062419 0%, #04080c 75%);
+    color: #ecfdf5;
+    border-top: 3px solid #10b981;
+    min-height: auto;
+    position: relative;
+    padding: 100px 5.5vw 120px;
+  }
+  .lm-header-card {
+    margin-bottom: 36px;
+  }
+  .lm-green { color: #10b981; }
+  .lm-silver { color: #e2e8f0; }
+
+  /* SECTION 06: HARRY POTTER, COCO & THE WILD ROBOT */
+  .section-tales {
+    background: radial-gradient(circle at 50% 20%, #241407 0%, #080605 75%);
+    color: #ffedd5;
+    border-top: 3px solid #f97316;
+    min-height: auto;
+    position: relative;
+    padding: 100px 5.5vw 120px;
+  }
+  .tales-header-card {
+    margin-bottom: 36px;
+  }
+  .tales-orange { color: #fb923c; }
+  .tales-emerald { color: #22c55e; }
+
+  /* MEDIA IMAGE FRAME WITH PLACEHOLDER FALLBACK */
+  .media-img-frame {
+    width: 100%;
+    min-height: 380px;
+    max-height: 520px;
+    background: #0f1117;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .media-img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  }
+  .media-img-frame:hover img {
+    transform: scale(1.03);
+  }
+  .media-placeholder-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    background: repeating-linear-gradient(45deg, rgba(0,0,0,0.4) 0 10px, rgba(20,20,20,0.4) 10px 20px);
+    font-family: var(--mono);
+    color: rgba(255, 255, 255, 0.65);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* SUBLIMINAL PROJECTOR FLICKER OVERLAY */
+  #projectorFlicker {
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+    mix-blend-mode: difference;
+  }
+  .flicker-active {
+    animation: projector-flash 0.18s ease-in-out;
+  }
+  @keyframes projector-flash {
+    0% { opacity: 0; }
+    20% { opacity: 0.9; }
+    40% { opacity: 0.1; }
+    60% { opacity: 0.85; }
+    100% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<a class="skiplink" href="#cinema-content">Skip to content</a>
+<div id="noise" aria-hidden="true"></div>
+<canvas id="trail" aria-hidden="true"></canvas>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursorTag" aria-hidden="true">OPEN</div>
+<div id="projectorFlicker" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<nav id="siteNav" aria-label="Site">
+  <a class="brand" href="index.html">← DEB <span class="hide-mobile">— BACK TO HOME</span></a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="tag hide-mobile" href="projects.html" style="text-decoration:none;border-color:var(--yellow);color:var(--yellow)">PROJECTS</a>
+    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
+    <a class="tag hide-mobile" href="anime.html" style="text-decoration:none">ANIME</a>
+    <a class="tag hide-mobile" href="music.html" style="text-decoration:none">MUSIC</a>
+    <a class="tag hide-mobile" href="gaming.html" style="text-decoration:none">GAMES</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  </div>
+</nav>
+
+<!-- TOC -->
+<div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-head"><h2>Cinema Index</h2><button id="tocClose">CLOSE ×</button></div>
+  <ul class="toc-list">
+    <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Command Hub</span><span class="leader"></span><span class="t-pg">HUB ↗</span></a></li>
+    <li><a href="projects.html"><span class="t-no">★</span><span class="t-title">Projects Dossier (3D Model &amp; Code)</span><span class="leader"></span><span class="t-pg">PROJ ↗</span></a></li>
+    <li><a href="achievements.html"><span class="t-no">★</span><span class="t-title">Achievements &amp; Hackathon Wins</span><span class="leader"></span><span class="t-pg">WINS ↗</span></a></li>
+    <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Cinema Cover</span><span class="leader"></span><span class="t-pg">P.C00</span></a></li>
+    <li><a href="#m-fightclub"><span class="t-no">01</span><span class="t-title">Fight Club (#1 All-Time Favorite Movie)</span><span class="leader"></span><span class="t-pg">P.C01</span></a></li>
+    <li><a href="#m-se7en"><span class="t-no">02</span><span class="t-title">Se7en (Fincher Crime Noir / What’s in the Box?)</span><span class="leader"></span><span class="t-pg">P.C02</span></a></li>
+    <li><a href="#m-space"><span class="t-no">03</span><span class="t-title">Interstellar &amp; Project Hail Mary (“Amaze!”)</span><span class="leader"></span><span class="t-pg">P.C03</span></a></li>
+    <li><a href="#m-night-shaw"><span class="t-no">04</span><span class="t-title">Nightcrawler &amp; Shawshank Redemption</span><span class="leader"></span><span class="t-pg">P.C04</span></a></li>
+    <li><a href="#m-loki-moon"><span class="t-no">05</span><span class="t-title">Loki &amp; Moon Knight (Tied Favorite Series)</span><span class="leader"></span><span class="t-pg">P.C05</span></a></li>
+    <li><a href="#m-tales"><span class="t-no">06</span><span class="t-title">Harry Potter, Coco &amp; The Wild Robot</span><span class="leader"></span><span class="t-pg">P.C06</span></a></li>
+  </ul>
+  <p class="toc-foot">DEBARGHA SARKAR / 2026 — CINEMA &amp; SERIES SANCTUARY</p>
+</div>
+
+<main id="cinema-content">
+
+<!-- ============ COVER ============ -->
+<section id="cover" aria-label="Cinema Cover" data-page="P.C00" data-name="CINEMA COVER" style="min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:86px 5.5vw 64px;position:relative;">
+  <div class="crops" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="topline">
+    <div>DEBARGHA SARKAR <span class="hide-mobile">— 35MM REEL &amp; MULTIVERSE</span></div>
+    <div class="hide-mobile">CHAPTER 02 // CINEMA &amp; SERIES</div>
+    <div>CINEMA ARCHIVE / 2026</div>
+  </div>
+  <div class="hero-center">
+    <div class="crosshair" aria-hidden="true"></div>
+    <div class="side-vert">FINCHER NOIR · RELATIVITY · TVA LOOM · PETAL BRIDGES</div>
+    <h1 class="hero-name" aria-label="CINEMA.">
+      <span class="ln" style="--fx:-140px;--fy:30px;--fr:-9deg;--d:.15s">C</span><span class="ln" style="--fx:40px;--fy:-160px;--fr:6deg;--d:.32s">I</span><span class="ln" style="--fx:150px;--fy:60px;--fr:-5deg;--d:.5s">N</span><span class="ln" style="--fx:-60px;--fy:90px;--fr:7deg;--d:.65s">E</span><span class="ln dot" style="--fx:0;--fy:-80px;--fr:0deg;--d:.78s">M.</span>
+    </h1>
+    <p class="hero-sub">Celluloid, Time &amp; Will</p>
+    <p class="hero-roles">FIGHT CLUB · SE7EN · INTERSTELLAR · PROJECT HAIL MARY · NIGHTCRAWLER · SHAWSHANK · LOKI · MOON KNIGHT</p>
+    <div class="hero-rule" aria-hidden="true"></div>
+    
+    <div style="margin-top:24px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:10">
+      <a class="ctl button" href="#m-fightclub" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
+        ENTER WITH FIGHT CLUB ↓
+      </a>
+    </div>
+  </div>
+  <div class="botline">
+    <div>INDEX 02 / CINEMA</div>
+    <div class="hide-mobile">UNHURRIED FULL-SCREEN JOURNEY ACROSS FRAMEWORKS OF CONSCIOUSNESS</div>
+    <div class="scroll-cue">SCROLL <i aria-hidden="true"></i></div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     01 / FIGHT CLUB (#1 MOST FAVORITE MOVIE)
+     RAW INDUSTRIAL NOIR & DISSIDENT PINK SOAP
+     ===================================================================== -->
+<section id="m-fightclub" class="section-fightclub" data-page="P.C01" data-name="FIGHT CLUB" aria-labelledby="h-fc">
+  <div class="spread-inner rv-scope" style="position:relative;z-index:2">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(255,0,127,0.35)">01</div>
+    
+    <div class="fc-header-card">
+      <header class="kicker rv">
+        <span class="fc-pink">👑 #1 ALL-TIME FAVORITE MOVIE</span>
+        <span class="tag win" style="background:#ff007f;border-color:#ff007f;color:#fff">CELLULOID NOIR &amp; NIHILISM</span>
+      </header>
+      <h2 id="h-fc" class="h-giant rv" style="--d:.05s">
+        FIGHT CLUB<br>
+        <span class="fc-pink" style="font-size:clamp(22px, 3.8vw, 44px);letter-spacing:0.04em">RULE #1: YOU DO NOT TALK ABOUT FIGHT CLUB.</span>
+      </h2>
+      <p class="dek rv" style="--d:.1s;color:#fbcfe8">
+        Directed by David Fincher (1999) · Adapted from Chuck Palahniuk · Cinematography by Jeff Cronenweth · Music by The Dust Brothers. The definitive dissection of modern consumerist alienation and splintered ego.
+      </p>
+
+      <div style="margin-top:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <button id="fcShutterBtn" class="ctl button" style="background:#ff007f;color:#fff;border:1px solid #ff007f;box-shadow:0 0 16px rgba(255,0,127,0.4);padding:8px 18px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;cursor:pointer">
+          ⚡ TRIGGER SUBLIMINAL 1/24s SHUTTER
+        </button>
+        <span style="font-family:var(--mono);font-size:11px;color:#ff007f">PRESS TO SPLICE A SINGLE PROJECTOR FRAME</span>
+      </div>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div style="margin-top:70px;display:grid;grid-template-columns:repeat(12, 1fr);gap:36px;align-items:start">
+      <div style="grid-column: span 7;">
+        <blockquote class="rv" style="border-left:4px solid #ff007f;padding-left:22px;font-size:clamp(19px,2.4vw,28px);font-weight:700;line-height:1.35;margin-bottom:28px;color:#fff">
+          “The things you own end up owning you. It’s only after we’ve lost everything that we’re free to do anything.”
+        </blockquote>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#fce7f3;margin-bottom:20px">
+          Fincher’s <em>Fight Club</em> is not a movie about violence; it is a clinical psychological autopsy of a society trapped inside glossy IKEA catalogs, corporate sterile cubicles, and simulated existential meaning. The narrator's insomnia is the modern human condition — alive, yet never truly awake.
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#fbcfe8;margin-bottom:24px">
+          Tyler Durden arrives as the seductive, hyper-charismatic shadow: pure raw impulse untamed by social polite contracts. The film’s genius lies in letting the audience cheer for Tyler’s anti-consumerist crusade right up until the point where his underground boxing club curdles into <strong>Project Mayhem</strong> — an authoritarian cult trading one form of mindless subjugation for another.
+        </p>
+
+        <div class="rv" style="background:rgba(255,0,127,0.08);border:1px solid rgba(255,0,127,0.35);padding:24px;border-radius:4px;margin-bottom:32px">
+          <div style="font-family:var(--mono);font-size:11px;color:#ff007f;letter-spacing:.12em;margin-bottom:12px;text-transform:uppercase">
+            // CINEMATIC CRAFT BREAKDOWN
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#fdf2f8;margin:0">
+            From the opening CGI camera pull navigating through the microscopic dendrites and synapses of the narrator’s terrified brain, to the subtle single-frame splices of Brad Pitt spliced into early scenes before Tyler formally appears, every frame is an intentional act of visual sabotage. The Dust Brothers’ industrial sample-heavy score cements the film in a perpetual fever dream.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border-top:1px solid rgba(255,0,127,0.35);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#ff007f;letter-spacing:.1em">CORE PHILOSOPHY</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#fce7f3">Destruction as a catalyst for rebirth. Stripping down false identities to uncover what is authentic.</p>
+          </div>
+          <div style="border-top:1px solid rgba(255,0,127,0.35);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#ff007f;letter-spacing:.1em">FINAL TABLEAU</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#fce7f3">The Pixies’ “Where Is My Mind?” playing as credit card credit towers collapse outside the high-rise window.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE & SPEC SPREAD -->
+      <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
+        <div class="media-img-frame" style="border-color:rgba(255,0,127,0.5)">
+          <img src="images/fight-club.jpg" alt="Fight Club Tyler Durden Pink Soap" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="font-size:32px;margin-bottom:8px">🧼</span>
+            <strong>images/fight-club.jpg</strong>
+            <span style="font-size:11px;opacity:0.75;margin-top:4px">Tyler Durden / Pink Bar of Soap / Basement Fight</span>
+            <span style="font-size:10px;color:#ff007f;margin-top:8px">Drop image in /images to render</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:20px;font-family:var(--mono);font-size:12px">
+          <div style="color:#ff007f;font-weight:700;margin-bottom:12px;letter-spacing:.1em">ARCHIVE LOG // ENTRY C-01</div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;color:#fbcfe8;font-size:11px">
+            <span style="opacity:0.6">DIRECTOR:</span> <span>David Fincher</span>
+            <span style="opacity:0.6">RELEASE:</span> <span>October 15, 1999</span>
+            <span style="opacity:0.6">DUST BROTHERS:</span> <span>16-Track Sample Score</span>
+            <span style="opacity:0.6">IMPACT:</span> <span>#1 Personal Favorite Film</span>
+            <span style="opacity:0.6">SIGNATURE PROP:</span> <span>Paper Street Soap Co. Pink Soap</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     02 / SE7EN (1995 // DAVID FINCHER)
+     BLEACH-BYPASS NOIR, RAIN-SOAKED ROT & THE BOX
+     ===================================================================== -->
+<section id="m-se7en" class="section-se7en" data-page="P.C02" data-name="SE7EN" aria-labelledby="h-se7en">
+  <div class="spread-inner rv-scope" style="position:relative;z-index:2">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(180,83,9,0.2)">02</div>
+    
+    <div class="se7en-header-card">
+      <header class="kicker rv">
+        <span class="se7en-gold">CRIMINAL PSYCHOLOGY NOIR</span>
+        <span class="tag win" style="background:#78350f;border-color:#f59e0b">THE SEVEN DEADLY SINS</span>
+      </header>
+      <h2 id="h-se7en" class="h-giant rv" style="--d:.05s">
+        SE7EN<br>
+        <span class="se7en-gold" style="font-size:clamp(22px, 3.8vw, 44px);letter-spacing:0.04em">“WHAT’S IN THE BOX?!”</span>
+      </h2>
+      <p class="dek rv" style="--d:.1s;color:#fde68a">
+        Directed by David Fincher (1995) · Written by Andrew Kevin Walker · Cinematography by Darius Khondji · Morgan Freeman, Brad Pitt, Kevin Spacey. The bleakest, most razor-sharp detective masterpiece ever captured on celluloid.
+      </p>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div style="margin-top:70px;display:grid;grid-template-columns:repeat(12, 1fr);gap:36px;align-items:start">
+      <div style="grid-column: span 7;">
+        <blockquote class="rv" style="border-left:4px solid #f59e0b;padding-left:22px;font-size:clamp(18px,2.2vw,26px);font-weight:700;line-height:1.4;margin-bottom:28px;color:#fff">
+          “Ernest Hemingway once wrote: ‘The world is a fine place and worth fighting for.’ I agree with the second part.”
+          <div style="font-size:13px;font-weight:400;margin-top:8px;color:#fde68a">— Detective Lt. William Somerset</div>
+        </blockquote>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#fef3c7;margin-bottom:20px">
+          The unnamed metropolis in <em>Se7en</em> is not merely a setting; it is a moral septic tank drowning in unceasing, suffocating rain. Fincher and cinematographer Darius Khondji pioneered the proprietary <strong>silver retention / bleach bypass process</strong> to drag heavy shadows and metallic desaturation into the celluloid grain.
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#fde68a;margin-bottom:24px">
+          John Doe does not commit crimes out of passion or robbery; he orchestrates sermons. Each grotesque tableau — Gluttony, Greed, Sloth, Lust, Pride, Envy, Wrath — is calculated to force an indifferent, apathetic society to turn its eyes and witness its own decay. Somerset represents the weary intellect holding on to dignity; Mills represents fiery passion walking blindly into Doe’s final checkmate.
+        </p>
+
+        <div class="rv" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.3);padding:24px;border-radius:4px;margin-bottom:32px">
+          <div style="font-family:var(--mono);font-size:11px;color:#f59e0b;letter-spacing:.12em;margin-bottom:12px;text-transform:uppercase">
+            // JOHN DOE’S NOTEBOOK ARCHIVE
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#fffbeb;margin:0">
+            The two thousand notebooks bound in human leather, handwritten word-for-word by artist Clive Piercy, stand as one of cinema’s most chilling pieces of production design. The ending in the California high-voltage desert remains unmatched in dramatic tension: no gunshots, just an open parcel, buzzing desert flies, and a predator engineering his own death to win the thesis.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border-top:1px solid rgba(245,158,11,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#f59e0b;letter-spacing:.1em">ATMOSPHERE</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#fef3c7">Perpetual water dripping from ceilings, humming neon diners, Howard Shore's brooding brass drone.</p>
+          </div>
+          <div style="border-top:1px solid rgba(245,158,11,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#f59e0b;letter-spacing:.1em">THE CHECKMATE</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#fef3c7">Doe envied Mills’ normal life; Mills becomes Wrath. A masterclass in tragic inevitability.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE & SPEC SPREAD -->
+      <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
+        <div class="media-img-frame" style="border-color:rgba(245,158,11,0.4)">
+          <img src="images/se7en.jpg" alt="Se7en Somerset and Mills in the Rain" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="font-size:32px;margin-bottom:8px">📦</span>
+            <strong>images/se7en.jpg</strong>
+            <span style="font-size:11px;opacity:0.75;margin-top:4px">Somerset &amp; Mills / Rainy Noir Crime Scene / Desert Finale</span>
+            <span style="font-size:10px;color:#f59e0b;margin-top:8px">Drop image in /images to render</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:20px;font-family:var(--mono);font-size:12px">
+          <div style="color:#f59e0b;font-weight:700;margin-bottom:12px;letter-spacing:.1em">ARCHIVE LOG // ENTRY C-02</div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;color:#fde68a;font-size:11px">
+            <span style="opacity:0.6">DIRECTOR:</span> <span>David Fincher</span>
+            <span style="opacity:0.6">YEAR:</span> <span>1995</span>
+            <span style="opacity:0.6">CINEMATOGRAPHY:</span> <span>Darius Khondji</span>
+            <span style="opacity:0.6">THEME:</span> <span>Apathy vs Moral Responsibility</span>
+            <span style="opacity:0.6">FINAL SCENE:</span> <span>The Desert Delivery / Package 19</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     03 / INTERSTELLAR & PROJECT HAIL MARY
+     GRAVITATIONAL TIME DILATION & ERIDIAN ALLIANCE
+     ===================================================================== -->
+<section id="m-space" class="section-space" data-page="P.C03" data-name="SPACE ODYSSEY" aria-labelledby="h-space">
+  <div class="spread-inner rv-scope" style="position:relative;z-index:2">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(56,189,248,0.2)">03</div>
+    
+    <div class="space-header-card">
+      <header class="kicker rv">
+        <span class="space-cyan">HARD SCI-FI &amp; COSMIC SURVIVAL</span>
+        <span class="tag win" style="background:#0369a1;border-color:#38bdf8">GARGANTUA × ERIDIAN ENGINEERING</span>
+      </header>
+      <h2 id="h-space" class="h-giant rv" style="--d:.05s">
+        INTERSTELLAR ×<br>
+        <span class="space-cyan" style="font-size:clamp(22px, 3.8vw, 44px);letter-spacing:0.04em">PROJECT HAIL MARY</span>
+      </h2>
+      <p class="dek rv" style="--d:.1s;color:#bae6fd">
+        Christopher Nolan (2014) &amp; Andy Weir’s masterpiece novel. Real relativistic physics, Kip Thorne’s equations, Hans Zimmer’s church organ, and Rocky the spider-engineer: “Amaze! Amaze! Amaze!”
+      </p>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div style="margin-top:70px;display:grid;grid-template-columns:repeat(12, 1fr);gap:36px;align-items:start">
+      <div style="grid-column: span 7;">
+        <blockquote class="rv" style="border-left:4px solid #38bdf8;padding-left:22px;font-size:clamp(18px,2.2vw,26px);font-weight:700;line-height:1.4;margin-bottom:28px;color:#fff">
+          “Do not go gentle into that good night.<br>
+          Rage, rage against the dying of the light.”
+          <div style="font-size:13px;font-weight:400;margin-top:8px;color:#7dd3fc">— Dylan Thomas / Professor Brand / Cooper</div>
+        </blockquote>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#e0f2fe;margin-bottom:20px">
+          <em>Interstellar</em> achieved what few science fiction films ever dare: reconciling rigorous astrophysics with raw filial love. The water world of Miller’s Planet — where 1 hour equals 7 years on Earth, soundtracked by Hans Zimmer’s ticking 1.25-second clock pulse representing a whole Earth day lost with each tick — is one of the most terrifying depictions of time dilation ever rendered.
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#bae6fd;margin-bottom:24px">
+          Coupled directly with Andy Weir’s <em>Project Hail Mary</em>, you get the twin peaks of modern space survival. Ryland Grace waking up light-years from Earth with amnesia, and meeting <strong>Rocky</strong> — the carapace-clad, musical-chord-speaking Eridian engineer whose species cannot see light but possesses ultrasonic mastery. Rocky’s catchphrase <em>“Amaze! Amaze! Amaze!”</em> and the iconic <em>“Fist my bump!”</em> transform what could have been cold science into pure warm heart.
+        </p>
+
+        <div class="rv" style="background:rgba(56,189,248,0.06);border:1px solid rgba(56,189,248,0.3);padding:24px;border-radius:4px;margin-bottom:32px">
+          <div style="font-family:var(--mono);font-size:11px;color:#38bdf8;letter-spacing:.12em;margin-bottom:12px;text-transform:uppercase">
+            // MATHEMATICS AS NARRATIVE ARCHITECTURE
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#f0f9ff;margin:0">
+            Nobel laureate Kip Thorne wrote the real ray-tracing equations for the supermassive black hole Gargantua, discovering accretion disk doppler asymmetry that astrophysics had never formally simulated before. In Hail Mary, Weir solves real heat transfer, Xenonite structural tension, and astrophage reproduction without cheating the physics once.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border-top:1px solid rgba(56,189,248,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#38bdf8;letter-spacing:.1em">THE TESSERACT</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#e0f2fe">Five-dimensional beings constructing a 3D interface inside Murph’s childhood bedroom so love can cross gravity.</p>
+          </div>
+          <div style="border-top:1px solid rgba(56,189,248,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#38bdf8;letter-spacing:.1em">ROCKY THE ERIDIAN</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#e0f2fe">“Human. Good. Proud. I am scary space monster. You are leaky space blob.”</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE & SPEC SPREAD -->
+      <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
+        <div class="media-img-frame" style="border-color:rgba(56,189,248,0.4)">
+          <img src="images/interstellar.jpg" alt="Gargantua Black Hole Interstellar" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="font-size:32px;margin-bottom:8px">🪐</span>
+            <strong>images/interstellar.jpg</strong>
+            <span style="font-size:11px;opacity:0.75;margin-top:4px">Gargantua Black Hole / The Endurance / Rocky the Eridian</span>
+            <span style="font-size:10px;color:#38bdf8;margin-top:8px">Drop image in /images to render</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:20px;font-family:var(--mono);font-size:12px">
+          <div style="color:#38bdf8;font-weight:700;margin-bottom:12px;letter-spacing:.1em">ARCHIVE LOG // ENTRY C-03</div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;color:#bae6fd;font-size:11px">
+            <span style="opacity:0.6">CREATORS:</span> <span>Christopher Nolan &amp; Andy Weir</span>
+            <span style="opacity:0.6">COMPOSER:</span> <span>Hans Zimmer (Temple Church 1927 Organ)</span>
+            <span style="opacity:0.6">THEME:</span> <span>Survival Across Interstellar Voids</span>
+            <span style="opacity:0.6">ROBOTS:</span> <span>TARS / CASE / Rocky</span>
+            <span style="opacity:0.6">FAV PHRASE:</span> <span>“Amaze! Amaze! Amaze!”</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     04 / NIGHTCRAWLER & SHAWSHANK REDEMPTION
+     THE PREDATORY GRIND VS THE UNBROKEN HUMAN SPIRIT
+     ===================================================================== -->
+<section id="m-night-shaw" class="section-night-shaw" data-page="P.C04" data-name="NIGHT & SHAWSHANK" aria-labelledby="h-ns">
+  <div class="spread-inner rv-scope" style="position:relative;z-index:2">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(234,179,8,0.2)">04</div>
+    
+    <div class="ns-header-card">
+      <header class="kicker rv">
+        <span class="ns-gold">NOCTURNAL DRIVE &amp; PATIENT FREEDOM</span>
+        <span class="tag win" style="background:#713f12;border-color:#eab308">LOU BLOOM × ANDY DUFRESNE</span>
+      </header>
+      <h2 id="h-ns" class="h-giant rv" style="--d:.05s">
+        NIGHTCRAWLER ×<br>
+        <span class="ns-gold" style="font-size:clamp(22px, 3.8vw, 44px);letter-spacing:0.04em">SHAWSHANK REDEMPTION</span>
+      </h2>
+      <p class="dek rv" style="--d:.1s;color:#fef08a">
+        Dan Gilroy (2014) &amp; Frank Darabont (1994). Two polar opposite portraits of sheer human will: one cold, predatory, and ruthless; the other quiet, patient, and unshakeable in hope.
+      </p>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div style="margin-top:70px;display:grid;grid-template-columns:repeat(12, 1fr);gap:36px;align-items:start">
+      <div style="grid-column: span 7;">
+        <blockquote class="rv" style="border-left:4px solid #eab308;padding-left:22px;font-size:clamp(18px,2.2vw,26px);font-weight:700;line-height:1.4;margin-bottom:28px;color:#fff">
+          “Hope is a good thing, maybe the best of things, and no good thing ever dies.”
+          <div style="font-size:13px;font-weight:400;margin-top:8px;color:#fef08a">— Andy Dufresne / Stephen King / Frank Darabont</div>
+        </blockquote>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#fef9c3;margin-bottom:20px">
+          <em>Nightcrawler</em> presents Jake Gyllenhaal as Lou Bloom: gaunt, unblinking, reciting online business management seminars while scanning police radios for fatal car crashes and home invasions. He doesn’t merely record human tragedy; he edits and stages crime scenes to maximize ratings. It is an indictment of modern algorithmic capitalism where psychopathy is rewarded as "initiative."
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#fef08a;margin-bottom:24px">
+          In direct dialogue stands <em>The Shawshank Redemption</em>: the story of an innocent man who refuses to surrender his soul to institutionalization. Andy Dufresne carving chess pieces from soapstone, expanding the prison library by writing one letter every week for six years, and ultimately crawling through five hundred yards of sewage to emerge into the pouring rain a free man.
+        </p>
+
+        <div class="rv" style="background:rgba(234,179,8,0.06);border:1px solid rgba(234,179,8,0.3);padding:24px;border-radius:4px;margin-bottom:32px">
+          <div style="font-family:var(--mono);font-size:11px;color:#eab308;letter-spacing:.12em;margin-bottom:12px;text-transform:uppercase">
+            // WILLPOWER AS A WEAPON
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#fffbeb;margin:0">
+            Both films illustrate the terrifying power of human patience. Lou Bloom weaponizes persistence to bend moral boundaries to his favor. Andy Dufresne uses a small rock hammer over nineteen years to bore through solid limestone without anyone noticing. It is a study in what happens when a mind decides that no circumstance can break its trajectory.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border-top:1px solid rgba(234,179,8,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#eab308;letter-spacing:.1em">LOU BLOOM’S MAXIM</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#fef9c3">“If you want to win the lottery, you have to make the money to buy a ticket.”</p>
+          </div>
+          <div style="border-top:1px solid rgba(234,179,8,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#eab308;letter-spacing:.1em">RED’S EPITAPH</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#fef9c3">“Some birds aren’t meant to be caged. Their feathers are just too bright.”</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE & SPEC SPREAD -->
+      <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
+        <div class="media-img-frame" style="border-color:rgba(234,179,8,0.4)">
+          <img src="images/nightcrawler.jpg" alt="Lou Bloom Nightcrawler Dodge Challenger" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="font-size:32px;margin-bottom:8px">📹</span>
+            <strong>images/nightcrawler.jpg</strong>
+            <span style="font-size:11px;opacity:0.75;margin-top:4px">Lou Bloom with Camcorder / Red Dodge Challenger / Shawshank Rain</span>
+            <span style="font-size:10px;color:#eab308;margin-top:8px">Drop image in /images to render</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:20px;font-family:var(--mono);font-size:12px">
+          <div style="color:#eab308;font-weight:700;margin-bottom:12px;letter-spacing:.1em">ARCHIVE LOG // ENTRY C-04</div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;color:#fef08a;font-size:11px">
+            <span style="opacity:0.6">FILMS:</span> <span>Nightcrawler (2014) · Shawshank (1994)</span>
+            <span style="opacity:0.6">LEAD ACTORS:</span> <span>Jake Gyllenhaal · Tim Robbins</span>
+            <span style="opacity:0.6">CONTRAST:</span> <span>Predatory Hustle vs Pure Hope</span>
+            <span style="opacity:0.6">MEMORABLE PROP:</span> <span>Dodge Challenger SRT8 / 6-Inch Rock Hammer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     05 / LOKI & MOON KNIGHT
+     TIED #1 FAVORITE TELEVISION SERIES
+     TVA TEMPORAL LOOM & KHONSHU’S CRESCENT AVATAR
+     ===================================================================== -->
+<section id="m-loki-moon" class="section-loki-moon" data-page="P.C05" data-name="LOKI & MOON KNIGHT" aria-labelledby="h-lm">
+  <div class="spread-inner rv-scope" style="position:relative;z-index:2">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(16,185,129,0.2)">05</div>
+    
+    <div class="lm-header-card">
+      <header class="kicker rv">
+        <span class="lm-green">👑 TIED #1 FAVORITE SERIES</span>
+        <span class="tag win" style="background:#065f46;border-color:#10b981">TEMPORAL WEAVING &amp; MULTIPLE ETERNAL MINDS</span>
+      </header>
+      <h2 id="h-lm" class="h-giant rv" style="--d:.05s">
+        LOKI ×<br>
+        <span class="lm-green" style="font-size:clamp(22px, 3.8vw, 44px);letter-spacing:0.04em">MOON KNIGHT</span>
+      </h2>
+      <p class="dek rv" style="--d:.1s;color:#a7f3d0">
+        Tom Hiddleston &amp; Oscar Isaac. The Sacred Timeline, the collapse of the Temporal Loom, and an Egyptian deity choosing a broken man with Dissociative Identity Disorder as his fist of vengeance.
+      </p>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div style="margin-top:70px;display:grid;grid-template-columns:repeat(12, 1fr);gap:36px;align-items:start">
+      <div style="grid-column: span 7;">
+        <blockquote class="rv" style="border-left:4px solid #10b981;padding-left:22px;font-size:clamp(18px,2.2vw,26px);font-weight:700;line-height:1.4;margin-bottom:28px;color:#fff">
+          “I know what kind of god I need to be. For you. For all of us.”
+          <div style="font-size:13px;font-weight:400;margin-top:8px;color:#6ee7b7">— God of Stories Loki, Season 2 Finale</div>
+        </blockquote>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#ecfdf5;margin-bottom:20px">
+          <em>Loki</em> gave the God of Mischief the greatest character arc in modern serialized television. Beginning as an arrogant, defeated villain at the end of the Avengers, Loki spends centuries mastering physics and temporal mechanics with O.B. only to realize that you cannot save the multiverse by destroying timelines. His ultimate ascendance — gathering the dying strands of reality with bare hands, wrapping them into the cosmic world tree <strong>Yggdrasil</strong>, and voluntarily condemning himself to eternity alone on the throne so his friends can live — is Shakespearean tragedy elevated to cosmic myth.
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#a7f3d0;margin-bottom:24px">
+          Tied shoulder-to-shoulder is <em>Moon Knight</em>. Oscar Isaac delivers a tour-de-force performance alternating seamlessly between gentle, nervous Egyptologist Steven Grant, ruthless mercenary Marc Spector, and the violent third alter Jake Lockley. Episode 5 (“Asylum”) traversing Marc’s childhood trauma and the scales of the Duat is profound emotional storytelling that transcends standard superhero fiction.
+        </p>
+
+        <div class="rv" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.3);padding:24px;border-radius:4px;margin-bottom:32px">
+          <div style="font-family:var(--mono);font-size:11px;color:#10b981;letter-spacing:.12em;margin-bottom:12px;text-transform:uppercase">
+            // IDENTITY &amp; PURPOSE UNDER HEAVY SKIES
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#f0fdf4;margin:0">
+            Both series are anchored by protagonists wrestling with their inner ghosts. Loki asks: <em>“Is a villain destined to be a stepping stone for others, or can he redefine glory?”</em> Moon Knight asks: <em>“When your mind is fractured by abuse, can those fractured pieces unite to protect the defenseless?”</em>
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border-top:1px solid rgba(16,185,129,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#10b981;letter-spacing:.1em">YGGDRASIL ASCENT</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#ecfdf5">Loki holding trillions of glowing timeline branches, transformed into the living God of Stories.</p>
+          </div>
+          <div style="border-top:1px solid rgba(16,185,129,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#10b981;letter-spacing:.1em">THE DUAT SCALES</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#ecfdf5">Taweret weighing hearts against the feather of Ma’at. Steven’s selfless leap into the sands.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE & SPEC SPREAD -->
+      <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
+        <div class="media-img-frame" style="border-color:rgba(16,185,129,0.4)">
+          <img src="images/loki-moonknight.jpg" alt="Loki on Yggdrasil Throne and Moon Knight Khonshu" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="font-size:32px;margin-bottom:8px">⏳</span>
+            <strong>images/loki-moonknight.jpg</strong>
+            <span style="font-size:11px;opacity:0.75;margin-top:4px">Loki on the Throne of Time / Khonshu Moon Knight Suit</span>
+            <span style="font-size:10px;color:#10b981;margin-top:8px">Drop image in /images to render</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:20px;font-family:var(--mono);font-size:12px">
+          <div style="color:#10b981;font-weight:700;margin-bottom:12px;letter-spacing:.1em">ARCHIVE LOG // ENTRY C-05</div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;color:#a7f3d0;font-size:11px">
+            <span style="opacity:0.6">SHOWS:</span> <span>Loki (S1-S2) · Moon Knight</span>
+            <span style="opacity:0.6">DIRECTORS:</span> <span>Benson &amp; Moorhead · Mohamed Diab</span>
+            <span style="opacity:0.6">LEADS:</span> <span>Tom Hiddleston · Oscar Isaac</span>
+            <span style="opacity:0.6">SCORE:</span> <span>Natalie Holt (Theremin) · Hesham Nazih</span>
+            <span style="opacity:0.6">STATUS:</span> <span>Tied #1 Favorite Television Series</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     06 / HARRY POTTER, COCO & THE WILD ROBOT
+     FOLKLORE, MARIGOLD PETAL BRIDGES & MECHANICAL SOULS
+     ===================================================================== -->
+<section id="m-tales" class="section-tales" data-page="P.C06" data-name="MAGICAL TALES" aria-labelledby="h-tales">
+  <div class="spread-inner rv-scope" style="position:relative;z-index:2">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(249,115,22,0.2)">06</div>
+    
+    <div class="tales-header-card">
+      <header class="kicker rv">
+        <span class="tales-orange">FOLKLORE, MEMORY &amp; TENDER HEARTS</span>
+        <span class="tag win" style="background:#7c2d12;border-color:#f97316">HOGWARTS · LAND OF THE DEAD · ROZ</span>
+      </header>
+      <h2 id="h-tales" class="h-giant rv" style="--d:.05s">
+        HARRY POTTER · COCO ·<br>
+        <span class="tales-orange" style="font-size:clamp(22px, 3.8vw, 44px);letter-spacing:0.04em">THE WILD ROBOT</span>
+      </h2>
+      <p class="dek rv" style="--d:.1s;color:#fdba74">
+        From the floating candles of the Great Hall to Miguel crossing the orange cempasúchil bridge, to ROZZUM Unit 7134 raising an orphaned gosling on a desolate island. Stories that remind us why love persists.
+      </p>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div style="margin-top:70px;display:grid;grid-template-columns:repeat(12, 1fr);gap:36px;align-items:start">
+      <div style="grid-column: span 7;">
+        <blockquote class="rv" style="border-left:4px solid #f97316;padding-left:22px;font-size:clamp(18px,2.2vw,26px);font-weight:700;line-height:1.4;margin-bottom:28px;color:#fff">
+          “Sometimes to survive, we must become more than we were programmed to be.”
+          <div style="font-size:13px;font-weight:400;margin-top:8px;color:#fdba74">— Roz (ROZZUM Unit 7134), The Wild Robot</div>
+        </blockquote>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#ffedd5;margin-bottom:20px">
+          These three cinematic experiences represent the bedrock of personal imagination. <strong>Harry Potter</strong> is the world that defined childhood: the creaking staircases of Hogwarts, John Williams’ magical French horn melodies, and the enduring reminder that words and choices are the deepest magic available to human beings.
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#fed7aa;margin-bottom:24px">
+          Pixar’s <strong>Coco</strong> crafts one of the most culturally reverent, visually breathtaking explorations of ancestral memory ever animated. The concept that a human truly dies only when no living person on Earth speaks their name or plays their song turns <em>“Remember Me”</em> into an emotional gut punch that reverberates across generations.
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#fdba74;margin-bottom:24px">
+          And Chris Sanders’ <strong>The Wild Robot</strong> is a revelation of hand-painted digital expression. Watching a cold titanium automation protocol override its default parameters through empathy, sacrifice, and maternal warmth for Brightbill shows that consciousness is not dictated by hardware — it is forged through care.
+        </p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px">
+          <div style="border-top:1px solid rgba(249,115,22,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#f97316;letter-spacing:.1em">MARIGOLD PATHWAY</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#ffedd5">Luminous orange petal bridges linking our present world with our ancestors’ everlasting warmth.</p>
+          </div>
+          <div style="border-top:1px solid rgba(249,115,22,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#f97316;letter-spacing:.1em">BRIGHTBILL’S FLIGHT</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#ffedd5">A robot running on battery reserves teaching a runt goose how to migrate across mountain peaks.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE & SPEC SPREAD -->
+      <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
+        <div class="media-img-frame" style="border-color:rgba(249,115,22,0.4)">
+          <img src="images/coco-wild-robot.jpg" alt="Coco Marigold Bridge and The Wild Robot Roz" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="font-size:32px;margin-bottom:8px">🌸</span>
+            <strong>images/coco-wild-robot.jpg</strong>
+            <span style="font-size:11px;opacity:0.75;margin-top:4px">Coco Day of the Dead / The Wild Robot Roz &amp; Brightbill / Hogwarts</span>
+            <span style="font-size:10px;color:#f97316;margin-top:8px">Drop image in /images to render</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:20px;font-family:var(--mono);font-size:12px">
+          <div style="color:#f97316;font-weight:700;margin-bottom:12px;letter-spacing:.1em">ARCHIVE LOG // ENTRY C-06</div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;color:#fed7aa;font-size:11px">
+            <span style="opacity:0.6">WORKS:</span> <span>Harry Potter · Coco · Wild Robot</span>
+            <span style="opacity:0.6">STUDIOS:</span> <span>Warner Bros · Pixar · DreamWorks</span>
+            <span style="opacity:0.6">CORE THEME:</span> <span>Memory, Belonging &amp; Empathy</span>
+            <span style="opacity:0.6">PALETTE:</span> <span>Marigold Orange, Emerald Moss &amp; Candlelit Gold</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="spread" style="min-height:50vh;display:flex;align-items:center;background:var(--ink);color:var(--paper);border-top:1px solid rgba(255,255,255,0.1)">
+  <div class="spread-inner rv-scope" style="padding:60px 0">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+      <div>
+        <span class="sec-label rv">END OF CINEMA CHAPTER</span>
+        <h2 class="h-giant rv" style="font-size:clamp(28px, 4vw, 56px);margin-top:12px">PROJECTED ON THE MIND.</h2>
+      </div>
+      <div>
+        <ul class="end-lines rv" style="--d:.15s">
+          <li><span>CINEMA ARCHIVE</span><span class="mdim">DEBARGHA SARKAR / 2026</span></li>
+          <li><span>CELLULOID &amp; MULTIVERSE</span><span class="mdim">STILL BUILDING.</span></li>
+        </ul>
+        <div style="margin-top:28px">
+          <a class="ctl button" href="gaming.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
+            NEXT: THE GAMING SANCTUARY (BALATRO &amp; AMONG US) →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<div id="pageBar" aria-hidden="true">
+  <span id="pgL">P.C00 — CINEMA COVER</span>
+  <span class="r">DEB / CINEMA ARCHIVE — STILL BUILDING</span>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // PROJECTOR SUBLIMINAL FLICKER EASTER EGG FOR FIGHT CLUB
+  const fcBtn = document.getElementById('fcShutterBtn');
+  const flickerEl = document.getElementById('projectorFlicker');
+  if (fcBtn && flickerEl) {
+    fcBtn.addEventListener('click', () => {
+      flickerEl.classList.remove('flicker-active');
+      void flickerEl.offsetWidth; // trigger reflow
+      flickerEl.classList.add('flicker-active');
+    });
+  }
+</script>
+</body>
+</html>

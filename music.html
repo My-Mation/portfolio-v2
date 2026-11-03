@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEB — Music Sanctuary / Malice Mizer, Radiohead, Arctic Monkeys &amp; More</title>
+<meta name="description" content="Debargha Sarkar — Music Sanctuary: Malice Mizer in Pitch Black & Blood Red, Radiohead, Tame Impala, Tyler, and Arctic Monkeys in High-Contrast B&W.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+  /* ============ MUSIC PALETTES ============ */
+
+  /* SECTION 01: MALICE MIZER (PITCH BLACK & CRIMSON BLOOD RED) */
+  .section-malice {
+    background: #000000;
+    color: #ffe4e6;
+    border-top: 4px solid #ff1744;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+  .malice-accent { color: #ff1744; }
+  .malice-gold { color: #eab308; }
+  .malice-border { border-color: #880015 !important; }
+
+  /* SECTION 02: RADIOHEAD (OK COMPUTER MUTED CYAN & DIGITAL COLD) */
+  .section-radiohead {
+    background: #060b14;
+    color: #e2e8f0;
+    border-top: 4px solid #38bdf8;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+  .radiohead-accent { color: #38bdf8; }
+
+  /* SECTION 03: TAME IMPALA (CURRENTS PSYCHEDELIC MAGENTA & AMBER) */
+  .section-tame {
+    background: #0e031a;
+    color: #fae8ff;
+    border-top: 4px solid #c084fc;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+  .tame-accent { color: #e879f9; }
+
+  /* SECTION 04: TYLER, THE CREATOR (IGOR PINK & FLOWER BOY GOLD) */
+  .section-tyler {
+    background: #14050d;
+    color: #fce7f3;
+    border-top: 4px solid #ff69b4;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+
+  /* SECTION 05: ARCTIC MONKEYS (RAW HIGH-CONTRAST MONOCHROME B&W) */
+  .section-arctic {
+    background: #000000;
+    color: #ffffff;
+    border-top: 4px solid #ffffff;
+    position: relative;
+    padding: 100px 5.5vw 140px;
+  }
+  .am-mono {
+    font-family: var(--mono);
+    color: #ffffff;
+  }
+
+  /* PERSISTENT AUDIO CONTROL BAR */
+  .audio-now-playing-bar {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 80;
+    background: rgba(0, 0, 0, 0.94);
+    border: 2px solid #ff1744;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.85);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+  }
+  .audio-indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff1744;
+    animation: blink-dot 1.2s infinite ease-in-out;
+  }
+  @keyframes blink-dot {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* NATURAL DOCUMENT FLOW (NO STICKY OVERLAP) */
+  .music-header-card {
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .media-img-frame {
+    width: 100%;
+    min-height: 400px;
+    background: #09090b;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .media-img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .media-img-frame:hover img {
+    transform: scale(1.03);
+  }
+  .media-placeholder-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    background: repeating-linear-gradient(45deg, rgba(0,0,0,0.6) 0 10px, rgba(20,20,20,0.6) 10px 20px);
+    font-family: var(--mono);
+    color: rgba(255, 255, 255, 0.75);
+    pointer-events: none;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+<a class="skiplink" href="#music-content">Skip to content</a>
+<div id="noise" aria-hidden="true"></div>
+<canvas id="trail" aria-hidden="true"></canvas>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursorTag" aria-hidden="true">OPEN</div>
+
+<!-- NAVIGATION -->
+<nav id="siteNav" aria-label="Site">
+  <a class="brand" href="index.html">← DEB <span class="hide-mobile">— BACK TO HOME</span></a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="tag hide-mobile" href="projects.html" style="text-decoration:none;border-color:var(--yellow);color:var(--yellow)">PROJECTS</a>
+    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
+    <a class="tag hide-mobile" href="anime.html" style="text-decoration:none">ANIME</a>
+    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
+    <a class="tag hide-mobile" href="gaming.html" style="text-decoration:none">GAMES</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  </div>
+</nav>
+
+<!-- TOC -->
+<div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-head"><h2>Music Index</h2><button id="tocClose">CLOSE ×</button></div>
+  <ul class="toc-list">
+    <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Main Junction</span><span class="leader"></span><span class="t-pg">HOME ↗</span></a></li>
+    <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Music Cover</span><span class="leader"></span><span class="t-pg">P.S00</span></a></li>
+    <li><a href="#m-malice"><span class="t-no">01</span><span class="t-title">Malice Mizer — Gekka no Yasoukyoku (#1 Pitch Black &amp; Blood Red)</span><span class="leader"></span><span class="t-pg">P.S01</span></a></li>
+    <li><a href="#m-radiohead"><span class="t-no">02</span><span class="t-title">Radiohead — Creep &amp; No Surprises (OK Computer)</span><span class="leader"></span><span class="t-pg">P.S02</span></a></li>
+    <li><a href="#m-tame"><span class="t-no">03</span><span class="t-title">Tame Impala — Currents (Psychedelic Waves)</span><span class="leader"></span><span class="t-pg">P.S03</span></a></li>
+    <li><a href="#m-tyler"><span class="t-no">04</span><span class="t-title">Tyler, The Creator — Can I Get A Kiss? (IGOR &amp; Flower Boy)</span><span class="leader"></span><span class="t-pg">P.S04</span></a></li>
+    <li><a href="#m-arctic"><span class="t-no">05</span><span class="t-title">Arctic Monkeys — 505 (Raw High-Contrast B&amp;W)</span><span class="leader"></span><span class="t-pg">P.S05</span></a></li>
+  </ul>
+  <p class="toc-foot">DEBARGHA SARKAR / 2026 — SOUND SANCTUARY</p>
+</div>
+
+<!-- NOW PLAYING AUDIO HUD BAR -->
+<div class="audio-now-playing-bar" id="audioBar">
+  <div class="audio-indicator-dot"></div>
+  <div>
+    <span style="color:rgba(255,255,255,0.5);display:block;font-size:9.5px">ACTIVE TRACK // WEB AUDIO</span>
+    <span id="nowPlayingText" style="color:#fff;font-weight:700">MALICE MIZER — GEKKA NO YASOUKYOKU</span>
+  </div>
+  <button id="toggleAudioBtn" style="background:#ff1744;color:#fff;border:none;padding:6px 12px;font-family:var(--mono);font-size:10px;font-weight:700;cursor:pointer;letter-spacing:.1em">MUTE 🔇</button>
+</div>
+
+<main id="music-content">
+
+<!-- ============ 00 / COVER ============ -->
+<section id="cover" aria-label="Music Cover" data-page="P.S00" data-name="MUSIC OVERVIEW" style="min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:86px 5.5vw 64px;position:relative;">
+  <div class="crops" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="topline">
+    <div>DEBARGHA SARKAR <span class="hide-mobile">— SOUNDTRACK OF THE LAB</span></div>
+    <div class="hide-mobile">CHAPTER 02 // SOUND</div>
+    <div>2026 ARCHIVE</div>
+  </div>
+  <div class="hero-center">
+    <div class="crosshair" aria-hidden="true"></div>
+    <div class="side-vert">VISUAL KEI · ALT ROCK · PSYCHEDELIA · B&amp;W MONOCHROME</div>
+    <h1 class="hero-name" aria-label="SOUND.">
+      <span class="ln" style="--fx:-140px;--fy:30px;--fr:-9deg;--d:.15s">S</span><span class="ln" style="--fx:40px;--fy:-160px;--fr:6deg;--d:.32s">O</span><span class="ln" style="--fx:150px;--fy:60px;--fr:-5deg;--d:.5s">U</span><span class="ln" style="--fx:-60px;--fy:90px;--fr:7deg;--d:.65s">N</span><span class="ln dot" style="--fx:0;--fy:-90px;--fr:0deg;--d:.78s">D.</span>
+    </h1>
+    <p class="hero-sub">The Sound Sanctuary</p>
+    <p class="hero-roles">MALICE MIZER #1 · RADIOHEAD · TAME IMPALA · TYLER THE CREATOR · ARCTIC MONKEYS</p>
+    <div class="hero-rule" aria-hidden="true"></div>
+    
+    <div style="margin-top:24px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:10">
+      <a class="ctl button" href="#m-malice" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:#ff1744;color:#fff;border:1px solid #ff1744">
+        ENTER MALICE MIZER CROWN TRACK ↓
+      </a>
+      <a class="ctl button" href="index.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink)">
+        ← HOME JUNCTION
+      </a>
+    </div>
+  </div>
+  <div class="botline">
+    <div>INDEX 02 / SOUND</div>
+    <div class="hide-mobile">DEFAULT AUDIO PLAYING ON VISIT · SCROLL FOR EACH ARTIST UNIVERSE</div>
+    <div class="scroll-cue">SCROLL <i aria-hidden="true"></i></div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     01 / MALICE MIZER — GEKKA NO YASOUKYOKU (#1 CROWN FAVORITE)
+     PITCH BLACK & CRIMSON BLOOD RED / VELVET BURGUNDY
+     ===================================================================== -->
+<section id="m-malice" class="section-malice" data-page="P.S01" data-name="MALICE MIZER" aria-labelledby="h-malice">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(255,23,68,0.3)">01</div>
+    
+    <!-- NATURAL FLOW (NO OVERLAPPING STICKY TEXT) -->
+    <div class="music-header-card">
+      <header class="kicker rv">
+        <span class="malice-accent">👑 #1 ALL-TIME FAVORITE SONG</span>
+        <span class="tag win" style="background:#880015;color:#fff;border-color:#ff1744;font-weight:900">CROWN TRACK</span>
+        <span class="tag" style="background:#000;color:#ff1744;border-color:#ff1744">PITCH BLACK &amp; BLOOD RED</span>
+      </header>
+      <h2 id="h-malice" class="h-giant rv" style="--d:.05s">
+        MALICE MIZER<br>
+        <span style="color:#ff1744">月下の夜想曲</span><span style="color:#eab308">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:#880015;background:rgba(136,0,21,0.15)">
+        <span><b>SONG:</b> GEKKA NO YASOUKYOKU (NOCTURNE UNDER THE MOONLIGHT)</span>
+        <span><b>RELEASE:</b> 1998 · ALBUM: MERVEILLES</span>
+        <span><b>LINEUP:</b> MANA · GACKT · KÖZI · YŪKI · KAMI</span>
+        <span><b>GENRE:</b> FRENCH BAROQUE VISUAL KEI</span>
+      </div>
+    </div>
+
+    <!-- MAIN THESIS & QUOTE -->
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#ffe4e6">
+      My absolute number one favorite track in existence. <em>A gothic marionette waltz beneath a blood-red moon.</em> The sinister harpsichord arpeggios, the dollhouse rhythm, and Gackt's haunting theatrical baritone.
+    </p>
+
+    <!-- PICTURES & GESTURES SHOWCASE ROW -->
+    <div class="gr gr-2" style="margin-top:44px">
+      <!-- PICTURE 1: HERO PORTRAIT -->
+      <div class="rv" style="--d:.1s">
+        <div class="media-img-frame" style="border:2px solid #ff1744;box-shadow:0 0 35px rgba(255,23,68,0.25)">
+          <img src="images/malice-mizer-hero.jpg" alt="Malice Mizer - Visual Kei Gestures" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#ff1744;font-size:32px;margin-bottom:8px">🥀</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: MALICE MIZER (HERO GESTURE)</span>
+            <span style="font-size:11px;color:#fecdd3;margin-top:6px">Place photo in: <code>images/malice-mizer-hero.jpg</code></span>
+          </div>
+        </div>
+        <div class="fig-label" style="color:#fecdd3">
+          <span>MANA &amp; GACKT — THEATRICAL BAROQUE COSTUMES &amp; GESTURES</span>
+          <span>1998 MERVEILLES ERA</span>
+        </div>
+      </div>
+
+      <!-- PICTURE 2: GESTURES / DOLLHOUSE POSE -->
+      <div class="rv" style="--d:.2s">
+        <div class="media-img-frame" style="border:2px solid #880015">
+          <img src="images/malice-mizer-gesture.jpg" alt="Malice Mizer - Theatrical Puppetry Pose" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#eab308;font-size:32px;margin-bottom:8px">🎭</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: DOLLHOUSE GESTURES &amp; HARPSICHORD</span>
+            <span style="font-size:11px;color:#fecdd3;margin-top:6px">Place photo in: <code>images/malice-mizer-gesture.jpg</code></span>
+          </div>
+        </div>
+        <div class="fig-label" style="color:#fecdd3">
+          <span>MARIONETTE SYMBOLISM &amp; GOTHIC GESTURES</span>
+          <span>TOKYO NIPPON BUDOKAN</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXTENDED EDITORIAL BREAKDOWN -->
+    <div class="gr gr-2" style="margin-top:48px">
+      <div class="readout rv" style="padding:28px;background:#0d0205;border:2px solid #ff1744">
+        <span class="mono" style="color:#ff1744;display:block;margin-bottom:12px;font-weight:700">01 / THE HARPSICHORD CADENCE</span>
+        <p style="color:#ffe4e6;font-size:14.5px;line-height:1.65">The track opens with a chilling solo harpsichord cadence that sounds like an antique music box unearthed from an 18th-century French chateau. When the classical strings collide with the rock drum kit, the composition achieves pure dramatic majesty.</p>
+      </div>
+
+      <div class="readout rv" style="padding:28px;background:#0d0205;border:2px solid #880015;--d:.15s">
+        <span class="mono" style="color:#eab308;display:block;margin-bottom:12px;font-weight:700">02 / WHY IT'S MY #1 CODING SOUNDTRACK</span>
+        <p style="color:#ffe4e6;font-size:14.5px;line-height:1.65">Most developers listen to generic elevator lo-fi beats. I put Gekka no Yasoukyoku on loop. The dark romantic precision keeps my mind locked into deep focus, whether I'm writing ESP32 C++ firmware, solving inverse kinematics, or compiling kernels in Termux.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     02 / RADIOHEAD — CREEP & NO SURPRISES
+     MUTED CYAN SLATE & OK COMPUTER DIGITAL COLD
+     ===================================================================== -->
+<section id="m-radiohead" class="section-radiohead" data-page="P.S02" data-name="RADIOHEAD" aria-labelledby="h-radiohead">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(56,189,248,0.3)">02</div>
+    
+    <div class="music-header-card">
+      <header class="kicker rv">
+        <span class="radiohead-accent">ALT-ROCK &amp; MELANCHOLIC CHIMES</span>
+        <span class="tag live" style="background:#0369a1;border-color:#38bdf8">OK COMPUTER &amp; PABLO HONEY</span>
+      </header>
+      <h2 id="h-radiohead" class="h-giant rv" style="--d:.05s">
+        RADIOHEAD<br>
+        <span style="color:#38bdf8">CREEP</span> &amp; <span style="color:#e2e8f0">NO SURPRISES</span><span style="color:#38bdf8">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:rgba(56,189,248,0.3)">
+        <span><b>SONGS:</b> CREEP (1992) · NO SURPRISES (1997)</span>
+        <span><b>FRONTMAN:</b> THOM YORKE</span>
+        <span><b>SONIC MOOD:</b> REZONANT GUITAR CRUNCH &amp; GLOCKENSPIEL LULLABY</span>
+      </div>
+    </div>
+
+    <!-- MAIN THESIS -->
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#e2e8f0">
+      The ultimate sonic study in alienation. From Jonny Greenwood's brutal dead-string guitar chops right before the chorus in <em>Creep</em>, to the deceptively cheerful music-box chimes of <em>No Surprises</em>.
+    </p>
+
+    <!-- CONTENT GRID -->
+    <div class="gr gr-2" style="margin-top:44px">
+      <div class="rv" style="--d:.1s">
+        <div class="media-img-frame" style="border:2px solid #38bdf8;box-shadow:0 0 35px rgba(56,189,248,0.2)">
+          <img src="images/radiohead.jpg" alt="Radiohead - Thom Yorke" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#38bdf8;font-size:32px;margin-bottom:8px">📻</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: RADIOHEAD / THOM YORKE</span>
+            <span style="font-size:11px;color:#bae6fd;margin-top:6px">Place photo in: <code>images/radiohead.jpg</code></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s">
+        <div class="readout" style="padding:28px;background:#0b1322;border:2px solid #38bdf8">
+          <span class="mono" style="color:#38bdf8;display:block;margin-bottom:12px;font-weight:700">01 / "A HEART THAT'S FULL UP LIKE A LANDFILL"</span>
+          <p style="color:#e2e8f0;font-size:14.5px;line-height:1.65;margin-bottom:16px">
+            No Surprises is the anthem of modern burnout — an anti-capitalist prayer packaged as a gentle children's lullaby. The glockenspiel riff is pure poetry.
+          </p>
+          <div style="border-top:1px solid rgba(56,189,248,0.25);padding-top:12px;font-family:var(--mono);font-size:12px;color:#38bdf8">
+            FAVORITE LYRIC: "No alarms and no surprises, please."
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     03 / TAME IMPALA — CURRENTS PSYCHEDELIA
+     ===================================================================== -->
+<section id="m-tame" class="section-tame" data-page="P.S03" data-name="TAME IMPALA" aria-labelledby="h-tame">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(192,132,252,0.3)">03</div>
+    
+    <div class="music-header-card">
+      <header class="kicker rv">
+        <span class="tame-accent">ANALOG SYNTH &amp; PSYCHEDELIC POP</span>
+        <span class="tag win" style="background:#581c87;color:#fff;border-color:#c084fc">CURRENTS ERA</span>
+      </header>
+      <h2 id="h-tame" class="h-giant rv" style="--d:.05s">
+        TAME IMPALA<br>
+        <span style="color:#c084fc">THE LESS I KNOW</span><br>
+        THE BETTER<span style="color:#eab308">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:rgba(192,132,252,0.3)">
+        <span><b>ARCHITECT:</b> KEVIN PARKER (SOLO STUDIO MASTERMIND)</span>
+        <span><b>SOUND:</b> ROLAND JUNO-106 SYNTH · FUZZ BASS · PHASER DRUMS</span>
+      </div>
+    </div>
+
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#fae8ff">
+      Kevin Parker proved that one person alone in a bedroom studio can craft stadium-sized psychedelic disco. The infectious bassline of <em>The Less I Know The Better</em> is an instant adrenaline rush.
+    </p>
+
+    <div class="gr gr-2" style="margin-top:44px">
+      <div class="rv" style="--d:.1s">
+        <div class="media-img-frame" style="border:2px solid #c084fc;box-shadow:0 0 35px rgba(192,132,252,0.2)">
+          <img src="images/tame-impala.jpg" alt="Tame Impala - Currents" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#c084fc;font-size:32px;margin-bottom:8px">🌀</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: TAME IMPALA / CURRENTS</span>
+            <span style="font-size:11px;color:#e9d5ff;margin-top:6px">Place photo in: <code>images/tame-impala.jpg</code></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s">
+        <div class="readout" style="padding:28px;background:#150626;border:2px solid #c084fc">
+          <span class="mono" style="color:#e879f9;display:block;margin-bottom:12px;font-weight:700">01 / ONE-MAN STUDIO MASTERY</span>
+          <p style="color:#fae8ff;font-size:14.5px;line-height:1.65">
+            Kevin writes, records, performs, and produces every single note by himself. That solo DIY builder ethos resonates deeply with how I approach building hardware and codebases from scratch.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     04 / TYLER, THE CREATOR
+     ===================================================================== -->
+<section id="m-tyler" class="section-tyler" data-page="P.S04" data-name="TYLER" aria-labelledby="h-tyler">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(255,105,180,0.3)">04</div>
+    
+    <div class="music-header-card">
+      <header class="kicker rv">
+        <span style="color:#ff69b4">NEO-SOUL &amp; EXPERIMENTAL HIP HOP</span>
+        <span class="tag live" style="background:#831843;color:#fff;border-color:#ff69b4">IGOR &amp; FLOWER BOY</span>
+      </header>
+      <h2 id="h-tyler" class="h-giant rv" style="--d:.05s">
+        TYLER, THE<br>
+        <span style="color:#ff69b4">CREATOR</span><span style="color:#fbbf24">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:rgba(255,105,180,0.3)">
+        <span><b>FAVORITE MOMENT:</b> "CAN I GET A KISS?" (SEE YOU AGAIN)</span>
+        <span><b>VIBE:</b> WARM ANALOG PASTEL CHORDS &amp; CREATIVE AUDACITY</span>
+      </div>
+    </div>
+
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#fce7f3">
+      Tyler's fearlessness in evolving from raw underground shock-rap to gorgeous neo-soul chords in <em>Flower Boy</em> and <em>IGOR</em> is pure inspiration.
+    </p>
+
+    <div class="gr gr-2" style="margin-top:44px">
+      <div class="rv" style="--d:.1s">
+        <div class="media-img-frame" style="border:2px solid #ff69b4">
+          <img src="images/tyler-creator.jpg" alt="Tyler, The Creator" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#ff69b4;font-size:32px;margin-bottom:8px">🌻</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: TYLER, THE CREATOR</span>
+            <span style="font-size:11px;color:#fbcfe8;margin-top:6px">Place photo in: <code>images/tyler-creator.jpg</code></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s">
+        <div class="readout" style="padding:28px;background:#1e0814;border:2px solid #ff69b4">
+          <span class="mono" style="color:#ff69b4;display:block;margin-bottom:12px;font-weight:700">01 / "CAN I GET A KISS?"</span>
+          <p style="color:#fce7f3;font-size:14.5px;line-height:1.65">
+            The bridge on <em>See You Again</em> with Kali Uchis is pure euphoric summer sunshine. Tyler proves you don't have to stay in one creative box forever.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     05 / ARCTIC MONKEYS
+     RAW HIGH-CONTRAST MONOCHROME BLACK & WHITE
+     ===================================================================== -->
+<section id="m-arctic" class="section-arctic" data-page="P.S05" data-name="ARCTIC MONKEYS" aria-labelledby="h-arctic">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(255,255,255,0.3)">05</div>
+    
+    <div class="music-header-card">
+      <header class="kicker rv">
+        <span style="color:#ffffff;font-weight:700">RAW POST-PUNK &amp; INDIE ROCK</span>
+        <span class="tag win" style="background:#ffffff;color:#000;border-color:#ffffff;font-weight:900">HIGH-CONTRAST B&amp;W</span>
+      </header>
+      <h2 id="h-arctic" class="h-giant rv" style="--d:.05s">
+        ARCTIC<br>
+        <span style="color:#ffffff">MONKEYS</span><span style="color:#ff1744">.</span>
+      </h2>
+      <div class="meta-row rv" style="--d:.15s;border-color:#ffffff;background:#111">
+        <span class="am-mono"><b>KEY TRACK:</b> 505 (FAVOURITE WORST NIGHTMARE)</span>
+        <span class="am-mono"><b>PALETTE:</b> STARK MONOCHROME BLACK &amp; WHITE</span>
+        <span class="am-mono"><b>LEAD:</b> ALEX TURNER</span>
+      </div>
+    </div>
+
+    <!-- MAIN THESIS -->
+    <p class="thesis rv" style="--d:.2s;max-width:34em;color:#ffffff">
+      Pure high-contrast British rock. <em>"I'm going back to 505 / If it's a seven hour flight or a forty-five minute drive..."</em> The slow organ crescendo that erupts into thunderous drums and crashing guitars.
+    </p>
+
+    <!-- CONTENT GRID -->
+    <div class="gr gr-2" style="margin-top:44px">
+      <div class="rv" style="--d:.1s">
+        <div class="media-img-frame" style="border:2px solid #ffffff;box-shadow:0 0 35px rgba(255,255,255,0.15)">
+          <img src="images/arctic-monkeys.jpg" alt="Arctic Monkeys - Alex Turner 505" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="color:#ffffff;font-size:32px;margin-bottom:8px">📼</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: ARCTIC MONKEYS (HIGH CONTRAST B&amp;W)</span>
+            <span style="font-size:11px;color:#d4d4d8;margin-top:6px">Place photo in: <code>images/arctic-monkeys.jpg</code></span>
+          </div>
+        </div>
+        <div class="fig-label" style="color:#ffffff">
+          <span>ALEX TURNER // ANALOG OSCILLOSCOPE WAVEFORM AESTHETIC</span>
+          <span>505 FINALE</span>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s">
+        <div class="readout" style="padding:28px;background:#111111;border:2px solid #ffffff">
+          <span class="mono" style="color:#ffffff;display:block;margin-bottom:12px;font-weight:700">01 / THE ORGAN EXPLOSION AT 2:30</span>
+          <p style="color:#ffffff;font-size:14.5px;line-height:1.65;margin-bottom:14px">
+            The tension in 505 builds on just two gentle organ chords sampled from Ennio Morricone. When the rhythm section detonates at 2:30, it delivers one of the most raw, visceral climaxes in indie rock history.
+          </p>
+          <div style="border-top:1px solid #333;padding-top:12px;font-family:var(--mono);font-size:12px;color:#fff">
+            "I crumble completely when you cry..."
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="pageBar" aria-hidden="true">
+  <span id="pgL">P.S00 — OVERVIEW</span>
+  <span class="r">DEB / 2026 — SOUND SANCTUARY</span>
+</div>
+
+<!-- WEB AUDIO SYNTHESIZER SCRIPT -->
+<script>
+let audioCtx = null;
+let isMuted = false;
+let synthTimer = null;
+
+// Gekka no Yasoukyoku Harpsichord Arpeggio Melody
+const notes = [
+  // F# minor baroque waltz phrase
+  370.0, 440.0, 554.37, 740.0, 659.25, 554.37, 440.0, 370.0,
+  330.0, 415.30, 493.88, 659.25, 554.37, 493.88, 415.30, 330.0,
+  293.66, 370.0, 440.0, 587.33, 554.37, 440.0, 370.0, 293.66,
+  277.18, 370.0, 440.0, 554.37, 440.0, 370.0, 277.18, 370.0
+];
+
+function playHarpsichordPluck(freq, time) {
+  if (!audioCtx || isMuted) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+
+  // Bright, harpsichord plucked timbre
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(freq, time);
+
+  filter.type = 'bandpass';
+  filter.frequency.setValueAtTime(freq * 2.2, time);
+  filter.Q.setValueAtTime(3.0, time);
+
+  gain.gain.setValueAtTime(0.001, time);
+  gain.gain.exponentialRampToValueAtTime(0.08, time + 0.015);
+  gain.gain.exponentialRampToValueAtTime(0.0001, time + 0.45);
+
+  osc.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.start(time);
+  osc.stop(time + 0.48);
+}
+
+function startMusicLoop() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  
+  let noteIdx = 0;
+  const stepTime = 0.22;
+  
+  function tick() {
+    if (isMuted) return;
+    const now = audioCtx.currentTime;
+    playHarpsichordPluck(notes[noteIdx % notes.length], now);
+    noteIdx++;
+  }
+  
+  if (synthTimer) clearInterval(synthTimer);
+  synthTimer = setInterval(tick, stepTime * 1000);
+}
+
+// Start audio on first user gesture or scroll (browser autoplay compliant)
+let audioStarted = false;
+function initAudioOnInteraction() {
+  if (audioStarted) return;
+  audioStarted = true;
+  startMusicLoop();
+}
+
+window.addEventListener('click', initAudioOnInteraction, { once: true });
+window.addEventListener('scroll', initAudioOnInteraction, { once: true });
+window.addEventListener('keydown', initAudioOnInteraction, { once: true });
+
+// Toggle Mute Button
+const toggleBtn = document.getElementById('toggleAudioBtn');
+const audioBar = document.getElementById('audioBar');
+
+if (toggleBtn) {
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!audioStarted) {
+      audioStarted = true;
+      startMusicLoop();
+    }
+    isMuted = !isMuted;
+    if (isMuted) {
+      toggleBtn.textContent = 'UNMUTE 🔊';
+      toggleBtn.style.background = '#333';
+      if (synthTimer) clearInterval(synthTimer);
+    } else {
+      toggleBtn.textContent = 'MUTE 🔇';
+      toggleBtn.style.background = '#ff1744';
+      startMusicLoop();
+    }
+  });
+}
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -3,104 +3,298 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DEB — Debargha Sarkar / Still Building</title>
-<meta name="description" content="Debargha Sarkar — student builder, Kolkata. Software × hardware × systems. A working archive of experiments that became engineering.">
+<title>DEB — Command Junction / Software × Hardware × Systems</title>
+<meta name="description" content="Debargha Sarkar (Deb) — Builder junction navigating to Projects Dossier, Achievements, Anime, Music, Cinema, and Gaming sanctuaries.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<!-- THREE.JS & STL LOADER FOR 3D QUADRUPED MODEL -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+<style>
+  /* JUNCTION SPECIFIC ENHANCEMENTS */
+  .junction-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .j-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 26px;
+    border: 2px solid var(--pline);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+    min-height: 280px;
+  }
+  .j-card:hover {
+    transform: translateY(-4px);
+  }
+  .j-badge {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    padding: 4px 8px;
+    display: inline-block;
+  }
+  .j-title {
+    font-weight: 900;
+    font-size: clamp(26px, 3.2vw, 36px);
+    line-height: 1.08;
+    margin: 14px 0 10px;
+    letter-spacing: -0.02em;
+  }
+  .j-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .j-foot {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+</style>
 </head>
 <body>
-<a class="skiplink" href="#work">Skip to content</a>
+<a class="skiplink" href="#junction-content">Skip to content</a>
 <div id="noise" aria-hidden="true"></div>
 <canvas id="trail" aria-hidden="true"></canvas>
 <div id="cursor" aria-hidden="true"></div>
 <div id="cursorTag" aria-hidden="true">OPEN</div>
 
+<!-- NAVIGATION -->
 <nav id="siteNav" aria-label="Site">
-  <a class="brand" href="#cover">DEB <span class="hide-mobile">— STILL BUILDING / 2026</span></a>
-  <div style="display:flex;align-items:center;gap:16px">
-    <a class="tag live hide-mobile" href="https://www.instagram.com/local_first_lab/" target="_blank" rel="noopener" style="text-decoration:none">LOCAL_FIRST_LAB / 13K+ ↗</a>
+  <a class="brand" href="#cover">DEB <span class="hide-mobile">— COMMAND JUNCTION</span></a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="tag hide-mobile" href="projects.html" style="text-decoration:none;border-color:var(--yellow);color:var(--yellow)">PROJECTS</a>
+    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
+    <a class="tag hide-mobile" href="anime.html" style="text-decoration:none">ANIME</a>
+    <a class="tag hide-mobile" href="music.html" style="text-decoration:none">MUSIC</a>
+    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
+    <a class="tag hide-mobile" href="gaming.html" style="text-decoration:none">GAMES</a>
     <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
   </div>
 </nav>
 
+<!-- TOC -->
 <div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
-  <div class="toc-head"><h2>Index</h2><button id="tocClose">CLOSE ×</button></div>
+  <div class="toc-head"><h2>Junction Index</h2><button id="tocClose">CLOSE ×</button></div>
   <ul class="toc-list">
-    <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Cover</span><span class="leader"></span><span class="t-pg">P.001</span></a></li>
-    <li><a href="#p00"><span class="t-no">—</span><span class="t-title">Prologue / I Keep Finding Things to Build</span><span class="leader"></span><span class="t-pg">P.002</span></a></li>
-    <li><a href="#pidx"><span class="t-no">—</span><span class="t-title">The Work / Project Index</span><span class="leader"></span><span class="t-pg">P.003</span></a></li>
-    <li><a href="#p01"><span class="t-no">01</span><span class="t-title">OSAMU (Aveenir Hackathon 1st Prize)</span><span class="leader"></span><span class="t-pg">P.004</span></a></li>
-    <li><a href="#p02"><span class="t-no">02</span><span class="t-title">Quadruped Robot (3D Interactive Model)</span><span class="leader"></span><span class="t-pg">P.005</span></a></li>
-    <li><a href="#p03"><span class="t-no">03</span><span class="t-title">Phone Homelab &amp; Local AI</span><span class="leader"></span><span class="t-pg">P.006</span></a></li>
-    <li><a href="#p04"><span class="t-no">04</span><span class="t-title">Studiva</span><span class="leader"></span><span class="t-pg">P.007</span></a></li>
-    <li><a href="#p05"><span class="t-no">05</span><span class="t-title">RepBot</span><span class="leader"></span><span class="t-pg">P.008</span></a></li>
-    <li><a href="#p06"><span class="t-no">06</span><span class="t-title">VISO (FSociety Hackathon)</span><span class="leader"></span><span class="t-pg">P.009</span></a></li>
-    <li><a href="#p07"><span class="t-no">07</span><span class="t-title">Sarbanash (Survival Horror Pixel Art)</span><span class="leader"></span><span class="t-pg">P.010</span></a></li>
-    <li><a href="#p08"><span class="t-no">08</span><span class="t-title">Kisor (Visual Novel)</span><span class="leader"></span><span class="t-pg">P.011</span></a></li>
-    <li><a href="#pintern"><span class="t-no">09</span><span class="t-title">Internship (Forge IT Systems)</span><span class="leader"></span><span class="t-pg">P.012</span></a></li>
-    <li><a href="#phack"><span class="t-no">★</span><span class="t-title">Hackathons Showcase</span><span class="leader"></span><span class="t-pg">P.013</span></a></li>
-    <li><a href="#pinsta"><span class="t-no">✦</span><span class="t-title">Local First Lab / 13K+ Channel</span><span class="leader"></span><span class="t-pg">P.014</span></a></li>
-    <li><a href="#p17"><span class="t-no">—</span><span class="t-title">About</span><span class="leader"></span><span class="t-pg">P.015</span></a></li>
-    <li><a href="#p18"><span class="t-no">—</span><span class="t-title">Contact &amp; Social</span><span class="leader"></span><span class="t-pg">P.016</span></a></li>
+    <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Cover // Command Hub</span><span class="leader"></span><span class="t-pg">P.001</span></a></li>
+    <li><a href="#junction"><span class="t-no">✦</span><span class="t-title">The Grand Junction (All Dedicated Portals)</span><span class="leader"></span><span class="t-pg">P.002</span></a></li>
+    <li><a href="#p00"><span class="t-no">—</span><span class="t-title">Prologue // The Builder Manifesto</span><span class="leader"></span><span class="t-pg">P.003</span></a></li>
+    <li><a href="#pabout"><span class="t-no">—</span><span class="t-title">About Deb // Profile &amp; Focus</span><span class="leader"></span><span class="t-pg">P.004</span></a></li>
+    <li><a href="#pinsta"><span class="t-no">✦</span><span class="t-title">Local_First_Lab // 13K+ Channel</span><span class="leader"></span><span class="t-pg">P.005</span></a></li>
+    <li><a href="#pcontact"><span class="t-no">→</span><span class="t-title">Contact &amp; Channels</span><span class="leader"></span><span class="t-pg">P.006</span></a></li>
+    <li><a href="projects.html" style="color:var(--yellow)"><span class="t-no">★</span><span class="t-title">Projects Dossier (3D Model, Flowcharts &amp; Code)</span><span class="leader"></span><span class="t-pg">PROJECTS ↗</span></a></li>
+    <li><a href="https://ecg-demo-one.vercel.app/" target="_blank" rel="noopener" style="color:#00d084"><span class="t-no">★</span><span class="t-title">ECG &amp; Holter Telemetry Suite (Live 8-Model Demo)</span><span class="leader"></span><span class="t-pg">LIVE ↗</span></a></li>
+    <li><a href="achievements.html" style="color:var(--red)"><span class="t-no">★</span><span class="t-title">Achievements (Aveenir 1st Prize, VISO, Internship)</span><span class="leader"></span><span class="t-pg">WINS ↗</span></a></li>
+    <li><a href="anime.html" style="color:#ff5500"><span class="t-no">★</span><span class="t-title">Anime Realm (Dragon Ball Super #1, AOT, Eva...)</span><span class="leader"></span><span class="t-pg">ANIME ↗</span></a></li>
+    <li><a href="music.html" style="color:#ff1744"><span class="t-no">★</span><span class="t-title">Music Sanctuary (Malice Mizer #1, Radiohead...)</span><span class="leader"></span><span class="t-pg">MUSIC ↗</span></a></li>
+    <li><a href="cinema.html" style="color:#ff007f"><span class="t-no">★</span><span class="t-title">Cinema Vault (Fight Club #1, Se7en, Interstellar...)</span><span class="leader"></span><span class="t-pg">CINEMA ↗</span></a></li>
+    <li><a href="gaming.html" style="color:#16a34a"><span class="t-no">★</span><span class="t-title">Gaming Archive (Balatro #1, Among Us, Undertale...)</span><span class="leader"></span><span class="t-pg">GAMES ↗</span></a></li>
   </ul>
   <p class="toc-foot">DEBARGHA SARKAR / 2026 — SOFTWARE × HARDWARE × SYSTEMS</p>
 </div>
 
-<main id="work">
+<main id="junction-content">
 
 <!-- ============ 00 / COVER ============ -->
 <section id="cover" aria-label="Cover" data-page="P.001" data-name="COVER">
   <div class="crops" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <div class="topline">
     <div>DEBARGHA SARKAR <span class="hide-mobile">— B.TECH CSE</span></div>
-    <div class="hide-mobile">VOL. 01</div>
-    <div>PORTFOLIO / 2026</div>
+    <div class="hide-mobile">COMMAND JUNCTION // 2026</div>
+    <div>PORTFOLIO V2</div>
   </div>
   <div class="hero-center">
     <div class="crosshair" aria-hidden="true"></div>
-    <div class="side-vert">NSEC / KOLKATA — 22.57°N / 88.36°E</div>
+    <div class="side-vert">SOFTWARE · HARDWARE · SYSTEMS · MEDIA</div>
     <h1 class="hero-name" aria-label="DEB.">
-      <span class="ln" style="--fx:-140px;--fy:30px;--fr:-9deg;--d:.15s">D</span><span class="ln" style="--fx:40px;--fy:-160px;--fr:6deg;--d:.32s">E</span><span class="ln" style="--fx:150px;--fy:60px;--fr:-5deg;--d:.5s">B</span><span class="ln dot" style="--fx:0;--fy:-90px;--fr:0deg;--d:.78s">.</span>
+      <span class="ln" style="--fx:-120px;--fy:40px;--fr:-8deg;--d:.15s">D</span><span class="ln" style="--fx:30px;--fy:-140px;--fr:5deg;--d:.32s">E</span><span class="ln dot" style="--fx:140px;--fy:50px;--fr:-4deg;--d:.6s">B.</span>
     </h1>
     <p class="hero-sub">Still building</p>
     <p class="hero-roles">SOFTWARE × HARDWARE × SYSTEMS <span class="hide-mobile">— STUDENT / BUILDER / SYSTEMS EXPLORER</span></p>
     <div class="hero-rule" aria-hidden="true"></div>
     
-    <!-- FRONT PAGE LINKS (INSTAGRAM, GITHUB, LINKEDIN) -->
-    <div style="margin-top:24px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:10">
+    <!-- FRONT PAGE ACTION LINKS -->
+    <div style="margin-top:24px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;position:relative;z-index:10">
       <a class="hero-stamp hide-mobile" href="https://www.instagram.com/local_first_lab/" target="_blank" rel="noopener" style="position:relative;right:auto;bottom:auto;transform:rotate(-2deg);display:inline-block;text-decoration:none">
         LOCAL_FIRST_LAB / 13K+<br>FOLLOW THE LAB ↗
       </a>
-      <a class="ctl button" href="https://github.com/My-Mation" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink)">
-        GITHUB ↗
+      <a class="ctl button" href="#junction" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
+        THE JUNCTION ↓
       </a>
-      <a class="ctl button" href="https://www.linkedin.com/in/debargha-sarkar-72575937/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
-        LINKEDIN ↗
+      <a class="ctl button" href="projects.html" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--yellow);color:var(--black);border:1px solid var(--yellow)">
+        PROJECTS DOSSIER ↗
+      </a>
+      <a class="ctl button" href="https://ecg-demo-one.vercel.app/" target="_blank" rel="noopener" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:#00d084;color:#000;border:1px solid #00d084">
+        ECG DEMO ↗
+      </a>
+      <a class="ctl button" href="achievements.html" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink)">
+        ACHIEVEMENTS ↗
+      </a>
+      <a class="ctl button" href="https://github.com/My-Mation" target="_blank" rel="noopener" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--paper2);color:var(--ink);border:1px solid var(--line2)">
+        GITHUB ↗
       </a>
     </div>
   </div>
   <div class="botline">
-    <div>INDEX 00 / INTRO</div>
-    <div class="hide-mobile">AN ARCHIVE OF EXPERIMENTS THAT BECAME ENGINEERING</div>
+    <div>INDEX 00 / JUNCTION</div>
+    <div class="hide-mobile">AN UNAPOLOGETIC MIRROR OF WHO I AM AS A BUILDER &amp; PERSON</div>
     <div class="scroll-cue">SCROLL <i aria-hidden="true"></i></div>
   </div>
 </section>
 
-<!-- ============ PROLOGUE ============ -->
-<section id="p00" class="spread" data-page="P.002" data-name="PROLOGUE" aria-labelledby="h-p00">
+<!-- ============ 01 / THE GRAND JUNCTION PORTALS ============ -->
+<section id="junction" class="spread dark" data-page="P.002" data-name="THE JUNCTION" aria-labelledby="h-junction" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 5.5vw">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">✦</div>
+    <header class="kicker rv">
+      <span>SECTOR MAP // CENTRAL JUNCTION</span>
+      <span class="tag win" style="border-color:var(--red);background:var(--red);color:var(--paper)">SELECT DESTINATION</span>
+    </header>
+    <h2 id="h-junction" class="h-giant rv" style="--d:.05s">
+      THE CENTRAL<br>
+      <span style="color:var(--red)">JUNCTION</span><span style="color:var(--red)">.</span>
+    </h2>
+    <p class="thesis rv" style="--d:.1s">
+      This portfolio is not an overcrowded corporate resume. It is an authentic command hub into my engineering work, competitive hackathon wins, and personal media universes. Pick a sector to explore:
+    </p>
+
+    <div class="junction-grid">
+      <!-- PORTAL 1: PROJECTS DOSSIER -->
+      <a href="projects.html" class="j-card rv" style="--d:.12s;background:#141311;border-color:var(--yellow);color:var(--paper);box-shadow:0 0 25px rgba(230,194,41,0.08)">
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="j-badge" style="background:var(--yellow);color:#000">SECTOR 01 // ENGINEERING</span>
+            <span class="tag live" style="font-size:9.5px">3D CAD &amp; SCHEMATICS</span>
+          </div>
+          <div class="j-title" style="color:#fff">PROJECTS<br><span style="color:var(--yellow)">DOSSIER</span>.</div>
+          <p class="j-desc" style="color:var(--pdim)">
+            Full hardware specs, 3D Quadruped Robot CAD viewport, OSAMU adaptive exam flowchart, clinical ECG &amp; Holter telemetry suite, Termux phone homelab cluster, RepBot CV, and VISO telemetry.
+          </p>
+        </div>
+        <div class="j-foot" style="border-color:rgba(230,194,41,0.25);color:var(--yellow)">
+          <span>ENTER DOSSIER →</span>
+          <span style="color:rgba(255,255,255,0.4)">9 ACTIVE BUILDS</span>
+        </div>
+      </a>
+
+      <!-- PORTAL 2: ACHIEVEMENTS & HACKATHONS -->
+      <a href="achievements.html" class="j-card rv" style="--d:.16s;background:#180b0b;border-color:var(--red);color:var(--paper);box-shadow:0 0 25px rgba(191,48,22,0.1)">
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="j-badge" style="background:var(--red);color:#fff">SECTOR 02 // HONORS</span>
+            <span class="tag win" style="font-size:9.5px">🏆 1ST PRIZE</span>
+          </div>
+          <div class="j-title" style="color:#fff">ACHIEVEMENTS<br><span style="color:var(--red)">&amp; WINS</span>.</div>
+          <p class="j-desc" style="color:#fca5a5">
+            Aveenir Hackathon 1st Place overall (OSAMU), VISO machine health hackathon sprint, Forge IT Systems engineering internship, and 13K+ lab community.
+          </p>
+        </div>
+        <div class="j-foot" style="border-color:rgba(191,48,22,0.3);color:var(--red)">
+          <span>VIEW AWARDS &amp; SPRINT WINS →</span>
+          <span style="color:rgba(255,255,255,0.4)">FIELD RECORD</span>
+        </div>
+      </a>
+
+      <!-- PORTAL 3: ANIME DIMENSION -->
+      <a href="anime.html" class="j-card rv" style="--d:.20s;background:#0d0614;border-color:#ff5500;color:#ffedd5;box-shadow:0 0 25px rgba(255,85,0,0.1)">
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="j-badge" style="background:#ff5500;color:#000">CHAPTER 01 // ANIME</span>
+            <span class="tag" style="background:#0044cc;color:#fff;border-color:#ff5500;font-size:9.5px">DB SUPER #1</span>
+          </div>
+          <div class="j-title" style="color:#fff">ANIME<br><span style="color:#ff5500">DIMENSION</span>.</div>
+          <p class="j-desc" style="color:#fed7aa">
+            Goku Orange &amp; Saiyan Blue tribute, Colossal Titan peering over the Eldian wall on the right, Evangelion Unit-01, Johan Liebert noir in Monster, and Vinland Saga.
+          </p>
+        </div>
+        <div class="j-foot" style="border-color:rgba(255,85,0,0.3);color:#ff5500">
+          <span>ENTER ANIME SPREAD →</span>
+          <span style="color:rgba(255,255,255,0.4)">UNHURRIED SCROLL</span>
+        </div>
+      </a>
+
+      <!-- PORTAL 4: MUSIC SANCTUARY -->
+      <a href="music.html" class="j-card rv" style="--d:.24s;background:#0d0205;border-color:#ff1744;color:#ffe4e6;box-shadow:0 0 25px rgba(255,23,68,0.12)">
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="j-badge" style="background:#880015;color:#fff">CHAPTER 02 // SOUND</span>
+            <span class="tag" style="background:#ff1744;color:#000;border-color:#ff1744;font-size:9.5px">LIVE AUDIO ♫</span>
+          </div>
+          <div class="j-title" style="color:#fff">MUSIC<br><span style="color:#ff1744">SANCTUARY</span>.</div>
+          <p class="j-desc" style="color:#fecdd3">
+            Malice Mizer (*Gekka no Yasoukyoku* #1 crown track with live Web Audio synth playing on visit), Radiohead (*Creep* &amp; *No Surprises*), Tame Impala, Tyler, and Arctic Monkeys.
+          </p>
+        </div>
+        <div class="j-foot" style="border-color:rgba(255,23,68,0.3);color:#ff1744">
+          <span>ENTER SOUNDSTAGE →</span>
+          <span style="color:rgba(255,255,255,0.4)">BLACK &amp; BLOOD RED</span>
+        </div>
+      </a>
+
+      <!-- PORTAL 5: CINEMA & SERIES -->
+      <a href="cinema.html" class="j-card rv" style="--d:.28s;background:#0d050c;border-color:#ff007f;color:#fce7f3;box-shadow:0 0 25px rgba(255,0,127,0.1)">
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="j-badge" style="background:#ff007f;color:#fff">CHAPTER 03 // CINEMA</span>
+            <span class="tag" style="background:#33001a;color:#ff007f;border-color:#ff007f;font-size:9.5px">FIGHT CLUB #1</span>
+          </div>
+          <div class="j-title" style="color:#fff">CINEMA<br><span style="color:#ff007f">&amp; SERIES</span>.</div>
+          <p class="j-desc" style="color:#fbcfe8">
+            Fight Club with subliminal single-frame projector flicker, Se7en rainy noir, Interstellar &amp; Project Hail Mary (*"Amaze!"*), Nightcrawler, and Loki &amp; Moon Knight.
+          </p>
+        </div>
+        <div class="j-foot" style="border-color:rgba(255,0,127,0.3);color:#ff007f">
+          <span>ENTER 35MM SPREAD →</span>
+          <span style="color:rgba(255,255,255,0.4)">NEON SOAP PINK</span>
+        </div>
+      </a>
+
+      <!-- PORTAL 6: GAMING ARCHIVE -->
+      <a href="gaming.html" class="j-card rv" style="--d:.32s;background:#04140d;border-color:#16a34a;color:#dcfce7;box-shadow:0 0 25px rgba(22,163,74,0.12)">
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="j-badge" style="background:#16a34a;color:#000">CHAPTER 04 // GAMES</span>
+            <span class="tag" style="background:#14532d;color:#fff;border-color:#16a34a;font-size:9.5px">BALATRO #1</span>
+          </div>
+          <div class="j-title" style="color:#fff">GAMING<br><span style="color:#16a34a">ARCHIVE</span>.</div>
+          <p class="j-desc" style="color:#bbf7d0">
+            Balatro poker felt &amp; interactive mult simulator, Among Us quarantine emergency siren salute, Undertale &amp; Deltarune Determination, and indie games Sarbanash &amp; Kisor.
+          </p>
+        </div>
+        <div class="j-foot" style="border-color:rgba(22,163,74,0.3);color:#16a34a">
+          <span>ENTER GAMING FELT →</span>
+          <span style="color:rgba(255,255,255,0.4)">POKER FELT GREEN</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 / PROLOGUE: THE BUILDER MANIFESTO ============ -->
+<section id="p00" class="spread" data-page="P.003" data-name="PROLOGUE" aria-labelledby="h-p00">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">↻</div>
-    <header class="kicker rv"><span>PROLOGUE — THE CORE STORY</span><span class="mdim">AN ARCHIVE THAT GRADUALLY BECAME ENGINEERING</span></header>
+    <header class="kicker rv"><span>PROLOGUE // THE CORE MANIFESTO</span><span class="mdim">AN ARCHIVE THAT BECAME ENGINEERING</span></header>
     <h2 id="h-p00" class="h-giant rv" style="--d:.05s">I KEEP<br>FINDING THINGS<br><span class="outline wcond">TO BUILD<span style="color:var(--red)">.</span></span></h2>
     <p class="thesis rv" style="--d:.15s">Games led to apps. Apps led to backend systems. Backend led to Linux and networking. Networking led to self-hosting. Self-hosting led to local AI. Hardware experiments led to robots. <em>And the common thread is: MAKE IT WORK.</em></p>
 
     <div class="chain rv" style="--d:.2s" aria-label="Progression of work">
-      <div class="node"><span class="mono mdim">PHASE 01</span><h4>GAMES &amp; APPS</h4><span class="st">GODOT · PISKEL · FLUTTER · MOBILE APPS</span></div>
+      <div class="node"><span class="mono mdim">PHASE 01</span><h4>GAMES &amp; APPS</h4><span class="st">GODOT · PISKEL · FLUTTER · MOBILE</span></div>
       <span class="arr" aria-hidden="true">↓</span>
       <div class="node"><span class="mono mdim">PHASE 02</span><h4>BACKEND &amp; SYSTEMS</h4><span class="st">LINUX · TERMUX · NETWORKING · HOMELAB</span></div>
       <span class="arr" aria-hidden="true">↓</span>
@@ -111,602 +305,42 @@
   </div>
 </section>
 
-<!-- ============ THE WORK / INDEX ============ -->
-<section id="pidx" class="spread" data-page="P.003" data-name="PROJECT INDEX" aria-labelledby="h-pidx">
+<!-- ============ 03 / ABOUT DEB ============ -->
+<section id="pabout" class="spread" data-page="P.004" data-name="ABOUT" aria-labelledby="h-pabout">
   <div class="spread-inner rv-scope">
-    <header class="kicker rv"><span>TABLE OF PROJECTS</span><span class="mdim">FEATURED / LIVE / SYSTEMS / CREATIVE</span></header>
-    <h2 id="h-pidx" class="h-giant rv" style="--d:.05s">THE WORK<span style="color:var(--red)">.</span></h2>
-    <nav class="widx rv" style="--d:.15s" aria-label="Project index">
-      <a class="feat" href="#p01"><span class="no">01</span><span class="ti">OSAMU</span><span class="hook">Adaptive anti-cheat exam hardware on ESP32. Aveenir Hackathon 1st Prize Winner.</span><span class="tg"><span class="tag win">1ST PRIZE 🏆</span><span class="tag team">TEAM PROJECT</span></span></a>
-      <a class="feat" href="#p02"><span class="no">02</span><span class="ti">QUADRUPED ROBOT</span><span class="hook">Interactive 3D mechanical model (dog02_web.stl) &amp; gait kinematics.</span><span class="tg"><span class="tag exp">3D MODEL</span><span class="tag arch">IN PROGRESS</span></span></a>
-      <a class="feat" href="#p03"><span class="no">03</span><span class="ti">PHONE HOMELAB</span><span class="hook">A server in my pocket. Termux, media servers, local 32-bit LLM &amp; network scanner.</span><span class="tg"><span class="tag exp">FEATURED</span><span class="tag live">SYSTEMS</span></span></a>
-      <a href="#p04"><span class="no">04</span><span class="ti">STUDIVA</span><span class="hook">Need notes for Makaut? Live academic resource platform.</span><span class="tg"><span class="tag live">LIVE</span><span class="tag team">TEAM PROJECT</span></span></a>
-      <a href="#p05"><span class="no">05</span><span class="ti">REPBOT</span><span class="hook">Stop counting. Let the camera count. Real-time pose tracking.</span><span class="tg"><span class="tag live">LIVE</span></span></a>
-      <a href="#p06"><span class="no">06</span><span class="ti">VISO</span><span class="hook">Machines speak before they break. Predictive hardware health (FSociety hackathon build).</span><span class="tg"><span class="tag team">TEAM PROJECT</span></span></a>
-      <a href="#p07"><span class="no">07</span><span class="ti">SARBANASH</span><span class="hook">Before the robots, there were monsters. Survival horror pixel art indie game.</span><span class="tg"><span class="tag win">SURVIVAL HORROR</span><span class="tag">CREATIVE</span></span></a>
-      <a href="#p08"><span class="no">08</span><span class="ti">KISOR</span><span class="hook">Visual novel exploring adolescence &amp; self-discovery.</span><span class="tg"><span class="tag">CREATIVE</span></span></a>
-      <a class="feat" href="#pintern"><span class="no">09</span><span class="ti">FORGE IT SYSTEMS INTERNSHIP</span><span class="hook">Software &amp; Systems Engineering Intern at Forge IT Systems.</span><span class="tg"><span class="tag win">INTERNSHIP</span><span class="tag live">ACTIVE ROLE</span></span></a>
-    </nav>
-  </div>
-</section>
-
-<!-- ============ 01 / OSAMU (COMPACT SLEEK FLOWCHART) ============ -->
-<section id="p01" class="spread" data-page="P.004" data-name="OSAMU" aria-labelledby="h-p01">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">01</div>
-    <header class="kicker rv"><span>FEATURED 01 — AVEENIR HACKATHON</span><span class="tag win">🏆 1ST PRIZE WINNER</span><span class="tag team">TEAM PROJECT</span></header>
-    <h2 id="h-p01" class="h-giant rv" style="--d:.05s">CHEAT-PROOF<span style="color:var(--red)">.</span><br><span class="outline wcond">UNBIASED</span><br>EXAMINATION<br>HARDWARE<span style="color:var(--red)">.</span></h2>
-    <div class="meta-row rv" style="--d:.15s">
-      <span><b>AWARD:</b> 🏆 1ST PRIZE WINNER — AVEENIR HACKATHON</span>
-      <span><b>TIME BIND:</b> BUILT IN 48 HOURS</span>
-      <span><b>TYPE:</b> HARDWARE + EMBEDDED C++ + LOCAL WEB AP + AI ENGINE</span>
-      <span><b>TEAM:</b> TEAM PROJECT</span>
-    </div>
-    <p class="thesis rv" style="--d:.2s">OSAMU is an anti-cheat hardware terminal system that replaces vulnerable online exams. It broadcasts encrypted questions to ESP32 student keypads, evaluates responses with zero bias, and adaptively generates deep-dive questions when students struggle.</p>
-
-    <!-- EXPLANATORY ARCHITECTURE CARDS -->
-    <div class="gr gr-2" style="margin-top:36px">
-      <div class="readout rv" style="padding:22px;background:var(--paper2);border:1px solid var(--line2)">
-        <span class="mono" style="color:var(--red);display:block;margin-bottom:8px;font-weight:700">01 / HARDWARE ISOLATION (ANTI-CHEAT)</span>
-        <p style="color:var(--ink);font-size:14.5px;line-height:1.55">Standard digital exams fail because students switch tabs, use secondary phones, or consult AI tools. OSAMU runs on isolated, standalone ESP32 physical hardware terminals equipped with tactile keypads, timers, buzzers, and offline Wi-Fi access points. No internet access, no tab switching, no cheating possible.</p>
-      </div>
-
-      <div class="readout rv" style="padding:22px;background:var(--paper2);border:1px solid var(--line2);--d:.15s">
-        <span class="mono" style="color:var(--red);display:block;margin-bottom:8px;font-weight:700">02 / UNBIASED ADAPTIVE DEEP-DIVES</span>
-        <p style="color:var(--ink);font-size:14.5px;line-height:1.55">Grading is 100% objective without teacher bias or favoritism. The system tracks response latency, key hesitations, and answer accuracy in real time. If a student shows hesitation on a concept, OSAMU dynamically generates targeted follow-up questions to test deep understanding rather than surface memory.</p>
-      </div>
-    </div>
-
-    <!-- COMPACT ULTRA-SLEEK AI ADAPTIVE ASSESSMENT FLOWCHART -->
-    <div class="gr gr-2" style="margin-top:36px">
-      <figure class="rv" style="--d:.1s;background:var(--paper2);padding:20px;border:1px solid var(--line2)">
-        <span class="mono" style="color:var(--red);display:block;margin-bottom:14px;font-weight:700;font-size:10.5px;letter-spacing:.12em">AI-POWERED ADAPTIVE ASSESSMENT FLOWCHART</span>
-        
-        <svg class="bp" viewBox="0 0 620 830" role="img" aria-label="OSAMU adaptive AI evaluation decision flowchart" style="width:100%;height:auto;display:block">
-          <g font-family="IBM Plex Mono">
-            <!-- 1. TEACHER UPLOADS MATERIAL -->
-            <rect class="flowbox draw" pathLength="1" x="130" y="12" width="360" height="44" rx="2"/>
-            <text class="flowlab" x="310" y="31" font-size="12" font-weight="700" text-anchor="middle">1. TEACHER UPLOADS MATERIAL</text>
-            <text class="lab2" x="310" y="45" font-size="9.5" font-weight="500" text-anchor="middle">PDF / Notes / Question Bank</text>
-
-            <!-- Down arrow 1 -> 2 -->
-            <path class="ln thin draw d1" pathLength="1" d="M310,56 V78 M306,74 L310,78 L314,74"/>
-
-            <!-- 2. AI PARSER & ASSESSMENT GENERATOR -->
-            <rect class="flowbox draw d1" pathLength="1" x="110" y="78" width="400" height="44" rx="2"/>
-            <text class="flowlab" x="310" y="97" font-size="12" font-weight="700" text-anchor="middle">2. AI ASSESSMENT GENERATOR</text>
-            <text class="lab2" x="310" y="111" font-size="9.5" font-weight="500" text-anchor="middle">Questions, Topics, Difficulty &amp; Criteria → JSON</text>
-
-            <!-- Down arrow 2 -> 3 -->
-            <path class="ln thin draw d2" pathLength="1" d="M310,122 V144 M306,140 L310,144 L314,140"/>
-
-            <!-- 3. SECURE OFFLINE STATION -->
-            <rect class="flowbox draw d2" pathLength="1" x="110" y="144" width="400" height="44" rx="2"/>
-            <text class="flowlab" x="310" y="163" font-size="12" font-weight="700" text-anchor="middle">3. SECURE OFFLINE STATION</text>
-            <text class="lab2" x="310" y="177" font-size="9.5" font-weight="500" text-anchor="middle">Handles Input, Audio, Timing &amp; Answer Capture</text>
-
-            <!-- Down arrow 3 -> 4 -->
-            <path class="ln thin draw d3" pathLength="1" d="M310,188 V210 M306,206 L310,210 L314,206"/>
-
-            <!-- 4. BASELINE QUESTIONS PRESENTED -->
-            <rect class="flowbox draw d3" pathLength="1" x="120" y="210" width="380" height="44" rx="2"/>
-            <text class="flowlab" x="310" y="229" font-size="12" font-weight="700" text-anchor="middle">4. BASELINE QUESTIONS PRESENTED</text>
-            <text class="lab2" x="310" y="243" font-size="9.5" font-weight="500" text-anchor="middle">System Records Answer &amp; Latency</text>
-
-            <!-- Down arrow 4 -> 5 -->
-            <path class="ln thin draw d4" pathLength="1" d="M310,254 V276 M306,272 L310,276 L314,272"/>
-
-            <!-- 5. DECISION DIAMOND 1: DOES RESPONSE DEMONSTRATE UNDERSTANDING? -->
-            <polygon points="310,276 480,325 310,374 140,325" fill="var(--paper2)" stroke="var(--red)" stroke-width="1.5"/>
-            <text x="310" y="320" fill="var(--ink)" font-weight="700" font-size="10.5" text-anchor="middle">5. DOES RESPONSE DEMONSTRATE</text>
-            <text x="310" y="336" fill="var(--red)" font-weight="700" font-size="10.5" text-anchor="middle">UNDERSTANDING?</text>
-
-            <!-- Decision 5 YES Branch (Right side orthogonal route to Node 8) -->
-            <path class="ln thin draw d4" pathLength="1" d="M480,325 H570 V700 H440 M444,696 L440,700 L444,704"/>
-            <text x="490" y="318" fill="var(--ink2)" font-weight="700" font-size="9.5">YES (Next Concept)</text>
-
-            <!-- Decision 5 NO / UNCERTAIN Branch (Down arrow into Decision 6) -->
-            <path class="rs draw d4" pathLength="1" d="M310,374 V410 M306,406 L310,410 L314,406"/>
-            <text x="318" y="396" fill="var(--red)" font-weight="700" font-size="9.5">NO / UNCERTAIN (Identify Weak Concept)</text>
-
-            <!-- 6. DECISION DIAMOND 2: IS UNCERTAINTY SIGNIFICANT TO PROBE FURTHER? -->
-            <polygon points="310,410 480,455 310,500 140,455" fill="var(--paper2)" stroke="var(--red)" stroke-width="1.5"/>
-            <text x="310" y="450" fill="var(--ink)" font-weight="700" font-size="10.5" text-anchor="middle">6. IS UNCERTAINTY SIGNIFICANT</text>
-            <text x="310" y="466" fill="var(--red)" font-weight="700" font-size="10.5" text-anchor="middle">TO PROBE FURTHER?</text>
-
-            <!-- Decision 6 NO Branch (Left side orthogonal route to Node 8) -->
-            <path class="ln thin draw d5" pathLength="1" d="M140,455 H50 V700 H180 M176,696 L180,700 L176,704"/>
-            <text x="55" y="448" fill="var(--ink2)" font-weight="700" font-size="9.5">NO (Continue)</text>
-
-            <!-- Decision 6 YES Branch (Down arrow into Decision 7) -->
-            <path class="rs draw d5" pathLength="1" d="M310,500 V535 M306,531 L310,535 L314,531"/>
-            <text x="318" y="521" fill="var(--red)" font-weight="700" font-size="9.5">YES (Generate Targeted Probe)</text>
-
-            <!-- 7. DECISION DIAMOND 3: FOLLOW-UP DEMONSTRATES UNDERSTANDING? -->
-            <polygon points="310,535 480,580 310,625 140,580" fill="var(--paper2)" stroke="var(--red)" stroke-width="1.5"/>
-            <text x="310" y="575" fill="var(--ink)" font-weight="700" font-size="10.5" text-anchor="middle">7. FOLLOW-UP DEMONSTRATES</text>
-            <text x="310" y="591" fill="var(--red)" font-weight="700" font-size="10.5" text-anchor="middle">UNDERSTANDING?</text>
-
-            <!-- Decision 7 YES Branch (Right side orthogonal route to Node 8) -->
-            <path class="ln thin draw d6" pathLength="1" d="M480,580 H540 V700 H440 M444,696 L440,700 L444,704"/>
-            <text x="485" y="573" fill="var(--ink2)" font-weight="700" font-size="9.5">YES (Mark Understood)</text>
-
-            <!-- Decision 7 NO Branch (Loop back arrow to probing process) -->
-            <path class="rs draw d6" pathLength="1" d="M140,580 H90 V518 H302 M298,514 L302,518 L298,522"/>
-            <text x="95" y="573" fill="var(--red)" font-weight="700" font-size="9.5">NO — DEEPER PROBE</text>
-            <text x="95" y="530" fill="var(--ink2)" font-weight="600" font-size="9">LIMITED REPEATS</text>
-
-            <!-- Decision 7 Bottom Branch (Probe limit reached / resolved -> Down to Node 8) -->
-            <path class="ln thin draw d6" pathLength="1" d="M310,625 V680 M306,676 L310,680 L314,676"/>
-            <text x="318" y="655" fill="var(--ink2)" font-weight="600" font-size="9">PROBE LIMIT REACHED / RESOLVED</text>
-
-            <!-- 8. FINAL AI EVALUATION ENGINE (Convergence point for all branches) -->
-            <rect class="flowbox draw d6" pathLength="1" x="180" y="680" width="260" height="44" rx="2" stroke="var(--red)"/>
-            <text class="flowlab" x="310" y="699" font-size="12" font-weight="700" fill="var(--red)" text-anchor="middle">8. FINAL AI EVALUATION ENGINE</text>
-            <text class="lab2" x="310" y="713" font-size="9.5" font-weight="500" text-anchor="middle">Baseline Performance + Latency + Probes</text>
-
-            <!-- Single Down arrow from 8 -> 9 -->
-            <path class="ln thin draw d7" pathLength="1" d="M310,724 V752 M306,748 L310,752 L314,748"/>
-
-            <!-- 9. STRUCTURED STUDENT REPORT -->
-            <rect class="flowbox draw d7" pathLength="1" x="140" y="752" width="340" height="48" rx="2" stroke="var(--red)"/>
-            <text class="flowlab" x="310" y="772" font-size="12.5" font-weight="700" fill="var(--red)" text-anchor="middle">9. STRUCTURED STUDENT REPORT</text>
-            <text class="lab2" x="310" y="788" font-size="9.5" font-weight="500" text-anchor="middle">Mastered/Weak Concepts, Signals &amp; Overall Score</text>
-          </g>
-        </svg>
-      </figure>
-
-      <div class="rv" style="--d:.2s">
-        <div class="stamp gold" style="margin-bottom:16px">🏆 1ST PLACE WINNER — AVEENIR HACKATHON</div>
-        <div class="readout" style="padding:16px">
-          <p class="mono" style="margin-bottom:8px;color:var(--red)">DEB'S CONTRIBUTION:</p>
-          <p style="color:var(--ink);font-size:14px">Collaborated on physical ESP32 hardware integration, local AP web interface, response behavior parsing, and system logic during the 48-hour build window.</p>
-        </div>
-        
-        <div class="ctl" style="margin-top:20px">
-          <button id="pushBtn" style="font-weight:700;padding:12px 20px">SIMULATE ADAPTIVE HARDWARE TEST →</button>
-        </div>
-
-        <div class="readout" id="osamuLog" style="margin-top:14px;padding:16px" aria-live="polite">
-          <div><span>STATUS</span><span class="v">ESP32 KEYPAD READY</span></div>
-          <div><span>QUESTION 01</span><span class="v">"WHAT IS THE TIME COMPLEXITY OF HEAPSORT?"</span></div>
-          <div><span>STUDENT INPUT</span><span class="v">WAITING FOR KEYPAD INPUT…</span></div>
-          <div><span>AI DEEP-DIVE</span><span class="v">STANDBY FOR BEHAVIOR ANALYZER</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 02 / QUADRUPED ROBOT (LIGHT PAPER THEMING & CENTERED CLEAN BOM CARDS) ============ -->
-<section id="p02" class="spread" data-page="P.005" data-name="QUADRUPED ROBOT" aria-labelledby="h-p02">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">02</div>
-    <header class="kicker rv"><span>FEATURED 02 — PHYSICAL ROBOTICS</span><span class="tag win">3D INTERACTIVE MODEL</span><span class="tag arch">IN PROGRESS</span></header>
-    <h2 id="h-p02" class="h-giant rv" style="--d:.05s">FOUR LEGS<span style="color:var(--red)">.</span><br><span class="outline wcond">TOO MANY</span><br>THINGS TO<br>CALIBRATE<span style="color:var(--red)">.</span></h2>
-    <div class="meta-row rv" style="--d:.15s">
-      <span><b>3D MODEL:</b> DOG02_WEB.STL (LOCAL WEBGLE ENGINE)</span>
-      <span><b>DISCIPLINE:</b> MECHANICAL CAD · SERVOS · EMBEDDED GAIT KINEMATICS</span>
-      <span><b>DOF:</b> 8 SERVOS</span>
-    </div>
-
-    <!-- 2-COLUMN LAYOUT: 3D MODEL BOX ON LEFT, TEXT & SPECS ON RIGHT -->
-    <div class="gr gr-2" style="margin-top:36px">
-      <!-- LEFT COLUMN: 3D MODEL FIGURE -->
-      <figure class="rv" style="--d:.1s">
-        <div id="quad3dContainer" class="cvp scan" style="height:380px;position:relative;border:1px solid var(--red)">
-          <canvas id="quad3dCv"></canvas>
-          <div id="quad3dLoader" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--yellow);background:rgba(19,18,16,.92)">
-            <div>INITIALIZING 3D ENGINE …</div>
-            <div style="color:var(--pdim)">LOADING MODEL/DOG02_WEB.STL</div>
-          </div>
-          <div style="position:absolute;left:14px;bottom:14px;pointer-events:none;font-family:var(--mono);font-size:10px;color:var(--yellow);letter-spacing:.12em;background:rgba(20,19,17,.8);padding:4px 8px;border:1px solid var(--pline)">
-            ✦ CINEMATIC 3D ROTATION · INTERACTIVE HOVER
-          </div>
-        </div>
-        <figcaption class="fig-label"><span>FIG. 002 — 3D CAD MESH (DOG02_WEB.STL)</span><span>INTERACTIVE 3D VIEWPORT</span></figcaption>
-      </figure>
-
-      <!-- RIGHT COLUMN: THESIS TEXT & SPECS -->
-      <div class="rv" style="--d:.2s">
-        <p class="thesis" style="margin-top:0">A physical quadruped robot. Move your cursor over the 3D viewport on the left or scroll through to trigger cinematic rotation and joint inspection.</p>
-        
-        <div class="readout" style="margin-top:20px;padding:18px">
-          <span class="mono" style="color:var(--red);display:block;margin-bottom:10px;font-weight:700">GAIT KINEMATICS &amp; HARDWARE SPECS</span>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>KINEMATIC SOLVER</span><span class="v">8 SERVO IK FRAME</span></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>BALANCE SYSTEM</span><span class="v">PITCH / ROLL GYRO</span></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>CAD GEOMETRY</span><span class="v">CUSTOM DOG02 STL</span></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0"><span>INTERACTION</span><span class="v">CINEMATIC SCROLL ROTATION</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MINIMAL DROPDOWN HARDWARE BOM LIST (NAMES ONLY) -->
-    <details class="readout rv" style="--d:.25s;margin-top:28px;padding:16px 20px;background:var(--paper2);border:1px solid var(--line2);cursor:pointer">
-      <summary class="mono" style="color:var(--ink);font-weight:700;letter-spacing:.14em;outline:none;user-select:none;display:flex;justify-content:space-between;align-items:center">
-        <span>HARDWARE SPECS // COMPONENT &amp; SENSOR BOM</span>
-        <span class="tag" style="font-size:10px;background:var(--paper);border:1px solid var(--line2);padding:4px 8px">EXPAND COMPONENT LIST ▾</span>
-      </summary>
-      <ul style="list-style:none;margin-top:16px;padding-top:14px;border-top:1px solid var(--line2);display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:10px 20px;font-family:var(--mono);font-size:12px;color:var(--ink)">
-        <li>• 6× MG995 Metal-Gear Servos</li>
-        <li>• 1× Micro Servo</li>
-        <li>• MPU6050 6-DOF IMU Sensor</li>
-        <li>• Time-of-Flight (ToF) Sensor</li>
-        <li>• ESP32 Microcontroller</li>
-        <li>• 2× Buck Converters &amp; Li-ion Pack</li>
-        <li>• Buzzer, LEDs, Perfboards &amp; Passives</li>
-      </ul>
-    </details>
-  </div>
-</section>
-
-<!-- ============ 03 / PHONE HOMELAB ============ -->
-<section id="p03" class="spread dark" data-page="P.006" data-name="PHONE HOMELAB" aria-labelledby="h-p03">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">03</div>
-    <header class="kicker rv"><span>FEATURED 03 — SYSTEMS &amp; INFRASTRUCTURE</span><span class="tag live">SYSTEMS</span></header>
-    <h2 id="h-p03" class="h-giant rv" style="--d:.05s">THIS IS<br>A PHONE<span style="color:var(--red)">.</span><br><span class="outline wcond">IT'S ALSO</span><br>A SERVER<span style="color:var(--red)">.</span><br><span class="wexp">AND SOMETIMES</span><br>AN AI MACHINE<span style="color:var(--red)">.</span></h2>
-    <div class="meta-row rv" style="--d:.15s">
-      <span><b>CORE CONCEPT:</b> HOW MUCH INFRASTRUCTURE CAN RUN FROM A PHONE I ALREADY OWN?</span>
-      <span><b>HOST ENVIRONMENT:</b> ANDROID → TERMUX → UBUNTU (PROOT)</span>
-    </div>
-    <p class="thesis rv" style="--d:.2s">Turning an Android phone into a personal computing and server environment. From media streaming to running local LLMs on 32-bit hardware and wireless network monitoring.</p>
-
-    <div class="chain rv" style="--d:.25s;margin-top:30px">
-      <div class="node"><span class="mono mdim">LAYER 01</span><h4>ANDROID</h4><span class="st">BASE HARDWARE</span></div>
-      <span class="arr" aria-hidden="true">→</span>
-      <div class="node"><span class="mono mdim">LAYER 02</span><h4>TERMUX</h4><span class="st">TERMINAL / LINUX</span></div>
-      <span class="arr" aria-hidden="true">→</span>
-      <div class="node"><span class="mono mdim">LAYER 03</span><h4>PROOT UBUNTU</h4><span class="st">SERVICES / RUNTIME</span></div>
-      <span class="arr" aria-hidden="true">→</span>
-      <div class="node cur"><span class="mono mdim" style="color:var(--pdim)">EXPANSE</span><h4>MEDIA / NETWORK / AI / STORAGE</h4><span class="st">4 STACKS</span></div>
-    </div>
-
-    <div class="hl-grid" style="margin-top:40px">
-      <figure class="rv" style="--d:.1s">
-        <svg class="bp" id="hlSvg" viewBox="0 0 760 620" role="img" aria-label="Homelab infrastructure map">
-          <g font-family="IBM Plex Mono">
-            <rect class="box draw" pathLength="1" x="348" y="272" width="64" height="120" rx="8"/>
-            <text class="lab" x="352" y="412">PHONE</text>
-            <g class="hn" data-k="termux" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="110" y="118" width="120" height="44"/><text class="lab" x="138" y="145">TERMUX</text></g>
-            <g class="hn" data-k="ubuntu" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="320" y="74" width="120" height="44"/><text class="lab" x="344" y="101">UBUNTU</text></g>
-            <g class="hn" data-k="navidrome" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="530" y="118" width="120" height="44"/><text class="lab" x="544" y="145">NAVIDROME</text></g>
-            <g class="hn" data-k="jellyfin" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="570" y="288" width="120" height="44"/><text class="lab" x="598" y="315">JELLYFIN</text></g>
-            <g class="hn" data-k="llm" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="530" y="468" width="120" height="44"/><text class="lab" x="552" y="495">LOCAL LLM</text></g>
-            <g class="hn" data-k="books" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="320" y="512" width="120" height="44"/><text class="lab" x="356" y="539">BOOKS</text></g>
-            <g class="hn" data-k="network" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="110" y="468" width="120" height="44"/><text class="lab" x="124" y="495">SCANNER</text></g>
-            <g class="hn" data-k="storage" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="70" y="288" width="120" height="44"/><text class="lab" x="90" y="315">STORAGE</text></g>
-          </g>
-        </svg>
-      </figure>
-      <div id="hlPanel" class="rv" style="--d:.2s" aria-live="polite">
-        <h3 id="hlTitle">PHONE HOMELAB</h3>
-        <span class="hp-meta" id="hlMeta">SELECT A NODE ABOVE</span>
-        <p id="hlDesc">Click any node on the infrastructure diagram to inspect specific services running on the phone.</p>
-        
-        <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
-          <a class="srclink" href="https://github.com/My-Mation/termux_llm" target="_blank" rel="noopener">TERMUX LOCAL LLM (32-BIT) REPO ↗</a>
-          <a class="srclink" href="https://github.com/My-Mation/network-scanner" target="_blank" rel="noopener">WIRELESS NETWORK SCANNER REPO ↗</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 04 / STUDIVA ============ -->
-<section id="p04" class="spread" data-page="P.007" data-name="STUDIVA" aria-labelledby="h-p04">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">04</div>
-    <header class="kicker rv"><span>LIVE PRODUCT 04</span><span class="tag team">TEAM PROJECT</span><span class="tag live">LIVE</span></header>
-    <h2 id="h-p04" class="h-giant rv" style="--d:.05s">NEED NOTES<br><span style="color:var(--red)">FOR MAKAUT</span><span style="color:var(--red)">?</span></h2>
-    <div class="meta-row rv" style="--d:.15s">
-      <span><b>STATUS:</b> TEAM PROJECT</span>
-      <span><b>MY CONTRIBUTION:</b> DEVELOPMENT</span>
-      <span><b>WEBSITE:</b> HTTPS://WWW.STUDIVA.CO.IN/</span>
-    </div>
-    <p class="thesis rv" style="--d:.2s">Studiva is an academic resource and knowledge-sharing platform where students find study materials and creators share educational resources.</p>
-    
-    <div style="margin-top:30px" class="rv" style="--d:.25s">
-      <a class="ctl button" href="https://www.studiva.co.in/" target="_blank" rel="noopener" style="display:inline-block;padding:16px 28px;font-size:14px;font-weight:700;text-decoration:none;background:var(--red);color:var(--paper);border:none">
-        VISIT STUDIVA →
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 05 / REPBOT ============ -->
-<section id="p05" class="spread dark" data-page="P.008" data-name="REPBOT" aria-labelledby="h-p08">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">05</div>
-    <header class="kicker rv"><span>LIVE PRODUCT 05 — FLUTTER POSE TRACKING</span><span class="tag live">LIVE</span></header>
-    <h2 id="h-p05" class="h-giant rv" style="--d:.05s">STOP<br>COUNTING<span style="color:var(--red)">.</span><br><span class="outline wcond">LET THE</span><br>CAMERA<br>COUNT<span style="color:var(--red)">.</span></h2>
-    <div class="meta-row rv" style="--d:.15s">
-      <span><b>PLATFORM:</b> FLUTTER — ON-DEVICE REAL-TIME POSE DETECTION</span>
-      <span><b>EXERCISES:</b> PUSH-UPS · PULL-UPS · SQUATS · DUMBBELL CURLS · FREE PLAY</span>
-      <span><b>STATUS:</b> LIVE ON GOOGLE PLAY</span>
-    </div>
-
-    <div class="gr gr-2" style="margin-top:40px">
-      <!-- CANVAS POSE SIMULATOR (HIDDEN ON MOBILE, VISIBLE ON PC) -->
-      <figure class="cvp rv hide-mobile" style="--d:.1s">
-        <canvas id="repCv" width="640" height="440" aria-label="RepBot live pose simulation"></canvas>
-        <div class="ctl ctl-dark" style="display:flex;gap:8px;flex-wrap:wrap;padding:12px" role="group" aria-label="Exercise selector">
-          <button data-rep="push" aria-pressed="true">PUSH-UPS</button>
-          <button data-rep="pull" aria-pressed="false">PULL-UPS</button>
-          <button data-rep="squat" aria-pressed="false">SQUATS</button>
-          <button data-rep="curl" aria-pressed="false">CURLS</button>
-        </div>
-      </figure>
-      
-      <div class="rv" style="--d:.2s">
-        <div style="border:1px solid var(--pline);padding:24px;background:#141311;margin-bottom:20px">
-          <span class="stamp ok" style="border-color:var(--red);color:var(--red);margin-bottom:14px">HANDS-FREE FITNESS AI</span>
-          <h3 style="font-weight:900;font-stretch:75%;font-size:24px;text-transform:uppercase;margin-bottom:16px;color:var(--paper)">STRESS-FREE AUTOMATIC WORKOUT TRACKING</h3>
-          
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;color:var(--paper);font-size:14px;line-height:1.6">
-            <li style="display:flex;align-items:flex-start;gap:10px">
-              <span style="color:var(--red);font-weight:900;font-family:var(--mono);line-height:1.2">→</span>
-              <div><strong style="color:var(--paper)">NO MENTAL OVERHEAD:</strong> Stop counting reps in your head or tapping your screen mid-set. Prop up your phone and focus 100% on your workout form without distraction.</div>
-            </li>
-            <li style="display:flex;align-items:flex-start;gap:10px">
-              <span style="color:var(--red);font-weight:900;font-family:var(--mono);line-height:1.2">→</span>
-              <div><strong style="color:var(--paper)">REAL-TIME POSE DETECTION:</strong> Built with Flutter and on-device vision models that track joint kinematics and validate full range of motion for push-ups, pull-ups, squats, and curls.</div>
-            </li>
-            <li style="display:flex;align-items:flex-start;gap:10px">
-              <span style="color:var(--red);font-weight:900;font-family:var(--mono);line-height:1.2">→</span>
-              <div><strong style="color:var(--paper)">100% LOCAL &amp; PRIVATE:</strong> All computer vision processing happens on-device with zero cloud latency, zero camera feeds leaving your phone, and zero privacy risks.</div>
-            </li>
-          </ul>
-        </div>
-
-        <ul class="readout" style="list-style:none">
-          <li style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--pline)"><span>AUTOMATIC REP COUNTING</span><span class="v" style="color:var(--paper)">HANDS-FREE</span></li>
-          <li style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--pline)"><span>SKELETON POSE TRACKING</span><span class="v" style="color:var(--paper)">ON-DEVICE AI</span></li>
-          <li style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--pline)"><span>WORKOUT STRESS OVERHEAD</span><span class="v" style="color:var(--yellow)">ZERO MENTAL FATIGUE</span></li>
-          <li style="display:flex;justify-content:space-between;padding:10px 14px"><span>PRIVACY &amp; PROCESSING</span><span class="v" style="color:var(--paper)">100% LOCAL / NO CLOUD</span></li>
-        </ul>
-
-        <div style="margin-top:24px">
-          <a class="srclink" href="https://play.google.com/store/apps/details?id=com.debargha.repbot&hl=en_IN" target="_blank" rel="noopener" style="color:var(--yellow);border-color:var(--yellow)">
-            GET IT ON GOOGLE PLAY STORE ↗
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 06 / VISO & FSOCIETY ============ -->
-<section id="p06" class="spread dark" data-page="P.009" data-name="VISO" aria-labelledby="h-p06">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">06</div>
-    <header class="kicker rv"><span>SYSTEMS 06 — MACHINE HEALTH HACKATHON</span><span class="tag team">TEAM PROJECT</span><span class="tag win">HACKATHON BUILD</span></header>
-    <h2 id="h-p06" class="h-giant rv" style="--d:.05s">MACHINES<br>SPEAK BEFORE<br><span class="outline wcond">THEY BREAK<span style="color:var(--red)">.</span></span></h2>
-    <div class="meta-row rv" style="--d:.15s">
-      <span><b>SENSORS:</b> VIBRATION · ACOUSTIC SOUND · SMOKE DENSITY · THERMAL ANOMALY</span>
-      <span><b>ANALYSIS:</b> AI-ASSISTED PREDICTIVE ANOMALY INTERPRETATION</span>
-      <span><b>REPOSITORY:</b> FSOCIETY (GITHUB)</span>
-      <span><b>TYPE:</b> TEAM PROJECT</span>
-    </div>
-    
-    <div class="gr gr-2" style="margin-top:40px">
-      <!-- FULL-HEIGHT 4-CHANNEL CANVAS TELEMETRY -->
-      <figure class="cvp rv" style="--d:.1s">
-        <canvas id="visoCv" width="640" height="420" aria-label="VISO 4-channel real-time telemetry visualization"></canvas>
-      </figure>
-
-      <!-- ENRICHED SPECS & HACKATHON READOUT -->
-      <div class="rv" style="--d:.2s">
-        <p class="body-col" style="margin-top:0">Detecting mechanical failures before structural breakdown using acoustic sound, vibration, smoke density, and thermal telemetry processed by ESP32 microcontrollers and AI models.</p>
-        
-        <div class="readout" style="margin-top:20px;padding:20px;background:#141311;border:1px solid var(--pline)">
-          <span class="mono" style="color:var(--red);display:block;margin-bottom:10px;font-weight:700">ESP32 SENSOR CHANNELS &amp; AI MODEL</span>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--pline)"><span>VIBRATION SENSOR</span><span class="v" style="color:var(--paper)">MPU6050 ACCELEROMETER</span></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--pline)"><span>ACOUSTIC SPECTRUM</span><span class="v" style="color:var(--paper)">24 FFT FREQUENCY BANDS</span></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--pline)"><span>SMOKE &amp; THERMAL</span><span class="v" style="color:var(--paper)">MQ-2 GAS &amp; THERMOCOUPLE</span></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0"><span>PREDICTIVE ENGINE</span><span class="v" style="color:var(--yellow)">EDGE ANOMALY INDEX (AI)</span></div>
-        </div>
-
-        <div style="margin-top:24px">
-          <a class="srclink" href="https://github.com/My-Mation/FSociety" target="_blank" rel="noopener" style="color:var(--paper);border-color:var(--red)">
-            VIEW FSOCIETY / VISO HACKATHON REPO ↗
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 07 / SARBANASH ============ -->
-<section id="p07" class="spread dark" data-page="P.010" data-name="SARBANASH" aria-labelledby="h-p07">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">07</div>
-    <header class="kicker rv"><span>CREATIVE 07 — INDIE GAME</span><span class="tag win">SURVIVAL HORROR</span><span class="mdim">SOLO / GODOT / PISKEL</span></header>
-    <h2 id="h-p07" class="h-giant rv" style="--d:.05s">BEFORE<br>THE ROBOTS<span style="color:var(--red)">,</span><br><span class="outline wcond">THERE WERE</span><br>MONSTERS<span style="color:var(--red)">.</span></h2>
-    <div class="meta-row rv" style="--d:.15s">
-      <span><b>TITLE:</b> SARBANASH</span>
-      <span><b>TYPE:</b> SOLO INDIE GAME</span>
-      <span><b>TOOLS:</b> GODOT ENGINE · PISKEL</span>
-      <span><b>STYLE:</b> SURVIVAL-HORROR ADVENTURE · PIXEL ART</span>
-    </div>
-
+    <div class="big-num" aria-hidden="true">—</div>
+    <header class="kicker rv"><span>ABOUT</span><span class="mdim">BIOGRAPHY &amp; PROFILE</span></header>
+    <h2 id="h-pabout" class="h-giant rv" style="--d:.05s">STILL<br><span class="outline wcond">BUILDING</span><span style="color:var(--red)">.</span></h2>
     <div class="gr gr-2" style="margin-top:44px">
-      <!-- ATMOSPHERIC CRT GAME MONITOR -->
-      <figure class="cartridge scan rv" style="--d:.1s;background:#0a0807;border:1px solid var(--red)">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--pline);margin-bottom:16px">
-          <span class="mono" style="color:var(--red);letter-spacing:.16em">SARBANASH // CRT MONSTER RADAR</span>
-          <span class="mono" style="color:var(--yellow)">STATUS: ACTIVE</span>
-        </div>
-        <canvas id="foxCv" width="480" height="320" aria-label="Pixel art fox and monster sprite canvas"></canvas>
-        <div class="ctl ctl-dark" style="margin-top:16px;display:flex;justify-content:space-between;align-items:center">
-          <button id="foxVisionBtn" aria-pressed="false" style="background:var(--red);color:#ffffff;border:1px solid var(--red);font-weight:700;font-size:11.5px;padding:10px 18px;letter-spacing:.12em;cursor:pointer">TOGGLE MONSTER VISION 👁</button>
-          <span class="mono mdim" style="font-size:10px">PISKEL SPRITE RENDER</span>
-        </div>
-      </figure>
-
-      <div class="rv" style="--d:.2s">
-        <div style="border:1px solid var(--pline);padding:24px;background:#141210;position:relative">
-          <span class="stamp warn" style="margin-bottom:14px">SOLO INDIE GAME</span>
-          <h3 style="font-weight:900;font-stretch:75%;font-size:28px;text-transform:uppercase;margin-bottom:12px;color:var(--paper)">THE STORY OF SARBANASH</h3>
-          <p class="body-col" style="margin-top:0;color:var(--paper);font-size:15px;line-height:1.6">Sarbanash is a survival-horror pixel art game crafted from scratch. Set in a desolate world filled with supernatural creatures, exploration, tension, and survival mechanics.</p>
-          
-          <ul class="readout" style="margin-top:20px">
-            <div><span>GAME ENGINE</span><span class="v" style="color:var(--paper)">GODOT ENGINE</span></div>
-            <div><span>ART &amp; ANIMATION</span><span class="v" style="color:var(--paper)">PISKEL (HAND-DRAWN PIXELS)</span></div>
-            <div><span>AUDIO DESIGN</span><span class="v" style="color:var(--paper)">ATMOSPHERIC SYNTH &amp; SFX</span></div>
-            <div><span>GENRE</span><span class="v" style="color:var(--paper)">SURVIVAL HORROR / ADVENTURE</span></div>
-          </ul>
-
-          <div style="margin-top:22px">
-            <a class="srclink" href="https://github.com/My-Mation/Sarbanash" target="_blank" rel="noopener" style="color:var(--paper);border-color:var(--red)">
-              VISIT SARBANASH GAME REPO ↗
-            </a>
-          </div>
-        </div>
+      <div class="body-col rv" style="margin-top:0">
+        <p>I am a B.Tech Computer Science &amp; Engineering student at Netaji Subhash Engineering College, Kolkata.</p>
+        <p>Software × hardware × systems. Finding out what happens when software leaves the screen and enters physical microcontrollers, terminal servers, and walking robots.</p>
+        <p>Whether it is winning 1st prize at Aveenir Hackathon building anti-cheat hardware in 48 hours or tuning inverse kinematics solvers on an 8-servo quadruped, I care about working code and physical reality.</p>
+      </div>
+      <div class="facts rv" style="--d:.25s">
+        <div><span>NAME</span><span class="val">DEBARGHA SARKAR</span></div>
+        <div><span>GOES BY</span><span class="val">DEB</span></div>
+        <div><span>PROGRAM</span><span class="val">B.TECH CSE</span></div>
+        <div><span>LOCATION</span><span class="val">KOLKATA, INDIA</span></div>
+        <div><span>FOCUS</span><span class="val">SOFTWARE × HARDWARE × SYSTEMS</span></div>
+        <div><span>COMMUNITY</span><span class="val">13,000+ MAKERS (@LOCAL_FIRST_LAB)</span></div>
+        <div><span>TAGLINE</span><span class="val" style="color:var(--red)">STILL BUILDING</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 08 / KISOR ============ -->
-<section id="p08" class="spread" data-page="P.011" data-name="KISOR" aria-labelledby="h-p08">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">08</div>
-    <header class="kicker rv"><span>CREATIVE 08 — VISUAL NOVEL</span><span class="mdim">SOLO / GODOT / PISKEL</span></header>
-    <h2 id="h-p08" class="h-giant klight rv" style="--d:.05s;font-size:clamp(52px,10vw,150px)">Kisor<span style="color:var(--red)">.</span></h2>
-    <div class="meta-row rv" style="--d:.15s">
-      <span><b>TYPE:</b> INDIE VISUAL NOVEL</span>
-      <span><b>TOOLS:</b> GODOT · PISKEL</span>
-    </div>
-    <p class="kisor-thesis rv" style="--d:.2s">A narrative game centered around a teacher and eight students, exploring difficult personal experiences, adolescence, and self-discovery.</p>
-    
-    <div style="margin-top:24px" class="rv" style="--d:.25s">
-      <a class="srclink" href="https://github.com/My-Mation/Kisor" target="_blank" rel="noopener" style="color:var(--ink);border-color:var(--red)">
-        VISIT KISOR REPO ↗
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ INTERNSHIP / FORGE IT SYSTEMS ============ -->
-<section id="pintern" class="spread dark" data-page="P.012" data-name="INTERNSHIP" aria-labelledby="h-pintern" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">09</div>
-    <header class="kicker rv">
-      <span>INDUSTRY EXPERIENCE — FORGE IT SYSTEMS</span>
-      <span class="tag win" style="background:var(--red);color:var(--paper);border-color:var(--red)">INTERNSHIP</span>
-      <span class="tag live">ACTIVE ROLE</span>
-    </header>
-    
-    <h2 id="h-pintern" class="h-giant rv" style="--d:.05s;font-size:clamp(44px,6.8vw,88px)">ENGINEERING<br><span style="color:var(--red)">INTERN</span><br>AT FORGE IT<br>SYSTEMS<span style="color:var(--red)">.</span></h2>
-    
-    <div class="meta-row rv" style="--d:.15s">
-      <span><b>COMPANY:</b> FORGE IT SYSTEMS (FORGEITSYSTEMS.COM)</span>
-      <span><b>ROLE:</b> SOFTWARE &amp; SYSTEMS INTERN</span>
-      <span><b>STATUS:</b> ACTIVE INTERNSHIP</span>
-    </div>
-
-    <div class="gr gr-2" style="margin-top:36px">
-      <div class="rv" style="--d:.2s">
-        <p class="thesis" style="margin-top:0">Engineering Intern at Forge IT Systems — building production software, backend APIs, and systems infrastructure.</p>
-        
-        <div style="margin-top:28px">
-          <a class="ctl button" href="https://forgeitsystems.com/" target="_blank" rel="noopener" style="display:inline-block;padding:16px 30px;font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
-            VISIT FORGE IT SYSTEMS ↗
-          </a>
-        </div>
-      </div>
-
-      <div class="readout rv" style="padding:24px;background:#141311;border:1px solid var(--pline);--d:.25s;display:flex;flex-direction:column;justify-content:center">
-        <span class="mono" style="color:var(--red);display:block;margin-bottom:14px;font-weight:700;letter-spacing:.14em">INTERNSHIP HIGHLIGHTS</span>
-        
-        <div style="display:flex;flex-direction:column;gap:12px;color:var(--paper);font-family:var(--mono);font-size:12.5px;line-height:1.6">
-          <div style="border-bottom:1px solid var(--pline);padding-bottom:10px">
-            <span style="color:var(--red);font-weight:700;display:block">01 / PRODUCTION SOFTWARE</span>
-            <span>Developing robust codebases and implementing system feature enhancements.</span>
-          </div>
-          <div>
-            <span style="color:var(--red);font-weight:700;display:block">02 / BACKEND &amp; APIs</span>
-            <span>Building RESTful APIs and optimizing backend infrastructure workflows.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ HACKATHONS SECTION ============ -->
-<section id="phack" class="spread dark" data-page="P.013" data-name="HACKATHONS" aria-labelledby="h-phack" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">★</div>
-    <header class="kicker rv"><span>COMPETITIVE BUILDS</span><span class="tag win">HACKATHONS</span></header>
-    <h2 id="h-phack" class="h-giant rv" style="--d:.05s;font-size:clamp(44px,6.8vw,88px)">BUILDING UNDER<br><span style="color:var(--red)">PRESSURE</span><span style="color:var(--red)">.</span></h2>
-    <p class="thesis rv" style="--d:.15s">Taking hardware and software experiments into high-stakes hackathons. Wiring, coding, and pitching working prototypes in 48 hours.</p>
-
-    <div class="gr gr-2" style="margin-top:40px">
-      <div class="readout rv" style="padding:24px;background:#141311;border:1px solid var(--pline)">
-        <span class="tag win" style="display:inline-block;margin-bottom:12px">🏆 1ST PRIZE WINNER</span>
-        <h3 style="font-weight:900;font-size:28px;text-transform:uppercase;margin-bottom:8px;color:var(--paper)">AVEENIR HACKATHON</h3>
-        <p style="font-size:15px;line-height:1.5;margin-bottom:16px;color:var(--paper)">Built <b>OSAMU</b> — Adaptive Examination Hardware System on ESP32 in 48 hours. Processed PDF questions and broadcasted them to interactive keypads.</p>
-        <span class="mono" style="color:var(--red)">TEAM PROJECT · 1ST PLACE OVERALL</span>
-      </div>
-
-      <div class="readout rv" style="padding:24px;background:#141311;border:1px solid var(--pline);--d:.15s">
-        <span class="tag live" style="display:inline-block;margin-bottom:12px">HACKATHON BUILD</span>
-        <h3 style="font-weight:900;font-size:28px;text-transform:uppercase;margin-bottom:8px;color:var(--paper)">VISO / FSOCIETY HACKATHON</h3>
-        <p style="font-size:15px;line-height:1.5;margin-bottom:16px;color:var(--paper)">Built <b>VISO</b> — Machine-health predictive maintenance system using vibration, acoustic sound, and smoke sensors paired with ESP32.</p>
-        <span class="mono" style="color:var(--pdim)">TEAM PROJECT · REPOSITORY: FSOCIETY</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PINNED HORIZONTAL SIDE SCROLLING FEATURE ============ -->
-<div class="h-scroll-wrapper" id="p-horizontal">
-  <div class="h-scroll-sticky">
-    <div class="h-scroll-track">
-      <div class="h-card">
-        <span class="hc-tag">EXPERIMENT 01 // HARDWARE</span>
-        <h3>ESP32 TELEMETRY</h3>
-        <p>Sensor loops, real-time wireless packet broadcasting, physical keypads, and touch feedback on unprivileged microcontrollers.</p>
-        <span class="mono" style="color:var(--red)">OSAMU &amp; VISO HARDWARE</span>
-      </div>
-
-      <div class="h-card">
-        <span class="hc-tag">EXPERIMENT 02 // SYSTEMS</span>
-        <h3>SERVER IN A POCKET</h3>
-        <p>Running Ubuntu containers, Navidrome audio streaming, Jellyfin media, and quantized 32-bit local LLMs inside Termux on Android.</p>
-        <span class="mono" style="color:var(--yellow)">PHONE HOMELAB STACK</span>
-      </div>
-
-      <div class="h-card">
-        <span class="hc-tag">EXPERIMENT 03 // VISION</span>
-        <h3>ON-DEVICE POSE TRACKING</h3>
-        <p>Real-time pose estimation and automatic repetition tracking using camera frames without cloud server round-trips.</p>
-        <span class="mono" style="color:var(--red)">REPBOT FLUTTER APP</span>
-      </div>
-
-      <div class="h-card">
-        <span class="hc-tag">EXPERIMENT 04 // LAB CHANNEL</span>
-        <h3>LOCAL_FIRST_LAB</h3>
-        <p>13,000+ followers watching real-time hardware experiments, mobile Linux servers, and robotics prototypes evolve.</p>
-        <span class="mono" style="color:var(--yellow)">13K+ COMMUNITY</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ DEDICATED INSTAGRAM LAB SECTION ============ -->
-<section id="pinsta" class="spread dark" data-page="P.013" data-name="LOCAL_FIRST_LAB" aria-labelledby="h-pinsta">
+<!-- ============ 04 / LOCAL_FIRST_LAB HIGHLIGHT ============ -->
+<section id="pinsta" class="spread dark" data-page="P.005" data-name="LOCAL_FIRST_LAB" aria-labelledby="h-pinsta">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">✦</div>
-    <header class="kicker rv"><span>DEDICATED CHANNEL — 13K+ COMMUNITY</span><span class="tag live">PROJECT LAB</span></header>
+    <header class="kicker rv"><span>DEDICATED CHANNEL // 13K+ COMMUNITY</span><span class="tag live">PROJECT LAB</span></header>
     <h2 id="h-pinsta" class="h-giant rv" style="--d:.05s">LOCAL_FIRST_LAB<br><span class="outline wcond">/ 13K+ FOLLOWERS</span><span style="color:var(--red)">.</span></h2>
     
     <div class="gr gr-2" style="margin-top:40px">
       <div class="rv" style="--d:.10s">
-        <p class="thesis" style="margin-top:0">The experimental tech channel where I document real-time hardware builds, mobile Linux servers, local AI, and robotics prototypes.</p>
-        <p class="body-col" style="color:var(--pdim)">An extension of the portfolio's engineering notebook identity — documenting iterations, failures, and breakthroughs live for a community of over 13,000 builders.</p>
+        <p class="thesis" style="margin-top:0">The experimental engineering channel where I document real-time hardware builds, mobile Linux servers, local AI, and robotics prototypes.</p>
+        <p class="body-col" style="color:var(--pdim)">An extension of the portfolio identity — documenting iterations, failures, and breakthroughs live for a community of over 13,000 builders.</p>
       </div>
 
       <div class="rv" style="--d:.2s;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px;border:1px solid var(--pline);padding:32px;background:#141311">
@@ -721,42 +355,19 @@
   </div>
 </section>
 
-<!-- ============ ABOUT (CLEAN BORDERLESS DISPLAY WITH HIDDEN BACKGROUND SHAPE) ============ -->
-<section id="p17" class="spread" data-page="P.014" data-name="ABOUT" aria-labelledby="h-p17">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">—</div>
-    <header class="kicker rv"><span>ABOUT</span><span class="mdim">BIOGRAPHY &amp; PROFILE</span></header>
-    <h2 id="h-p17" class="h-giant rv" style="--d:.05s">STILL<br><span class="outline wcond">BUILDING</span><span style="color:var(--red)">.</span></h2>
-    <div class="gr gr-2" style="margin-top:44px">
-      <div class="body-col rv" style="margin-top:0">
-        <p>I'm a B.Tech CSE student at Netaji Subhash Engineering College, Kolkata.</p>
-        <p>Software × hardware × systems. Finding out what happens when software leaves the screen and enters physical devices, servers, and machines.</p>
-      </div>
-      <div class="facts rv" style="--d:.25s">
-        <div><span>NAME</span><span class="val">DEBARGHA SARKAR</span></div>
-        <div><span>GOES BY</span><span class="val">DEB</span></div>
-        <div><span>PROGRAM</span><span class="val">B.TECH CSE</span></div>
-        <div><span>LOCATION</span><span class="val">KOLKATA, INDIA</span></div>
-        <div><span>FOCUS</span><span class="val">SOFTWARE × HARDWARE × SYSTEMS</span></div>
-        <div><span>TAGLINE</span><span class="val" style="color:var(--red)">STILL BUILDING</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CONTACT & SOCIAL ============ -->
-<section id="p18" class="spread" data-page="P.015" data-name="CONTACT" aria-labelledby="h-p18">
+<!-- ============ 05 / CONTACT & SOCIAL ============ -->
+<section id="pcontact" class="spread" data-page="P.006" data-name="CONTACT" aria-labelledby="h-pcontact">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">→</div>
-    <header class="kicker rv"><span>CONTACT &amp; CHANNELS</span><span class="mdim">DIRECT LINKS</span></header>
-    <h2 id="h-p18" class="h-giant rv" style="--d:.05s">LET'S<br><span class="outline wcond">BUILD</span><span style="color:var(--red)">.</span></h2>
+    <header class="kicker rv"><span>CONTACT &amp; CHANNELS</span><span class="mdim">DIRECT INBOX</span></header>
+    <h2 id="h-pcontact" class="h-giant rv" style="--d:.05s">LET'S<br><span class="outline wcond">BUILD</span><span style="color:var(--red)">.</span></h2>
     
     <div class="rv" id="contactRows" style="--d:.25s;margin-top:34px"></div>
   </div>
 </section>
 
-<!-- ============ BACK COVER ============ -->
-<footer id="end" data-page="P.016" data-name="BACK COVER" aria-label="Back cover">
+<!-- ============ 06 / BACK COVER ============ -->
+<footer id="end" data-page="P.007" data-name="BACK COVER" aria-label="Back cover">
   <div class="crops" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <div class="spread-inner rv-scope">
     <div class="colophon">

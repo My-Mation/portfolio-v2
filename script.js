@@ -169,8 +169,10 @@ requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement
 /* ============ LOOP HELPER ============ */
 function loopWhen(el, fn){
   let on = false;
-  new IntersectionObserver(es => { on = es[0].isIntersecting; }, {threshold:0}).observe(el);
-  (function f(){ requestAnimationFrame(f); if (on && !document.hidden && !REDUCED) fn(); })();
+  try {
+    new IntersectionObserver(es => { on = es[0].isIntersecting; }, {threshold:0}).observe(el);
+  } catch(e) { on = true; }
+  (function f(){ requestAnimationFrame(f); if ((on || !el) && !document.hidden) fn(); })();
 }
 function fitCanvas(c, ratio){
   const r = c.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
@@ -212,7 +214,7 @@ if (pushBtn && oLog) {
   });
 }
 
-/* ============ 02 QUADRUPED 3D ENGINE (RIGHT COLUMN VIEWPORT) ============ */
+/* ============ 02 QUADRUPED 3D ENGINE (ORIGINAL CENTERPIECE VIEWPORT) ============ */
 (function initQuad3D() {
   const container = $('#quad3dContainer');
   const canvas = $('#quad3dCv');
@@ -220,39 +222,40 @@ if (pushBtn && oLog) {
   if (!container || !canvas || typeof THREE === 'undefined') return;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x181614);
-  scene.fog = new THREE.FogExp2(0x181614, 0.004);
+  scene.background = new THREE.Color(0x0d0c0a);
+  scene.fog = new THREE.FogExp2(0x0d0c0a, 0.008);
 
-  // CAMERA SETTINGS FOR RIGHT-COLUMN VIEWPORT
-  const camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 1000);
-  camera.position.set(0, 38, 190);
+  const initW = container.clientWidth || 640;
+  const initH = container.clientHeight || 460;
+  const camera = new THREE.PerspectiveCamera(45, initW / initH, 0.1, 1000);
+  camera.position.set(0, 70, 190);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setSize(initW, initH);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-  // LIGHTING
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.6);
+  // Lights
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
   scene.add(ambientLight);
 
-  const topLight = new THREE.DirectionalLight(0xffffff, 3.8);
+  const topLight = new THREE.DirectionalLight(0xffffff, 3.2);
   topLight.position.set(0, 250, 150);
   scene.add(topLight);
 
   const redLight = new THREE.DirectionalLight(0xbf3016, 2.8);
-  redLight.position.set(150, 150, 120);
+  redLight.position.set(120, 150, 120);
   scene.add(redLight);
 
-  const keyLight = new THREE.DirectionalLight(0xf1ede2, 3.0);
-  keyLight.position.set(-150, 160, -100);
+  const keyLight = new THREE.DirectionalLight(0xf1ede2, 2.5);
+  keyLight.position.set(-120, 160, -100);
   scene.add(keyLight);
 
-  const fillLight = new THREE.PointLight(0xe6c229, 2.4, 320);
-  fillLight.position.set(0, -20, 120);
+  const fillLight = new THREE.PointLight(0xe6c229, 2.2, 280);
+  fillLight.position.set(0, -40, 100);
   scene.add(fillLight);
 
   // Technical Floor Grid
-  const gridHelper = new THREE.GridHelper(360, 24, 0xbf3016, 0x44403a);
+  const gridHelper = new THREE.GridHelper(300, 20, 0xbf3016, 0x33322e);
   gridHelper.position.y = -45;
   scene.add(gridHelper);
 
@@ -261,47 +264,97 @@ if (pushBtn && oLog) {
   let targetRotX = 0;
   let scrollProgress = 0;
 
-  // Load dog02_web.stl
+  function buildProceduralQuadruped() {
+    const group = new THREE.Group();
+    const darkMat = new THREE.MeshStandardMaterial({ color: 0x1f1d1a, metalness: 0.85, roughness: 0.25 });
+    const wireMat = new THREE.LineBasicMaterial({ color: 0xbf3016, opacity: 0.5, transparent: true });
+
+    function addPart(geo, pos, rot) {
+      const mesh = new THREE.Mesh(geo, darkMat);
+      if (pos) mesh.position.set(pos[0], pos[1], pos[2]);
+      if (rot) mesh.rotation.set(rot[0], rot[1], rot[2]);
+      const w = new THREE.LineSegments(new THREE.WireframeGeometry(geo), wireMat);
+      mesh.add(w);
+      group.add(mesh);
+      return mesh;
+    }
+
+    // Body chassis
+    addPart(new THREE.BoxGeometry(68, 24, 38), [0, 10, 0]);
+    // Top battery spine
+    addPart(new THREE.BoxGeometry(42, 8, 26), [0, 24, 0]);
+    // Head / sensor unit
+    addPart(new THREE.BoxGeometry(22, 18, 20), [38, 20, 0]);
+
+    // 4 Articulated legs
+    const legPositions = [
+      [24, 0, 22],   // Front Right
+      [24, 0, -22],  // Front Left
+      [-24, 0, 22],  // Rear Right
+      [-24, 0, -22]  // Rear Left
+    ];
+
+    legPositions.forEach(p => {
+      // Hip joint
+      addPart(new THREE.CylinderGeometry(5, 5, 8, 12), [p[0], 8, p[2]], [Math.PI/2, 0, 0]);
+      // Upper leg
+      addPart(new THREE.BoxGeometry(8, 26, 8), [p[0], -4, p[2]]);
+      // Knee joint
+      addPart(new THREE.SphereGeometry(5, 8, 8), [p[0], -18, p[2]]);
+      // Lower leg
+      addPart(new THREE.BoxGeometry(6, 24, 6), [p[0], -30, p[2]]);
+      // Foot pad
+      addPart(new THREE.CylinderGeometry(5, 7, 4, 10), [p[0], -42, p[2]]);
+    });
+
+    group.scale.set(0.9, 0.9, 0.9);
+    group.position.set(0, 5, 0);
+    return group;
+  }
+
+  // Load dog02_web.stl with immediate procedural fallback
   if (typeof THREE.STLLoader !== 'undefined') {
     const loader = new THREE.STLLoader();
     loader.load('model/dog02_web.stl', (geometry) => {
+      if (dogMesh) scene.remove(dogMesh);
       geometry.center();
       geometry.computeVertexNormals();
 
       const material = new THREE.MeshStandardMaterial({
-        color: 0x888278,
-        metalness: 0.5,
-        roughness: 0.3
+        color: 0x1f1d1a,
+        metalness: 0.85,
+        roughness: 0.25
       });
 
       dogMesh = new THREE.Mesh(geometry, material);
-
-      // Blueprint Wireframe Overlay
       const wireGeo = new THREE.WireframeGeometry(geometry);
-      const wireMat = new THREE.LineBasicMaterial({ color: 0xbf3016, opacity: 0.6, transparent: true });
+      const wireMat = new THREE.LineBasicMaterial({ color: 0xbf3016, opacity: 0.42, transparent: true });
       const wireframe = new THREE.LineSegments(wireGeo, wireMat);
       dogMesh.add(wireframe);
 
-      // COMPACT SCALE
-      dogMesh.scale.set(0.32, 0.32, 0.32);
-      dogMesh.position.set(0, 10, 0);
+      dogMesh.scale.set(0.55, 0.55, 0.55);
+      dogMesh.position.set(0, 5, 0);
       dogMesh.rotation.x = -Math.PI / 2;
       scene.add(dogMesh);
 
       if (loaderEl) loaderEl.style.display = 'none';
+      renderer.render(scene, camera);
     }, 
     undefined, 
     (err) => {
-      console.warn('STL Loader warning:', err);
-      const group = new THREE.Group();
-      const bodyMat = new THREE.MeshStandardMaterial({ color: 0x888278, wireframe: true });
-      const body = new THREE.Mesh(new THREE.BoxGeometry(50, 22, 30), bodyMat);
-      group.add(body);
-      dogMesh = group;
-      dogMesh.position.set(0, 10, 0);
-      scene.add(dogMesh);
+      console.warn('STL load notice (using articulated CAD fallback):', err);
+      if (!dogMesh) {
+        dogMesh = buildProceduralQuadruped();
+        scene.add(dogMesh);
+      }
       if (loaderEl) loaderEl.style.display = 'none';
+      renderer.render(scene, camera);
     });
+  } else {
+    dogMesh = buildProceduralQuadruped();
+    scene.add(dogMesh);
+    if (loaderEl) loaderEl.style.display = 'none';
+    renderer.render(scene, camera);
   }
 
   // Pointer hover interaction
@@ -313,8 +366,8 @@ if (pushBtn && oLog) {
   });
 
   // Cinematic scroll calculation
-  const p02 = $('#p02');
   function onScrollCinematic() {
+    const p02 = $('#p02');
     if (!p02) return;
     const r = p02.getBoundingClientRect();
     const vh = innerHeight;
@@ -324,26 +377,82 @@ if (pushBtn && oLog) {
   }
   addEventListener('scroll', onScrollCinematic, { passive: true });
 
+  function checkSize() {
+    if (!container) return;
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+  }
+
   // Optimized Render Loop
   loopWhen(container, () => {
+    checkSize();
     if (dogMesh) {
       targetRotY = (scrollProgress * Math.PI * 2.4) + (mouseX * 0.7);
       targetRotX = (mouseY * 0.35);
 
       dogMesh.rotation.z += (targetRotY - dogMesh.rotation.z) * 0.08;
       dogMesh.rotation.y += (targetRotX - dogMesh.rotation.y) * 0.08;
-      dogMesh.position.y = 10 + Math.sin(Date.now() * 0.0035) * 3;
+      dogMesh.position.y = 5 + Math.sin(Date.now() * 0.0035) * 5;
     }
     renderer.render(scene, camera);
   });
 
   addEventListener('resize', () => {
-    if (!container) return;
-    camera.aspect = container.clientWidth / container.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    checkSize();
+    renderer.render(scene, camera);
   });
 })();
+
+/* ============ 02 QUADRUPED TELEMETRY CONTROLS ============ */
+const qVals = {rh:$('#qv1'), rk:$('#qv2'), fh:$('#qv3'), fk:$('#qv4')};
+let qWalkSim = false, qWalkStep = 0, qWalkTimer = null;
+const QPOSES = {
+  stand: [0, 0, 0, 0],
+  sit: [-45, 60, -10, 15],
+  walk: [
+    [-18, 26, 10, -6],
+    [6, 8, -14, 26],
+    [14, -6, 6, 8],
+    [-6, 12, 12, -8]
+  ]
+};
+
+function updateQTelemetry(arr) {
+  if (qVals.rh) qVals.rh.textContent = arr[0].toFixed(1) + '°';
+  if (qVals.rk) qVals.rk.textContent = arr[1].toFixed(1) + '°';
+  if (qVals.fh) qVals.fh.textContent = arr[2].toFixed(1) + '°';
+  if (qVals.fk) qVals.fk.textContent = arr[3].toFixed(1) + '°';
+}
+
+$$('#p02 [data-qp]').forEach(b => b.addEventListener('click', () => {
+  if (qWalkSim) { qWalkSim = false; clearInterval(qWalkTimer); }
+  $$('#p02 [data-qp]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  if ($('#qWalkBtn')) $('#qWalkBtn').setAttribute('aria-pressed', 'false');
+  updateQTelemetry(QPOSES[b.dataset.qp] || [0,0,0,0]);
+}));
+
+if ($('#qWalkBtn')) {
+  $('#qWalkBtn').addEventListener('click', function() {
+    if (qWalkSim) {
+      qWalkSim = false; clearInterval(qWalkTimer);
+      this.setAttribute('aria-pressed', 'false');
+      updateQTelemetry(QPOSES.stand);
+    } else {
+      qWalkSim = true;
+      this.setAttribute('aria-pressed', 'true');
+      $$('#p02 [data-qp]').forEach(x => x.setAttribute('aria-pressed', 'false'));
+      qWalkTimer = setInterval(() => {
+        qWalkStep = (qWalkStep + 1) % QPOSES.walk.length;
+        updateQTelemetry(QPOSES.walk[qWalkStep]);
+      }, 350);
+    }
+  });
+}
 
 /* ============ 03 HOMELAB MAP ============ */
 $$('.hn').forEach(g => {
@@ -660,6 +769,153 @@ if (fc) {
   if (REDUCED) drawFox();
   else loopWhen(fc, () => { ft++; drawFox(); });
   drawFox();
+}
+
+/* ============ 09 ECG & HOLTER REAL-TIME WAVEFORM ENGINE ============ */
+const ec = $('#ecgCv');
+if (ec) {
+  fit(ec);
+  const ectx = ec.getContext('2d');
+  let ecgBpm = 72;
+  let ecgPhase = 0;
+  const bpmDisp = $('#ecgBpmDisplay');
+  const btnNorm = $('#ecgNormalBtn');
+  const btnTach = $('#ecgTachBtn');
+  const btnBrady = $('#ecgBradyBtn');
+
+  function setEcgMode(bpm, text, activeBtn) {
+    ecgBpm = bpm;
+    if (bpmDisp) bpmDisp.textContent = text;
+    [btnNorm, btnTach, btnBrady].forEach(b => {
+      if (b) {
+        const isActive = (b === activeBtn);
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        b.style.background = isActive ? '#00d084' : 'transparent';
+        b.style.color = isActive ? '#000' : 'var(--paper)';
+        b.style.borderColor = isActive ? '#00d084' : 'var(--pline)';
+      }
+    });
+  }
+
+  if (btnNorm) btnNorm.addEventListener('click', () => setEcgMode(72, 'HR: 72 BPM · NSR (NORMAL)', btnNorm));
+  if (btnTach) btnTach.addEventListener('click', () => setEcgMode(130, 'HR: 130 BPM · SINUS TACHYCARDIA', btnTach));
+  if (btnBrady) btnBrady.addEventListener('click', () => setEcgMode(48, 'HR: 48 BPM · SINUS BRADYCARDIA', btnBrady));
+
+  // Compute physiological P-QRS-T amplitude at cycle pos t in [0, 1)
+  function ecgSample(t) {
+    if (t >= 0.12 && t <= 0.22) {
+      const p = (t - 0.17) / 0.05;
+      return 0.16 * Math.exp(-p * p * 4);
+    }
+    if (t >= 0.28 && t < 0.31) {
+      return -0.16 * Math.sin((t - 0.28) / 0.03 * Math.PI);
+    }
+    if (t >= 0.31 && t <= 0.36) {
+      const r = (t - 0.335) / 0.025;
+      return 1.15 * Math.exp(-r * r * 5);
+    }
+    if (t > 0.36 && t <= 0.40) {
+      return -0.36 * Math.sin((t - 0.36) / 0.04 * Math.PI);
+    }
+    if (t >= 0.48 && t <= 0.64) {
+      const tw = (t - 0.56) / 0.08;
+      return 0.30 * Math.exp(-tw * tw * 3);
+    }
+    return 0;
+  }
+
+  const bufW = 600;
+  const trace = new Float32Array(bufW).fill(0);
+  let sweepIndex = 0;
+
+  function drawEcg() {
+    ectx.clearRect(0, 0, 600, 300);
+
+    // Minor grid
+    ectx.strokeStyle = 'rgba(0, 208, 132, 0.07)';
+    ectx.lineWidth = 1;
+    for (let x = 0; x < 600; x += 15) {
+      ectx.beginPath(); ectx.moveTo(x, 0); ectx.lineTo(x, 300); ectx.stroke();
+    }
+    for (let y = 0; y < 300; y += 15) {
+      ectx.beginPath(); ectx.moveTo(0, y); ectx.lineTo(600, y); ectx.stroke();
+    }
+    // Major grid
+    ectx.strokeStyle = 'rgba(0, 208, 132, 0.18)';
+    for (let x = 0; x < 600; x += 75) {
+      ectx.beginPath(); ectx.moveTo(x, 0); ectx.lineTo(x, 300); ectx.stroke();
+    }
+    for (let y = 0; y < 300; y += 75) {
+      ectx.beginPath(); ectx.moveTo(0, y); ectx.lineTo(600, y); ectx.stroke();
+    }
+
+    // Step simulation
+    const speed = (ecgBpm / 60) * 0.016;
+    const steps = 3;
+    for (let s = 0; s < steps; s++) {
+      ecgPhase = (ecgPhase + speed / steps) % 1.0;
+      trace[sweepIndex] = ecgSample(ecgPhase);
+      sweepIndex = (sweepIndex + 1) % bufW;
+    }
+
+    const baselineY = 160;
+    const scaleY = 90;
+
+    // Glowing phosphorescent trace
+    ectx.shadowColor = '#00d084';
+    ectx.shadowBlur = 7;
+    ectx.strokeStyle = '#00d084';
+    ectx.lineWidth = 2.2;
+    ectx.lineJoin = 'round';
+    ectx.lineCap = 'round';
+
+    ectx.beginPath();
+    let started = false;
+    for (let i = 0; i < bufW; i++) {
+      const dist = (i - sweepIndex + bufW) % bufW;
+      if (dist < 20) {
+        if (started) { ectx.stroke(); ectx.beginPath(); started = false; }
+        continue;
+      }
+      const x = i;
+      const y = baselineY - trace[i] * scaleY;
+      if (!started) {
+        ectx.moveTo(x, y);
+        started = true;
+      } else {
+        ectx.lineTo(x, y);
+      }
+    }
+    if (started) ectx.stroke();
+    ectx.shadowBlur = 0;
+
+    // Head dot
+    const headY = baselineY - trace[sweepIndex] * scaleY;
+    ectx.fillStyle = '#ffffff';
+    ectx.beginPath();
+    ectx.arc(sweepIndex, headY, 3, 0, Math.PI * 2);
+    ectx.fill();
+
+    // Scan bar
+    const grad = ectx.createLinearGradient(Math.max(0, sweepIndex - 35), 0, sweepIndex, 0);
+    grad.addColorStop(0, 'rgba(0, 208, 132, 0)');
+    grad.addColorStop(1, 'rgba(0, 208, 132, 0.22)');
+    ectx.fillStyle = grad;
+    ectx.fillRect(Math.max(0, sweepIndex - 35), 0, 35, 300);
+
+    // Legend
+    ectx.font = '600 10px "IBM Plex Mono"';
+    ectx.fillStyle = 'rgba(241,237,226,0.65)';
+    ectx.fillText('CONTINUOUS HOLTER TELEMETRY // EVERBEAT CLINICAL SUITE', 18, 282);
+    ectx.fillStyle = '#00d084';
+    ectx.textAlign = 'right';
+    ectx.fillText('60FPS REALTIME SWEEP', 585, 282);
+    ectx.textAlign = 'left';
+  }
+
+  if (REDUCED) drawEcg();
+  else loopWhen(ec, () => drawEcg());
+  drawEcg();
 }
 
 /* ============ CONTACT ROWS ============ */

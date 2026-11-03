@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEB — Projects Dossier / Hardware, Robotics, Systems & Software</title>
+<meta name="description" content="Debargha Sarkar — Complete Engineering Dossier: OSAMU adaptive exam hardware, Quadruped robot 3D CAD, Phone Homelab, ECG & Holter Telemetry Suite, RepBot, VISO, Sarbanash & Kisor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- THREE.JS & STL LOADER FOR 3D QUADRUPED MODEL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+</head>
+<body>
+<a class="skiplink" href="#projects-work">Skip to content</a>
+<div id="noise" aria-hidden="true"></div>
+<canvas id="trail" aria-hidden="true"></canvas>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursorTag" aria-hidden="true">OPEN</div>
+
+<!-- NAVIGATION -->
+<nav id="siteNav" aria-label="Site">
+  <a class="brand" href="index.html">← DEB <span class="hide-mobile">— BACK TO HOME</span></a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
+    <a class="tag hide-mobile" href="anime.html" style="text-decoration:none">ANIME</a>
+    <a class="tag hide-mobile" href="music.html" style="text-decoration:none">MUSIC</a>
+    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
+    <a class="tag hide-mobile" href="gaming.html" style="text-decoration:none">GAMES</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  </div>
+</nav>
+
+<!-- TOC -->
+<div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-head"><h2>Projects Dossier</h2><button id="tocClose">CLOSE ×</button></div>
+  <ul class="toc-list">
+    <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Main Junction</span><span class="leader"></span><span class="t-pg">HOME ↗</span></a></li>
+    <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Projects Overview</span><span class="leader"></span><span class="t-pg">P.P00</span></a></li>
+    <li><a href="#p01"><span class="t-no">01</span><span class="t-title">OSAMU (Aveenir Hackathon 1st Prize &amp; Flowchart)</span><span class="leader"></span><span class="t-pg">P.P01</span></a></li>
+    <li><a href="#p02"><span class="t-no">02</span><span class="t-title">Quadruped Robot (3D Interactive Model &amp; BOM)</span><span class="leader"></span><span class="t-pg">P.P02</span></a></li>
+    <li><a href="#p03"><span class="t-no">03</span><span class="t-title">Phone Homelab &amp; 32-Bit Local AI</span><span class="leader"></span><span class="t-pg">P.P03</span></a></li>
+    <li><a href="#p04"><span class="t-no">04</span><span class="t-title">Studiva (Academic Notes Platform)</span><span class="leader"></span><span class="t-pg">P.P04</span></a></li>
+    <li><a href="#p05"><span class="t-no">05</span><span class="t-title">RepBot (On-Device Computer Vision Pose Tracking)</span><span class="leader"></span><span class="t-pg">P.P05</span></a></li>
+    <li><a href="#p06"><span class="t-no">06</span><span class="t-title">VISO (Machine Health Predictive Anomaly Telemetry)</span><span class="leader"></span><span class="t-pg">P.P06</span></a></li>
+    <li><a href="#p07"><span class="t-no">07</span><span class="t-title">Sarbanash (Survival Horror Pixel Art Game)</span><span class="leader"></span><span class="t-pg">P.P07</span></a></li>
+    <li><a href="#p08"><span class="t-no">08</span><span class="t-title">Kisor (Narrative Visual Novel)</span><span class="leader"></span><span class="t-pg">P.P08</span></a></li>
+    <li><a href="#p09" style="color:#00d084"><span class="t-no">09</span><span class="t-title">ECG &amp; Holter Monitor (Clinical Telemetry Suite)</span><span class="leader"></span><span class="t-pg">P.P09</span></a></li>
+    <li><a href="achievements.html" style="color:var(--red)"><span class="t-no">★</span><span class="t-title">Achievements &amp; Honors (Aveenir 1st Prize, VISO, Internship)</span><span class="leader"></span><span class="t-pg">WINS ↗</span></a></li>
+  </ul>
+  <p class="toc-foot">DEBARGHA SARKAR / 2026 — COMPLETE TECHNICAL DOSSIER</p>
+</div>
+
+<main id="projects-work">
+
+<!-- ============ 00 / COVER ============ -->
+<section id="cover" aria-label="Projects Cover" data-page="P.P00" data-name="PROJECTS OVERVIEW" style="min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:86px 5.5vw 64px;position:relative;">
+  <div class="crops" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="topline">
+    <div>DEBARGHA SARKAR <span class="hide-mobile">— COMPLETE TECHNICAL ENGINEERING DOSSIER</span></div>
+    <div class="hide-mobile">CIRCUITS · KINEMATICS · LOCAL INFERENCE · KERNELS</div>
+    <div>VOL. 01 / 2026</div>
+  </div>
+  <div class="hero-center">
+    <div class="crosshair" aria-hidden="true"></div>
+    <div class="side-vert">CIRCUITS · KINEMATICS · LOCAL INFERENCE · EMBEDDED</div>
+    <h1 class="hero-name" aria-label="WORK.">
+      <span class="ln" style="--fx:-140px;--fy:30px;--fr:-9deg;--d:.15s">W</span><span class="ln" style="--fx:40px;--fy:-160px;--fr:6deg;--d:.32s">O</span><span class="ln" style="--fx:150px;--fy:60px;--fr:-5deg;--d:.5s">R</span><span class="ln dot" style="--fx:0;--fy:-80px;--fr:0deg;--d:.78s">K.</span>
+    </h1>
+    <p class="hero-sub">Full Technical Specifications &amp; Architecture</p>
+    <p class="hero-roles">SOFTWARE × HARDWARE × EMBEDDED SYSTEMS <span class="hide-mobile">— WORKING PROTOTYPES, CODEBASES &amp; SCHEMATICS</span></p>
+    <div class="hero-rule" aria-hidden="true"></div>
+    
+    <div style="margin-top:24px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:10">
+      <a class="ctl button" href="#p01" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
+        EXPLORE OSAMU FLOWCHART ↓
+      </a>
+      <a class="ctl button" href="#p02" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--yellow);color:var(--black);border:1px solid var(--yellow)">
+        QUADRUPED 3D MODEL ↓
+      </a>
+      <a class="ctl button" href="#p09" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:#00d084;color:#000;border:1px solid #00d084">
+        ECG TELEMETRY SUITE ↓
+      </a>
+      <a class="ctl button" href="index.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink)">
+        ← HOME JUNCTION
+      </a>
+    </div>
+  </div>
+  <div class="botline">
+    <div>DOSSIER 00 / ARCHIVE</div>
+    <div class="hide-mobile">COMPLETE SCHEMATICS, FLOWCHARTS &amp; ARCHITECTURAL ANALYSES</div>
+    <div class="scroll-cue">SCROLL <i aria-hidden="true"></i></div>
+  </div>
+</section>
+
+<!-- ============ 01 / OSAMU (FULL FLOWCHART & ARCHITECTURE) ============ -->
+<section id="p01" class="spread" data-page="P.P01" data-name="OSAMU" aria-labelledby="h-p01">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">01</div>
+    <header class="kicker rv">
+      <span>FEATURED 01 — AVEENIR HACKATHON</span>
+      <span class="tag win">🏆 1ST PRIZE WINNER</span>
+      <span class="tag team">TEAM PROJECT</span>
+    </header>
+    <h2 id="h-p01" class="h-giant rv" style="--d:.05s">CHEAT-PROOF<span style="color:var(--red)">.</span><br><span class="outline wcond">UNBIASED</span><br>EXAMINATION<br>HARDWARE<span style="color:var(--red)">.</span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>AWARD:</b> 🏆 1ST PRIZE WINNER — AVEENIR HACKATHON</span>
+      <span><b>TIME BIND:</b> BUILT IN 48 HOURS FROM SCRATCH</span>
+      <span><b>TECH:</b> ESP32 · RF SNIFFING · ADAPTIVE DIFFICULTY ENGINE</span>
+    </div>
+    <p class="thesis rv" style="--d:.2s">OSAMU replaces vulnerable online browser exams with isolated ESP32 hardware terminals. It broadcasts encrypted questions to student keypads, evaluates responses with zero bias, and adaptively generates deep-dive questions when students struggle.</p>
+
+    <!-- EXPLANATORY ARCHITECTURE CARDS -->
+    <div class="gr gr-2" style="margin-top:36px">
+      <div class="readout rv" style="padding:22px;background:var(--paper2);border:1px solid var(--line2)">
+        <span class="mono" style="color:var(--red);display:block;margin-bottom:8px;font-weight:700">01 / HARDWARE ISOLATION (ANTI-CHEAT)</span>
+        <p style="color:var(--ink);font-size:14.5px;line-height:1.55">Standard digital exams fail because students switch tabs, use secondary phones, or consult AI tools. OSAMU runs on isolated, standalone ESP32 physical hardware terminals equipped with tactile keypads, timers, buzzers, and offline Wi-Fi access points. No internet access, no tab switching, no cheating possible.</p>
+      </div>
+
+      <div class="readout rv" style="padding:22px;background:var(--paper2);border:1px solid var(--line2);--d:.15s">
+        <span class="mono" style="color:var(--red);display:block;margin-bottom:8px;font-weight:700">02 / UNBIASED ADAPTIVE DEEP-DIVES</span>
+        <p style="color:var(--ink);font-size:14.5px;line-height:1.55">Grading is 100% objective without teacher bias or favoritism. The system tracks response latency, key hesitations, and answer accuracy in real time. If a student shows hesitation on a concept, OSAMU dynamically generates targeted follow-up questions to test deep understanding rather than surface memory.</p>
+      </div>
+    </div>
+
+    <!-- COMPLETE AI ADAPTIVE ASSESSMENT FLOWCHART -->
+    <div class="gr gr-2" style="margin-top:36px">
+      <figure class="rv" style="--d:.1s;background:var(--paper2);padding:20px;border:1px solid var(--line2)">
+        <span class="mono" style="color:var(--red);display:block;margin-bottom:14px;font-weight:700;font-size:10.5px;letter-spacing:.12em">AI-POWERED ADAPTIVE ASSESSMENT FLOWCHART</span>
+        
+        <svg class="bp" viewBox="0 0 620 830" role="img" aria-label="OSAMU adaptive AI evaluation decision flowchart" style="width:100%;height:auto;display:block">
+          <g font-family="IBM Plex Mono">
+            <!-- 1. TEACHER UPLOADS MATERIAL -->
+            <rect class="flowbox draw" pathLength="1" x="130" y="12" width="360" height="44" rx="2"/>
+            <text class="flowlab" x="310" y="31" font-size="12" font-weight="700" text-anchor="middle">1. TEACHER UPLOADS MATERIAL</text>
+            <text class="lab2" x="310" y="45" font-size="9.5" font-weight="500" text-anchor="middle">PDF / Notes / Question Bank</text>
+
+            <!-- Down arrow 1 -> 2 -->
+            <path class="ln thin draw d1" pathLength="1" d="M310,56 V78 M306,74 L310,78 L314,74"/>
+
+            <!-- 2. AI PARSER & ASSESSMENT GENERATOR -->
+            <rect class="flowbox draw d1" pathLength="1" x="110" y="78" width="400" height="44" rx="2"/>
+            <text class="flowlab" x="310" y="97" font-size="12" font-weight="700" text-anchor="middle">2. AI ASSESSMENT GENERATOR</text>
+            <text class="lab2" x="310" y="111" font-size="9.5" font-weight="500" text-anchor="middle">Questions, Topics, Difficulty &amp; Criteria → JSON</text>
+
+            <!-- Down arrow 2 -> 3 -->
+            <path class="ln thin draw d2" pathLength="1" d="M310,122 V144 M306,140 L310,144 L314,140"/>
+
+            <!-- 3. SECURE OFFLINE STATION -->
+            <rect class="flowbox draw d2" pathLength="1" x="110" y="144" width="400" height="44" rx="2"/>
+            <text class="flowlab" x="310" y="163" font-size="12" font-weight="700" text-anchor="middle">3. SECURE OFFLINE STATION</text>
+            <text class="lab2" x="310" y="177" font-size="9.5" font-weight="500" text-anchor="middle">Handles Input, Audio, Timing &amp; Answer Capture</text>
+
+            <!-- Down arrow 3 -> 4 -->
+            <path class="ln thin draw d3" pathLength="1" d="M310,188 V210 M306,206 L310,210 L314,206"/>
+
+            <!-- 4. BASELINE QUESTIONS PRESENTED -->
+            <rect class="flowbox draw d3" pathLength="1" x="120" y="210" width="380" height="44" rx="2"/>
+            <text class="flowlab" x="310" y="229" font-size="12" font-weight="700" text-anchor="middle">4. BASELINE QUESTIONS PRESENTED</text>
+            <text class="lab2" x="310" y="243" font-size="9.5" font-weight="500" text-anchor="middle">System Records Answer &amp; Latency</text>
+
+            <!-- Down arrow 4 -> 5 -->
+            <path class="ln thin draw d4" pathLength="1" d="M310,254 V276 M306,272 L310,276 L314,272"/>
+
+            <!-- 5. DECISION DIAMOND 1 -->
+            <polygon points="310,276 480,325 310,374 140,325" fill="var(--paper2)" stroke="var(--red)" stroke-width="1.5"/>
+            <text x="310" y="320" fill="var(--ink)" font-weight="700" font-size="10.5" text-anchor="middle">5. DOES RESPONSE DEMONSTRATE</text>
+            <text x="310" y="336" fill="var(--red)" font-weight="700" font-size="10.5" text-anchor="middle">UNDERSTANDING?</text>
+
+            <!-- Decision 5 YES Branch -->
+            <path class="ln thin draw d4" pathLength="1" d="M480,325 H570 V700 H440 M444,696 L440,700 L444,704"/>
+            <text x="490" y="318" fill="var(--ink2)" font-weight="700" font-size="9.5">YES (Next Concept)</text>
+
+            <!-- Decision 5 NO Branch -->
+            <path class="rs draw d4" pathLength="1" d="M310,374 V410 M306,406 L310,410 L314,406"/>
+            <text x="318" y="396" fill="var(--red)" font-weight="700" font-size="9.5">NO / UNCERTAIN (Identify Weak Concept)</text>
+
+            <!-- 6. DECISION DIAMOND 2 -->
+            <polygon points="310,410 480,455 310,500 140,455" fill="var(--paper2)" stroke="var(--red)" stroke-width="1.5"/>
+            <text x="310" y="450" fill="var(--ink)" font-weight="700" font-size="10.5" text-anchor="middle">6. IS UNCERTAINTY SIGNIFICANT</text>
+            <text x="310" y="466" fill="var(--red)" font-weight="700" font-size="10.5" text-anchor="middle">TO PROBE FURTHER?</text>
+
+            <!-- Decision 6 NO Branch -->
+            <path class="ln thin draw d5" pathLength="1" d="M140,455 H50 V700 H180 M176,696 L180,700 L176,704"/>
+            <text x="55" y="448" fill="var(--ink2)" font-weight="700" font-size="9.5">NO (Continue)</text>
+
+            <!-- Decision 6 YES Branch -->
+            <path class="rs draw d5" pathLength="1" d="M310,500 V535 M306,531 L310,535 L314,531"/>
+            <text x="318" y="521" fill="var(--red)" font-weight="700" font-size="9.5">YES (Generate Targeted Probe)</text>
+
+            <!-- 7. DECISION DIAMOND 3 -->
+            <polygon points="310,535 480,580 310,625 140,580" fill="var(--paper2)" stroke="var(--red)" stroke-width="1.5"/>
+            <text x="310" y="575" fill="var(--ink)" font-weight="700" font-size="10.5" text-anchor="middle">7. FOLLOW-UP DEMONSTRATES</text>
+            <text x="310" y="591" fill="var(--red)" font-weight="700" font-size="10.5" text-anchor="middle">UNDERSTANDING?</text>
+
+            <!-- Decision 7 YES Branch -->
+            <path class="ln thin draw d6" pathLength="1" d="M480,580 H540 V700 H440 M444,696 L440,700 L444,704"/>
+            <text x="485" y="573" fill="var(--ink2)" font-weight="700" font-size="9.5">YES (Mark Understood)</text>
+
+            <!-- Decision 7 NO Branch -->
+            <path class="rs draw d6" pathLength="1" d="M140,580 H90 V518 H302 M298,514 L302,518 L298,522"/>
+            <text x="95" y="573" fill="var(--red)" font-weight="700" font-size="9.5">NO — DEEPER PROBE</text>
+            <text x="95" y="530" fill="var(--ink2)" font-weight="600" font-size="9">LIMITED REPEATS</text>
+
+            <!-- Decision 7 Bottom Branch -->
+            <path class="ln thin draw d6" pathLength="1" d="M310,625 V680 M306,676 L310,680 L314,676"/>
+            <text x="318" y="655" fill="var(--ink2)" font-weight="600" font-size="9">PROBE LIMIT REACHED / RESOLVED</text>
+
+            <!-- 8. FINAL AI EVALUATION ENGINE -->
+            <rect class="flowbox draw d6" pathLength="1" x="180" y="680" width="260" height="44" rx="2" stroke="var(--red)"/>
+            <text class="flowlab" x="310" y="699" font-size="12" font-weight="700" fill="var(--red)" text-anchor="middle">8. FINAL AI EVALUATION ENGINE</text>
+            <text class="lab2" x="310" y="713" font-size="9.5" font-weight="500" text-anchor="middle">Baseline Performance + Latency + Probes</text>
+
+            <!-- Down arrow 8 -> 9 -->
+            <path class="ln thin draw d7" pathLength="1" d="M310,724 V752 M306,748 L310,752 L314,748"/>
+
+            <!-- 9. STRUCTURED STUDENT REPORT -->
+            <rect class="flowbox draw d7" pathLength="1" x="140" y="752" width="340" height="48" rx="2" stroke="var(--red)"/>
+            <text class="flowlab" x="310" y="772" font-size="12.5" font-weight="700" fill="var(--red)" text-anchor="middle">9. STRUCTURED STUDENT REPORT</text>
+            <text class="lab2" x="310" y="788" font-size="9.5" font-weight="500" text-anchor="middle">Mastered/Weak Concepts, Signals &amp; Overall Score</text>
+          </g>
+        </svg>
+      </figure>
+
+      <div class="rv" style="--d:.2s">
+        <div class="stamp gold" style="margin-bottom:16px">🏆 1ST PLACE WINNER — AVEENIR HACKATHON</div>
+        <div class="readout" style="padding:16px">
+          <p class="mono" style="margin-bottom:8px;color:var(--red)">DEB CONTRIBUTION:</p>
+          <p style="color:var(--ink);font-size:14px">Collaborated on physical ESP32 hardware integration, local AP web interface, response behavior parsing, and system logic during the 48-hour build window.</p>
+        </div>
+        
+        <div class="ctl" style="margin-top:20px">
+          <button id="pushBtn" style="font-weight:700;padding:12px 20px">SIMULATE ADAPTIVE HARDWARE TEST →</button>
+        </div>
+
+        <div class="readout" id="osamuLog" style="margin-top:14px;padding:16px" aria-live="polite">
+          <div><span>STATUS</span><span class="v">ESP32 KEYPAD READY</span></div>
+          <div><span>QUESTION 01</span><span class="v">"WHAT IS THE TIME COMPLEXITY OF HEAPSORT?"</span></div>
+          <div><span>STUDENT INPUT</span><span class="v">WAITING FOR KEYPAD INPUT…</span></div>
+          <div><span>AI DEEP-DIVE</span><span class="v">STANDBY FOR BEHAVIOR ANALYZER</span></div>
+        </div>
+
+        <div style="margin-top:24px">
+          <a class="ctl button" href="achievements.html#ac-osamu" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-decoration:none;background:var(--red);color:var(--paper);border:none">
+            VIEW AVEENIR HACKATHON WIN DETAILS ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 / QUADRUPED ROBOT (3D INTERACTIVE MODEL) ============ -->
+<section id="p02" class="spread" data-page="P.P02" data-name="QUADRUPED ROBOT" aria-labelledby="h-p02">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">02</div>
+    <header class="kicker rv">
+      <span>FEATURED 02 — PHYSICAL ROBOTICS</span>
+      <span class="tag win">3D INTERACTIVE MODEL</span>
+      <span class="tag arch">IN PROGRESS</span>
+    </header>
+    <h2 id="h-p02" class="h-giant rv" style="--d:.05s">FOUR LEGS<span style="color:var(--red)">.</span><br><span class="outline wcond">TOO MANY</span><br>THINGS TO<br>CALIBRATE<span style="color:var(--red)">.</span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>3D MODEL:</b> DOG02_WEB.STL (LOCAL THREE.JS CAD ENGINE)</span>
+      <span><b>DISCIPLINE:</b> MECHANICAL CAD · SERVOS · EMBEDDED GAIT KINEMATICS</span>
+      <span><b>DOF:</b> 8 SERVOS (2-DOF PER LIMB)</span>
+    </div>
+    <p class="thesis rv" style="--d:.2s">A physical quadruped robot. Move your cursor over the 3D viewport below to inspect joints and rotate the chassis. Inverse kinematics solver trigonometric calculations run per gait frame.</p>
+
+    <div class="gr gr-2" style="margin-top:40px">
+      <!-- 3D CANVAS MODEL VIEWPORT -->
+      <figure class="rv" style="--d:.1s">
+        <div id="quad3dContainer" class="cvp scan" style="height:460px;position:relative;border:1px solid var(--red);background:#0d0c0a">
+          <canvas id="quad3dCv"></canvas>
+          <div id="quad3dLoader" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--yellow);background:rgba(19,18,16,.92)">
+            <div>INITIALIZING 3D ENGINE …</div>
+            <div style="color:var(--pdim)">LOADING MODEL/DOG02_WEB.STL</div>
+          </div>
+          <div style="position:absolute;left:14px;bottom:14px;pointer-events:none;font-family:var(--mono);font-size:10px;color:var(--yellow);letter-spacing:.12em;background:rgba(20,19,17,.8);padding:4px 8px;border:1px solid var(--pline)">
+            ✦ CINEMATIC 3D ROTATION · INTERACTIVE HOVER
+          </div>
+        </div>
+        <figcaption class="fig-label">
+          <span>FIG. 002 — 3D CAD MESH (DOG02_WEB.STL)</span>
+          <span>INTERACTIVE THREE.JS VIEWPORT</span>
+        </figcaption>
+      </figure>
+
+      <div class="rv" style="--d:.2s">
+        <p class="note-marg" style="margin-bottom:14px">INTERACTIVE POSE TESTER — GAIT TELEMETRY</p>
+        <div class="ctl" role="group" aria-label="Quadruped controls" style="display:flex;gap:10px;flex-wrap:wrap">
+          <button data-qp="stand" aria-pressed="true">STAND POSE</button>
+          <button data-qp="sit" aria-pressed="false">SIT POSE</button>
+          <button id="qWalkBtn" aria-pressed="false">STEP CYCLE</button>
+        </div>
+        <div class="readout" style="margin-top:16px">
+          <div><span>S1 HIP·REAR</span><span class="v" id="qv1">0.0°</span></div>
+          <div><span>S2 KNEE·REAR</span><span class="v" id="qv2">0.0°</span></div>
+          <div><span>S5 HIP·FRONT</span><span class="v" id="qv3">0.0°</span></div>
+          <div><span>S7 KNEE·FRONT</span><span class="v" id="qv4">0.0°</span></div>
+        </div>
+        
+        <div class="readout" style="margin-top:16px;padding:16px;background:rgba(191,48,22,.06);border-color:var(--red)">
+          <span class="mono" style="color:var(--red);display:block;margin-bottom:8px">// INVERSE KINEMATICS SOLVER</span>
+          <p style="font-size:13.5px;line-height:1.5;color:var(--ink)">
+            Foot coordinates (x, y, z) are calculated using the law of cosines:
+          </p>
+          <pre style="background:var(--paper);border:1px solid var(--line2);padding:8px 12px;font-family:var(--mono);font-size:10.5px;color:var(--red);margin:8px 0">
+cos(θ_knee) = (x² + y² - L1² - L2²) / (2 · L1 · L2)
+θ_hip = atan2(y, x) - atan2(L2·sin(θ_knee), L1 + L2·cos(θ_knee))
+          </pre>
+        </div>
+
+        <div class="readout" style="margin-top:16px;padding:16px;background:var(--paper2);border:1px solid var(--line2)">
+          <span class="mono" style="color:var(--ink);display:block;margin-bottom:8px;font-weight:700">// HARDWARE BOM</span>
+          <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-family:var(--mono);font-size:11px;color:var(--ink)">
+            <li>• 6× MG995 High-Torque Servos</li>
+            <li>• 1× Pan/Tilt Micro Servo</li>
+            <li>• MPU6050 6-DOF IMU Sensor</li>
+            <li>• VL53L0X Laser ToF Sensor</li>
+            <li>• ESP32 NodeMCU Controller</li>
+            <li>• 2× LM2596 Buck Converters</li>
+            <li>• 7.4V 2S High-Drain Pack</li>
+            <li>• Custom PLA+ Printed Frame</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 / PHONE HOMELAB (INTERACTIVE MAP) ============ -->
+<section id="p03" class="spread dark" data-page="P.P03" data-name="PHONE HOMELAB" aria-labelledby="h-p03">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">03</div>
+    <header class="kicker rv"><span>FEATURED 03 — SYSTEMS &amp; INFRASTRUCTURE</span><span class="tag live">SYSTEMS</span></header>
+    <h2 id="h-p03" class="h-giant rv" style="--d:.05s">THIS IS<br>A PHONE<span style="color:var(--red)">.</span><br><span class="outline wcond">IT'S ALSO</span><br>A SERVER<span style="color:var(--red)">.</span><br><span class="wexp">AND SOMETIMES</span><br>AN AI MACHINE<span style="color:var(--red)">.</span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>CORE CONCEPT:</b> HOW MUCH INFRASTRUCTURE CAN RUN FROM A PHONE I ALREADY OWN?</span>
+      <span><b>HOST ENVIRONMENT:</b> ANDROID → TERMUX → UBUNTU (PROOT)</span>
+    </div>
+    <p class="thesis rv" style="--d:.2s">Turning an unrooted Android phone into an always-on computing cluster. From Navidrome music streaming and Jellyfin media to quantized 32-bit local LLMs and Wi-Fi packet monitoring.</p>
+
+    <div class="chain rv" style="--d:.25s;margin-top:30px">
+      <div class="node"><span class="mono mdim">LAYER 01</span><h4>ANDROID</h4><span class="st">BASE HARDWARE</span></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="node"><span class="mono mdim">LAYER 02</span><h4>TERMUX</h4><span class="st">TERMINAL / LINUX</span></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="node"><span class="mono mdim">LAYER 03</span><h4>PROOT UBUNTU</h4><span class="st">SERVICES / RUNTIME</span></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="node cur"><span class="mono mdim" style="color:var(--pdim)">EXPANSE</span><h4>MEDIA / NETWORK / AI / STORAGE</h4><span class="st">4 STACKS</span></div>
+    </div>
+
+    <div class="hl-grid" style="margin-top:40px">
+      <figure class="rv" style="--d:.1s">
+        <svg class="bp" id="hlSvg" viewBox="0 0 760 620" role="img" aria-label="Homelab infrastructure map">
+          <g font-family="IBM Plex Mono">
+            <rect class="box draw" pathLength="1" x="348" y="272" width="64" height="120" rx="8"/>
+            <text class="lab" x="352" y="412">PHONE</text>
+            <g class="hn" data-k="termux" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="110" y="118" width="120" height="44"/><text class="lab" x="138" y="145">TERMUX</text></g>
+            <g class="hn" data-k="ubuntu" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="320" y="74" width="120" height="44"/><text class="lab" x="344" y="101">UBUNTU</text></g>
+            <g class="hn" data-k="navidrome" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="530" y="118" width="120" height="44"/><text class="lab" x="544" y="145">NAVIDROME</text></g>
+            <g class="hn" data-k="jellyfin" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="570" y="288" width="120" height="44"/><text class="lab" x="598" y="315">JELLYFIN</text></g>
+            <g class="hn" data-k="llm" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="530" y="468" width="120" height="44"/><text class="lab" x="552" y="495">LOCAL LLM</text></g>
+            <g class="hn" data-k="books" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="320" y="512" width="120" height="44"/><text class="lab" x="356" y="539">BOOKS</text></g>
+            <g class="hn" data-k="network" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="110" y="468" width="120" height="44"/><text class="lab" x="124" y="495">SCANNER</text></g>
+            <g class="hn" data-k="storage" tabindex="0" role="button"><rect class="box draw d1" pathLength="1" x="70" y="288" width="120" height="44"/><text class="lab" x="90" y="315">STORAGE</text></g>
+          </g>
+        </svg>
+      </figure>
+      <div id="hlPanel" class="rv" style="--d:.2s" aria-live="polite">
+        <h3 id="hlTitle">PHONE HOMELAB</h3>
+        <span class="hp-meta" id="hlMeta">SELECT A NODE ABOVE</span>
+        <p id="hlDesc">Click any node on the infrastructure diagram to inspect specific services running on the phone.</p>
+        
+        <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
+          <a class="srclink" href="https://github.com/My-Mation/termux_llm" target="_blank" rel="noopener">TERMUX LOCAL LLM (32-BIT) REPO ↗</a>
+          <a class="srclink" href="https://github.com/My-Mation/network-scanner" target="_blank" rel="noopener">WIRELESS NETWORK SCANNER REPO ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 / STUDIVA ============ -->
+<section id="p04" class="spread" data-page="P.P04" data-name="STUDIVA" aria-labelledby="h-p04">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">04</div>
+    <header class="kicker rv"><span>LIVE PRODUCT 04</span><span class="tag team">TEAM PROJECT</span><span class="tag live">LIVE</span></header>
+    <h2 id="h-p04" class="h-giant rv" style="--d:.05s">NEED NOTES<br><span style="color:var(--red)">FOR MAKAUT</span><span style="color:var(--red)">?</span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>STATUS:</b> TEAM PROJECT</span>
+      <span><b>MY CONTRIBUTION:</b> PLATFORM DEVELOPMENT &amp; ARCHITECTURE</span>
+      <span><b>WEBSITE:</b> HTTPS://WWW.STUDIVA.CO.IN/</span>
+    </div>
+    <p class="thesis rv" style="--d:.2s">Studiva is an academic knowledge-sharing platform tailored specifically for MAKAUT engineering students. Students find organized lecture notes, syllabi, previous years question papers, and creators publish verified educational materials.</p>
+    
+    <div class="gr gr-2" style="margin-top:36px">
+      <div class="readout rv" style="padding:24px;background:var(--paper2);border:1px solid var(--line2)">
+        <span class="mono" style="color:var(--red);font-weight:700;display:block;margin-bottom:12px">// CORE OBJECTIVE</span>
+        <p style="color:var(--ink);font-size:14.5px;line-height:1.6">University curricula in West Bengal often suffer from fragmented distribution of study notes. Studiva consolidates departmental notes by semester and subject, offering high-speed search and responsive reading on both mobile and desktop.</p>
+      </div>
+
+      <div class="readout rv" style="padding:24px;background:var(--paper2);border:1px solid var(--line2);--d:.15s">
+        <span class="mono" style="color:var(--ink);font-weight:700;display:block;margin-bottom:12px">// PLATFORM HIGHLIGHTS</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:12px;color:var(--ink)">
+          <li>• Instant semester &amp; subject filtering</li>
+          <li>• Secure document CDN delivery</li>
+          <li>• Community creator verification</li>
+          <li>• Low-latency mobile-first UI</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:30px" class="rv" style="--d:.25s">
+      <a class="ctl button" href="https://www.studiva.co.in/" target="_blank" rel="noopener" style="display:inline-block;padding:16px 28px;font-size:14px;font-weight:700;text-decoration:none;background:var(--red);color:var(--paper);border:none">
+        VISIT STUDIVA (STUDIVA.CO.IN) →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 / REPBOT (POSE ESTIMATION) ============ -->
+<section id="p05" class="spread dark" data-page="P.P05" data-name="REPBOT" aria-labelledby="h-p05">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">05</div>
+    <header class="kicker rv"><span>LIVE PRODUCT 05 — FLUTTER POSE TRACKING</span><span class="tag live">LIVE</span></header>
+    <h2 id="h-p05" class="h-giant rv" style="--d:.05s">STOP<br>COUNTING<span style="color:var(--red)">.</span><br><span class="outline wcond">LET THE</span><br>CAMERA<br>COUNT<span style="color:var(--red)">.</span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>PLATFORM:</b> FLUTTER — ON-DEVICE REAL-TIME POSE DETECTION</span>
+      <span><b>EXERCISES:</b> PUSH-UPS · PULL-UPS · SQUATS · DUMBBELL CURLS · FREE PLAY</span>
+      <span><b>STATUS:</b> LIVE ON GOOGLE PLAY STORE</span>
+    </div>
+
+    <div class="gr gr-2" style="margin-top:40px">
+      <!-- CANVAS POSE SIMULATOR -->
+      <figure class="cvp rv hide-mobile" style="--d:.1s">
+        <canvas id="repCv" width="640" height="440" aria-label="RepBot live pose simulation"></canvas>
+        <div class="ctl ctl-dark" style="display:flex;gap:8px;flex-wrap:wrap;padding:12px" role="group" aria-label="Exercise selector">
+          <button data-rep="push" aria-pressed="true">PUSH-UPS</button>
+          <button data-rep="pull" aria-pressed="false">PULL-UPS</button>
+          <button data-rep="squat" aria-pressed="false">SQUATS</button>
+          <button data-rep="curl" aria-pressed="false">CURLS</button>
+        </div>
+      </figure>
+      
+      <div class="rv" style="--d:.2s">
+        <p class="body-col" style="margin-top:0;color:var(--paper);font-size:15px;line-height:1.6">
+          Prop up your phone and train without counting in your head or tapping sweaty screens mid-set. On-device pose estimation analyzes joint angles and validates full range of motion with zero cloud server round-trips.
+        </p>
+
+        <ul class="readout" style="list-style:none;margin-top:20px">
+          <li style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--pline)"><span>AUTOMATIC REP COUNTING</span><span class="v" style="color:var(--paper)">HANDS-FREE</span></li>
+          <li style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--pline)"><span>SKELETON POSE TRACKING</span><span class="v" style="color:var(--paper)">ON-DEVICE AI</span></li>
+          <li style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--pline)"><span>WORKOUT STRESS OVERHEAD</span><span class="v" style="color:var(--yellow)">ZERO MENTAL FATIGUE</span></li>
+          <li style="display:flex;justify-content:space-between;padding:10px 14px"><span>PRIVACY &amp; PROCESSING</span><span class="v" style="color:var(--paper)">100% LOCAL / NO CLOUD</span></li>
+        </ul>
+
+        <div style="margin-top:24px">
+          <a class="srclink" href="https://play.google.com/store/apps/details?id=com.debargha.repbot&hl=en_IN" target="_blank" rel="noopener" style="color:var(--yellow);border-color:var(--yellow)">
+            GET REPBOT ON GOOGLE PLAY STORE ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 / VISO & FSOCIETY ============ -->
+<section id="p06" class="spread dark" data-page="P.P06" data-name="VISO" aria-labelledby="h-p06">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">06</div>
+    <header class="kicker rv"><span>SYSTEMS 06 — MACHINE HEALTH HACKATHON</span><span class="tag team">TEAM PROJECT</span><span class="tag win">HACKATHON BUILD</span></header>
+    <h2 id="h-p06" class="h-giant rv" style="--d:.05s">MACHINES<br>SPEAK BEFORE<br><span class="outline wcond">THEY BREAK<span style="color:var(--red)">.</span></span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>SENSORS:</b> VIBRATION · ACOUSTIC SOUND · SMOKE DENSITY · THERMAL ANOMALY</span>
+      <span><b>ANALYSIS:</b> AI-ASSISTED PREDICTIVE ANOMALY INTERPRETATION</span>
+      <span><b>REPOSITORY:</b> FSOCIETY (GITHUB)</span>
+      <span><b>TYPE:</b> TEAM PROJECT</span>
+    </div>
+    
+    <div class="gr gr-2" style="margin-top:40px">
+      <!-- FULL-HEIGHT 4-CHANNEL CANVAS TELEMETRY -->
+      <figure class="cvp rv" style="--d:.1s">
+        <canvas id="visoCv" width="640" height="420" aria-label="VISO 4-channel real-time telemetry visualization"></canvas>
+      </figure>
+
+      <!-- SPECS & HACKATHON READOUT -->
+      <div class="rv" style="--d:.2s">
+        <p class="body-col" style="margin-top:0">Detecting mechanical failures before structural breakdown using acoustic sound, vibration, smoke density, and thermal telemetry processed by ESP32 microcontrollers and AI models.</p>
+        
+        <div class="readout" style="margin-top:20px;padding:20px;background:#141311;border:1px solid var(--pline)">
+          <span class="mono" style="color:var(--red);display:block;margin-bottom:10px;font-weight:700">ESP32 SENSOR CHANNELS &amp; AI MODEL</span>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--pline)"><span>VIBRATION SENSOR</span><span class="v" style="color:var(--paper)">MPU6050 ACCELEROMETER</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--pline)"><span>ACOUSTIC SPECTRUM</span><span class="v" style="color:var(--paper)">24 FFT FREQUENCY BANDS</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--pline)"><span>SMOKE &amp; THERMAL</span><span class="v" style="color:var(--paper)">MQ-2 GAS &amp; THERMOCOUPLE</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0"><span>PREDICTIVE ENGINE</span><span class="v" style="color:var(--yellow)">EDGE ANOMALY INDEX (AI)</span></div>
+        </div>
+
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+          <a class="srclink" href="https://github.com/My-Mation/FSociety" target="_blank" rel="noopener" style="color:var(--paper);border-color:var(--red)">
+            VIEW FSOCIETY / VISO HACKATHON REPO ↗
+          </a>
+          <a class="srclink" href="achievements.html#ac-viso" style="color:var(--yellow);border-color:var(--yellow)">
+            ACHIEVEMENTS BREAKDOWN ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 / SARBANASH ============ -->
+<section id="p07" class="spread dark" data-page="P.P07" data-name="SARBANASH" aria-labelledby="h-p07">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">07</div>
+    <header class="kicker rv"><span>CREATIVE 07 — INDIE GAME</span><span class="tag win">SURVIVAL HORROR</span><span class="mdim">SOLO / GODOT / PISKEL</span></header>
+    <h2 id="h-p07" class="h-giant rv" style="--d:.05s">BEFORE<br>THE ROBOTS<span style="color:var(--red)">,</span><br><span class="outline wcond">THERE WERE</span><br>MONSTERS<span style="color:var(--red)">.</span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>TITLE:</b> SARBANASH</span>
+      <span><b>TYPE:</b> SOLO INDIE GAME</span>
+      <span><b>TOOLS:</b> GODOT ENGINE · PISKEL</span>
+      <span><b>STYLE:</b> SURVIVAL-HORROR ADVENTURE · PIXEL ART</span>
+    </div>
+
+    <div class="gr gr-2" style="margin-top:44px">
+      <!-- ATMOSPHERIC CRT GAME MONITOR -->
+      <figure class="cartridge scan rv" style="--d:.1s;background:#0a0807;border:1px solid var(--red)">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--pline);margin-bottom:16px">
+          <span class="mono" style="color:var(--red);letter-spacing:.16em">SARBANASH // CRT MONSTER RADAR</span>
+          <span class="mono" style="color:var(--yellow)">STATUS: ACTIVE</span>
+        </div>
+        <canvas id="foxCv" width="480" height="320" aria-label="Pixel art fox and monster sprite canvas"></canvas>
+        <div class="ctl ctl-dark" style="margin-top:16px;display:flex;justify-content:space-between;align-items:center">
+          <button id="foxVisionBtn" aria-pressed="false" style="background:var(--red);color:#ffffff;border:1px solid var(--red);font-weight:700;font-size:11.5px;padding:10px 18px;letter-spacing:.12em;cursor:pointer">TOGGLE MONSTER VISION 👁</button>
+          <span class="mono mdim" style="font-size:10px">PISKEL SPRITE RENDER</span>
+        </div>
+      </figure>
+
+      <div class="rv" style="--d:.2s">
+        <div style="border:1px solid var(--pline);padding:24px;background:#141210;position:relative">
+          <span class="stamp warn" style="margin-bottom:14px">SOLO INDIE GAME</span>
+          <h3 style="font-weight:900;font-stretch:75%;font-size:28px;text-transform:uppercase;margin-bottom:12px;color:var(--paper)">THE STORY OF SARBANASH</h3>
+          <p class="body-col" style="margin-top:0;color:var(--paper);font-size:15px;line-height:1.6">Sarbanash is a survival-horror pixel art game crafted from scratch. Set in a desolate world filled with supernatural creatures, exploration, tension, and survival mechanics.</p>
+          
+          <ul class="readout" style="margin-top:20px">
+            <div><span>GAME ENGINE</span><span class="v" style="color:var(--paper)">GODOT ENGINE</span></div>
+            <div><span>ART &amp; ANIMATION</span><span class="v" style="color:var(--paper)">PISKEL (HAND-DRAWN PIXELS)</span></div>
+            <div><span>AUDIO DESIGN</span><span class="v" style="color:var(--paper)">ATMOSPHERIC SYNTH &amp; SFX</span></div>
+            <div><span>GENRE</span><span class="v" style="color:var(--paper)">SURVIVAL HORROR / ADVENTURE</span></div>
+          </ul>
+
+          <div style="margin-top:22px">
+            <a class="srclink" href="https://github.com/My-Mation/Sarbanash" target="_blank" rel="noopener" style="color:var(--paper);border-color:var(--red)">
+              VISIT SARBANASH GAME REPO ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 / KISOR ============ -->
+<section id="p08" class="spread" data-page="P.P08" data-name="KISOR" aria-labelledby="h-p08">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">08</div>
+    <header class="kicker rv"><span>CREATIVE 08 — VISUAL NOVEL</span><span class="mdim">SOLO / GODOT / PISKEL</span></header>
+    <h2 id="h-p08" class="h-giant klight rv" style="--d:.05s;font-size:clamp(52px,10vw,150px)">Kisor<span style="color:var(--red)">.</span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>TYPE:</b> INDIE VISUAL NOVEL</span>
+      <span><b>TOOLS:</b> GODOT · PISKEL</span>
+    </div>
+    <p class="kisor-thesis rv" style="--d:.2s">A narrative game centered around a teacher and eight students, exploring difficult personal experiences, adolescence, and self-discovery.</p>
+    
+    <div style="margin-top:24px" class="rv" style="--d:.25s">
+      <a class="srclink" href="https://github.com/My-Mation/Kisor" target="_blank" rel="noopener" style="color:var(--ink);border-color:var(--red)">
+        VISIT KISOR REPO ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 / ECG & HOLTER MONITOR TELEMETRY SUITE ============ -->
+<section id="p09" class="spread dark" data-page="P.P09" data-name="ECG DEMO" aria-labelledby="h-p09">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">09</div>
+    <header class="kicker rv">
+      <span>SYSTEMS 09 — CLINICAL TELEMETRY</span>
+      <span class="tag live" style="background:#00d084;color:#000;border-color:#00d084;font-weight:700">LIVE DEMO ↗</span>
+      <span class="tag" style="background:var(--red);color:#fff;border-color:var(--red);font-weight:600">8 PROTOTYPES</span>
+      <span class="tag team">WEB APPLICATION</span>
+    </header>
+    <h2 id="h-p09" class="h-giant rv" style="--d:.05s">HOSPITAL-GRADE<br>CONTINUOUS ECG<br><span class="outline wcond">TELEMETRY SUITE</span><span style="color:var(--red)">.</span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>LIVE PLATFORM:</b> <a href="https://ecg-demo-one.vercel.app/" target="_blank" rel="noopener" style="color:var(--yellow);text-decoration:underline;font-weight:700">ECG-DEMO-ONE.VERCEL.APP ↗</a></span>
+      <span><b>ENGINEERING:</b> NEXT.JS 16 · TURBOPACK · TAILWIND CSS · HTML5 CANVAS</span>
+      <span><b>SCOPE:</b> 8 HOSPITAL-GRADE PROTOTYPES (EVERBEAT, VITALIS, PULSECHECK...)</span>
+      <span><b>SOURCE:</b> <a href="https://github.com/My-Mation/ecg-demo" target="_blank" rel="noopener" style="color:var(--paper);text-decoration:underline">GITHUB / ECG-DEMO ↗</a></span>
+    </div>
+    <p class="thesis rv" style="--d:.2s">
+      A continuous cardiac telemetry and Holter monitor showcase suite. Engineered with Next.js 16 and high-frequency HTML5 waveform sweeps to simulate real-time clinical P-QRS-T electrocardiograms, arrhythmia detection (40–180 BPM), rhythm strip analysis, and cardiologist review workflows.
+    </p>
+
+    <div class="gr gr-2" style="margin-top:40px">
+      <!-- LIVE MEDICAL ECG MONITOR CANVAS -->
+      <figure class="cartridge scan rv" style="--d:.1s;background:#050d0a;border:1px solid #00d084">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid rgba(0,208,132,0.25);margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00d084;box-shadow:0 0 8px #00d084"></span>
+            <span class="mono" style="color:#00d084;letter-spacing:.16em;font-weight:700">LEAD II // 25mm/s 10mm/mV</span>
+          </div>
+          <span id="ecgBpmDisplay" class="mono" style="color:var(--yellow);font-weight:700">HR: 72 BPM · NSR</span>
+        </div>
+        <canvas id="ecgCv" width="600" height="300" aria-label="Real-time clinical ECG Lead II rhythm strip animation"></canvas>
+        <div class="ctl ctl-dark" style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+          <div style="display:flex;gap:6px">
+            <button id="ecgNormalBtn" class="tag" style="background:#00d084;color:#000;border-color:#00d084;font-weight:700;cursor:pointer" aria-pressed="true">NORMAL (72 BPM)</button>
+            <button id="ecgTachBtn" class="tag" style="background:transparent;color:var(--paper);border-color:var(--pline);cursor:pointer" aria-pressed="false">TACHY (130 BPM)</button>
+            <button id="ecgBradyBtn" class="tag" style="background:transparent;color:var(--paper);border-color:var(--pline);cursor:pointer" aria-pressed="false">BRADY (48 BPM)</button>
+          </div>
+          <a href="https://ecg-demo-one.vercel.app/" target="_blank" rel="noopener" class="mono" style="font-size:10.5px;color:#00d084;text-decoration:none;font-weight:700">
+            OPEN FULL SUITE ↗
+          </a>
+        </div>
+      </figure>
+
+      <!-- TECHNICAL SPECIFICATIONS & REDIRECT CTA -->
+      <div class="rv" style="--d:.2s">
+        <div style="border:1px solid var(--pline);padding:24px;background:#141311;position:relative">
+          <span class="stamp warn" style="margin-bottom:14px;background:#00d084;border-color:#00d084;color:#000">CLINICAL TELEMETRY</span>
+          <h3 style="font-weight:900;font-stretch:75%;font-size:26px;text-transform:uppercase;margin-bottom:12px;color:var(--paper)">8 COMPLETE PRODUCT EXPERIENCES</h3>
+          <p class="body-col" style="margin-top:0;color:var(--pdim);font-size:14.5px;line-height:1.6">
+            Built as a multi-model design and engineering exploration of clinical Holter monitoring. Each of the 8 prototypes implements distinct medical design languages, telemetry displays, telemetry data tables, and cardiologist diagnostic flows.
+          </p>
+
+          <ul class="readout" style="margin-top:18px;list-style:none">
+            <li style="display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--pline)"><span>01. EVERBEAT MONITOR</span><span class="v" style="color:var(--paper)">CONTINUOUS HOLTER + 14-DAY BATTERY</span></li>
+            <li style="display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--pline)"><span>02. VITALIS TELEMETRY</span><span class="v" style="color:var(--paper)">HOSPITAL ICU CARDIAC SUITE</span></li>
+            <li style="display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--pline)"><span>03. PULSECHECK AI</span><span class="v" style="color:var(--paper)">AUTOMATED AFIB &amp; ARRHYTHMIA TRIAGE</span></li>
+            <li style="display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--pline)"><span>04–08. SPECIALIZED MODELS</span><span class="v" style="color:var(--yellow)">CARDIOWATCH, SENTINEL, SYNC...</span></li>
+            <li style="display:flex;justify-content:space-between;padding:9px 12px"><span>ARCHITECTURE</span><span class="v" style="color:#00d084">NEXT.JS 16 · TURBOPACK · TAILWIND</span></li>
+          </ul>
+
+          <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
+            <a class="ctl button" href="https://ecg-demo-one.vercel.app/" target="_blank" rel="noopener" style="display:flex;justify-content:center;align-items:center;padding:14px 24px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red);text-align:center;box-shadow:0 0 20px rgba(191,48,22,0.3)">
+              LAUNCH LIVE ECG DEMO (ECG-DEMO-ONE.VERCEL.APP) →
+            </a>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <a class="srclink" href="https://github.com/My-Mation/ecg-demo" target="_blank" rel="noopener" style="flex:1;text-align:center;color:var(--yellow);border-color:var(--yellow)">
+                VIEW GITHUB REPO ↗
+              </a>
+              <a class="srclink" href="https://ecg-demo-one.vercel.app/showcase" target="_blank" rel="noopener" style="flex:1;text-align:center;color:var(--paper);border-color:var(--pline)">
+                ALL 8 PROTOTYPES ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="pageBar" aria-hidden="true">
+  <span id="pgL">P.P00 — OVERVIEW</span>
+  <span class="r">DEB / 2026 — COMPLETE PROJECTS DOSSIER</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

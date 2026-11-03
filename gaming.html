@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEB — Gaming Archive / Balatro, Among Us, Undertale &amp; Indie Lab</title>
+<meta name="description" content="Debargha Sarkar — personal gaming sanctuary: Balatro (#1 favorite), Among Us quarantine lifeline, Undertale & Deltarune, and indie titles Sarbanash & Kisor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+  /* ============ GAMING SECTIONS COLOR SCHEMES ============ */
+
+  /* SECTION 01: BALATRO (AUTHENTIC CASINO FELT GREEN, JOKER RED & GOLD MULT) */
+  .section-balatro {
+    background: radial-gradient(circle at 50% 20%, #064e3b 0%, #022c22 45%, #02160e 100%);
+    color: #e0f2fe;
+    border-top: 4px solid #ef4444;
+    min-height: auto;
+    position: relative;
+    padding: 100px 5.5vw 120px;
+  }
+  .balatro-header-card {
+    margin-bottom: 36px;
+  }
+  .balatro-red { color: #ef4444; text-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
+  .balatro-gold { color: #f59e0b; }
+  .balatro-blue { color: #38bdf8; }
+
+  /* SECTION 02: AMONG US (THE SKELD SPACESHIP HULL & EMERGENCY RED) */
+  .section-amongus {
+    background: radial-gradient(circle at 50% 20%, #150f24 0%, #090710 75%);
+    color: #f5f3ff;
+    border-top: 3px solid #06b6d4;
+    min-height: auto;
+    position: relative;
+    padding: 100px 5.5vw 120px;
+  }
+  .au-header-card {
+    margin-bottom: 36px;
+  }
+  .au-cyan { color: #06b6d4; }
+  .au-red { color: #ef4444; }
+
+  /* SECTION 03: UNDERTALE & DELTARUNE (TOBY FOX VOID & DETERMINATION RED) */
+  .section-undertale {
+    background: radial-gradient(circle at 50% 20%, #10061e 0%, #000000 75%);
+    color: #fdf4ff;
+    border-top: 3px solid #ef4444;
+    min-height: auto;
+    position: relative;
+    padding: 100px 5.5vw 120px;
+  }
+  .ut-header-card {
+    margin-bottom: 36px;
+  }
+  .ut-soul { color: #ef4444; text-shadow: 0 0 12px rgba(239, 68, 68, 0.6); }
+  .ut-purple { color: #c084fc; }
+
+  /* SECTION 04: DEBARGHA'S OWN GAMES (SARBANASH & KISOR / RETRO INDIE) */
+  .section-indie {
+    background: radial-gradient(circle at 50% 20%, #0d1a10 0%, #070c08 75%);
+    color: #ecfdf5;
+    border-top: 3px solid #22c55e;
+    min-height: auto;
+    position: relative;
+    padding: 100px 5.5vw 120px;
+  }
+  .indie-header-card {
+    margin-bottom: 36px;
+  }
+  .indie-green { color: #22c55e; }
+  .indie-amber { color: #f59e0b; }
+
+  /* MEDIA IMAGE FRAME WITH PLACEHOLDER FALLBACK */
+  .media-img-frame {
+    width: 100%;
+    min-height: 380px;
+    max-height: 520px;
+    background: #0d121d;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .media-img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  }
+  .media-img-frame:hover img {
+    transform: scale(1.03);
+  }
+  .media-placeholder-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    background: repeating-linear-gradient(45deg, rgba(0,0,0,0.4) 0 10px, rgba(20,20,20,0.4) 10px 20px);
+    font-family: var(--mono);
+    color: rgba(255, 255, 255, 0.65);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* BALATRO MULT CALCULATOR SIMULATOR WIDGET */
+  .balatro-box {
+    background: #0f172a;
+    border: 2px solid #38bdf8;
+    padding: 20px;
+    border-radius: 6px;
+    font-family: var(--mono);
+  }
+  .score-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-weight: 700;
+    border-radius: 4px;
+  }
+
+  /* EMERGENCY MEETING SIREN OVERLAY */
+  #sirenOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(239, 68, 68, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+  }
+  .siren-active {
+    animation: siren-pulse 0.4s 3 ease-in-out;
+  }
+  @keyframes siren-pulse {
+    0% { opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<a class="skiplink" href="#gaming-content">Skip to content</a>
+<div id="noise" aria-hidden="true"></div>
+<canvas id="trail" aria-hidden="true"></canvas>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursorTag" aria-hidden="true">OPEN</div>
+<div id="sirenOverlay" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<nav id="siteNav" aria-label="Site">
+  <a class="brand" href="index.html">← DEB <span class="hide-mobile">— BACK TO HOME</span></a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="tag hide-mobile" href="projects.html" style="text-decoration:none;border-color:var(--yellow);color:var(--yellow)">PROJECTS</a>
+    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
+    <a class="tag hide-mobile" href="anime.html" style="text-decoration:none">ANIME</a>
+    <a class="tag hide-mobile" href="music.html" style="text-decoration:none">MUSIC</a>
+    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  </div>
+</nav>
+
+<!-- TOC -->
+<div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-head"><h2>Gaming Index</h2><button id="tocClose">CLOSE ×</button></div>
+  <ul class="toc-list">
+    <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Command Hub</span><span class="leader"></span><span class="t-pg">HUB ↗</span></a></li>
+    <li><a href="projects.html"><span class="t-no">★</span><span class="t-title">Projects Dossier (3D Model &amp; Code)</span><span class="leader"></span><span class="t-pg">PROJ ↗</span></a></li>
+    <li><a href="achievements.html"><span class="t-no">★</span><span class="t-title">Achievements &amp; Hackathon Wins</span><span class="leader"></span><span class="t-pg">WINS ↗</span></a></li>
+    <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Gaming Cover</span><span class="leader"></span><span class="t-pg">P.G00</span></a></li>
+    <li><a href="#m-balatro"><span class="t-no">01</span><span class="t-title">Balatro (#1 All-Time Favorite Game)</span><span class="leader"></span><span class="t-pg">P.G01</span></a></li>
+    <li><a href="#m-amongus"><span class="t-no">02</span><span class="t-title">Among Us (Corona Quarantine Lifeline)</span><span class="leader"></span><span class="t-pg">P.G02</span></a></li>
+    <li><a href="#m-undertale"><span class="t-no">03</span><span class="t-title">Undertale &amp; Deltarune (Determination)</span><span class="leader"></span><span class="t-pg">P.G03</span></a></li>
+    <li><a href="#m-indie"><span class="t-no">04</span><span class="t-title">Sarbanash &amp; Kisor (Deb’s Own Indie Games)</span><span class="leader"></span><span class="t-pg">P.G04</span></a></li>
+  </ul>
+  <p class="toc-foot">DEBARGHA SARKAR / 2026 — GAMING SANCTUARY</p>
+</div>
+
+<main id="gaming-content">
+
+<!-- ============ COVER ============ -->
+<section id="cover" aria-label="Gaming Cover" data-page="P.G00" data-name="GAMING COVER" style="min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:86px 5.5vw 64px;position:relative;">
+  <div class="crops" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="topline">
+    <div>DEBARGHA SARKAR <span class="hide-mobile">— JOKER MULT &amp; RETRO PIXELS</span></div>
+    <div class="hide-mobile">CHAPTER 03 // GAMING ARCHIVE</div>
+    <div>GAMING ARCHIVE / 2026</div>
+  </div>
+  <div class="hero-center">
+    <div class="crosshair" aria-hidden="true"></div>
+    <div class="side-vert">ROGUELIKE MATH · SKELD DECEPTION · DETERMINATION · BENGALI HORROR</div>
+    <h1 class="hero-name" aria-label="GAMES.">
+      <span class="ln" style="--fx:-140px;--fy:30px;--fr:-9deg;--d:.15s">G</span><span class="ln" style="--fx:40px;--fy:-160px;--fr:6deg;--d:.32s">A</span><span class="ln" style="--fx:150px;--fy:60px;--fr:-5deg;--d:.5s">M</span><span class="ln" style="--fx:-60px;--fy:90px;--fr:7deg;--d:.65s">E</span><span class="ln dot" style="--fx:0;--fy:-80px;--fr:0deg;--d:.78s">S.</span>
+    </h1>
+    <p class="hero-sub">The Interactive Playground</p>
+    <p class="hero-roles">BALATRO · AMONG US · UNDERTALE · DELTARUNE · SARBANASH · KISOR</p>
+    <div class="hero-rule" aria-hidden="true"></div>
+    
+    <div style="margin-top:24px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:10">
+      <a class="ctl button" href="#m-balatro" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
+        ENTER WITH BALATRO ↓
+      </a>
+    </div>
+  </div>
+  <div class="botline">
+    <div>INDEX 03 / GAMING</div>
+    <div class="hide-mobile">UNHURRIED FULL-SCREEN JOURNEY ACROSS ROGUELIKES &amp; RETRO EXPERIMENTS</div>
+    <div class="scroll-cue">SCROLL <i aria-hidden="true"></i></div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     01 / BALATRO (#1 MOST FAVORITE GAME)
+     POKER FELT NAVY, JOKER MULT & ROGUELIKE EUPHORIA
+     ===================================================================== -->
+<section id="m-balatro" class="section-balatro" data-page="P.G01" data-name="BALATRO" aria-labelledby="h-balatro">
+  <div class="spread-inner rv-scope" style="position:relative;z-index:2">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(239,68,68,0.2)">01</div>
+    
+    <div class="balatro-header-card">
+      <header class="kicker rv">
+        <span class="balatro-red">👑 #1 ALL-TIME FAVORITE GAME</span>
+        <span class="tag win" style="background:#991b1b;border-color:#ef4444">HYPNOTIC DECKBUILDER &amp; EXPONENTIAL MATH</span>
+      </header>
+      <h2 id="h-balatro" class="h-giant rv" style="--d:.05s">
+        BALATRO<br>
+        <span class="balatro-gold" style="font-size:clamp(22px, 3.8vw, 44px);letter-spacing:0.04em">ANTE 8 BOSS BLIND: DEFEATED.</span>
+      </h2>
+      <p class="dek rv" style="--d:.1s;color:#bae6fd">
+        Developed by LocalThunk (2024) · Published by Playstack. The poker roguelike that took over the world through pure mathematical dopamine, CRT phosphor bloom, and procedural Joker synergies.
+      </p>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div style="margin-top:70px;display:grid;grid-template-columns:repeat(12, 1fr);gap:36px;align-items:start">
+      <div style="grid-column: span 7;">
+        <blockquote class="rv" style="border-left:4px solid #ef4444;padding-left:22px;font-size:clamp(18px,2.2vw,26px);font-weight:700;line-height:1.4;margin-bottom:28px;color:#fff">
+          “Play your cards right. Trigger the Jokers. Watch the numbers explode into scientific notation.”
+        </blockquote>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#e0f2fe;margin-bottom:20px">
+          <em>Balatro</em> is pure game design distilled to absolute perfection. It takes the universal 500-year-old vocabulary of poker hands — Pairs, Straights, Flushes, Full Houses — and violently re-engineers them with 150 unique Jokers that modify base chips and multipliers in real-time.
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#bae6fd;margin-bottom:24px">
+          What makes it Debargha’s undisputed <strong>#1 favorite game</strong> is the tactile feedback loop: the satisfying clatter of cards flipping, the subtle screen tilt, the hypnotic analogue synth soundtrack composed by LouisF, and the euphoria when a Blueprint-Brainstorm combo triggers a Baron-Mime king re-trigger cascade, sending the mult counter spinning uncontrollably past <code>100,000,000</code>.
+        </p>
+
+        <!-- INTERACTIVE BALATRO MULT SIMULATOR -->
+        <div class="rv balatro-box" style="margin-bottom:32px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <span style="color:#ef4444;font-weight:700;font-size:11px;letter-spacing:.1em">JOKER SYNERGY SIMULATOR</span>
+            <span class="score-badge" style="background:#ef4444;color:#fff">ANTE 11 // PURPLE STAKE</span>
+          </div>
+          <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+            <span style="border:1px solid #38bdf8;padding:6px 10px;font-size:11px;background:rgba(56,189,248,0.1)">🃏 BLUEPRINT (Copies Mult)</span>
+            <span style="border:1px solid #f59e0b;padding:6px 10px;font-size:11px;background:rgba(245,158,11,0.1)">🍌 CAVENDISH (×3 Mult)</span>
+            <span style="border:1px solid #ef4444;padding:6px 10px;font-size:11px;background:rgba(239,68,68,0.1)">👑 BARON (×1.5 Per King)</span>
+            <span style="border:1px solid #10b981;padding:6px 10px;font-size:11px;background:rgba(16,185,129,0.1)">🔄 MIME (Re-trigger in Hand)</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:#020617;padding:12px 18px;border-radius:4px;border:1px solid #1e293b">
+            <div>
+              <span style="font-size:10px;color:#94a3b8">HAND: FLUSH FIVE (KINGS OF HEARTS)</span>
+              <div id="balatroScore" style="font-size:22px;font-weight:700;color:#f59e0b;margin-top:2px">
+                <span style="color:#38bdf8">1,240</span> CHIPS × <span style="color:#ef4444">48,600</span> MULT = <span style="color:#f59e0b">60,264,000</span>
+              </div>
+            </div>
+            <button id="rollMultBtn" class="ctl button" style="background:#ef4444;color:#fff;border:none;padding:8px 16px;font-size:11px;font-weight:700;cursor:pointer;border-radius:3px">
+              ROLL MULT ↻
+            </button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border-top:1px solid rgba(239,68,68,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#ef4444;letter-spacing:.1em">LOCALTHUNK'S PHILOSOPHY</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#e0f2fe">Solo developer, zero predatory microtransactions, pure love for classic gaming feel and math elegance.</p>
+          </div>
+          <div style="border-top:1px solid rgba(239,68,68,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#ef4444;letter-spacing:.1em">BOSS BLIND COUNTER</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#e0f2fe">The Arm, The Needle, The Violet Vessel — every run demands adaptive pivot or certain death.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE & SPEC SPREAD -->
+      <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
+        <div class="media-img-frame" style="border-color:rgba(239,68,68,0.4)">
+          <img src="images/balatro-hero.jpg" alt="Balatro Joker Cards and Poker Felt" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="font-size:32px;margin-bottom:8px">🃏</span>
+            <strong>images/balatro-hero.jpg</strong>
+            <span style="font-size:11px;opacity:0.75;margin-top:4px">Balatro Title / Joker Cards / High-Stakes Run</span>
+            <span style="font-size:10px;color:#ef4444;margin-top:8px">Drop image in /images to render</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:20px;font-family:var(--mono);font-size:12px">
+          <div style="color:#ef4444;font-weight:700;margin-bottom:12px;letter-spacing:.1em">ARCHIVE LOG // ENTRY G-01</div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;color:#bae6fd;font-size:11px">
+            <span style="opacity:0.6">TITLE:</span> <span>Balatro</span>
+            <span style="opacity:0.6">DEVELOPER:</span> <span>LocalThunk</span>
+            <span style="opacity:0.6">GENRE:</span> <span>Roguelike Deckbuilder</span>
+            <span style="opacity:0.6">RANK:</span> <span>#1 Personal Favorite Game</span>
+            <span style="opacity:0.6">FAV JOKER:</span> <span>Blueprint / Cavendish / Gros Michel</span>
+            <span style="opacity:0.6">HIGHEST SCORE:</span> <span>Scientific Notation (e12+)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     02 / AMONG US (INNERSLOTH)
+     THE CORONA QUARANTINE LIFELINE & THE SKELD PSYCHOLOGY
+     ===================================================================== -->
+<section id="m-amongus" class="section-amongus" data-page="P.G02" data-name="AMONG US" aria-labelledby="h-au">
+  <div class="spread-inner rv-scope" style="position:relative;z-index:2">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(6,182,212,0.2)">02</div>
+    
+    <div class="au-header-card">
+      <header class="kicker rv">
+        <span class="au-cyan">THE CORONA QUARANTINE LIFELINE</span>
+        <span class="tag win" style="background:#0e7490;border-color:#06b6d4">FRIENDSHIP IN ISOLATION</span>
+      </header>
+      <h2 id="h-au" class="h-giant rv" style="--d:.05s">
+        AMONG US<br>
+        <span class="au-red" style="font-size:clamp(22px, 3.8vw, 44px);letter-spacing:0.04em">THERE IS 1 IMPOSTOR AMONG US.</span>
+      </h2>
+      <p class="dek rv" style="--d:.1s;color:#cffafe">
+        InnerSloth (2018–2021). The social deduction phenomenon that saved our sanity during the Covid lockdowns. Late-night Discord calls, electrical room terrors, and emergency meetings that tested friendships.
+      </p>
+
+      <div style="margin-top:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <button id="sirenBtn" class="ctl button" style="background:#dc2626;color:#fff;border:1px solid #ef4444;padding:8px 18px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;cursor:pointer">
+          🚨 CALL EMERGENCY MEETING
+        </button>
+        <span style="font-family:var(--mono);font-size:11px;color:#67e8f9">WHO VENTED IN ELECTRICAL?</span>
+      </div>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div style="margin-top:70px;display:grid;grid-template-columns:repeat(12, 1fr);gap:36px;align-items:start">
+      <div style="grid-column: span 7;">
+        <blockquote class="rv" style="border-left:4px solid #06b6d4;padding-left:22px;font-size:clamp(18px,2.2vw,26px);font-weight:700;line-height:1.4;margin-bottom:28px;color:#fff">
+          “Red was not an Anarchist. 1 Impostor remains.”
+        </blockquote>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#f5f3ff;margin-bottom:20px">
+          During the peak of the 2020–2021 quarantine, when physical classrooms went silent and the entire world was confined within four walls, <em>Among Us</em> wasn’t merely a game — it was our digital living room. Every evening at 9 PM, ten of us would jump into Discord, boot up The Skeld or Mira HQ, and argue passionately for three straight hours about who was fixing wires in Navigation and who faked card swipe in Admin.
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#cffafe;margin-bottom:24px">
+          The brilliant simplicity of its mechanic — asymmetric information, paranoia, body discovery panic, and vote-or-eject democracy — created legendary inside jokes that still persist among high school friends today. It demonstrated the profound power of multiplayer games to bridge distance and stave off loneliness when reality felt overwhelming.
+        </p>
+
+        <div class="rv" style="background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.3);padding:24px;border-radius:4px;margin-bottom:32px">
+          <div style="font-family:var(--mono);font-size:11px;color:#06b6d4;letter-spacing:.12em;margin-bottom:12px;text-transform:uppercase">
+            // MEMORIES FROM ELECTRICAL
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#ecfeff;margin:0">
+            Fixing the circuit breaker in Electrical while checking your shoulder every two seconds; seeing the vent flap rattle; dead body reported; screaming defensive alibis while someone quietly chuckles in mute. It remains a core cultural milestone in Debargha’s gaming memory.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border-top:1px solid rgba(6,182,212,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#06b6d4;letter-spacing:.1em">THE QUARANTINE BOND</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#f5f3ff">Kept high school friends connected through laughter, accusations, and late-night voice chats.</p>
+          </div>
+          <div style="border-top:1px solid rgba(6,182,212,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#06b6d4;letter-spacing:.1em">PSYCHOLOGICAL ART</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#f5f3ff">A masterclass in how human trust fractures and mends in micro-societies.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE & SPEC SPREAD -->
+      <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
+        <div class="media-img-frame" style="border-color:rgba(6,182,212,0.4)">
+          <img src="images/among-us.jpg" alt="Among Us Space Crewmates" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="font-size:32px;margin-bottom:8px">🚀</span>
+            <strong>images/among-us.jpg</strong>
+            <span style="font-size:11px;opacity:0.75;margin-top:4px">Crewmates in Space / Emergency Button / The Skeld</span>
+            <span style="font-size:10px;color:#06b6d4;margin-top:8px">Drop image in /images to render</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:20px;font-family:var(--mono);font-size:12px">
+          <div style="color:#06b6d4;font-weight:700;margin-bottom:12px;letter-spacing:.1em">ARCHIVE LOG // ENTRY G-02</div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;color:#cffafe;font-size:11px">
+            <span style="opacity:0.6">DEVELOPER:</span> <span>InnerSloth</span>
+            <span style="opacity:0.6">ERA:</span> <span>2020–2021 Corona Quarantine</span>
+            <span style="opacity:0.6">SIGNIFICANCE:</span> <span>Friendship Lifeline</span>
+            <span style="opacity:0.6">MAP OF CHOICE:</span> <span>The Skeld &amp; Polus</span>
+            <span style="opacity:0.6">COLOR TAG:</span> <span>Cyan Visor / Red Impostor</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     03 / UNDERTALE & DELTARUNE (TOBY FOX)
+     DETERMINATION, BULLET HELL & METANARRATIVE
+     ===================================================================== -->
+<section id="m-undertale" class="section-undertale" data-page="P.G03" data-name="UNDERTALE & DELTARUNE" aria-labelledby="h-ut">
+  <div class="spread-inner rv-scope" style="position:relative;z-index:2">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(168,85,247,0.2)">03</div>
+    
+    <div class="ut-header-card">
+      <header class="kicker rv">
+        <span class="ut-purple">TOBY FOX'S MASTERWORK</span>
+        <span class="tag win" style="background:#6b21a8;border-color:#a855f7">DETERMINATION &amp; MERCY</span>
+      </header>
+      <h2 id="h-ut" class="h-giant rv" style="--d:.05s">
+        UNDERTALE ×<br>
+        <span class="ut-soul" style="font-size:clamp(22px, 3.8vw, 44px);letter-spacing:0.04em">DELTARUNE</span>
+      </h2>
+      <p class="dek rv" style="--d:.1s;color:#e9d5ff">
+        Created by Toby Fox (2015 / 2018–Present). The retro pixel RPG that deconstructed gaming morality: showing mercy when combat was expected, and confronting the player directly with their own cruelty.
+      </p>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div style="margin-top:70px;display:grid;grid-template-columns:repeat(12, 1fr);gap:36px;align-items:start">
+      <div style="grid-column: span 7;">
+        <blockquote class="rv" style="border-left:4px solid #ef4444;padding-left:22px;font-size:clamp(18px,2.2vw,26px);font-weight:700;line-height:1.4;margin-bottom:28px;color:#fff">
+          “Despite everything, it’s still you.”
+          <div style="font-size:13px;font-weight:400;margin-top:8px;color:#fca5a5">— Undertale, Mirror in Asgore’s Home</div>
+        </blockquote>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#fdf4ff;margin-bottom:20px">
+          <em>Undertale</em> is a landmark in interactive fiction because it remembered what standard RPGs ask you to forget: every enemy has a life, an insecurity, and a reason for being in the dark. The bullet-hell battle system turns dodging attacks into a dance of empathy where you can talk, spare, or befriend monsters rather than slaughtering them for EXP (Execution Points).
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#e9d5ff;margin-bottom:24px">
+          <em>Deltarune</em> deepens the existential inquiry: <em>“In this world, your choices don’t matter... or do they?”</em> Kris, Susie, and Ralsei exploring the Dark World with Toby Fox’s unmatched chiptune arrangements — like *MEGALOVANIA*, *Hopes and Dreams*, and *A Town Called Hometown* — cement Toby Fox as one of the greatest auteurs in modern gaming history.
+        </p>
+
+        <!-- RETRO DETERMINATION SOUL WIDGET -->
+        <div class="rv" style="background:#000;border:2px solid #fff;padding:24px;border-radius:4px;margin-bottom:32px;font-family:var(--mono)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+            <span style="color:#ef4444;font-size:24px;animation:heartbeat 1.2s infinite">❤️</span>
+            <span style="color:#fff;font-size:13px;letter-spacing:.1em">* Seeing such an unhurried portfolio fills you with DETERMINATION.</span>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:16px">
+            <span style="border:1px solid #f59e0b;color:#f59e0b;padding:4px 12px;font-size:11px">[ FIGHT ]</span>
+            <span style="border:1px solid #f59e0b;color:#f59e0b;padding:4px 12px;font-size:11px">[ ACT ]</span>
+            <span style="border:1px solid #f59e0b;color:#f59e0b;padding:4px 12px;font-size:11px">[ ITEM ]</span>
+            <span style="border:2px solid #ef4444;background:#ef4444;color:#fff;padding:4px 12px;font-size:11px;font-weight:700">[ MERCY ]</span>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border-top:1px solid rgba(168,85,247,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#c084fc;letter-spacing:.1em">METANARRATIVE GENIUS</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#fdf4ff">Flowey and Sans breaking the fourth wall, addressing save files, resets, and player agency directly.</p>
+          </div>
+          <div style="border-top:1px solid rgba(168,85,247,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#c084fc;letter-spacing:.1em">CHIPTUNE SOUNDTRACK</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#fdf4ff">Over 100 tracks entirely composed by Toby Fox, blending leitmotifs with operatic emotional weight.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE & SPEC SPREAD -->
+      <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
+        <div class="media-img-frame" style="border-color:rgba(168,85,247,0.4)">
+          <img src="images/undertale.jpg" alt="Undertale Frisk Sans Toriel Pixel Art" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="font-size:32px;margin-bottom:8px">❤️</span>
+            <strong>images/undertale.jpg</strong>
+            <span style="font-size:11px;opacity:0.75;margin-top:4px">Undertale &amp; Deltarune / The Red SOUL / Sans &amp; Papyrus</span>
+            <span style="font-size:10px;color:#c084fc;margin-top:8px">Drop image in /images to render</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:20px;font-family:var(--mono);font-size:12px">
+          <div style="color:#c084fc;font-weight:700;margin-bottom:12px;letter-spacing:.1em">ARCHIVE LOG // ENTRY G-03</div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;color:#e9d5ff;font-size:11px">
+            <span style="opacity:0.6">CREATOR:</span> <span>Toby Fox</span>
+            <span style="opacity:0.6">GAMES:</span> <span>Undertale (2015) · Deltarune (Ch 1-2)</span>
+            <span style="opacity:0.6">GENRE:</span> <span>Bullet Hell / Subversive RPG</span>
+            <span style="opacity:0.6">KEY MOTIF:</span> <span>Determination</span>
+            <span style="opacity:0.6">FAV TRACKS:</span> <span>Hopes &amp; Dreams · Field of Hopes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     04 / DEBARGHA'S OWN GAMES: SARBANASH & KISOR
+     PIXEL ART SURVIVAL HORROR & VISUAL NOVEL LAB
+     ===================================================================== -->
+<section id="m-indie" class="section-indie" data-page="P.G04" data-name="DEB'S INDIE GAMES" aria-labelledby="h-indie">
+  <div class="spread-inner rv-scope" style="position:relative;z-index:2">
+    <div class="big-num" aria-hidden="true" style="-webkit-text-stroke-color:rgba(34,197,94,0.2)">04</div>
+    
+    <div class="indie-header-card">
+      <header class="kicker rv">
+        <span class="indie-green">DEV LOG // INDIE AUTHORSHIP</span>
+        <span class="tag win" style="background:#14532d;border-color:#22c55e">SELF-DEVELOPED TITLES</span>
+      </header>
+      <h2 id="h-indie" class="h-giant rv" style="--d:.05s">
+        SARBANASH ×<br>
+        <span class="indie-green" style="font-size:clamp(22px, 3.8vw, 44px);letter-spacing:0.04em">KISOR</span>
+      </h2>
+      <p class="dek rv" style="--d:.1s;color:#bbf7d0">
+        Debargha Sarkar’s own indie game projects: a top-down pixel art Bengali survival horror game published on itch.io, and a narrative-driven visual novel. The seed of engineering that sparked everything.
+      </p>
+
+      <div style="margin-top:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <a class="ctl button" href="https://debargha-sarkar.itch.io/sarbanash" target="_blank" rel="noopener" style="background:#16a34a;color:#fff;border:1px solid #22c55e;padding:8px 18px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-decoration:none">
+          PLAY SARBANASH ON ITCH.IO ↗
+        </a>
+        <a class="ctl button" href="index.html#p07" style="background:transparent;color:#bbf7d0;border:1px solid rgba(34,197,94,0.4);padding:8px 18px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-decoration:none">
+          VIEW CODE DETAILS IN MAIN PORTFOLIO ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div style="margin-top:70px;display:grid;grid-template-columns:repeat(12, 1fr);gap:36px;align-items:start">
+      <div style="grid-column: span 7;">
+        <blockquote class="rv" style="border-left:4px solid #22c55e;padding-left:22px;font-size:clamp(18px,2.2vw,26px);font-weight:700;line-height:1.4;margin-bottom:28px;color:#fff">
+          “Before I built quadruped robots or homelabs, I drew monsters pixel-by-pixel in the dead of night.”
+        </blockquote>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#ecfdf5;margin-bottom:20px">
+          <em>Sarbanash</em> was born out of a desire to create authentic psychological horror rooted in rural Bengal folk dread. Custom 16-bit sprite sheets, eerie ambient atmospheric loops, limited flashlight vision, and resource scarcity turned an amateur experiment into a fully realized playable game published on itch.io.
+        </p>
+
+        <p class="rv" style="font-size:15px;line-height:1.75;color:#bbf7d0;margin-bottom:24px">
+          Paired with <em>Kisor</em>, a branching visual novel exploring memory, youth, and regret, game development was Debargha’s direct gateway into software engineering. Building game loops taught frame timing, 2D vector collisions, audio buffering, memory management, and sprite sheet caching — the very foundation that later enabled building 3D STL loaders, phone servers, and real-time robotic controllers.
+        </p>
+
+        <div class="rv" style="background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.3);padding:24px;border-radius:4px;margin-bottom:32px">
+          <div style="font-family:var(--mono);font-size:11px;color:#22c55e;letter-spacing:.12em;margin-bottom:12px;text-transform:uppercase">
+            // FROM SPRITES TO SYSTEMS
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#f0fdf4;margin:0">
+            Game design forces an engineer to care about both extremes simultaneously: the lowest-level CPU cycles rendering a frame in 16.6ms, and the highest-level emotional empathy keeping a player immersed in a story. That duality informs every piece of code Debargha writes today.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border-top:1px solid rgba(34,197,94,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#22c55e;letter-spacing:.1em">SARBANASH (2023)</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#ecfdf5">Top-down survival horror, custom Bengali sprite art, itch.io release.</p>
+          </div>
+          <div style="border-top:1px solid rgba(34,197,94,0.3);padding-top:12px">
+            <span style="font-family:var(--mono);font-size:11px;color:#22c55e;letter-spacing:.1em">KISOR (2023)</span>
+            <p style="font-size:13px;margin:6px 0 0;color:#ecfdf5">Interactive visual novel, narrative branches, character dialogue states.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE & SPEC SPREAD -->
+      <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
+        <div class="media-img-frame" style="border-color:rgba(34,197,94,0.4)">
+          <img src="images/sarbanash-game.jpg" alt="Sarbanash Survival Horror Pixel Art" onerror="this.style.display='none'">
+          <div class="media-placeholder-hint">
+            <span style="font-size:32px;margin-bottom:8px">🎮</span>
+            <strong>images/sarbanash-game.jpg</strong>
+            <span style="font-size:11px;opacity:0.75;margin-top:4px">Sarbanash Title Screen / Pixel Art Monster / Itch.io</span>
+            <span style="font-size:10px;color:#22c55e;margin-top:8px">Drop image in /images to render</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:20px;font-family:var(--mono);font-size:12px">
+          <div style="color:#22c55e;font-weight:700;margin-bottom:12px;letter-spacing:.1em">ARCHIVE LOG // ENTRY G-04</div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;color:#bbf7d0;font-size:11px">
+            <span style="opacity:0.6">AUTHOR:</span> <span>Debargha Sarkar</span>
+            <span style="opacity:0.6">TITLES:</span> <span>Sarbanash &amp; Kisor</span>
+            <span style="opacity:0.6">PUBLISHED:</span> <span>itch.io (Debargha-Sarkar)</span>
+            <span style="opacity:0.6">TECH:</span> <span>Custom Game Engine &amp; Pixel Art</span>
+            <span style="opacity:0.6">LEGACY:</span> <span>Foundation for 3D &amp; Systems Work</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="spread" style="min-height:50vh;display:flex;align-items:center;background:var(--ink);color:var(--paper);border-top:1px solid rgba(255,255,255,0.1)">
+  <div class="spread-inner rv-scope" style="padding:60px 0">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+      <div>
+        <span class="sec-label rv">END OF GAMING CHAPTER</span>
+        <h2 class="h-giant rv" style="font-size:clamp(28px, 4vw, 56px);margin-top:12px">GAME LOOP TERMINATED.</h2>
+      </div>
+      <div>
+        <ul class="end-lines rv" style="--d:.15s">
+          <li><span>GAMING ARCHIVE</span><span class="mdim">DEBARGHA SARKAR / 2026</span></li>
+          <li><span>RETRO INDIE &amp; ROGUELIKES</span><span class="mdim">STILL BUILDING.</span></li>
+        </ul>
+        <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+          <a class="ctl button" href="projects.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--yellow);color:var(--black);border:1px solid var(--yellow)">
+            EXPLORE PROJECTS DOSSIER (3D ROBOT) ↗
+          </a>
+          <a class="ctl button" href="achievements.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
+            VIEW ACHIEVEMENTS &amp; AWARDS ↗
+          </a>
+          <a class="ctl button" href="index.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--paper2);color:var(--ink);border:1px solid var(--line2)">
+            COMMAND JUNCTION HUB ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<div id="pageBar" aria-hidden="true">
+  <span id="pgL">P.G00 — GAMING COVER</span>
+  <span class="r">DEB / GAMING ARCHIVE — STILL BUILDING</span>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // BALATRO MULT ROLL SIMULATOR
+  const rollBtn = document.getElementById('rollMultBtn');
+  const scoreEl = document.getElementById('balatroScore');
+  if (rollBtn && scoreEl) {
+    const scores = [
+      { chips: '1,240', mult: '48,600', total: '60,264,000' },
+      { chips: '2,480', mult: '194,400', total: '482,112,000' },
+      { chips: '5,120', mult: '1,555,200', total: '7.962e9' },
+      { chips: '10,240', mult: '24,883,200', total: '2.548e11' },
+      { chips: '24,000', mult: '398,131,200', total: '9.555e12 (ANTE 12 CLEARED)' }
+    ];
+    let idx = 0;
+    rollBtn.addEventListener('click', () => {
+      idx = (idx + 1) % scores.length;
+      const s = scores[idx];
+      scoreEl.innerHTML = `<span style="color:#38bdf8">${s.chips}</span> CHIPS × <span style="color:#ef4444">${s.mult}</span> MULT = <span style="color:#f59e0b">${s.total}</span>`;
+      scoreEl.style.transform = 'scale(1.05)';
+      setTimeout(() => { scoreEl.style.transform = 'scale(1)'; }, 180);
+    });
+  }
+
+  // AMONG US EMERGENCY MEETING OVERLAY
+  const sirenBtn = document.getElementById('sirenBtn');
+  const sirenOverlay = document.getElementById('sirenOverlay');
+  if (sirenBtn && sirenOverlay) {
+    sirenBtn.addEventListener('click', () => {
+      sirenOverlay.classList.remove('siren-active');
+      void sirenOverlay.offsetWidth; // trigger reflow
+      sirenOverlay.classList.add('siren-active');
+    });
+  }
+</script>
+</body>
+</html>
