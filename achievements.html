@@ -54,10 +54,11 @@
     <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Main Junction</span><span class="leader"></span><span class="t-pg">HOME ↗</span></a></li>
     <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Achievements Overview</span><span class="leader"></span><span class="t-pg">P.AC00</span></a></li>
     <li><a href="#ac-osamu"><span class="t-no">01</span><span class="t-title">Aveenir Hackathon 1st Prize (OSAMU)</span><span class="leader"></span><span class="t-pg">P.AC01</span></a></li>
-    <li><a href="#ac-viso"><span class="t-no">02</span><span class="t-title">VISO / FSociety Predictive Health Hackathon</span><span class="leader"></span><span class="t-pg">P.AC02</span></a></li>
-    <li><a href="#ac-intern"><span class="t-no">03</span><span class="t-title">Forge IT Systems — Systems Internship</span><span class="leader"></span><span class="t-pg">P.AC03</span></a></li>
-    <li><a href="#ac-lab"><span class="t-no">04</span><span class="t-title">Local_First_Lab — 13,000+ Community</span><span class="leader"></span><span class="t-pg">P.AC04</span></a></li>
-    <li><a href="#ac-timeline"><span class="t-no">05</span><span class="t-title">Academic &amp; Build Timeline</span><span class="leader"></span><span class="t-pg">P.AC05</span></a></li>
+    <li><a href="#ac-hackspire"><span class="t-no">02</span><span class="t-title">Hackspire Hackathon Sprint</span><span class="leader"></span><span class="t-pg">P.AC02</span></a></li>
+    <li><a href="#ac-viso"><span class="t-no">03</span><span class="t-title">VISO / FSociety Predictive Health Hackathon</span><span class="leader"></span><span class="t-pg">P.AC03</span></a></li>
+    <li><a href="#ac-intern"><span class="t-no">04</span><span class="t-title">Forge IT Systems — Systems Internship</span><span class="leader"></span><span class="t-pg">P.AC04</span></a></li>
+    <li><a href="#ac-lab"><span class="t-no">05</span><span class="t-title">Local_First_Lab — 13,000+ Community</span><span class="leader"></span><span class="t-pg">P.AC05</span></a></li>
+    <li><a href="#ac-timeline"><span class="t-no">06</span><span class="t-title">Milestones &amp; Build Timeline</span><span class="leader"></span><span class="t-pg">P.AC06</span></a></li>
   </ul>
       </div>
       <div>
@@ -78,14 +79,16 @@
 <main id="achieve-content">
 
 <!-- ============ 00 / COVER ============ -->
-<section id="cover" aria-label="Achievements Cover" data-page="P.AC00" data-name="OVERVIEW" style="min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:86px 5.5vw 64px;position:relative;">
+<section id="cover" aria-label="Achievements Cover" data-page="P.AC00" data-name="OVERVIEW" style="min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:86px 5.5vw 64px;position:relative;overflow:hidden;">
+  <!-- Faded Winning Background Plate -->
+  <div class="win-bg-plate" style="position:absolute;inset:0;background-image:linear-gradient(to right, rgba(244,242,238,0.92) 0%, rgba(244,242,238,0.72) 45%, rgba(244,242,238,0.85) 100%), url('images/win.jpeg');background-size:cover;background-position:center right;opacity:0.85;pointer-events:none;z-index:0;mix-blend-mode:multiply;filter:grayscale(25%) contrast(105%);mask-image:linear-gradient(to bottom, black 60%, transparent 100%);-webkit-mask-image:linear-gradient(to bottom, black 60%, transparent 100%);"></div>
   <div class="crops" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <div class="topline">
+  <div class="topline" style="position:relative;z-index:2">
     <div>DEBARGHA SARKAR <span class="hide-mobile">— COMPETITIVE BUILDS &amp; INDUSTRY HONORS</span></div>
     <div class="hide-mobile">FIELD HONORS // 2026</div>
     <div>ACHIEVEMENTS</div>
   </div>
-  <div class="hero-center">
+  <div class="hero-center" style="position:relative;z-index:2">
     <div class="crosshair" aria-hidden="true"></div>
     <div class="side-vert">HACKATHONS · INDUSTRY INTERNSHIP · 13K+ COMMUNITY</div>
     <h1 class="hero-name" aria-label="WINS.">
@@ -107,7 +110,7 @@
       </a>
     </div>
   </div>
-  <div class="botline">
+  <div class="botline" style="position:relative;z-index:2">
     <div>INDEX // HONORS</div>
     <div class="hide-mobile">48-HOUR SPRINTS, PRODUCTION SYSTEMS &amp; OPEN LAB EXPERIMENTS</div>
     <div class="scroll-cue">SCROLL <i aria-hidden="true"></i></div>
@@ -150,6 +153,11 @@
             VIEW COMPLETE OSAMU FLOWCHART &amp; CODE ↗
           </a>
         </div>
+
+        <figure class="fig-photo" style="margin-top:24px;border:1px solid var(--pline);border-radius:var(--radius-sm);overflow:hidden">
+          <img src="images/osamu.jpeg" alt="OSAMU winning prototype hardware demonstration at Aveenir hackathon" loading="lazy" style="width:100%;height:auto;display:block;object-fit:cover;max-height:320px">
+          <figcaption style="padding:10px 14px;background:#141311;font-family:var(--mono);font-size:11px;color:var(--pdim);border-top:1px solid var(--pline)">FIG. AC01-A — OSAMU LIVE DEMO AT AVEENIR HACKATHON</figcaption>
+        </figure>
       </div>
 
       <div class="readout rv" style="padding:28px;background:#141311;border:1px solid var(--pline);--d:.25s">
@@ -175,10 +183,60 @@
   </div>
 </section>
 
-<!-- ============ 02 / VISO / FSOCIETY HACKATHON ============ -->
-<section id="ac-viso" class="spread dark" data-page="P.AC02" data-name="VISO HACKATHON" aria-labelledby="h-ac-viso" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
+<!-- ============ 02 / HACKSPIRE HACKATHON ============ -->
+<section id="ac-hackspire" class="spread" data-page="P.AC02" data-name="HACKSPIRE" aria-labelledby="h-ac-hackspire" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">02</div>
+    <header class="kicker rv">
+      <span>COMPETITIVE HACKATHON</span>
+      <span class="tag win">HACKATHON BUILD</span>
+      <span class="tag team">TEAM SPRINT</span>
+    </header>
+    
+    <h2 id="h-ac-hackspire" class="h-giant rv" style="--d:.05s">
+      HACKSPIRE<br>
+      <span style="color:var(--red)">HACKATHON</span> SPRINT<span style="color:var(--red)">.</span>
+    </h2>
+    
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>EVENT:</b> HACKSPIRE HACKATHON</span>
+      <span><b>DISCIPLINE:</b> RAPID PROTOTYPING · EMBEDDED SYSTEMS &amp; ARCHITECTURE</span>
+      <span><b>FORMAT:</b> HIGH-PRESSURE IN-PERSON BUILD SPRINT</span>
+    </div>
+
+    <div class="gr gr-2" style="margin-top:40px">
+      <div class="rv" style="--d:.2s">
+        <p class="thesis" style="margin-top:0">
+          Competing at <b>Hackspire</b> — tackling complex real-world problem statements under rigid time constraints, building cohesive software-hardware prototypes from zero.
+        </p>
+        <p class="body-col" style="color:var(--ink2)">
+          Hackathons represent engineering at its purest: rapid ideation, stripping away theoretical bloat, designing clear architecture under tight deadlines, and delivering a functional, demonstrable prototype to industry judges and mentors.
+        </p>
+
+        <div class="readout" style="margin-top:28px;padding:22px;background:var(--paper2);border:1px solid var(--line2)">
+          <span class="mono" style="color:var(--red);font-weight:700;display:block;margin-bottom:10px">// SPRINT HIGHLIGHTS</span>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:12px;color:var(--ink)">
+            <li>• Rapid hardware-software integration</li>
+            <li>• High-concurrency architecture validation</li>
+            <li>• Live on-stage technical demonstration and defense</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.25s">
+        <figure class="fig-photo" style="border:1px solid var(--line2);border-radius:var(--radius-sm);overflow:hidden;background:var(--paper2)">
+          <img src="images/hackspire.jpeg" alt="Hackspire Hackathon team and project demonstration" loading="lazy" style="width:100%;height:auto;display:block;max-height:480px;object-fit:cover;object-position:center top">
+          <figcaption style="padding:10px 14px;background:var(--paper);font-family:var(--mono);font-size:11px;color:var(--ink2);border-top:1px solid var(--line2)">FIG. AC02-A — HACKSPIRE HACKATHON LIVE ON-SITE SPRINT</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 / VISO / FSOCIETY HACKATHON ============ -->
+<section id="ac-viso" class="spread dark" data-page="P.AC03" data-name="VISO HACKATHON" aria-labelledby="h-ac-viso" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">03</div>
     <header class="kicker rv">
       <span>COMPETITIVE HACKATHON — PREDICTIVE HARDWARE MAINTENANCE</span>
       <span class="tag win">HACKATHON BUILD</span>
@@ -240,10 +298,10 @@
   </div>
 </section>
 
-<!-- ============ 03 / FORGE IT SYSTEMS INTERNSHIP ============ -->
-<section id="ac-intern" class="spread" data-page="P.AC03" data-name="INTERNSHIP" aria-labelledby="h-ac-intern" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
+<!-- ============ 04 / FORGE IT SYSTEMS INTERNSHIP ============ -->
+<section id="ac-intern" class="spread" data-page="P.AC04" data-name="INTERNSHIP" aria-labelledby="h-ac-intern" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
   <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">03</div>
+    <div class="big-num" aria-hidden="true">04</div>
     <header class="kicker rv">
       <span>INDUSTRY EXPERIENCE — FORGE IT SYSTEMS</span>
       <span class="tag win" style="background:var(--red);color:var(--paper);border-color:var(--red)">INTERNSHIP</span>
@@ -300,10 +358,10 @@
   </div>
 </section>
 
-<!-- ============ 04 / 13K+ BUILDER COMMUNITY (LOCAL_FIRST_LAB) ============ -->
-<section id="ac-lab" class="spread dark" data-page="P.AC04" data-name="13K+ COMMUNITY" aria-labelledby="h-ac-lab" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
+<!-- ============ 05 / 13K+ BUILDER COMMUNITY (LOCAL_FIRST_LAB) ============ -->
+<section id="ac-lab" class="spread dark" data-page="P.AC05" data-name="13K+ COMMUNITY" aria-labelledby="h-ac-lab" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
   <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">04</div>
+    <div class="big-num" aria-hidden="true">05</div>
     <header class="kicker rv">
       <span>BUILDER CHANNEL &amp; COMMUNITY</span>
       <span class="tag live">13,000+ FOLLOWERS</span>
@@ -348,10 +406,10 @@
   </div>
 </section>
 
-<!-- ============ 05 / TIMELINE ============ -->
-<section id="ac-timeline" class="spread" data-page="P.AC05" data-name="TIMELINE" aria-labelledby="h-ac-timeline" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
+<!-- ============ 06 / TIMELINE ============ -->
+<section id="ac-timeline" class="spread" data-page="P.AC06" data-name="TIMELINE" aria-labelledby="h-ac-timeline" style="padding:120px 5.5vw 140px;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
   <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">05</div>
+    <div class="big-num" aria-hidden="true">06</div>
     <header class="kicker rv"><span>MILESTONES</span><span class="mdim">2023 — 2026</span></header>
     <h2 id="h-ac-timeline" class="h-giant rv" style="--d:.05s">BUILD<br>TIMELINE<span style="color:var(--red)">.</span></h2>
 
@@ -367,6 +425,9 @@
           </li>
           <li style="border-bottom:1px solid var(--line2);padding-bottom:10px">
             <b style="color:var(--red)">2024:</b> ★ 1st Prize Winner — Aveenir Hackathon for OSAMU adaptive exam terminal.
+          </li>
+          <li style="border-bottom:1px solid var(--line2);padding-bottom:10px">
+            <b style="color:var(--red)">2024:</b> Hackspire Hackathon — hardware prototype &amp; high-intensity engineering sprint.
           </li>
           <li>
             <b style="color:var(--red)">2023:</b> Built VISO machine health predictive telemetry system for FSociety Hackathon.
