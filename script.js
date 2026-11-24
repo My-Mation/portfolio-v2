@@ -30,7 +30,7 @@ if (FINE && !REDUCED) document.documentElement.classList.add('fine');
 const cursor = $('#cursor'), tag = $('#cursorTag'), trail = $('#trail');
 let mx = innerWidth/2, my = innerHeight/2, cx = mx, cy = my;
 const dots = []; let ltx = -99, lty = -99;
-if (FINE && !REDUCED) {
+if (FINE && !REDUCED && trail && trail.getContext) {
   const tctx = trail.getContext('2d');
   const fit = () => { trail.width = innerWidth; trail.height = innerHeight; };
   fit(); addEventListener('resize', fit);
@@ -44,15 +44,15 @@ if (FINE && !REDUCED) {
     }
   });
   document.addEventListener('mouseover', e => {
-    const t = e.target.closest('a,button,input,summary,[role="button"],.specimen,.hn,#quad3dContainer');
+    const t = e.target.closest('a,button,input,summary,[role="button"],.specimen,.hn,#quad3dContainer,#quadVideo,video');
     if (t) {
       cursor.classList.add('hot');
-      tag.textContent = t.dataset.cursor || (t.id === 'quad3dContainer' ? 'ROTATE 3D' : 'OPEN');
+      tag.textContent = t.dataset.cursor || (t.id === 'quadVideo' || t.tagName === 'VIDEO' ? 'PLAY / SOUND' : (t.id === 'quad3dContainer' ? 'ROTATE 3D' : 'OPEN'));
       tag.classList.add('show');
     }
   });
   document.addEventListener('mouseout', e => {
-    if (e.target.closest('a,button,input,summary,[role="button"],.specimen,.hn,#quad3dContainer')) {
+    if (e.target.closest('a,button,input,summary,[role="button"],.specimen,.hn,#quad3dContainer,#quadVideo,video')) {
       cursor.classList.remove('hot'); tag.classList.remove('show');
     }
   });
@@ -74,55 +74,105 @@ if (FINE && !REDUCED) {
   })();
 }
 
-/* ============ REVEAL + PAGE BAR ============ */
+/* ============ REVEAL ============ */
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
 }), {rootMargin:'0px 0px -10% 0px', threshold:.05});
-$$('.rv-scope').forEach(s => io.observe(s));
+$$('.rv-scope, .rv').forEach(s => io.observe(s));
 
+/* ============ PAGE BAR ============ */
 const pgL = $('#pgL');
-const po = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) pgL.textContent = `${e.target.dataset.page} — ${e.target.dataset.name}`;
-}), {rootMargin:'-45% 0px -45% 0px'});
-$$('[data-page]').forEach(s => po.observe(s));
+if (pgL) {
+  const po = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) pgL.textContent = `${e.target.dataset.page} — ${e.target.dataset.name}`;
+  }), {rootMargin:'-45% 0px -45% 0px'});
+  $$('[data-page]').forEach(s => po.observe(s));
+}
 
 /* ============ TOC ============ */
 const toc = $('#toc'), tocBtn = $('#tocBtn'), tocClose = $('#tocClose');
 const setToc = open => {
+  if (!toc) return;
   toc.classList.toggle('open', open);
-  tocBtn.setAttribute('aria-expanded', open);
+  if (tocBtn) tocBtn.setAttribute('aria-expanded', String(open));
   document.body.style.overflow = open ? 'hidden' : '';
-  if (open) tocClose.focus(); else tocBtn.focus();
+  if (open) {
+    const first = toc.querySelector('a[href], button:not([disabled])');
+    (first || tocClose || toc).focus({ preventScroll: true });
+  } else if (tocBtn) {
+    tocBtn.focus({ preventScroll: true });
+  }
 };
-if (tocBtn) tocBtn.addEventListener('click', () => setToc(true));
-if (tocClose) tocClose.addEventListener('click', () => setToc(false));
-if (toc) toc.addEventListener('click', e => { if (e.target.closest('a')) setToc(false); });
-addEventListener('keydown', e => { if (e.key === 'Escape' && toc && toc.classList.contains('open')) setToc(false); });
+if (tocBtn && toc) tocBtn.addEventListener('click', () => setToc(true));
+if (tocClose && toc) tocClose.addEventListener('click', () => setToc(false));
+if (toc) {
+  toc.addEventListener('click', e => {
+    if (e.target.closest('a')) setToc(false);
+  });
+  toc.addEventListener('keydown', e => {
+    if (e.key !== 'Tab' || !toc.classList.contains('open')) return;
+    const f = [...toc.querySelectorAll('a[href], button:not([disabled])')].filter(el => el.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+}
+addEventListener('keydown', e => {
+  if (e.key === 'Escape' && toc && toc.classList.contains('open')) setToc(false);
+});
 
-/* ============ SPREAD PARALLAX ============ */
-const spreads = $$('.spread').map((s, i) => ({inner: s.querySelector('.spread-inner'), dir: i % 2 ? 1 : -1, el: s}));
-if (!REDUCED) {
-  let ticking = false;
-  const shift = () => {
-    ticking = false;
-    if (innerWidth <= 768) {
-      for (const s of spreads) {
-        if (s.inner) s.inner.style.transform = 'none';
-      }
-      return;
-    }
-    const vh = innerHeight;
-    for (const s of spreads) {
-      if (!s.inner) continue;
-      const r = s.el.getBoundingClientRect();
-      if (r.bottom < -80 || r.top > vh + 80) continue;
-      const p = Math.max(-1, Math.min(1, (r.top + r.height/2 - vh/2) / vh));
-      s.inner.style.transform = `translateX(${(p * s.dir * 30).toFixed(1)}px)`;
-    }
+/* ============ PAGE CHROME: PROGRESS + CURTAIN ============ */
+if (!$('#progress')) {
+  const p = document.createElement('div');
+  p.id = 'progress';
+  p.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(p);
+}
+if (!$('#curtain')) {
+  const c = document.createElement('div');
+  c.id = 'curtain';
+  c.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(c);
+}
+const progress = $('#progress');
+if (progress) {
+  let ptick = false;
+  const paintProgress = () => {
+    ptick = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    progress.style.transform = `scaleX(${p.toFixed(4)})`;
   };
-  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(shift); } }, {passive:true});
-  addEventListener('resize', shift);
-  shift();
+  addEventListener('scroll', () => {
+    if (!ptick) { ptick = true; requestAnimationFrame(paintProgress); }
+  }, {passive:true});
+  addEventListener('resize', paintProgress);
+  paintProgress();
+}
+
+if (!REDUCED) {
+  let leaving = false;
+  document.addEventListener('click', e => {
+    if (leaving || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest('a[href]');
+    if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    const href = a.getAttribute('href');
+    if (!href || href.startsWith('#') || /^(mailto:|tel:|javascript:)/i.test(href)) return;
+    let url;
+    try { url = new URL(a.href, location.href); } catch { return; }
+    if (url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.search === location.search) return;
+    e.preventDefault();
+    leaving = true;
+    document.documentElement.classList.add('leaving');
+    const go = () => { location.href = url.href; };
+    setTimeout(go, 380);
+  }, true);
+  addEventListener('pageshow', () => {
+    leaving = false;
+    document.documentElement.classList.remove('leaving');
+  });
 }
 
 /* ============ PINNED HORIZONTAL SCROLL ANIMATION (SMOOTH EASED LERP) ============ */
@@ -195,7 +245,7 @@ if (pushBtn && oLog) {
   const steps = [
     { s: "ENCRYPTING & BROADCASTING...", q: '"WHAT IS THE TIME COMPLEXITY OF HEAPSORT?"', i: "ESP32 KEYPAD PRESSED: [O(N LOG N)]", a: "RESPONSE TIME: 1.2s (FAST) — ACCURATE" },
     { s: "EVALUATING BEHAVIOR...", q: '"EXPLAIN DYNAMIC MEMORY IN EMBEDDED C++"', i: "ESP32 KEYPAD PRESSED: HESITATION DETECTED (5.4s)", a: "TRIGGERING ADAPTIVE DEEP-DIVE PROBE..." },
-    { s: "ADAPTIVE PROBE LIVE ⚡", q: '"WHY DOES HEAP ALLOCATION CAUSE FRAGMENTATION IN ESP32?"', i: "ESP32 KEYPAD PRESSED: [CORRECT PROBE ANSWER]", a: "ZERO-BIAS EVALUATION: 96.8% CONCEPT MASTERY" }
+    { s: "ADAPTIVE PROBE LIVE", q: '"WHY DOES HEAP ALLOCATION CAUSE FRAGMENTATION IN ESP32?"', i: "ESP32 KEYPAD PRESSED: [CORRECT PROBE ANSWER]", a: "ZERO-BIAS EVALUATION: 96.8% CONCEPT MASTERY" }
   ];
   let stepIdx = 0;
 
@@ -222,52 +272,80 @@ if (pushBtn && oLog) {
   if (!container || !canvas || typeof THREE === 'undefined') return;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0d0c0a);
-  scene.fog = new THREE.FogExp2(0x0d0c0a, 0.008);
+  scene.background = new THREE.Color(0x12100d);
+  scene.fog = new THREE.FogExp2(0x12100d, 0.0032);
 
   const initW = container.clientWidth || 640;
   const initH = container.clientHeight || 460;
-  const camera = new THREE.PerspectiveCamera(45, initW / initH, 0.1, 1000);
-  camera.position.set(0, 70, 190);
+  const camera = new THREE.PerspectiveCamera(42, initW / initH, 0.1, 1200);
+  camera.position.set(0, 66, 188);
+  camera.lookAt(0, 2, 0);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
   renderer.setSize(initW, initH);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setClearColor(0x12100d, 1);
+  if ('outputEncoding' in renderer) renderer.outputEncoding = THREE.sRGBEncoding;
+  if ('toneMapping' in renderer) {
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.18;
+  }
 
-  // Lights
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+  // Lights — enough contrast to read the CAD silhouette, not a black box.
+  const ambientLight = new THREE.AmbientLight(0xf1ede2, 0.62);
   scene.add(ambientLight);
 
-  const topLight = new THREE.DirectionalLight(0xffffff, 3.2);
-  topLight.position.set(0, 250, 150);
+  const hemi = new THREE.HemisphereLight(0xf1ede2, 0x2b1a12, 0.55);
+  hemi.position.set(0, 120, 0);
+  scene.add(hemi);
+
+  const topLight = new THREE.DirectionalLight(0xffffff, 2.35);
+  topLight.position.set(30, 240, 170);
   scene.add(topLight);
 
-  const redLight = new THREE.DirectionalLight(0xbf3016, 2.8);
-  redLight.position.set(120, 150, 120);
+  const redLight = new THREE.DirectionalLight(0xc93a1e, 2.4);
+  redLight.position.set(150, 120, 110);
   scene.add(redLight);
 
-  const keyLight = new THREE.DirectionalLight(0xf1ede2, 2.5);
-  keyLight.position.set(-120, 160, -100);
+  const keyLight = new THREE.DirectionalLight(0xf1ede2, 1.65);
+  keyLight.position.set(-150, 130, -110);
   scene.add(keyLight);
 
-  const fillLight = new THREE.PointLight(0xe6c229, 2.2, 280);
-  fillLight.position.set(0, -40, 100);
+  const fillLight = new THREE.PointLight(0xe0b326, 1.2, 320);
+  fillLight.position.set(0, -20, 100);
   scene.add(fillLight);
 
-  // Technical Floor Grid
-  const gridHelper = new THREE.GridHelper(300, 20, 0xbf3016, 0x33322e);
-  gridHelper.position.y = -45;
+  // Technical floor: grid + registration ring.
+  const gridHelper = new THREE.GridHelper(340, 24, 0xc93a1e, 0x3a352f);
+  gridHelper.position.y = -48;
+  if (gridHelper.material) {
+    gridHelper.material.transparent = true;
+    gridHelper.material.opacity = .55;
+  }
   scene.add(gridHelper);
+
+  const ring = new THREE.Mesh(
+    new THREE.RingGeometry(57, 59, 96),
+    new THREE.MeshBasicMaterial({ color: 0xc93a1e, transparent: true, opacity: .42, side: THREE.DoubleSide })
+  );
+  ring.rotation.x = -Math.PI / 2;
+  ring.position.y = -47.5;
+  scene.add(ring);
+
+  const rig = new THREE.Group();
+  rig.position.y = 4;
+  scene.add(rig);
 
   let dogMesh = null;
   let targetRotY = 0;
   let targetRotX = 0;
   let scrollProgress = 0;
+  let lastW = 0, lastH = 0;
 
   function buildProceduralQuadruped() {
     const group = new THREE.Group();
-    const darkMat = new THREE.MeshStandardMaterial({ color: 0x1f1d1a, metalness: 0.85, roughness: 0.25 });
-    const wireMat = new THREE.LineBasicMaterial({ color: 0xbf3016, opacity: 0.5, transparent: true });
+    const darkMat = new THREE.MeshStandardMaterial({ color: 0x4b4640, metalness: 0.6, roughness: 0.36 });
+    const wireMat = new THREE.LineBasicMaterial({ color: 0xc93a1e, opacity: 0.55, transparent: true });
 
     function addPart(geo, pos, rot) {
       const mesh = new THREE.Mesh(geo, darkMat);
@@ -308,7 +386,7 @@ if (pushBtn && oLog) {
     });
 
     group.scale.set(0.9, 0.9, 0.9);
-    group.position.set(0, 5, 0);
+    group.position.set(0, 8, 0);
     return group;
   }
 
@@ -316,43 +394,51 @@ if (pushBtn && oLog) {
   if (typeof THREE.STLLoader !== 'undefined') {
     const loader = new THREE.STLLoader();
     loader.load('model/dog02_web.stl', (geometry) => {
-      if (dogMesh) scene.remove(dogMesh);
+      if (dogMesh) rig.remove(dogMesh);
       geometry.center();
       geometry.computeVertexNormals();
 
       const material = new THREE.MeshStandardMaterial({
-        color: 0x1f1d1a,
-        metalness: 0.85,
-        roughness: 0.25
+        color: 0x2c2823,
+        metalness: 0.68,
+        roughness: 0.38
       });
 
       dogMesh = new THREE.Mesh(geometry, material);
-      const wireGeo = new THREE.WireframeGeometry(geometry);
-      const wireMat = new THREE.LineBasicMaterial({ color: 0xbf3016, opacity: 0.42, transparent: true });
-      const wireframe = new THREE.LineSegments(wireGeo, wireMat);
+
+      // Normalise whichever unit the STL was authored in, so the robot fills the frame.
+      geometry.computeBoundingBox();
+      const size = new THREE.Vector3();
+      geometry.boundingBox.getSize(size);
+      const maxDim = Math.max(size.x, size.y, size.z) || 1;
+      const s = 95 / maxDim;
+
+      const edgeGeo = new THREE.EdgesGeometry(geometry, 26);
+      const wireMat = new THREE.LineBasicMaterial({ color: 0xc93a1e, opacity: 0.62, transparent: true });
+      const wireframe = new THREE.LineSegments(edgeGeo, wireMat);
       dogMesh.add(wireframe);
 
-      dogMesh.scale.set(0.55, 0.55, 0.55);
-      dogMesh.position.set(0, 5, 0);
+      dogMesh.scale.setScalar(s);
+      dogMesh.position.set(0, 10, 0);
       dogMesh.rotation.x = -Math.PI / 2;
-      scene.add(dogMesh);
+      rig.add(dogMesh);
 
       if (loaderEl) loaderEl.style.display = 'none';
       renderer.render(scene, camera);
-    }, 
-    undefined, 
+    },
+    undefined,
     (err) => {
       console.warn('STL load notice (using articulated CAD fallback):', err);
       if (!dogMesh) {
         dogMesh = buildProceduralQuadruped();
-        scene.add(dogMesh);
+        rig.add(dogMesh);
       }
       if (loaderEl) loaderEl.style.display = 'none';
       renderer.render(scene, camera);
     });
   } else {
     dogMesh = buildProceduralQuadruped();
-    scene.add(dogMesh);
+    rig.add(dogMesh);
     if (loaderEl) loaderEl.style.display = 'none';
     renderer.render(scene, camera);
   }
@@ -381,7 +467,8 @@ if (pushBtn && oLog) {
     if (!container) return;
     const w = container.clientWidth;
     const h = container.clientHeight;
-    if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
+    if (w > 0 && h > 0 && (w !== lastW || h !== lastH)) {
+      lastW = w; lastH = h;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
@@ -392,12 +479,12 @@ if (pushBtn && oLog) {
   loopWhen(container, () => {
     checkSize();
     if (dogMesh) {
-      targetRotY = (scrollProgress * Math.PI * 2.4) + (mouseX * 0.7);
-      targetRotX = (mouseY * 0.35);
+      targetRotY = (scrollProgress * Math.PI * 1.35) + (mouseX * 0.8);
+      targetRotX = (mouseY * 0.22);
 
-      dogMesh.rotation.z += (targetRotY - dogMesh.rotation.z) * 0.08;
-      dogMesh.rotation.y += (targetRotX - dogMesh.rotation.y) * 0.08;
-      dogMesh.position.y = 5 + Math.sin(Date.now() * 0.0035) * 5;
+      rig.rotation.y += (targetRotY - rig.rotation.y) * 0.075;
+      rig.rotation.x += (targetRotX - rig.rotation.x) * 0.075;
+      rig.position.y = 4 + Math.sin(Date.now() * 0.0032) * 2.4;
     }
     renderer.render(scene, camera);
   });
@@ -726,7 +813,7 @@ if (fc) {
     mBtn.addEventListener('click', () => {
       monsterVision = !monsterVision;
       mBtn.setAttribute('aria-pressed', monsterVision);
-      mBtn.textContent = monsterVision ? 'NORMAL VISION 👁' : 'MONSTER VISION 👁';
+      mBtn.textContent = monsterVision ? 'NORMAL VISION' : 'MONSTER VISION';
 
       // TRIGGER SCREEN SHAKE ON TOGGLE
       fc.classList.add('shake');

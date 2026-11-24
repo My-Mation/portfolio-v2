@@ -9,6 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f1ede3">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DEB — Gaming Archive / Balatro, Among Us, Undertale &amp; Indie Lab">
+<meta property="og:description" content="Debargha Sarkar — personal gaming sanctuary: Balatro (#1 favorite), Among Us quarantine lifeline, Undertale & Deltarune, and indie titles Sarbanash & Kisor.">
+<meta property="og:image" content="images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DEB — Gaming Archive / Balatro, Among Us, Undertale &amp; Indie Lab">
+<meta name="twitter:description" content="Debargha Sarkar — personal gaming sanctuary: Balatro (#1 favorite), Among Us quarantine lifeline, Undertale & Deltarune, and indie titles Sarbanash & Kisor.">
+<meta name="twitter:image" content="images/og.jpg">
 
 <style>
   /* ============ GAMING SECTIONS COLOR SCHEMES ============ */
@@ -153,25 +164,31 @@
 <canvas id="trail" aria-hidden="true"></canvas>
 <div id="cursor" aria-hidden="true"></div>
 <div id="cursorTag" aria-hidden="true">OPEN</div>
+<div id="progress" aria-hidden="true"></div>
+<div id="curtain" aria-hidden="true"></div>
 <div id="sirenOverlay" aria-hidden="true"></div>
 
 <!-- NAVIGATION -->
 <nav id="siteNav" aria-label="Site">
-  <a class="brand" href="index.html">← DEB <span class="hide-mobile">— BACK TO HOME</span></a>
-  <div style="display:flex;align-items:center;gap:12px">
-    <a class="tag hide-mobile" href="projects.html" style="text-decoration:none;border-color:var(--yellow);color:var(--yellow)">PROJECTS</a>
-    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
-    <a class="tag hide-mobile" href="anime.html" style="text-decoration:none">ANIME</a>
-    <a class="tag hide-mobile" href="music.html" style="text-decoration:none">MUSIC</a>
-    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
-    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  <a class="brand" href="index.html">DEB <span class="brand-sub hide-mobile">— FIELD ARCHIVE</span></a>
+  <div class="nav-links">
+    <a href="projects.html">Projects</a>
+    <a href="achievements.html">Wins</a>
+    <a href="anime.html">Anime</a>
+    <a href="music.html">Music</a>
+    <a href="cinema.html">Cinema</a>
+    <a href="gaming.html" aria-current="page">Games</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">Index +</button>
   </div>
 </nav>
 
 <!-- TOC -->
 <div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
   <div class="toc-head"><h2>Gaming Index</h2><button id="tocClose">CLOSE ×</button></div>
-  <ul class="toc-list">
+  <div class="toc-grid">
+      <div>
+        <p class="toc-label">On this page</p>
+        <ul class="toc-list">
     <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Command Hub</span><span class="leader"></span><span class="t-pg">HUB ↗</span></a></li>
     <li><a href="projects.html"><span class="t-no">★</span><span class="t-title">Projects Dossier (3D Model &amp; Code)</span><span class="leader"></span><span class="t-pg">PROJ ↗</span></a></li>
     <li><a href="achievements.html"><span class="t-no">★</span><span class="t-title">Achievements &amp; Hackathon Wins</span><span class="leader"></span><span class="t-pg">WINS ↗</span></a></li>
@@ -181,6 +198,19 @@
     <li><a href="#m-undertale"><span class="t-no">03</span><span class="t-title">Undertale &amp; Deltarune (Determination)</span><span class="leader"></span><span class="t-pg">P.G03</span></a></li>
     <li><a href="#m-indie"><span class="t-no">04</span><span class="t-title">Sarbanash &amp; Kisor (Deb’s Own Indie Games)</span><span class="leader"></span><span class="t-pg">P.G04</span></a></li>
   </ul>
+      </div>
+      <div>
+        <p class="toc-label">Elsewhere in the archive</p>
+        <ul class="toc-list">
+        <li><a href="index.html"><span class="t-no">↗</span><span class="t-title">Field Archive / Cover</span><span class="leader"></span><span class="t-pg">Home</span></a></li>
+        <li><a href="projects.html"><span class="t-no">↗</span><span class="t-title">Projects Dossier</span><span class="leader"></span><span class="t-pg">09 builds</span></a></li>
+        <li><a href="achievements.html"><span class="t-no">↗</span><span class="t-title">Achievements &amp; Honors</span><span class="leader"></span><span class="t-pg">Wins</span></a></li>
+        <li><a href="anime.html"><span class="t-no">↗</span><span class="t-title">Anime Dimension</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="music.html"><span class="t-no">↗</span><span class="t-title">Music Sanctuary</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="cinema.html"><span class="t-no">↗</span><span class="t-title">Cinema Vault</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        </ul>
+      </div>
+    </div>
   <p class="toc-foot">DEBARGHA SARKAR / 2026 — GAMING SANCTUARY</p>
 </div>
 
@@ -227,7 +257,7 @@
     
     <div class="balatro-header-card">
       <header class="kicker rv">
-        <span class="balatro-red">👑 #1 ALL-TIME FAVORITE GAME</span>
+        <span class="balatro-red">★ #1 ALL-TIME FAVORITE GAME</span>
         <span class="tag win" style="background:#991b1b;border-color:#ef4444">HYPNOTIC DECKBUILDER &amp; EXPONENTIAL MATH</span>
       </header>
       <h2 id="h-balatro" class="h-giant rv" style="--d:.05s">
@@ -261,10 +291,10 @@
             <span class="score-badge" style="background:#ef4444;color:#fff">ANTE 11 // PURPLE STAKE</span>
           </div>
           <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-            <span style="border:1px solid #38bdf8;padding:6px 10px;font-size:11px;background:rgba(56,189,248,0.1)">🃏 BLUEPRINT (Copies Mult)</span>
-            <span style="border:1px solid #f59e0b;padding:6px 10px;font-size:11px;background:rgba(245,158,11,0.1)">🍌 CAVENDISH (×3 Mult)</span>
-            <span style="border:1px solid #ef4444;padding:6px 10px;font-size:11px;background:rgba(239,68,68,0.1)">👑 BARON (×1.5 Per King)</span>
-            <span style="border:1px solid #10b981;padding:6px 10px;font-size:11px;background:rgba(16,185,129,0.1)">🔄 MIME (Re-trigger in Hand)</span>
+            <span style="border:1px solid #38bdf8;padding:6px 10px;font-size:11px;background:rgba(56,189,248,0.1)">BLUEPRINT (COPIES MULT)</span>
+            <span style="border:1px solid #f59e0b;padding:6px 10px;font-size:11px;background:rgba(245,158,11,0.1)">CAVENDISH (×3 MULT)</span>
+            <span style="border:1px solid #ef4444;padding:6px 10px;font-size:11px;background:rgba(239,68,68,0.1)">BARON (×1.5 PER KING)</span>
+            <span style="border:1px solid #10b981;padding:6px 10px;font-size:11px;background:rgba(16,185,129,0.1)">MIME (RE-TRIGGER IN HAND)</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;background:#020617;padding:12px 18px;border-radius:4px;border:1px solid #1e293b">
             <div>
@@ -294,7 +324,7 @@
       <!-- IMAGE & SPEC SPREAD -->
       <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
         <div class="media-img-frame" style="border-color:rgba(239,68,68,0.4)">
-          <img src="images/balatro-hero.jpg" alt="Balatro Joker Cards and Poker Felt" onerror="this.style.display='none'">
+          <img src="images/balatro-hero.jpg" alt="Balatro archive plate — green block grid" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
             <span style="font-size:32px;margin-bottom:8px">🃏</span>
             <strong>images/balatro-hero.jpg</strong>
@@ -342,7 +372,7 @@
 
       <div style="margin-top:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
         <button id="sirenBtn" class="ctl button" style="background:#dc2626;color:#fff;border:1px solid #ef4444;padding:8px 18px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;cursor:pointer">
-          🚨 CALL EMERGENCY MEETING
+          CALL EMERGENCY MEETING
         </button>
         <span style="font-family:var(--mono);font-size:11px;color:#67e8f9">WHO VENTED IN ELECTRICAL?</span>
       </div>
@@ -387,9 +417,9 @@
       <!-- IMAGE & SPEC SPREAD -->
       <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
         <div class="media-img-frame" style="border-color:rgba(6,182,212,0.4)">
-          <img src="images/among-us.jpg" alt="Among Us Space Crewmates" onerror="this.style.display='none'">
+          <img src="images/among-us.jpg" alt="Among Us archive plate — red pixel grid" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="font-size:32px;margin-bottom:8px">🚀</span>
+            <span style="font-size:32px;margin-bottom:8px">✕</span>
             <strong>images/among-us.jpg</strong>
             <span style="font-size:11px;opacity:0.75;margin-top:4px">Crewmates in Space / Emergency Button / The Skeld</span>
             <span style="font-size:10px;color:#06b6d4;margin-top:8px">Drop image in /images to render</span>
@@ -452,7 +482,7 @@
         <!-- RETRO DETERMINATION SOUL WIDGET -->
         <div class="rv" style="background:#000;border:2px solid #fff;padding:24px;border-radius:4px;margin-bottom:32px;font-family:var(--mono)">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-            <span style="color:#ef4444;font-size:24px;animation:heartbeat 1.2s infinite">❤️</span>
+            <span style="color:#ef4444;font-size:24px;animation:heartbeat 1.2s infinite">♥</span>
             <span style="color:#fff;font-size:13px;letter-spacing:.1em">* Seeing such an unhurried portfolio fills you with DETERMINATION.</span>
           </div>
           <div style="display:flex;gap:12px;margin-top:16px">
@@ -478,9 +508,9 @@
       <!-- IMAGE & SPEC SPREAD -->
       <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
         <div class="media-img-frame" style="border-color:rgba(168,85,247,0.4)">
-          <img src="images/undertale.jpg" alt="Undertale Frisk Sans Toriel Pixel Art" onerror="this.style.display='none'">
+          <img src="images/undertale.jpg" alt="Undertale and Deltarune archive plate — violet pixel grid" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="font-size:32px;margin-bottom:8px">❤️</span>
+            <span style="font-size:32px;margin-bottom:8px">♥</span>
             <strong>images/undertale.jpg</strong>
             <span style="font-size:11px;opacity:0.75;margin-top:4px">Undertale &amp; Deltarune / The Red SOUL / Sans &amp; Papyrus</span>
             <span style="font-size:10px;color:#c084fc;margin-top:8px">Drop image in /images to render</span>
@@ -572,9 +602,9 @@
       <!-- IMAGE & SPEC SPREAD -->
       <div style="grid-column: span 5;display:flex;flex-direction:column;gap:24px">
         <div class="media-img-frame" style="border-color:rgba(34,197,94,0.4)">
-          <img src="images/sarbanash-game.jpg" alt="Sarbanash Survival Horror Pixel Art" onerror="this.style.display='none'">
+          <img src="images/sarbanash-game.jpg" alt="Sarbanash and Kisor archive plate — green pixel system" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="font-size:32px;margin-bottom:8px">🎮</span>
+            <span style="font-size:32px;margin-bottom:8px">✕</span>
             <strong>images/sarbanash-game.jpg</strong>
             <span style="font-size:11px;opacity:0.75;margin-top:4px">Sarbanash Title Screen / Pixel Art Monster / Itch.io</span>
             <span style="font-size:10px;color:#22c55e;margin-top:8px">Drop image in /images to render</span>

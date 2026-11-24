@@ -9,6 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f1ede3">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DEB — Achievements, Hackathons &amp; Honors">
+<meta property="og:description" content="Debargha Sarkar — Hackathon 1st Prize Winner, Forge IT Systems Internship, and 13,000+ Local_First_Lab community.">
+<meta property="og:image" content="images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DEB — Achievements, Hackathons &amp; Honors">
+<meta name="twitter:description" content="Debargha Sarkar — Hackathon 1st Prize Winner, Forge IT Systems Internship, and 13,000+ Local_First_Lab community.">
+<meta name="twitter:image" content="images/og.jpg">
 </head>
 <body>
 <a class="skiplink" href="#achieve-content">Skip to content</a>
@@ -16,24 +27,30 @@
 <canvas id="trail" aria-hidden="true"></canvas>
 <div id="cursor" aria-hidden="true"></div>
 <div id="cursorTag" aria-hidden="true">OPEN</div>
+<div id="progress" aria-hidden="true"></div>
+<div id="curtain" aria-hidden="true"></div>
 
 <!-- NAVIGATION -->
 <nav id="siteNav" aria-label="Site">
-  <a class="brand" href="index.html">← DEB <span class="hide-mobile">— BACK TO HOME</span></a>
-  <div style="display:flex;align-items:center;gap:12px">
-    <a class="tag hide-mobile" href="projects.html" style="text-decoration:none;border-color:var(--yellow);color:var(--yellow)">PROJECTS</a>
-    <a class="tag hide-mobile" href="anime.html" style="text-decoration:none">ANIME</a>
-    <a class="tag hide-mobile" href="music.html" style="text-decoration:none">MUSIC</a>
-    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
-    <a class="tag hide-mobile" href="gaming.html" style="text-decoration:none">GAMES</a>
-    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  <a class="brand" href="index.html">DEB <span class="brand-sub hide-mobile">— FIELD ARCHIVE</span></a>
+  <div class="nav-links">
+    <a href="projects.html">Projects</a>
+    <a href="achievements.html" aria-current="page">Wins</a>
+    <a href="anime.html">Anime</a>
+    <a href="music.html">Music</a>
+    <a href="cinema.html">Cinema</a>
+    <a href="gaming.html">Games</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">Index +</button>
   </div>
 </nav>
 
 <!-- TOC -->
 <div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
   <div class="toc-head"><h2>Achievements Index</h2><button id="tocClose">CLOSE ×</button></div>
-  <ul class="toc-list">
+  <div class="toc-grid">
+      <div>
+        <p class="toc-label">On this page</p>
+        <ul class="toc-list">
     <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Main Junction</span><span class="leader"></span><span class="t-pg">HOME ↗</span></a></li>
     <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Achievements Overview</span><span class="leader"></span><span class="t-pg">P.AC00</span></a></li>
     <li><a href="#ac-osamu"><span class="t-no">01</span><span class="t-title">Aveenir Hackathon 1st Prize (OSAMU)</span><span class="leader"></span><span class="t-pg">P.AC01</span></a></li>
@@ -42,6 +59,19 @@
     <li><a href="#ac-lab"><span class="t-no">04</span><span class="t-title">Local_First_Lab — 13,000+ Community</span><span class="leader"></span><span class="t-pg">P.AC04</span></a></li>
     <li><a href="#ac-timeline"><span class="t-no">05</span><span class="t-title">Academic &amp; Build Timeline</span><span class="leader"></span><span class="t-pg">P.AC05</span></a></li>
   </ul>
+      </div>
+      <div>
+        <p class="toc-label">Elsewhere in the archive</p>
+        <ul class="toc-list">
+        <li><a href="index.html"><span class="t-no">↗</span><span class="t-title">Field Archive / Cover</span><span class="leader"></span><span class="t-pg">Home</span></a></li>
+        <li><a href="projects.html"><span class="t-no">↗</span><span class="t-title">Projects Dossier</span><span class="leader"></span><span class="t-pg">09 builds</span></a></li>
+        <li><a href="anime.html"><span class="t-no">↗</span><span class="t-title">Anime Dimension</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="music.html"><span class="t-no">↗</span><span class="t-title">Music Sanctuary</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="cinema.html"><span class="t-no">↗</span><span class="t-title">Cinema Vault</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="gaming.html"><span class="t-no">↗</span><span class="t-title">Gaming Archive</span><span class="leader"></span><span class="t-pg">04 plates</span></a></li>
+        </ul>
+      </div>
+    </div>
   <p class="toc-foot">DEBARGHA SARKAR / 2026 — ACHIEVEMENTS &amp; HONORS</p>
 </div>
 
@@ -69,7 +99,7 @@
       <a class="ctl button" href="#ac-osamu" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
         EXPLORE 1ST PRIZE BUILD ↓
       </a>
-      <a class="ctl button" href="projects.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--yellow);color:var(--black);border:1px solid var(--yellow)">
+      <a class="ctl button" href="projects.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--paper2);color:var(--ink);border:1px solid var(--line2);border-radius:var(--radius-sm)">
         PROJECTS DOSSIER ↗
       </a>
       <a class="ctl button" href="index.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--paper2);color:var(--ink);border:1px solid var(--line2)">
@@ -90,7 +120,7 @@
     <div class="big-num" aria-hidden="true">01</div>
     <header class="kicker rv">
       <span>COMPETITIVE HACKATHON — AVEENIR</span>
-      <span class="tag win">🏆 1ST PRIZE WINNER</span>
+      <span class="tag win">★ 1ST PRIZE WINNER</span>
       <span class="tag team">TEAM PROJECT</span>
     </header>
     
@@ -103,7 +133,7 @@
       <span><b>PROJECT BUILT:</b> OSAMU (ADAPTIVE EXAMINATION HARDWARE SYSTEM)</span>
       <span><b>TIME BIND:</b> BUILT IN 48 HOURS FROM SCRATCH</span>
       <span><b>HARDWARE:</b> ESP32 MICROCONTROLLER TERMINALS · RF PACKET ENCRYPTION</span>
-      <span><b>OUTCOME:</b> 🏆 1ST PLACE OVERALL WINNER</span>
+      <span><b>OUTCOME:</b> ★ 1ST PLACE OVERALL WINNER</span>
     </div>
 
     <div class="gr gr-2" style="margin-top:40px">
@@ -123,7 +153,7 @@
       </div>
 
       <div class="readout rv" style="padding:28px;background:#141311;border:1px solid var(--pline);--d:.25s">
-        <span class="stamp gold" style="display:inline-block;margin-bottom:14px">🏆 1ST PLACE TROPHY</span>
+        <span class="stamp gold" style="display:inline-block;margin-bottom:14px">★ 1ST PLACE TROPHY</span>
         <h3 style="font-weight:900;font-size:24px;text-transform:uppercase;color:var(--paper);margin-bottom:16px">THE WINNING ADVANTAGE</h3>
         
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;font-family:var(--mono);font-size:12.5px;color:var(--paper);line-height:1.6">
@@ -132,7 +162,7 @@
             <div>Zero internet connection required. Operates on offline 2.4GHz custom encrypted packets, preventing tab-switching and AI prompt injections.</div>
           </li>
           <li style="border-bottom:1px solid var(--pline);padding-bottom:10px">
-            <span style="color:var(--yellow);font-weight:700">02 / ADAPTIVE HESITATION ENGINE</span>
+            <span style="color:var(--red);font-weight:700">02 / ADAPTIVE HESITATION ENGINE</span>
             <div>Calculates statistical keystroke latency to automatically generate probing deep-dive questions in real time.</div>
           </li>
           <li>
@@ -190,16 +220,16 @@
         
         <div style="display:flex;flex-direction:column;gap:14px;color:var(--paper);font-family:var(--mono);font-size:12px">
           <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--pline);padding-bottom:8px">
-            <span>CHANNEL 1: VIBRATION</span><span class="v" style="color:var(--yellow)">MPU6050 (3-AXIS ACCEL)</span>
+            <span>CHANNEL 1: VIBRATION</span><span class="v" style="color:var(--paper)">MPU6050 (3-AXIS ACCEL)</span>
           </div>
           <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--pline);padding-bottom:8px">
-            <span>CHANNEL 2: ACOUSTIC FFT</span><span class="v" style="color:var(--yellow)">24 FREQUENCY BANDS</span>
+            <span>CHANNEL 2: ACOUSTIC FFT</span><span class="v" style="color:var(--paper)">24 FREQUENCY BANDS</span>
           </div>
           <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--pline);padding-bottom:8px">
-            <span>CHANNEL 3: GAS &amp; SMOKE</span><span class="v" style="color:var(--yellow)">MQ-2 ANALOG SENSOR</span>
+            <span>CHANNEL 3: GAS &amp; SMOKE</span><span class="v" style="color:var(--paper)">MQ-2 ANALOG SENSOR</span>
           </div>
           <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--pline);padding-bottom:8px">
-            <span>CHANNEL 4: TEMPERATURE</span><span class="v" style="color:var(--yellow)">THERMOCOUPLE READOUT</span>
+            <span>CHANNEL 4: TEMPERATURE</span><span class="v" style="color:var(--paper)">THERMOCOUPLE READOUT</span>
           </div>
           <div style="display:flex;justify-content:space-between">
             <span>INFERENCE RUNTIME</span><span class="v" style="color:var(--red)">ESP32 FREERTOS</span>
@@ -307,7 +337,7 @@
       </div>
 
       <div class="readout rv" style="padding:32px;background:#141311;border:1px solid var(--pline);--d:.25s;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:18px">
-        <span class="mono" style="color:var(--yellow);font-size:12px;letter-spacing:.16em">COMMUNITY SCALE</span>
+        <span class="mono" style="color:var(--red);font-size:12px;letter-spacing:.16em">COMMUNITY SCALE</span>
         <div style="font-size:clamp(44px,6vw,72px);font-weight:900;font-family:var(--mono);color:var(--paper);line-height:1">13,000+</div>
         <p class="mono mdim" style="font-size:12px;line-height:1.6;margin:0">ENGINEERS, HARDWARE HACKERS &amp; STUDENTS WATCHING REAL-TIME BUILDS</p>
         <div style="border-top:1px solid var(--pline);padding-top:14px;width:100%;font-family:var(--mono);font-size:11px;color:var(--pdim)">
@@ -336,7 +366,7 @@
             <b style="color:var(--red)">2025:</b> Software &amp; Systems Engineering Intern at Forge IT Systems.
           </li>
           <li style="border-bottom:1px solid var(--line2);padding-bottom:10px">
-            <b style="color:var(--red)">2024:</b> 🏆 1st Prize Winner — Aveenir Hackathon for OSAMU adaptive exam terminal.
+            <b style="color:var(--red)">2024:</b> ★ 1st Prize Winner — Aveenir Hackathon for OSAMU adaptive exam terminal.
           </li>
           <li>
             <b style="color:var(--red)">2023:</b> Built VISO machine health predictive telemetry system for FSociety Hackathon.
@@ -345,12 +375,12 @@
       </div>
 
       <div class="readout rv" style="padding:28px;background:var(--paper2);border:1px solid var(--line2);--d:.2s">
-        <span class="mono" style="color:var(--ink);font-weight:700;display:block;margin-bottom:14px">// ACADEMIC BACKGROUND</span>
-        <div style="font-family:var(--mono);font-size:13px;line-height:1.7;color:var(--ink)">
-          <div><b>INSTITUTION:</b> Netaji Subhash Engineering College (Kolkata)</div>
-          <div><b>DEGREE:</b> B.Tech in Computer Science &amp; Engineering</div>
-          <div><b>SPECIALIZATION:</b> Embedded Hardware, Distributed Systems &amp; Local AI</div>
-          <div style="margin-top:16px;border-top:1px solid var(--line2);padding-top:12px;color:var(--dim)">
+        <span class="mono" style="color:var(--red);font-weight:700;display:block;margin-bottom:14px">// PROFESSIONAL &amp; INDUSTRY BACKGROUND</span>
+        <div style="display:block;padding:0;border-bottom:0;font-family:var(--mono);font-size:13px;line-height:1.7;color:var(--ink)">
+          <div><b>ORGANIZATION:</b> ForgeinTech (Forge IT Systems)</div>
+          <div><b>ROLE:</b> Embedded &amp; Software Systems Engineer</div>
+          <div><b>SPECIALIZATION:</b> Embedded Hardware, Robotics Kinematics &amp; Systems</div>
+          <div style="margin-top:16px;border-top:1px solid var(--line2);padding-top:12px;color:var(--ink2)">
             Independent builder focusing on bridging software, Linux terminals, and real-world mechanical robotics.
           </div>
         </div>

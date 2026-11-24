@@ -3,386 +3,456 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DEB — Command Junction / Software × Hardware × Systems</title>
-<meta name="description" content="Debargha Sarkar (Deb) — Builder junction navigating to Projects Dossier, Achievements, Anime, Music, Cinema, and Gaming sanctuaries.">
+<title>DEB — Field Archive / Software × Hardware × Systems</title>
+<meta name="description" content="Debargha Sarkar (Deb) — builder in Kolkata. Anti-cheat exam hardware, a walking quadruped, a phone homelab, clinical telemetry, and a 13K+ maker lab.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<style>
-  /* JUNCTION SPECIFIC ENHANCEMENTS */
-  .junction-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-    margin-top: 40px;
-  }
-  .j-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 30px 26px;
-    border: 2px solid var(--pline);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
-    min-height: 280px;
-  }
-  .j-card:hover {
-    transform: translateY(-4px);
-  }
-  .j-badge {
-    font-family: var(--mono);
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: .14em;
-    padding: 4px 8px;
-    display: inline-block;
-  }
-  .j-title {
-    font-weight: 900;
-    font-size: clamp(26px, 3.2vw, 36px);
-    line-height: 1.08;
-    margin: 14px 0 10px;
-    letter-spacing: -0.02em;
-  }
-  .j-desc {
-    font-size: 13.5px;
-    line-height: 1.6;
-    margin: 0;
-  }
-  .j-foot {
-    margin-top: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding-top: 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .12em;
-  }
-</style>
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f1ede3">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DEB — Field Archive">
+<meta property="og:description" content="Software × hardware × systems from Kolkata. Proof, not promises.">
+<meta property="og:image" content="images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DEB — Field Archive">
+<meta name="twitter:description" content="Software × hardware × systems from Kolkata. Proof, not promises.">
+<meta name="twitter:image" content="images/og.jpg">
 </head>
-<body>
-<a class="skiplink" href="#junction-content">Skip to content</a>
+<body class="home">
+<a class="skiplink" href="#junction">Skip to content</a>
 <div id="noise" aria-hidden="true"></div>
 <canvas id="trail" aria-hidden="true"></canvas>
 <div id="cursor" aria-hidden="true"></div>
 <div id="cursorTag" aria-hidden="true">OPEN</div>
+<div id="progress" aria-hidden="true"></div>
+<div id="curtain" aria-hidden="true"></div>
 
-<!-- NAVIGATION -->
+<!-- ============ NAVIGATION ============ -->
 <nav id="siteNav" aria-label="Site">
-  <a class="brand" href="#cover">DEB <span class="hide-mobile">— COMMAND JUNCTION</span></a>
-  <div style="display:flex;align-items:center;gap:12px">
-    <a class="tag hide-mobile" href="projects.html" style="text-decoration:none;border-color:var(--yellow);color:var(--yellow)">PROJECTS</a>
-    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
-    <a class="tag hide-mobile" href="anime.html" style="text-decoration:none">ANIME</a>
-    <a class="tag hide-mobile" href="music.html" style="text-decoration:none">MUSIC</a>
-    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
-    <a class="tag hide-mobile" href="gaming.html" style="text-decoration:none">GAMES</a>
-    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  <a class="brand" href="index.html">DEB <span class="brand-sub hide-mobile">— FIELD ARCHIVE</span></a>
+  <div class="nav-links">
+    <a href="projects.html">Projects</a>
+    <a href="projects.html#p02">Robot</a>
+    <a href="projects.html#p10">Never Twice</a>
+    <a href="projects.html#p11">Pipeline</a>
+    <a href="achievements.html">Wins</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">Index +</button>
   </div>
 </nav>
 
-<!-- TOC -->
+<!-- ============ TABLE OF CONTENTS ============ -->
 <div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
-  <div class="toc-head"><h2>Junction Index</h2><button id="tocClose">CLOSE ×</button></div>
-  <ul class="toc-list">
-    <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Cover // Command Hub</span><span class="leader"></span><span class="t-pg">P.001</span></a></li>
-    <li><a href="#junction"><span class="t-no">✦</span><span class="t-title">The Grand Junction (All Dedicated Portals)</span><span class="leader"></span><span class="t-pg">P.002</span></a></li>
-    <li><a href="#p00"><span class="t-no">—</span><span class="t-title">Prologue // The Builder Manifesto</span><span class="leader"></span><span class="t-pg">P.003</span></a></li>
-    <li><a href="#pabout"><span class="t-no">—</span><span class="t-title">About Deb // Profile &amp; Focus</span><span class="leader"></span><span class="t-pg">P.004</span></a></li>
-    <li><a href="#pinsta"><span class="t-no">✦</span><span class="t-title">Local_First_Lab // 13K+ Channel</span><span class="leader"></span><span class="t-pg">P.005</span></a></li>
-    <li><a href="#pcontact"><span class="t-no">→</span><span class="t-title">Contact &amp; Channels</span><span class="leader"></span><span class="t-pg">P.006</span></a></li>
-    <li><a href="projects.html" style="color:var(--yellow)"><span class="t-no">★</span><span class="t-title">Projects Dossier (3D Model, Flowcharts &amp; Code)</span><span class="leader"></span><span class="t-pg">PROJECTS ↗</span></a></li>
-    <li><a href="https://ecg-demo-one.vercel.app/" target="_blank" rel="noopener" style="color:#00d084"><span class="t-no">★</span><span class="t-title">ECG &amp; Holter Telemetry Suite (Live 8-Model Demo)</span><span class="leader"></span><span class="t-pg">LIVE ↗</span></a></li>
-    <li><a href="achievements.html" style="color:var(--red)"><span class="t-no">★</span><span class="t-title">Achievements (Aveenir 1st Prize, VISO, Internship)</span><span class="leader"></span><span class="t-pg">WINS ↗</span></a></li>
-    <li><a href="anime.html" style="color:#ff5500"><span class="t-no">★</span><span class="t-title">Anime Realm (Dragon Ball Super #1, AOT, Eva...)</span><span class="leader"></span><span class="t-pg">ANIME ↗</span></a></li>
-    <li><a href="music.html" style="color:#ff1744"><span class="t-no">★</span><span class="t-title">Music Sanctuary (Malice Mizer #1, Radiohead...)</span><span class="leader"></span><span class="t-pg">MUSIC ↗</span></a></li>
-    <li><a href="cinema.html" style="color:#ff007f"><span class="t-no">★</span><span class="t-title">Cinema Vault (Fight Club #1, Se7en, Interstellar...)</span><span class="leader"></span><span class="t-pg">CINEMA ↗</span></a></li>
-    <li><a href="gaming.html" style="color:#16a34a"><span class="t-no">★</span><span class="t-title">Gaming Archive (Balatro #1, Among Us, Undertale...)</span><span class="leader"></span><span class="t-pg">GAMES ↗</span></a></li>
-  </ul>
-  <p class="toc-foot">DEBARGHA SARKAR / 2026 — SOFTWARE × HARDWARE × SYSTEMS</p>
+  <div class="toc-head"><h2>Field Index</h2><button id="tocClose">Close ×</button></div>
+  <div class="toc-grid">
+    <div>
+      <p class="toc-label">This page</p>
+      <ul class="toc-list">
+        <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Cover</span><span class="leader"></span><span class="t-pg">P.001</span></a></li>
+        <li><a href="#junction"><span class="t-no">01</span><span class="t-title">The Junction</span><span class="leader"></span><span class="t-pg">P.002</span></a></li>
+        <li><a href="#work"><span class="t-no">02</span><span class="t-title">Selected Builds</span><span class="leader"></span><span class="t-pg">P.003</span></a></li>
+        <li><a href="#notes"><span class="t-no">03</span><span class="t-title">Field Notes</span><span class="leader"></span><span class="t-pg">P.004</span></a></li>
+        <li><a href="#about"><span class="t-no">04</span><span class="t-title">The Operator</span><span class="leader"></span><span class="t-pg">P.005</span></a></li>
+        <li><a href="#lab"><span class="t-no">05</span><span class="t-title">Field Lab</span><span class="leader"></span><span class="t-pg">P.006</span></a></li>
+        <li><a href="#contact"><span class="t-no">06</span><span class="t-title">Open Channel</span><span class="leader"></span><span class="t-pg">P.007</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="toc-label">Major Projects &amp; Honors</p>
+      <ul class="toc-list">
+        <li><a href="projects.html"><span class="t-no">A</span><span class="t-title">Projects Dossier</span><span class="leader"></span><span class="t-pg">11 builds ↗</span></a></li>
+        <li><a href="projects.html#p02"><span class="t-no">B</span><span class="t-title">Quadruped Robot (Video Demo)</span><span class="leader"></span><span class="t-pg">Video ↗</span></a></li>
+        <li><a href="projects.html#p10"><span class="t-no">C</span><span class="t-title">The Never Twice (Research)</span><span class="leader"></span><span class="t-pg">App ↗</span></a></li>
+        <li><a href="projects.html#p11"><span class="t-no">D</span><span class="t-title">Instagram Pipeline (Zero-Token)</span><span class="leader"></span><span class="t-pg">Engine ↗</span></a></li>
+        <li><a href="achievements.html"><span class="t-no">E</span><span class="t-title">Achievements &amp; Honors</span><span class="leader"></span><span class="t-pg">Wins ↗</span></a></li>
+        <li><a href="https://ecg-demo-one.vercel.app/" target="_blank" rel="noopener"><span class="t-no">↗</span><span class="t-title">ECG Live Demo</span><span class="leader"></span><span class="t-pg">Vercel ↗</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="toc-foot">DEBARGHA SARKAR / 2026 — SOFTWARE × HARDWARE × SYSTEMS — KOLKATA, IN</p>
 </div>
 
-<main id="junction-content">
+<main>
 
 <!-- ============ 00 / COVER ============ -->
-<section id="cover" aria-label="Cover" data-page="P.001" data-name="COVER">
+<section id="cover" class="home-cover" data-page="P.001" data-name="COVER" aria-labelledby="cover-title">
   <div class="crops" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <div class="topline">
-    <div>DEBARGHA SARKAR <span class="hide-mobile">— B.TECH CSE</span></div>
-    <div class="hide-mobile">COMMAND JUNCTION // 2026</div>
-    <div>PORTFOLIO V2</div>
+  <span class="cover-rail" aria-hidden="true">FIELD ARCHIVE / VOL. 02 / KOLKATA, INDIA</span>
+
+  <div class="cover-top">
+    <span>DEBARGHA SARKAR / FIELD ARCHIVE 2026</span>
+    <span class="hide-mobile">SOFTWARE × HARDWARE × SYSTEMS</span>
+    <span class="clock">KOLKATA <span class="js-clock" data-clock="time">00:00:00</span></span>
   </div>
-  <div class="hero-center">
-    <div class="crosshair" aria-hidden="true"></div>
-    <div class="side-vert">SOFTWARE · HARDWARE · SYSTEMS · MEDIA</div>
-    <h1 class="hero-name" aria-label="DEB.">
-      <span class="ln" style="--fx:-120px;--fy:40px;--fr:-8deg;--d:.15s">D</span><span class="ln" style="--fx:30px;--fy:-140px;--fr:5deg;--d:.32s">E</span><span class="ln dot" style="--fx:140px;--fy:50px;--fr:-4deg;--d:.6s">B.</span>
-    </h1>
-    <p class="hero-sub">Still building</p>
-    <p class="hero-roles">SOFTWARE × HARDWARE × SYSTEMS <span class="hide-mobile">— STUDENT / BUILDER / SYSTEMS EXPLORER</span></p>
-    <div class="hero-rule" aria-hidden="true"></div>
-    
-    <!-- FRONT PAGE ACTION LINKS -->
-    <div style="margin-top:24px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;position:relative;z-index:10">
-      <a class="hero-stamp hide-mobile" href="https://www.instagram.com/local_first_lab/" target="_blank" rel="noopener" style="position:relative;right:auto;bottom:auto;transform:rotate(-2deg);display:inline-block;text-decoration:none">
-        LOCAL_FIRST_LAB / 13K+<br>FOLLOW THE LAB ↗
-      </a>
-      <a class="ctl button" href="#junction" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
-        THE JUNCTION ↓
-      </a>
-      <a class="ctl button" href="projects.html" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--yellow);color:var(--black);border:1px solid var(--yellow)">
-        PROJECTS DOSSIER ↗
-      </a>
-      <a class="ctl button" href="https://ecg-demo-one.vercel.app/" target="_blank" rel="noopener" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:#00d084;color:#000;border:1px solid #00d084">
-        ECG DEMO ↗
-      </a>
-      <a class="ctl button" href="achievements.html" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink)">
-        ACHIEVEMENTS ↗
-      </a>
-      <a class="ctl button" href="https://github.com/My-Mation" target="_blank" rel="noopener" style="display:inline-block;padding:12px 20px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--paper2);color:var(--ink);border:1px solid var(--line2)">
-        GITHUB ↗
-      </a>
-    </div>
-  </div>
-  <div class="botline">
-    <div>INDEX 00 / JUNCTION</div>
-    <div class="hide-mobile">AN UNAPOLOGETIC MIRROR OF WHO I AM AS A BUILDER &amp; PERSON</div>
-    <div class="scroll-cue">SCROLL <i aria-hidden="true"></i></div>
-  </div>
-</section>
 
-<!-- ============ 01 / THE GRAND JUNCTION PORTALS ============ -->
-<section id="junction" class="spread dark" data-page="P.002" data-name="THE JUNCTION" aria-labelledby="h-junction" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 5.5vw">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">✦</div>
-    <header class="kicker rv">
-      <span>SECTOR MAP // CENTRAL JUNCTION</span>
-      <span class="tag win" style="border-color:var(--red);background:var(--red);color:var(--paper)">SELECT DESTINATION</span>
-    </header>
-    <h2 id="h-junction" class="h-giant rv" style="--d:.05s">
-      THE CENTRAL<br>
-      <span style="color:var(--red)">JUNCTION</span><span style="color:var(--red)">.</span>
-    </h2>
-    <p class="thesis rv" style="--d:.1s">
-      This portfolio is not an overcrowded corporate resume. It is an authentic command hub into my engineering work, competitive hackathon wins, and personal media universes. Pick a sector to explore:
-    </p>
+  <div class="cover-main">
+    <p class="cover-eyebrow">EMBEDDED &amp; SOFTWARE ENGINEER · FORGEINTECH · KOLKATA</p>
 
-    <div class="junction-grid">
-      <!-- PORTAL 1: PROJECTS DOSSIER -->
-      <a href="projects.html" class="j-card rv" style="--d:.12s;background:#141311;border-color:var(--yellow);color:var(--paper);box-shadow:0 0 25px rgba(230,194,41,0.08)">
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="j-badge" style="background:var(--yellow);color:#000">SECTOR 01 // ENGINEERING</span>
-            <span class="tag live" style="font-size:9.5px">3D CAD &amp; SCHEMATICS</span>
-          </div>
-          <div class="j-title" style="color:#fff">PROJECTS<br><span style="color:var(--yellow)">DOSSIER</span>.</div>
-          <p class="j-desc" style="color:var(--pdim)">
-            Full hardware specs, 3D Quadruped Robot CAD viewport, OSAMU adaptive exam flowchart, clinical ECG &amp; Holter telemetry suite, Termux phone homelab cluster, RepBot CV, and VISO telemetry.
-          </p>
-        </div>
-        <div class="j-foot" style="border-color:rgba(230,194,41,0.25);color:var(--yellow)">
-          <span>ENTER DOSSIER →</span>
-          <span style="color:rgba(255,255,255,0.4)">9 ACTIVE BUILDS</span>
-        </div>
-      </a>
+    <div class="cover-headline">
+      <h1 id="cover-title" aria-label="DEB.">
+        <span class="char" style="--d:.12s">D</span><span class="char" style="--d:.22s">E</span><span class="char" style="--d:.32s">B</span><span class="char dot" style="--d:.44s">.</span>
+      </h1>
 
-      <!-- PORTAL 2: ACHIEVEMENTS & HACKATHONS -->
-      <a href="achievements.html" class="j-card rv" style="--d:.16s;background:#180b0b;border-color:var(--red);color:var(--paper);box-shadow:0 0 25px rgba(191,48,22,0.1)">
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="j-badge" style="background:var(--red);color:#fff">SECTOR 02 // HONORS</span>
-            <span class="tag win" style="font-size:9.5px">🏆 1ST PRIZE</span>
-          </div>
-          <div class="j-title" style="color:#fff">ACHIEVEMENTS<br><span style="color:var(--red)">&amp; WINS</span>.</div>
-          <p class="j-desc" style="color:#fca5a5">
-            Aveenir Hackathon 1st Place overall (OSAMU), VISO machine health hackathon sprint, Forge IT Systems engineering internship, and 13K+ lab community.
-          </p>
-        </div>
-        <div class="j-foot" style="border-color:rgba(191,48,22,0.3);color:var(--red)">
-          <span>VIEW AWARDS &amp; SPRINT WINS →</span>
-          <span style="color:rgba(255,255,255,0.4)">FIELD RECORD</span>
-        </div>
-      </a>
-
-      <!-- PORTAL 3: ANIME DIMENSION -->
-      <a href="anime.html" class="j-card rv" style="--d:.20s;background:#0d0614;border-color:#ff5500;color:#ffedd5;box-shadow:0 0 25px rgba(255,85,0,0.1)">
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="j-badge" style="background:#ff5500;color:#000">CHAPTER 01 // ANIME</span>
-            <span class="tag" style="background:#0044cc;color:#fff;border-color:#ff5500;font-size:9.5px">DB SUPER #1</span>
-          </div>
-          <div class="j-title" style="color:#fff">ANIME<br><span style="color:#ff5500">DIMENSION</span>.</div>
-          <p class="j-desc" style="color:#fed7aa">
-            Goku Orange &amp; Saiyan Blue tribute, Colossal Titan peering over the Eldian wall on the right, Evangelion Unit-01, Johan Liebert noir in Monster, and Vinland Saga.
-          </p>
-        </div>
-        <div class="j-foot" style="border-color:rgba(255,85,0,0.3);color:#ff5500">
-          <span>ENTER ANIME SPREAD →</span>
-          <span style="color:rgba(255,255,255,0.4)">UNHURRIED SCROLL</span>
-        </div>
-      </a>
-
-      <!-- PORTAL 4: MUSIC SANCTUARY -->
-      <a href="music.html" class="j-card rv" style="--d:.24s;background:#0d0205;border-color:#ff1744;color:#ffe4e6;box-shadow:0 0 25px rgba(255,23,68,0.12)">
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="j-badge" style="background:#880015;color:#fff">CHAPTER 02 // SOUND</span>
-            <span class="tag" style="background:#ff1744;color:#000;border-color:#ff1744;font-size:9.5px">LIVE AUDIO ♫</span>
-          </div>
-          <div class="j-title" style="color:#fff">MUSIC<br><span style="color:#ff1744">SANCTUARY</span>.</div>
-          <p class="j-desc" style="color:#fecdd3">
-            Malice Mizer (*Gekka no Yasoukyoku* #1 crown track with live Web Audio synth playing on visit), Radiohead (*Creep* &amp; *No Surprises*), Tame Impala, Tyler, and Arctic Monkeys.
-          </p>
-        </div>
-        <div class="j-foot" style="border-color:rgba(255,23,68,0.3);color:#ff1744">
-          <span>ENTER SOUNDSTAGE →</span>
-          <span style="color:rgba(255,255,255,0.4)">BLACK &amp; BLOOD RED</span>
-        </div>
-      </a>
-
-      <!-- PORTAL 5: CINEMA & SERIES -->
-      <a href="cinema.html" class="j-card rv" style="--d:.28s;background:#0d050c;border-color:#ff007f;color:#fce7f3;box-shadow:0 0 25px rgba(255,0,127,0.1)">
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="j-badge" style="background:#ff007f;color:#fff">CHAPTER 03 // CINEMA</span>
-            <span class="tag" style="background:#33001a;color:#ff007f;border-color:#ff007f;font-size:9.5px">FIGHT CLUB #1</span>
-          </div>
-          <div class="j-title" style="color:#fff">CINEMA<br><span style="color:#ff007f">&amp; SERIES</span>.</div>
-          <p class="j-desc" style="color:#fbcfe8">
-            Fight Club with subliminal single-frame projector flicker, Se7en rainy noir, Interstellar &amp; Project Hail Mary (*"Amaze!"*), Nightcrawler, and Loki &amp; Moon Knight.
-          </p>
-        </div>
-        <div class="j-foot" style="border-color:rgba(255,0,127,0.3);color:#ff007f">
-          <span>ENTER 35MM SPREAD →</span>
-          <span style="color:rgba(255,255,255,0.4)">NEON SOAP PINK</span>
-        </div>
-      </a>
-
-      <!-- PORTAL 6: GAMING ARCHIVE -->
-      <a href="gaming.html" class="j-card rv" style="--d:.32s;background:#04140d;border-color:#16a34a;color:#dcfce7;box-shadow:0 0 25px rgba(22,163,74,0.12)">
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="j-badge" style="background:#16a34a;color:#000">CHAPTER 04 // GAMES</span>
-            <span class="tag" style="background:#14532d;color:#fff;border-color:#16a34a;font-size:9.5px">BALATRO #1</span>
-          </div>
-          <div class="j-title" style="color:#fff">GAMING<br><span style="color:#16a34a">ARCHIVE</span>.</div>
-          <p class="j-desc" style="color:#bbf7d0">
-            Balatro poker felt &amp; interactive mult simulator, Among Us quarantine emergency siren salute, Undertale &amp; Deltarune Determination, and indie games Sarbanash &amp; Kisor.
-          </p>
-        </div>
-        <div class="j-foot" style="border-color:rgba(22,163,74,0.3);color:#16a34a">
-          <span>ENTER GAMING FELT →</span>
-          <span style="color:rgba(255,255,255,0.4)">POKER FELT GREEN</span>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 02 / PROLOGUE: THE BUILDER MANIFESTO ============ -->
-<section id="p00" class="spread" data-page="P.003" data-name="PROLOGUE" aria-labelledby="h-p00">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">↻</div>
-    <header class="kicker rv"><span>PROLOGUE // THE CORE MANIFESTO</span><span class="mdim">AN ARCHIVE THAT BECAME ENGINEERING</span></header>
-    <h2 id="h-p00" class="h-giant rv" style="--d:.05s">I KEEP<br>FINDING THINGS<br><span class="outline wcond">TO BUILD<span style="color:var(--red)">.</span></span></h2>
-    <p class="thesis rv" style="--d:.15s">Games led to apps. Apps led to backend systems. Backend led to Linux and networking. Networking led to self-hosting. Self-hosting led to local AI. Hardware experiments led to robots. <em>And the common thread is: MAKE IT WORK.</em></p>
-
-    <div class="chain rv" style="--d:.2s" aria-label="Progression of work">
-      <div class="node"><span class="mono mdim">PHASE 01</span><h4>GAMES &amp; APPS</h4><span class="st">GODOT · PISKEL · FLUTTER · MOBILE</span></div>
-      <span class="arr" aria-hidden="true">↓</span>
-      <div class="node"><span class="mono mdim">PHASE 02</span><h4>BACKEND &amp; SYSTEMS</h4><span class="st">LINUX · TERMUX · NETWORKING · HOMELAB</span></div>
-      <span class="arr" aria-hidden="true">↓</span>
-      <div class="node"><span class="mono mdim">PHASE 03</span><h4>LOCAL AI &amp; ROBOTICS</h4><span class="st">32-BIT LLM · EMBEDDED · ESP32 · QUADRUPED</span></div>
-      <span class="arr" aria-hidden="true">↓</span>
-      <div class="node cur"><span class="mono mdim" style="color:var(--pdim)">CURRENT</span><h4>ENGINEERING</h4><span class="st">MAKE IT WORK</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 03 / ABOUT DEB ============ -->
-<section id="pabout" class="spread" data-page="P.004" data-name="ABOUT" aria-labelledby="h-pabout">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">—</div>
-    <header class="kicker rv"><span>ABOUT</span><span class="mdim">BIOGRAPHY &amp; PROFILE</span></header>
-    <h2 id="h-pabout" class="h-giant rv" style="--d:.05s">STILL<br><span class="outline wcond">BUILDING</span><span style="color:var(--red)">.</span></h2>
-    <div class="gr gr-2" style="margin-top:44px">
-      <div class="body-col rv" style="margin-top:0">
-        <p>I am a B.Tech Computer Science &amp; Engineering student at Netaji Subhash Engineering College, Kolkata.</p>
-        <p>Software × hardware × systems. Finding out what happens when software leaves the screen and enters physical microcontrollers, terminal servers, and walking robots.</p>
-        <p>Whether it is winning 1st prize at Aveenir Hackathon building anti-cheat hardware in 48 hours or tuning inverse kinematics solvers on an 8-servo quadruped, I care about working code and physical reality.</p>
+      <div class="cover-plate" aria-hidden="true">
+        <svg viewBox="0 0 400 400" role="img">
+          <defs>
+            <path id="plateArc" d="M 200,200 m -150,0 a 150,150 0 1,1 300,0 a 150,150 0 1,1 -300,0"/>
+            <path id="plateArcIn" d="M 200,200 m -118,0 a 118,118 0 1,0 236,0 a 118,118 0 1,0 -236,0"/>
+          </defs>
+          <g class="plate-spin">
+            <circle cx="200" cy="200" r="188" fill="none" stroke="var(--ink)" stroke-width="1" opacity=".35"/>
+            <circle cx="200" cy="200" r="170" fill="none" stroke="var(--ink)" stroke-width="1" stroke-dasharray="2 7" opacity=".55"/>
+            <circle cx="200" cy="200" r="120" fill="none" stroke="var(--ink)" stroke-width="1" opacity=".28"/>
+            <g stroke="var(--ink)" stroke-width="1" opacity=".5">
+              <line x1="200" y1="8" x2="200" y2="30"/><line x1="200" y1="370" x2="200" y2="392"/>
+              <line x1="8" y1="200" x2="30" y2="200"/><line x1="370" y1="200" x2="392" y2="200"/>
+            </g>
+            <text font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="4.6" fill="var(--ink)" opacity=".7">
+              <textPath href="#plateArc" startOffset="0">DEBARGHA SARKAR · FIELD ARCHIVE · KOLKATA · 22.57°N 88.36°E · </textPath>
+            </text>
+          </g>
+          <g class="plate-spin reverse">
+            <circle cx="200" cy="200" r="88" fill="none" stroke="var(--red)" stroke-width="1.5" opacity=".8"/>
+            <circle cx="200" cy="200" r="74" fill="none" stroke="var(--ink)" stroke-width="1" opacity=".3"/>
+            <g stroke="var(--red)" stroke-width="1.4" opacity=".9">
+              <line x1="200" y1="112" x2="200" y2="130"/>
+              <line x1="200" y1="270" x2="200" y2="288"/>
+              <line x1="112" y1="200" x2="130" y2="200"/>
+              <line x1="270" y1="200" x2="288" y2="200"/>
+            </g>
+            <text font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="3.4" fill="var(--red)">
+              <textPath href="#plateArcIn" startOffset="4%">REGISTERED ORIGINAL · MMXXVI · DO NOT SCALE · </textPath>
+            </text>
+          </g>
+          <circle cx="200" cy="200" r="4.5" fill="var(--red)"/>
+          <circle cx="200" cy="200" r="12" fill="none" stroke="var(--red)" stroke-width="1"/>
+        </svg>
       </div>
-      <div class="facts rv" style="--d:.25s">
-        <div><span>NAME</span><span class="val">DEBARGHA SARKAR</span></div>
-        <div><span>GOES BY</span><span class="val">DEB</span></div>
-        <div><span>PROGRAM</span><span class="val">B.TECH CSE</span></div>
-        <div><span>LOCATION</span><span class="val">KOLKATA, INDIA</span></div>
-        <div><span>FOCUS</span><span class="val">SOFTWARE × HARDWARE × SYSTEMS</span></div>
-        <div><span>COMMUNITY</span><span class="val">13,000+ MAKERS (@LOCAL_FIRST_LAB)</span></div>
-        <div><span>TAGLINE</span><span class="val" style="color:var(--red)">STILL BUILDING</span></div>
+    </div>
+
+    <div class="cover-lower">
+      <div class="cover-deck">
+        <p class="deck-line">I build across <em>hardware, software &amp; autonomous systems.</em></p>
+        <p class="deck-bio">Embedded and software engineer passionate about physical robotics, inverse kinematics, local-first architecture, mobile apps, and zero-token media pipelines. Currently working at ForgeinTech.</p>
+      </div>
+      <div class="cover-side">
+        <div class="cover-actions">
+          <a class="btn btn-primary" href="#junction">Open the archive <span class="arw" aria-hidden="true">↘</span></a>
+          <a class="btn btn-ghost" href="projects.html">Projects dossier <span class="arw" aria-hidden="true">↗</span></a>
+        </div>
+        <div class="cover-socials">
+          <a href="https://github.com/My-Mation" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/debargha-sarkar-72575937/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.instagram.com/local_first_lab/" target="_blank" rel="noopener">Local_First_Lab</a>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="cover-bottom">
+    <div class="cover-stats">
+      <div><b>13K+</b><span>Lab community</span></div>
+      <div><b>01×</b><span>Hackathon 1st prize</span></div>
+      <div><b>09</b><span>Documented builds</span></div>
+      <div><b>2026</b><span>Archive edition</span></div>
+    </div>
+    <a class="cover-scroll" href="#junction">Scroll to the index <i aria-hidden="true"></i></a>
+  </div>
 </section>
 
-<!-- ============ 04 / LOCAL_FIRST_LAB HIGHLIGHT ============ -->
-<section id="pinsta" class="spread dark" data-page="P.005" data-name="LOCAL_FIRST_LAB" aria-labelledby="h-pinsta">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">✦</div>
-    <header class="kicker rv"><span>DEDICATED CHANNEL // 13K+ COMMUNITY</span><span class="tag live">PROJECT LAB</span></header>
-    <h2 id="h-pinsta" class="h-giant rv" style="--d:.05s">LOCAL_FIRST_LAB<br><span class="outline wcond">/ 13K+ FOLLOWERS</span><span style="color:var(--red)">.</span></h2>
-    
-    <div class="gr gr-2" style="margin-top:40px">
-      <div class="rv" style="--d:.10s">
-        <p class="thesis" style="margin-top:0">The experimental engineering channel where I document real-time hardware builds, mobile Linux servers, local AI, and robotics prototypes.</p>
-        <p class="body-col" style="color:var(--pdim)">An extension of the portfolio identity — documenting iterations, failures, and breakthroughs live for a community of over 13,000 builders.</p>
-      </div>
+<!-- ============ 01 / THE JUNCTION ============ -->
+<section id="junction" class="home-section dark junction-section" data-page="P.002" data-name="THE JUNCTION" aria-labelledby="h-junction">
+  <div class="section-head rv">
+    <div>
+      <p class="section-tag">01 / The junction</p>
+      <h2 id="h-junction">PICK A<br><span class="thin">SECTOR.</span></h2>
+    </div>
+    <p class="section-intro">Engineered systems, hardware prototypes, behavioral research, and field honors. Hover or focus a sector to route the signal.</p>
+    <span class="ink-note" style="margin-top:14px">psst — hover a row, the plate follows ↗</span>
+  </div>
 
-      <div class="rv" style="--d:.2s;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px;border:1px solid var(--pline);padding:32px;background:#141311">
-        <span class="mono" style="color:var(--yellow);font-size:13px;letter-spacing:.16em">INSTAGRAM / @LOCAL_FIRST_LAB</span>
-        <div style="font-size:56px;font-weight:900;font-family:var(--mono);color:var(--paper);line-height:1">13,000+</div>
-        <p class="mono mdim" style="margin-bottom:10px">ENGINEERS &amp; BUILDERS FOLLOWING THE LAB</p>
-        <a class="ctl button" href="https://www.instagram.com/local_first_lab/" target="_blank" rel="noopener" style="display:inline-block;padding:16px 28px;font-size:13px;font-weight:700;text-decoration:none;background:var(--red);color:var(--paper);border:none">
-          FOLLOW THE LAB → @LOCAL_FIRST_LAB ↗
-        </a>
+  <div class="junction-body rv">
+    <div class="j-list" role="list">
+      <a class="j-row is-active" role="listitem" href="projects.html" style="--accent:#c93a1e"
+         data-accent="#c93a1e" data-ink="#f1ede3" data-code="SEC.01 / ENGINEERING" data-index="01"
+         data-title="PROJECTS DOSSIER." data-desc="Complete technical dossier: custom 8-servo quadruped robot with video, un-cheatable exam hardware, clinical ECG telemetry suite, and on-device AI."
+         data-meta="ALL BUILDS / CAD / CODE">
+        <span class="j-no">01</span>
+        <span class="j-name"><strong>Projects Dossier</strong><small>Robotics / hardware / code</small><span class="j-desc-inline">11 builds, from ESP32 exam terminals to a walking quadruped.</span></span>
+        <span class="j-meta">All builds</span>
+        <span class="j-arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="j-row" role="listitem" href="projects.html#p02" style="--accent:#c93a1e"
+         data-accent="#c93a1e" data-ink="#f1ede3" data-code="SEC.02 / ROBOTICS" data-index="02"
+         data-title="QUADRUPED ROBOT." data-desc="A physical 8-servo quadruped dog robot engineered and fabricated from scratch with inverse kinematics, gait trigonometry, and live video demo."
+         data-meta="HARDWARE REEL / VIDEO">
+        <span class="j-no">02</span>
+        <span class="j-name"><strong>Quadruped Robot</strong><small>Custom 8-servo robot / inverse kinematics</small><span class="j-desc-inline">Hardware build, inverse kinematics math, and video reel with sound.</span></span>
+        <span class="j-meta">Physical build</span>
+        <span class="j-arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="j-row" role="listitem" href="projects.html#p10" style="--accent:#c93a1e"
+         data-accent="#c93a1e" data-ink="#f1ede3" data-code="SEC.03 / RESEARCH" data-index="03"
+         data-title="THE NEVER TWICE." data-desc="Behavioral habit platform and psychological research into anti-streak design, honest notebook day counts, and Ink, the nightly 9:30 PM AI companion."
+         data-meta="BEHAVIORAL RESEARCH">
+        <span class="j-no">03</span>
+        <span class="j-name"><strong>The Never Twice</strong><small>Habit psychology / Flutter / Nightly AI</small><span class="j-desc-inline">Cognitive research into habit friction and shame-free habit building.</span></span>
+        <span class="j-meta">Research app</span>
+        <span class="j-arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="j-row" role="listitem" href="projects.html#p11" style="--accent:#c93a1e"
+         data-accent="#c93a1e" data-ink="#f1ede3" data-code="SEC.04 / PIPELINE" data-index="04"
+         data-title="INSTAGRAM PIPELINE." data-desc="Zero-token autonomous media production line: converts declarative JSON specs into boiling carousels and full video reels without LLMs, plus autonomous Instagram uploading."
+         data-meta="ZERO-TOKEN AUTOMATION">
+        <span class="j-no">04</span>
+        <span class="j-name"><strong>Instagram Pipeline</strong><small>JSON-to-video / Python uploader</small><span class="j-desc-inline">Procedural boiling carousels, audio catalog matching, and spaced publishing.</span></span>
+        <span class="j-meta">Autonomous</span>
+        <span class="j-arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="j-row" role="listitem" href="achievements.html" style="--accent:#c93a1e"
+         data-accent="#c93a1e" data-ink="#f1ede3" data-code="SEC.05 / HONORS" data-index="05"
+         data-title="WINS &amp; HONORS." data-desc="Aveenir Hackathon first place with OSAMU. A predictive-health sprint with VISO. Engineering at ForgeinTech. And a 13,000+ maker community."
+         data-meta="FIELD RECORD / 2026">
+        <span class="j-no">05</span>
+        <span class="j-name"><strong>Wins &amp; Honors</strong><small>Hackathons / ForgeinTech / community</small><span class="j-desc-inline">First place at Aveenir, ForgeinTech, and 13K+ builders.</span></span>
+        <span class="j-meta">Field record</span>
+        <span class="j-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <aside class="j-preview" id="jPreview" role="link" tabindex="0" aria-label="Open Projects Dossier" style="--accent:#c93a1e;--accent-ink:#f1ede3">
+      <div class="jp-top"><span id="jpCode">SEC.01 / ENGINEERING</span><span>DEB ARCHIVE</span></div>
+      <span class="jp-num" id="jpNum" aria-hidden="true">01</span>
+      <div class="jp-body">
+        <h3 class="jp-title" id="jpTitle">PROJECTS DOSSIER.</h3>
+        <p class="jp-desc" id="jpDesc">Complete technical dossier: custom 8-servo quadruped robot with video, un-cheatable exam hardware, clinical ECG telemetry suite, and on-device AI.</p>
       </div>
+      <div class="jp-foot"><span class="jp-open">Enter sector <span class="jp-arrow" aria-hidden="true">↗</span></span><span id="jpMeta">11 BUILDS</span></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 02 / SELECTED BUILDS ============ -->
+<section id="work" class="home-section" data-page="P.003" data-name="SELECTED BUILDS" aria-labelledby="h-work">
+  <div class="section-head rv">
+    <div>
+      <p class="section-tag">02 / Selected builds</p>
+      <h2 id="h-work">PROOF,<br><span class="thin">NOT</span> PROMISES<span class="red">.</span></h2>
+    </div>
+    <p class="section-intro">Core engineered systems and mobile applications: a custom-built quadruped robot, behavioral habit research, on-device AI computer vision, academic platforms, and zero-token media automation.</p>
+  </div>
+
+  <div class="work-list rv">
+    <a class="work-row" href="projects.html#p02">
+      <span class="w-no">01</span>
+      <span class="w-main"><h3>Quadruped Dog Robot</h3><p>A custom-built 8-servo quadruped walking robot engineered myself from scratch, featuring inverse kinematics, real-time gait telemetry, and a physical hardware build video.</p></span>
+      <span class="w-meta">Robotics / Physical Build<br>8-Servo Gait Video</span>
+      <span class="w-arrow" aria-hidden="true">↗</span>
+      <span class="w-figure" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2"><rect x="28" y="44" width="64" height="26"/><path d="M36 70l-10 26M56 70l-6 28M84 70l10 26M70 70l6 28"/><path d="M92 50h14M99 43v14"/></svg></span>
+    </a>
+
+    <a class="work-row" href="projects.html#p10">
+      <span class="w-no">02</span>
+      <span class="w-main"><h3>The Never Twice</h3><p>A habit and behavioral reflection notebook app designed on anti-shame psychology, honest non-punitive day counts, if-then plans, and 'Ink' — the nightly 9:30 PM AI companion.</p></span>
+      <span class="w-meta">Psychology / Research<br>Flutter + Nightly AI</span>
+      <span class="w-arrow" aria-hidden="true">↗</span>
+      <span class="w-figure" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2"><rect x="20" y="24" width="80" height="72" rx="4"/><path d="M36 40h48M36 56h48M36 72h30"/><circle cx="80" cy="72" r="5"/></svg></span>
+    </a>
+
+    <a class="work-row" href="projects.html#p05">
+      <span class="w-no">03</span>
+      <span class="w-main"><h3>RepBot (Rebutt)</h3><p>An on-device AI fitness coach for Android with camera-based rep counting via ML Kit pose detection, smart routines, and RepGate app-locking.</p></span>
+      <span class="w-meta">Computer Vision / Mobile<br>ML Kit + Cloudflare</span>
+      <span class="w-arrow" aria-hidden="true">↗</span>
+      <span class="w-figure" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2"><circle cx="60" cy="28" r="14"/><path d="M60 42v36M40 56l20-8 20 8M44 102l16-24 16 24"/></svg></span>
+    </a>
+
+    <a class="work-row" href="projects.html#p04">
+      <span class="w-no">04</span>
+      <span class="w-main"><h3>Studiva (Sudipta App)</h3><p>A comprehensive study companion mobile app featuring structured syllabus modules, dynamic quiz engines, past exam paper archives, and cloud synchronization.</p></span>
+      <span class="w-meta">EdTech / Mobile App<br>Flutter + Node.js</span>
+      <span class="w-arrow" aria-hidden="true">↗</span>
+      <span class="w-figure" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 30l36-12 36 12v54l-36 12-36-12z"/><path d="M60 18v66M24 30l36 12 36-12"/></svg></span>
+    </a>
+
+    <a class="work-row" href="projects.html#p11">
+      <span class="w-no">05</span>
+      <span class="w-main"><h3>Instagram Pipeline</h3><p>An automated content pipeline that turns single JSON specs into boiling carousels and full video reels without LLMs, plus autonomous scheduled Instagram uploading.</p></span>
+      <span class="w-meta">Automation / Media<br>Zero-Token JSON Engine</span>
+      <span class="w-arrow" aria-hidden="true">↗</span>
+      <span class="w-figure" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2"><rect x="22" y="22" width="76" height="76" rx="16"/><circle cx="60" cy="60" r="18"/><circle cx="82" cy="38" r="4"/></svg></span>
+    </a>
+  </div>
+
+  <a class="work-all" href="projects.html"><span>Explore all engineering builds, schematics and code</span><span aria-hidden="true">Open the dossier →</span></a>
+</section>
+
+<!-- ============ 03 / FIELD NOTES ============ -->
+<section id="notes" class="home-section dark notes-section" data-page="P.004" data-name="FIELD NOTES" aria-labelledby="h-notes">
+  <div class="notes-inner">
+    <p class="section-tag">03 / Field notes</p>
+    <div class="section-head rv">
+      <h2 id="h-notes">I KEEP FINDING<br>THINGS <span class="red">TO BUILD.</span></h2>
+      <p class="section-intro">Games led to apps. Apps led to backend. Backend led to Linux, networking, self-hosting, local AI, and eventually robots. The common thread is not a stack. It is an insistence that the thing works.</p>
+    </div>
+
+    <div class="notes-grid rv">
+      <p class="notes-quote">MAKE<br>IT<br><span class="red">WORK.</span><br><span class="ink-note" style="margin-top:12px">the whole philosophy, honestly</span></p>
+      <div class="notes-copy">
+        <p>I care about the moment software stops being a screenshot and starts touching the world: a relay clicking, a servo holding a gait, a waveform updating at sixty frames a second.</p>
+        <p>That is why the archive is full of hardware, and why the hardware is full of code. The interesting problems live in the seam between them.</p>
+        <span class="mono">Working principle / 2026</span>
+      </div>
+    </div>
+
+    <ol class="phase-line rv" aria-label="Builder progression">
+      <li><span class="ph-no">PHASE 01</span><h3>Games &amp; apps</h3><p>Godot · Piskel · Flutter · mobile</p></li>
+      <li><span class="ph-no">PHASE 02</span><h3>Backend &amp; systems</h3><p>Linux · Termux · networking · homelab</p></li>
+      <li><span class="ph-no">PHASE 03</span><h3>Local AI &amp; robotics</h3><p>32-bit LLM · embedded · ESP32 · quadruped</p></li>
+      <li class="current"><span class="ph-no">CURRENT</span><h3>Engineering</h3><p>Make it work · document it · repeat</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 04 / THE OPERATOR ============ -->
+<section id="about" class="home-section about-section" data-page="P.005" data-name="THE OPERATOR" aria-labelledby="h-about">
+  <div class="about-grid rv">
+    <div class="about-main">
+      <p class="section-tag">04 / The operator</p>
+      <h2 id="h-about">STILL<br>BUILDING<span class="red">.</span></h2>
+      <p>I am Debargha Sarkar — Deb — an Embedded and Software Engineer currently working at ForgeinTech.</p>
+      <p>I build physical robotics, embedded firmware, mobile applications, and autonomous content systems: a custom-built 8-servo quadruped robot with real-time inverse kinematics, anti-cheat hardware (Aveenir 1st place), the Never Twice behavioral habit ecosystem, and an autonomous Instagram media pipeline.</p>
+      <p>I also run <strong>Local_First_Lab</strong>, a 13,000+ maker community where the builds, failures and iterations are documented in public.</p>
+      <p class="about-sign">Deb.</p>
+    </div>
+
+    <aside class="id-card" aria-label="Operator identity card">
+      <div class="id-head"><span>Operator ID</span><span>DEB / 001</span></div>
+      <figure class="id-photo">
+        <img src="images/kolkata-night.jpg" alt="Night traffic in Kolkata — a yellow Ambassador taxi under streetlights" loading="lazy">
+        <figcaption>Kolkata / night — base of operations · photo CC0</figcaption>
+        <span class="ink-note" aria-hidden="true">not me — my city</span>
+      </figure>
+      <div class="id-body">
+        <div class="id-field"><span>Name</span><strong>Debargha Sarkar</strong></div>
+        <div class="id-field"><span>Goes by</span><strong>Deb</strong></div>
+        <div class="id-field"><span>Role</span><strong>Embedded &amp; Software</strong></div>
+        <div class="id-field"><span>Company</span><strong>ForgeinTech</strong></div>
+        <div class="id-field"><span>Base</span><strong>Kolkata, India</strong></div>
+        <div class="id-field"><span>Status</span><strong style="color:var(--red)">Building</strong></div>
+      </div>
+      <div class="id-foot">
+        <div class="barcode" aria-hidden="true"></div>
+        <div class="id-loc">22.5726° N / 88.3639° E<br>Field archive / 2026</div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="currently" aria-label="Current status">
+    <div><span>Company</span><p>ForgeinTech (Embedded &amp; Systems)</p></div>
+    <div><span>Robotics</span><p>Custom 8-servo quadruped dog robot &amp; gait.</p></div>
+    <div><span>Platform</span><p>The Never Twice habit ecosystem &amp; Ink AI.</p></div>
+    <div><span>Pipeline</span><p>Zero-token automated Instagram media engine.</p></div>
+  </div>
+</section>
+
+<!-- ============ 05 / FIELD LAB ============ -->
+<section id="lab" class="home-section dark lab-section" data-page="P.006" data-name="FIELD LAB" aria-labelledby="h-lab">
+  <div class="lab-top"><span>05 / Field lab</span><span>@LOCAL_FIRST_LAB / 13K+ FOLLOWERS</span><span>Build in public</span></div>
+
+  <div class="lab-main rv">
+    <div>
+      <p class="lab-number">13K<em>+</em></p>
+      <h2 id="h-lab">The lab is open. The failures are documented too.</h2>
+      <p class="lab-intro">Local_First_Lab is where the work happens in real time: teardown logs, mobile Linux experiments, local AI on old hardware, robotics tests, and the unglamorous middle of a build.</p>
+      <a class="lab-cta" href="https://www.instagram.com/local_first_lab/" target="_blank" rel="noopener">Follow @local_first_lab <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <div class="lab-topics">
+      <a class="lab-topic" href="projects.html#p03">
+        <span class="lt-no">01</span>
+        <span><h3>Local-first systems</h3><p>Linux on a phone. Services that run without a cloud account.</p></span>
+        <span class="lt-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="lab-topic" href="projects.html#p02">
+        <span class="lt-no">02</span>
+        <span><h3>Robotics &amp; embedded</h3><p>Servos, ESP32, inverse kinematics, and a robot that walks.</p></span>
+        <span class="lt-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="lab-topic" href="projects.html#p01">
+        <span class="lt-no">03</span>
+        <span><h3>Hardware under pressure</h3><p>An anti-cheat exam terminal designed and built in 48 hours.</p></span>
+        <span class="lt-arrow" aria-hidden="true">↗</span>
+      </a>
+      <p class="lab-note">New builds, teardown notes and lab logs are posted as they happen. The archive is updated after the fact.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ 05 / CONTACT & SOCIAL ============ -->
-<section id="pcontact" class="spread" data-page="P.006" data-name="CONTACT" aria-labelledby="h-pcontact">
-  <div class="spread-inner rv-scope">
-    <div class="big-num" aria-hidden="true">→</div>
-    <header class="kicker rv"><span>CONTACT &amp; CHANNELS</span><span class="mdim">DIRECT INBOX</span></header>
-    <h2 id="h-pcontact" class="h-giant rv" style="--d:.05s">LET'S<br><span class="outline wcond">BUILD</span><span style="color:var(--red)">.</span></h2>
-    
-    <div class="rv" id="contactRows" style="--d:.25s;margin-top:34px"></div>
-  </div>
-</section>
-
-<!-- ============ 06 / BACK COVER ============ -->
-<footer id="end" data-page="P.007" data-name="BACK COVER" aria-label="Back cover">
-  <div class="crops" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <div class="spread-inner rv-scope">
-    <div class="colophon">
+<!-- ============ 06 / OPEN CHANNEL ============ -->
+<section id="contact" class="home-section contact-section" data-page="P.007" data-name="OPEN CHANNEL" aria-labelledby="h-contact">
+  <div class="contact-inner">
+    <div class="contact-head rv">
       <div>
-        <p class="fin rv">FIN<span>.</span></p>
-        <ul class="end-lines rv" style="--d:.15s">
-          <li><span>DEB / DEBARGHA SARKAR</span><span class="mdim">SOFTWARE × HARDWARE × SYSTEMS</span></li>
-          <li><span>TAGLINE</span><span class="mdim">STILL BUILDING.</span></li>
-        </ul>
+        <p class="section-tag">06 / Open channel</p>
+        <h2 id="h-contact">LET'S<br><span class="outline">BUILD.</span></h2>
       </div>
+      <p class="contact-note">The fastest way in is GitHub or LinkedIn. If you are working on hardware, systems, or something that has to work in the real world, say hello.</p>
+    </div>
+
+    <div class="contact-rows rv">
+      <a class="contact-row" href="https://github.com/My-Mation" target="_blank" rel="noopener">
+        <span class="cr-label">GitHub / Code</span><span class="cr-value">@My-Mation</span><span class="cr-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="contact-row" href="https://www.linkedin.com/in/debargha-sarkar-72575937/" target="_blank" rel="noopener">
+        <span class="cr-label">LinkedIn / Work</span><span class="cr-value">Debargha Sarkar</span><span class="cr-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="contact-row" href="https://www.instagram.com/local_first_lab/" target="_blank" rel="noopener">
+        <span class="cr-label">Instagram / Lab</span><span class="cr-value">@local_first_lab</span><span class="cr-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="contact-row" href="projects.html">
+        <span class="cr-label">Archive / Builds</span><span class="cr-value">Open the dossier</span><span class="cr-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <div class="contact-meta">
+      <span><b>Kolkata, India</b> · 22.5726° N, 88.3639° E</span>
+      <span>Local time <b class="js-clock">00:00:00</b></span>
+      <span>Open to internships &amp; collaborations</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ 07 / COLOPHON ============ -->
+<footer class="home-footer" data-page="P.008" data-name="COLOPHON">
+  <div class="footer-inner">
+    <div class="footer-top rv">
+      <p class="footer-fin">FIN<span>.</span></p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html"><span>00 / Cover</span><span aria-hidden="true">↖</span></a>
+        <a href="projects.html"><span>01 / Projects Dossier</span><span aria-hidden="true">↗</span></a>
+        <a href="projects.html#p02"><span>02 / Quadruped Robot</span><span aria-hidden="true">↗</span></a>
+        <a href="projects.html#p10"><span>03 / The Never Twice</span><span aria-hidden="true">↗</span></a>
+        <a href="projects.html#p11"><span>04 / Instagram Pipeline</span><span aria-hidden="true">↗</span></a>
+        <a href="achievements.html"><span>05 / Wins &amp; Honors</span><span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+    <div class="footer-colophon">
+      <span>DEBARGHA SARKAR / FIELD ARCHIVE / 2026</span>
+      <span>Set in Archivo / IBM Plex Mono / Caveat (OFL) · photos CC0 — see images/CREDITS.md · no frameworks, no trackers</span>
+      <span>Kolkata, India · <span class="js-clock">00:00:00</span> IST</span>
+      <span>Built by hand. Still building.</span>
     </div>
   </div>
 </footer>
-
-</main>
 
 <div id="pageBar" aria-hidden="true">
   <span id="pgL">P.001 — COVER</span>
@@ -390,5 +460,6 @@
 </div>
 
 <script src="script.js"></script>
+<script src="home.js"></script>
 </body>
 </html>

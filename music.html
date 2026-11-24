@@ -9,6 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f1ede3">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DEB — Music Sanctuary / Malice Mizer, Radiohead, Arctic Monkeys &amp; More">
+<meta property="og:description" content="Debargha Sarkar — Music Sanctuary: Malice Mizer in Pitch Black & Blood Red, Radiohead, Tame Impala, Tyler, and Arctic Monkeys in High-Contrast B&W.">
+<meta property="og:image" content="images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DEB — Music Sanctuary / Malice Mizer, Radiohead, Arctic Monkeys &amp; More">
+<meta name="twitter:description" content="Debargha Sarkar — Music Sanctuary: Malice Mizer in Pitch Black & Blood Red, Radiohead, Tame Impala, Tyler, and Arctic Monkeys in High-Contrast B&W.">
+<meta name="twitter:image" content="images/og.jpg">
 
 <style>
   /* ============ MUSIC PALETTES ============ */
@@ -148,24 +159,30 @@
 <canvas id="trail" aria-hidden="true"></canvas>
 <div id="cursor" aria-hidden="true"></div>
 <div id="cursorTag" aria-hidden="true">OPEN</div>
+<div id="progress" aria-hidden="true"></div>
+<div id="curtain" aria-hidden="true"></div>
 
 <!-- NAVIGATION -->
 <nav id="siteNav" aria-label="Site">
-  <a class="brand" href="index.html">← DEB <span class="hide-mobile">— BACK TO HOME</span></a>
-  <div style="display:flex;align-items:center;gap:12px">
-    <a class="tag hide-mobile" href="projects.html" style="text-decoration:none;border-color:var(--yellow);color:var(--yellow)">PROJECTS</a>
-    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
-    <a class="tag hide-mobile" href="anime.html" style="text-decoration:none">ANIME</a>
-    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
-    <a class="tag hide-mobile" href="gaming.html" style="text-decoration:none">GAMES</a>
-    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  <a class="brand" href="index.html">DEB <span class="brand-sub hide-mobile">— FIELD ARCHIVE</span></a>
+  <div class="nav-links">
+    <a href="projects.html">Projects</a>
+    <a href="achievements.html">Wins</a>
+    <a href="anime.html">Anime</a>
+    <a href="music.html" aria-current="page">Music</a>
+    <a href="cinema.html">Cinema</a>
+    <a href="gaming.html">Games</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">Index +</button>
   </div>
 </nav>
 
 <!-- TOC -->
 <div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
   <div class="toc-head"><h2>Music Index</h2><button id="tocClose">CLOSE ×</button></div>
-  <ul class="toc-list">
+  <div class="toc-grid">
+      <div>
+        <p class="toc-label">On this page</p>
+        <ul class="toc-list">
     <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Main Junction</span><span class="leader"></span><span class="t-pg">HOME ↗</span></a></li>
     <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Music Cover</span><span class="leader"></span><span class="t-pg">P.S00</span></a></li>
     <li><a href="#m-malice"><span class="t-no">01</span><span class="t-title">Malice Mizer — Gekka no Yasoukyoku (#1 Pitch Black &amp; Blood Red)</span><span class="leader"></span><span class="t-pg">P.S01</span></a></li>
@@ -174,6 +191,19 @@
     <li><a href="#m-tyler"><span class="t-no">04</span><span class="t-title">Tyler, The Creator — Can I Get A Kiss? (IGOR &amp; Flower Boy)</span><span class="leader"></span><span class="t-pg">P.S04</span></a></li>
     <li><a href="#m-arctic"><span class="t-no">05</span><span class="t-title">Arctic Monkeys — 505 (Raw High-Contrast B&amp;W)</span><span class="leader"></span><span class="t-pg">P.S05</span></a></li>
   </ul>
+      </div>
+      <div>
+        <p class="toc-label">Elsewhere in the archive</p>
+        <ul class="toc-list">
+        <li><a href="index.html"><span class="t-no">↗</span><span class="t-title">Field Archive / Cover</span><span class="leader"></span><span class="t-pg">Home</span></a></li>
+        <li><a href="projects.html"><span class="t-no">↗</span><span class="t-title">Projects Dossier</span><span class="leader"></span><span class="t-pg">09 builds</span></a></li>
+        <li><a href="achievements.html"><span class="t-no">↗</span><span class="t-title">Achievements &amp; Honors</span><span class="leader"></span><span class="t-pg">Wins</span></a></li>
+        <li><a href="anime.html"><span class="t-no">↗</span><span class="t-title">Anime Dimension</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="cinema.html"><span class="t-no">↗</span><span class="t-title">Cinema Vault</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="gaming.html"><span class="t-no">↗</span><span class="t-title">Gaming Archive</span><span class="leader"></span><span class="t-pg">04 plates</span></a></li>
+        </ul>
+      </div>
+    </div>
   <p class="toc-foot">DEBARGHA SARKAR / 2026 — SOUND SANCTUARY</p>
 </div>
 
@@ -184,7 +214,7 @@
     <span style="color:rgba(255,255,255,0.5);display:block;font-size:9.5px">ACTIVE TRACK // WEB AUDIO</span>
     <span id="nowPlayingText" style="color:#fff;font-weight:700">MALICE MIZER — GEKKA NO YASOUKYOKU</span>
   </div>
-  <button id="toggleAudioBtn" style="background:#ff1744;color:#fff;border:none;padding:6px 12px;font-family:var(--mono);font-size:10px;font-weight:700;cursor:pointer;letter-spacing:.1em">MUTE 🔇</button>
+  <button id="toggleAudioBtn" style="background:#ff1744;color:#fff;border:none;padding:6px 12px;font-family:var(--mono);font-size:10px;font-weight:700;cursor:pointer;letter-spacing:.1em">MUTE</button>
 </div>
 
 <main id="music-content">
@@ -234,7 +264,7 @@
     <!-- NATURAL FLOW (NO OVERLAPPING STICKY TEXT) -->
     <div class="music-header-card">
       <header class="kicker rv">
-        <span class="malice-accent">👑 #1 ALL-TIME FAVORITE SONG</span>
+        <span class="malice-accent">★ #1 ALL-TIME FAVORITE SONG</span>
         <span class="tag win" style="background:#880015;color:#fff;border-color:#ff1744;font-weight:900">CROWN TRACK</span>
         <span class="tag" style="background:#000;color:#ff1744;border-color:#ff1744">PITCH BLACK &amp; BLOOD RED</span>
       </header>
@@ -260,11 +290,11 @@
       <!-- PICTURE 1: HERO PORTRAIT -->
       <div class="rv" style="--d:.1s">
         <div class="media-img-frame" style="border:2px solid #ff1744;box-shadow:0 0 35px rgba(255,23,68,0.25)">
-          <img src="images/malice-mizer-hero.jpg" alt="Malice Mizer - Visual Kei Gestures" onerror="this.style.display='none'">
+          <img src="images/malice-mizer-hero.jpg" alt="Malice Mizer archive plate — crimson waveform" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#ff1744;font-size:32px;margin-bottom:8px">🥀</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: MALICE MIZER (HERO GESTURE)</span>
-            <span style="font-size:11px;color:#fecdd3;margin-top:6px">Place photo in: <code>images/malice-mizer-hero.jpg</code></span>
+            <span style="color:#ff1744;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — MALICE MIZER (HERO GESTURE)</span>
+            <span style="font-size:11px;color:#fecdd3;margin-top:6px">drop file at <code>images/malice-mizer-hero.jpg</code></span>
           </div>
         </div>
         <div class="fig-label" style="color:#fecdd3">
@@ -276,11 +306,11 @@
       <!-- PICTURE 2: GESTURES / DOLLHOUSE POSE -->
       <div class="rv" style="--d:.2s">
         <div class="media-img-frame" style="border:2px solid #880015">
-          <img src="images/malice-mizer-gesture.jpg" alt="Malice Mizer - Theatrical Puppetry Pose" onerror="this.style.display='none'">
+          <img src="images/malice-mizer-gesture.jpg" alt="Malice Mizer archive plate — dark red signal field" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#eab308;font-size:32px;margin-bottom:8px">🎭</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: DOLLHOUSE GESTURES &amp; HARPSICHORD</span>
-            <span style="font-size:11px;color:#fecdd3;margin-top:6px">Place photo in: <code>images/malice-mizer-gesture.jpg</code></span>
+            <span style="color:#eab308;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — DOLLHOUSE GESTURES &amp; HARPSICHORD</span>
+            <span style="font-size:11px;color:#fecdd3;margin-top:6px">drop file at <code>images/malice-mizer-gesture.jpg</code></span>
           </div>
         </div>
         <div class="fig-label" style="color:#fecdd3">
@@ -338,11 +368,11 @@
     <div class="gr gr-2" style="margin-top:44px">
       <div class="rv" style="--d:.1s">
         <div class="media-img-frame" style="border:2px solid #38bdf8;box-shadow:0 0 35px rgba(56,189,248,0.2)">
-          <img src="images/radiohead.jpg" alt="Radiohead - Thom Yorke" onerror="this.style.display='none'">
+          <img src="images/radiohead.jpg" alt="Radiohead archive plate — amber oscilloscope traces" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#38bdf8;font-size:32px;margin-bottom:8px">📻</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: RADIOHEAD / THOM YORKE</span>
-            <span style="font-size:11px;color:#bae6fd;margin-top:6px">Place photo in: <code>images/radiohead.jpg</code></span>
+            <span style="color:#38bdf8;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — RADIOHEAD / THOM YORKE</span>
+            <span style="font-size:11px;color:#bae6fd;margin-top:6px">drop file at <code>images/radiohead.jpg</code></span>
           </div>
         </div>
       </div>
@@ -392,11 +422,11 @@
     <div class="gr gr-2" style="margin-top:44px">
       <div class="rv" style="--d:.1s">
         <div class="media-img-frame" style="border:2px solid #c084fc;box-shadow:0 0 35px rgba(192,132,252,0.2)">
-          <img src="images/tame-impala.jpg" alt="Tame Impala - Currents" onerror="this.style.display='none'">
+          <img src="images/tame-impala.jpg" alt="Tame Impala archive plate — violet waveform field" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#c084fc;font-size:32px;margin-bottom:8px">🌀</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: TAME IMPALA / CURRENTS</span>
-            <span style="font-size:11px;color:#e9d5ff;margin-top:6px">Place photo in: <code>images/tame-impala.jpg</code></span>
+            <span style="color:#c084fc;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — TAME IMPALA / CURRENTS</span>
+            <span style="font-size:11px;color:#e9d5ff;margin-top:6px">drop file at <code>images/tame-impala.jpg</code></span>
           </div>
         </div>
       </div>
@@ -442,11 +472,11 @@
     <div class="gr gr-2" style="margin-top:44px">
       <div class="rv" style="--d:.1s">
         <div class="media-img-frame" style="border:2px solid #ff69b4">
-          <img src="images/tyler-creator.jpg" alt="Tyler, The Creator" onerror="this.style.display='none'">
+          <img src="images/tyler-creator.jpg" alt="Tyler, the Creator archive plate — orange signal traces" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#ff69b4;font-size:32px;margin-bottom:8px">🌻</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: TYLER, THE CREATOR</span>
-            <span style="font-size:11px;color:#fbcfe8;margin-top:6px">Place photo in: <code>images/tyler-creator.jpg</code></span>
+            <span style="color:#ff69b4;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — TYLER, THE CREATOR</span>
+            <span style="font-size:11px;color:#fbcfe8;margin-top:6px">drop file at <code>images/tyler-creator.jpg</code></span>
           </div>
         </div>
       </div>
@@ -496,11 +526,11 @@
     <div class="gr gr-2" style="margin-top:44px">
       <div class="rv" style="--d:.1s">
         <div class="media-img-frame" style="border:2px solid #ffffff;box-shadow:0 0 35px rgba(255,255,255,0.15)">
-          <img src="images/arctic-monkeys.jpg" alt="Arctic Monkeys - Alex Turner 505" onerror="this.style.display='none'">
+          <img src="images/arctic-monkeys.jpg" alt="Arctic Monkeys archive plate — slate waveform field" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#ffffff;font-size:32px;margin-bottom:8px">📼</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: ARCTIC MONKEYS (HIGH CONTRAST B&amp;W)</span>
-            <span style="font-size:11px;color:#d4d4d8;margin-top:6px">Place photo in: <code>images/arctic-monkeys.jpg</code></span>
+            <span style="color:#ffffff;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — ARCTIC MONKEYS (HIGH CONTRAST B&amp;W)</span>
+            <span style="font-size:11px;color:#d4d4d8;margin-top:6px">drop file at <code>images/arctic-monkeys.jpg</code></span>
           </div>
         </div>
         <div class="fig-label" style="color:#ffffff">
@@ -619,11 +649,11 @@ if (toggleBtn) {
     }
     isMuted = !isMuted;
     if (isMuted) {
-      toggleBtn.textContent = 'UNMUTE 🔊';
+      toggleBtn.textContent = 'UNMUTE';
       toggleBtn.style.background = '#333';
       if (synthTimer) clearInterval(synthTimer);
     } else {
-      toggleBtn.textContent = 'MUTE 🔇';
+      toggleBtn.textContent = 'MUTE';
       toggleBtn.style.background = '#ff1744';
       startMusicLoop();
     }

@@ -9,6 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f1ede3">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DEB — Projects Dossier / Hardware, Robotics, Systems & Software">
+<meta property="og:description" content="Debargha Sarkar — Complete Engineering Dossier: OSAMU adaptive exam hardware, Quadruped robot 3D CAD, Phone Homelab, ECG & Holter Telemetry Suite, RepBot, VISO, Sarbanash & Kisor.">
+<meta property="og:image" content="images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DEB — Projects Dossier / Hardware, Robotics, Systems & Software">
+<meta name="twitter:description" content="Debargha Sarkar — Complete Engineering Dossier: OSAMU adaptive exam hardware, Quadruped robot 3D CAD, Phone Homelab, ECG & Holter Telemetry Suite, RepBot, VISO, Sarbanash & Kisor.">
+<meta name="twitter:image" content="images/og.jpg">
 <!-- THREE.JS & STL LOADER FOR 3D QUADRUPED MODEL -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
@@ -19,37 +30,58 @@
 <canvas id="trail" aria-hidden="true"></canvas>
 <div id="cursor" aria-hidden="true"></div>
 <div id="cursorTag" aria-hidden="true">OPEN</div>
+<div id="progress" aria-hidden="true"></div>
+<div id="curtain" aria-hidden="true"></div>
 
 <!-- NAVIGATION -->
 <nav id="siteNav" aria-label="Site">
-  <a class="brand" href="index.html">← DEB <span class="hide-mobile">— BACK TO HOME</span></a>
-  <div style="display:flex;align-items:center;gap:12px">
-    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
-    <a class="tag hide-mobile" href="anime.html" style="text-decoration:none">ANIME</a>
-    <a class="tag hide-mobile" href="music.html" style="text-decoration:none">MUSIC</a>
-    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
-    <a class="tag hide-mobile" href="gaming.html" style="text-decoration:none">GAMES</a>
-    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  <a class="brand" href="index.html">DEB <span class="brand-sub hide-mobile">— FIELD ARCHIVE</span></a>
+  <div class="nav-links">
+    <a href="projects.html" aria-current="page">Projects</a>
+    <a href="achievements.html">Wins</a>
+    <a href="anime.html">Anime</a>
+    <a href="music.html">Music</a>
+    <a href="cinema.html">Cinema</a>
+    <a href="gaming.html">Games</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">Index +</button>
   </div>
 </nav>
 
 <!-- TOC -->
 <div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
   <div class="toc-head"><h2>Projects Dossier</h2><button id="tocClose">CLOSE ×</button></div>
-  <ul class="toc-list">
+  <div class="toc-grid">
+      <div>
+        <p class="toc-label">On this page</p>
+        <ul class="toc-list">
     <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Main Junction</span><span class="leader"></span><span class="t-pg">HOME ↗</span></a></li>
     <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Projects Overview</span><span class="leader"></span><span class="t-pg">P.P00</span></a></li>
     <li><a href="#p01"><span class="t-no">01</span><span class="t-title">OSAMU (Aveenir Hackathon 1st Prize &amp; Flowchart)</span><span class="leader"></span><span class="t-pg">P.P01</span></a></li>
-    <li><a href="#p02"><span class="t-no">02</span><span class="t-title">Quadruped Robot (3D Interactive Model &amp; BOM)</span><span class="leader"></span><span class="t-pg">P.P02</span></a></li>
+    <li><a href="#p02"><span class="t-no">02</span><span class="t-title">Quadruped Robot (Custom Build &amp; Hardware Video)</span><span class="leader"></span><span class="t-pg">P.P02</span></a></li>
     <li><a href="#p03"><span class="t-no">03</span><span class="t-title">Phone Homelab &amp; 32-Bit Local AI</span><span class="leader"></span><span class="t-pg">P.P03</span></a></li>
-    <li><a href="#p04"><span class="t-no">04</span><span class="t-title">Studiva (Academic Notes Platform)</span><span class="leader"></span><span class="t-pg">P.P04</span></a></li>
+    <li><a href="#p04"><span class="t-no">04</span><span class="t-title">Studiva (Study Companion App)</span><span class="leader"></span><span class="t-pg">P.P04</span></a></li>
     <li><a href="#p05"><span class="t-no">05</span><span class="t-title">RepBot (On-Device Computer Vision Pose Tracking)</span><span class="leader"></span><span class="t-pg">P.P05</span></a></li>
     <li><a href="#p06"><span class="t-no">06</span><span class="t-title">VISO (Machine Health Predictive Anomaly Telemetry)</span><span class="leader"></span><span class="t-pg">P.P06</span></a></li>
     <li><a href="#p07"><span class="t-no">07</span><span class="t-title">Sarbanash (Survival Horror Pixel Art Game)</span><span class="leader"></span><span class="t-pg">P.P07</span></a></li>
     <li><a href="#p08"><span class="t-no">08</span><span class="t-title">Kisor (Narrative Visual Novel)</span><span class="leader"></span><span class="t-pg">P.P08</span></a></li>
-    <li><a href="#p09" style="color:#00d084"><span class="t-no">09</span><span class="t-title">ECG &amp; Holter Monitor (Clinical Telemetry Suite)</span><span class="leader"></span><span class="t-pg">P.P09</span></a></li>
-    <li><a href="achievements.html" style="color:var(--red)"><span class="t-no">★</span><span class="t-title">Achievements &amp; Honors (Aveenir 1st Prize, VISO, Internship)</span><span class="leader"></span><span class="t-pg">WINS ↗</span></a></li>
+    <li><a href="#p09"><span class="t-no">09</span><span class="t-title">ECG &amp; Holter Monitor (Clinical Telemetry Suite)</span><span class="leader"></span><span class="t-pg">P.P09</span></a></li>
+    <li><a href="#p10" style="color:var(--red)"><span class="t-no">10</span><span class="t-title">The Never Twice (Habit Psychology &amp; Research)</span><span class="leader"></span><span class="t-pg">P.P10</span></a></li>
+    <li><a href="#p11" style="color:var(--red)"><span class="t-no">11</span><span class="t-title">Instagram Pipeline (Zero-Token Media Engine)</span><span class="leader"></span><span class="t-pg">P.P11</span></a></li>
+    <li><a href="achievements.html" style="color:var(--red)"><span class="t-no">★</span><span class="t-title">Achievements &amp; Honors (Aveenir 1st Prize, VISO, ForgeinTech)</span><span class="leader"></span><span class="t-pg">WINS ↗</span></a></li>
   </ul>
+      </div>
+      <div>
+        <p class="toc-label">Elsewhere in the archive</p>
+        <ul class="toc-list">
+        <li><a href="index.html"><span class="t-no">↗</span><span class="t-title">Field Archive / Cover</span><span class="leader"></span><span class="t-pg">Home</span></a></li>
+        <li><a href="achievements.html"><span class="t-no">↗</span><span class="t-title">Achievements &amp; Honors</span><span class="leader"></span><span class="t-pg">Wins</span></a></li>
+        <li><a href="anime.html"><span class="t-no">↗</span><span class="t-title">Anime Dimension</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="music.html"><span class="t-no">↗</span><span class="t-title">Music Sanctuary</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="cinema.html"><span class="t-no">↗</span><span class="t-title">Cinema Vault</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="gaming.html"><span class="t-no">↗</span><span class="t-title">Gaming Archive</span><span class="leader"></span><span class="t-pg">04 plates</span></a></li>
+        </ul>
+      </div>
+    </div>
   <p class="toc-foot">DEBARGHA SARKAR / 2026 — COMPLETE TECHNICAL DOSSIER</p>
 </div>
 
@@ -74,16 +106,16 @@
     <div class="hero-rule" aria-hidden="true"></div>
     
     <div style="margin-top:24px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:10">
-      <a class="ctl button" href="#p01" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red)">
+      <a class="ctl button" href="#p01" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--red);color:var(--paper);border:1px solid var(--red);border-radius:var(--radius-sm)">
         EXPLORE OSAMU FLOWCHART ↓
       </a>
-      <a class="ctl button" href="#p02" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--yellow);color:var(--black);border:1px solid var(--yellow)">
-        QUADRUPED 3D MODEL ↓
+      <a class="ctl button" href="#p02" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--paper2);color:var(--ink);border:1px solid var(--line2);border-radius:var(--radius-sm)">
+        QUADRUPED HARDWARE REEL ↓
       </a>
-      <a class="ctl button" href="#p09" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:#00d084;color:#000;border:1px solid #00d084">
-        ECG TELEMETRY SUITE ↓
+      <a class="ctl button" href="#p10" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--paper2);color:var(--ink);border:1px solid var(--line2);border-radius:var(--radius-sm)">
+        THE NEVER TWICE RESEARCH ↓
       </a>
-      <a class="ctl button" href="index.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink)">
+      <a class="ctl button" href="index.html" style="display:inline-block;padding:12px 24px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink);border-radius:var(--radius-sm)">
         ← HOME JUNCTION
       </a>
     </div>
@@ -101,12 +133,12 @@
     <div class="big-num" aria-hidden="true">01</div>
     <header class="kicker rv">
       <span>FEATURED 01 — AVEENIR HACKATHON</span>
-      <span class="tag win">🏆 1ST PRIZE WINNER</span>
+      <span class="tag win">★ 1ST PRIZE WINNER</span>
       <span class="tag team">TEAM PROJECT</span>
     </header>
     <h2 id="h-p01" class="h-giant rv" style="--d:.05s">CHEAT-PROOF<span style="color:var(--red)">.</span><br><span class="outline wcond">UNBIASED</span><br>EXAMINATION<br>HARDWARE<span style="color:var(--red)">.</span></h2>
     <div class="meta-row rv" style="--d:.15s">
-      <span><b>AWARD:</b> 🏆 1ST PRIZE WINNER — AVEENIR HACKATHON</span>
+      <span><b>AWARD:</b> ★ 1ST PRIZE WINNER — AVEENIR HACKATHON</span>
       <span><b>TIME BIND:</b> BUILT IN 48 HOURS FROM SCRATCH</span>
       <span><b>TECH:</b> ESP32 · RF SNIFFING · ADAPTIVE DIFFICULTY ENGINE</span>
     </div>
@@ -224,8 +256,12 @@
         </svg>
       </figure>
 
-      <div class="rv" style="--d:.2s">
-        <div class="stamp gold" style="margin-bottom:16px">🏆 1ST PLACE WINNER — AVEENIR HACKATHON</div>
+        <div class="rv" style="--d:.2s">
+        <figure class="fig-photo" style="margin-bottom:16px">
+          <img src="images/esp32-wroom.jpg" alt="Espressif ESP32-WROOM-32 shielded Wi-Fi module — the controller inside every OSAMU terminal" loading="lazy">
+          <figcaption>FIG. P01-A — ESP32-WROOM-32 · THE TERMINAL'S BRAIN · PHOTO CC0</figcaption>
+        </figure>
+        <div class="stamp gold" style="margin-bottom:16px">★ 1ST PLACE WINNER — AVEENIR HACKATHON</div>
         <div class="readout" style="padding:16px">
           <p class="mono" style="margin-bottom:8px;color:var(--red)">DEB CONTRIBUTION:</p>
           <p style="color:var(--ink);font-size:14px">Collaborated on physical ESP32 hardware integration, local AP web interface, response behavior parsing, and system logic during the 48-hour build window.</p>
@@ -252,39 +288,35 @@
   </div>
 </section>
 
-<!-- ============ 02 / QUADRUPED ROBOT (3D INTERACTIVE MODEL) ============ -->
+<!-- ============ 02 / QUADRUPED ROBOT (PHYSICAL HARDWARE & VIDEO DEMO) ============ -->
 <section id="p02" class="spread" data-page="P.P02" data-name="QUADRUPED ROBOT" aria-labelledby="h-p02">
   <div class="spread-inner rv-scope">
     <div class="big-num" aria-hidden="true">02</div>
     <header class="kicker rv">
       <span>FEATURED 02 — PHYSICAL ROBOTICS</span>
-      <span class="tag win">3D INTERACTIVE MODEL</span>
-      <span class="tag arch">IN PROGRESS</span>
+      <span class="tag win">CUSTOM-BUILT ROBOT</span>
+      <span class="tag exp">8-SERVO GAIT</span>
     </header>
-    <h2 id="h-p02" class="h-giant rv" style="--d:.05s">FOUR LEGS<span style="color:var(--red)">.</span><br><span class="outline wcond">TOO MANY</span><br>THINGS TO<br>CALIBRATE<span style="color:var(--red)">.</span></h2>
+    <h2 id="h-p02" class="h-giant rv" style="--d:.05s">FOUR LEGS<span style="color:var(--red)">.</span><br><span class="outline wcond">CALIBRATED</span><br>IN REAL LIFE<span style="color:var(--red)">.</span></h2>
     <div class="meta-row rv" style="--d:.15s">
-      <span><b>3D MODEL:</b> DOG02_WEB.STL (LOCAL THREE.JS CAD ENGINE)</span>
-      <span><b>DISCIPLINE:</b> MECHANICAL CAD · SERVOS · EMBEDDED GAIT KINEMATICS</span>
+      <span><b>HARDWARE:</b> CUSTOM 8-SERVO CHASSIS WITH REAR/FRONT DOF</span>
+      <span><b>DISCIPLINE:</b> ROBOTICS FABRICATION · EMBEDDED KINEMATICS · SERVO GAIT</span>
       <span><b>DOF:</b> 8 SERVOS (2-DOF PER LIMB)</span>
     </div>
-    <p class="thesis rv" style="--d:.2s">A physical quadruped robot. Move your cursor over the 3D viewport below to inspect joints and rotate the chassis. Inverse kinematics solver trigonometric calculations run per gait frame.</p>
+    <p class="thesis rv" style="--d:.2s">A physical quadruped dog robot engineered and fabricated myself. Watch the physical build walking, balancing, and executing gait cycles with live motor audio in the video below. Real-time inverse kinematics solver trigonometric calculations run per gait frame.</p>
 
     <div class="gr gr-2" style="margin-top:40px">
-      <!-- 3D CANVAS MODEL VIEWPORT -->
+      <!-- PHYSICAL VIDEO SHOWCASE -->
       <figure class="rv" style="--d:.1s">
-        <div id="quad3dContainer" class="cvp scan" style="height:460px;position:relative;border:1px solid var(--red);background:#0d0c0a">
-          <canvas id="quad3dCv"></canvas>
-          <div id="quad3dLoader" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--yellow);background:rgba(19,18,16,.92)">
-            <div>INITIALIZING 3D ENGINE …</div>
-            <div style="color:var(--pdim)">LOADING MODEL/DOG02_WEB.STL</div>
-          </div>
-          <div style="position:absolute;left:14px;bottom:14px;pointer-events:none;font-family:var(--mono);font-size:10px;color:var(--yellow);letter-spacing:.12em;background:rgba(20,19,17,.8);padding:4px 8px;border:1px solid var(--pline)">
-            ✦ CINEMATIC 3D ROTATION · INTERACTIVE HOVER
+        <div class="video-frame" style="position:relative;border-radius:var(--radius-lg);overflow:hidden;background:#0d0c0a;border:1px solid var(--line2);box-shadow:var(--card-shadow)">
+          <video id="quadVideo" src="images/quadruped_demo.mp4" controls autoplay loop playsinline style="width:100%;height:auto;max-height:480px;display:block;object-fit:cover;background:#000"></video>
+          <div style="position:absolute;left:14px;bottom:14px;pointer-events:none;font-family:var(--mono);font-size:10px;color:var(--paper);letter-spacing:.12em;background:rgba(20,19,17,.88);padding:6px 12px;border-radius:var(--radius-pill);border:1px solid var(--pline);backdrop-filter:blur(8px)">
+            ✦ PHYSICAL DEMO REEL WITH SOUND · CUSTOM ROBOT BUILD
           </div>
         </div>
         <figcaption class="fig-label">
-          <span>FIG. 002 — 3D CAD MESH (DOG02_WEB.STL)</span>
-          <span>INTERACTIVE THREE.JS VIEWPORT</span>
+          <span>FIG. 002 — PHYSICAL 8-SERVO QUADRUPED DOG ROBOT IN ACTION</span>
+          <span>LIVE HARDWARE &amp; GAIT CAPTURE WITH SOUND (@LOCAL_FIRST_LAB)</span>
         </figcaption>
       </figure>
 
@@ -302,12 +334,12 @@
           <div><span>S7 KNEE·FRONT</span><span class="v" id="qv4">0.0°</span></div>
         </div>
         
-        <div class="readout" style="margin-top:16px;padding:16px;background:rgba(191,48,22,.06);border-color:var(--red)">
+        <div class="readout" style="margin-top:16px;padding:16px;background:rgba(201,58,30,.06);border-color:var(--red)">
           <span class="mono" style="color:var(--red);display:block;margin-bottom:8px">// INVERSE KINEMATICS SOLVER</span>
           <p style="font-size:13.5px;line-height:1.5;color:var(--ink)">
             Foot coordinates (x, y, z) are calculated using the law of cosines:
           </p>
-          <pre style="background:var(--paper);border:1px solid var(--line2);padding:8px 12px;font-family:var(--mono);font-size:10.5px;color:var(--red);margin:8px 0">
+          <pre style="background:var(--paper);border:1px solid var(--line2);padding:8px 12px;font-family:var(--mono);font-size:10.5px;color:var(--red);margin:8px 0;border-radius:var(--radius-xs)">
 cos(θ_knee) = (x² + y² - L1² - L2²) / (2 · L1 · L2)
 θ_hip = atan2(y, x) - atan2(L2·sin(θ_knee), L1 + L2·cos(θ_knee))
           </pre>
@@ -534,7 +566,7 @@ cos(θ_knee) = (x² + y² - L1² - L2²) / (2 · L1 · L2)
         </div>
         <canvas id="foxCv" width="480" height="320" aria-label="Pixel art fox and monster sprite canvas"></canvas>
         <div class="ctl ctl-dark" style="margin-top:16px;display:flex;justify-content:space-between;align-items:center">
-          <button id="foxVisionBtn" aria-pressed="false" style="background:var(--red);color:#ffffff;border:1px solid var(--red);font-weight:700;font-size:11.5px;padding:10px 18px;letter-spacing:.12em;cursor:pointer">TOGGLE MONSTER VISION 👁</button>
+          <button id="foxVisionBtn" aria-pressed="false" style="background:var(--red);color:#ffffff;border:1px solid var(--red);font-weight:700;font-size:11.5px;padding:10px 18px;letter-spacing:.12em;cursor:pointer">TOGGLE MONSTER VISION</button>
           <span class="mono mdim" style="font-size:10px">PISKEL SPRITE RENDER</span>
         </div>
       </figure>
@@ -640,8 +672,8 @@ cos(θ_knee) = (x² + y² - L1² - L2²) / (2 · L1 · L2)
             <li style="display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--pline)"><span>01. EVERBEAT MONITOR</span><span class="v" style="color:var(--paper)">CONTINUOUS HOLTER + 14-DAY BATTERY</span></li>
             <li style="display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--pline)"><span>02. VITALIS TELEMETRY</span><span class="v" style="color:var(--paper)">HOSPITAL ICU CARDIAC SUITE</span></li>
             <li style="display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--pline)"><span>03. PULSECHECK AI</span><span class="v" style="color:var(--paper)">AUTOMATED AFIB &amp; ARRHYTHMIA TRIAGE</span></li>
-            <li style="display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--pline)"><span>04–08. SPECIALIZED MODELS</span><span class="v" style="color:var(--yellow)">CARDIOWATCH, SENTINEL, SYNC...</span></li>
-            <li style="display:flex;justify-content:space-between;padding:9px 12px"><span>ARCHITECTURE</span><span class="v" style="color:#00d084">NEXT.JS 16 · TURBOPACK · TAILWIND</span></li>
+            <li style="display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--pline)"><span>04–08. SPECIALIZED MODELS</span><span class="v" style="color:var(--red)">CARDIOWATCH, SENTINEL, SYNC...</span></li>
+            <li style="display:flex;justify-content:space-between;padding:9px 12px"><span>ARCHITECTURE</span><span class="v" style="color:var(--red)">NEXT.JS 16 · TURBOPACK · TAILWIND</span></li>
           </ul>
 
           <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
@@ -649,7 +681,7 @@ cos(θ_knee) = (x² + y² - L1² - L2²) / (2 · L1 · L2)
               LAUNCH LIVE ECG DEMO (ECG-DEMO-ONE.VERCEL.APP) →
             </a>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <a class="srclink" href="https://github.com/My-Mation/ecg-demo" target="_blank" rel="noopener" style="flex:1;text-align:center;color:var(--yellow);border-color:var(--yellow)">
+              <a class="srclink" href="https://github.com/My-Mation/ecg-demo" target="_blank" rel="noopener" style="flex:1;text-align:center;color:var(--red);border-color:var(--red)">
                 VIEW GITHUB REPO ↗
               </a>
               <a class="srclink" href="https://ecg-demo-one.vercel.app/showcase" target="_blank" rel="noopener" style="flex:1;text-align:center;color:var(--paper);border-color:var(--pline)">
@@ -657,6 +689,150 @@ cos(θ_knee) = (x² + y² - L1² - L2²) / (2 · L1 · L2)
               </a>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 / THE NEVER TWICE (BEHAVIORAL RESEARCH & HABIT PLATFORM) ============ -->
+<section id="p10" class="spread" data-page="P.P10" data-name="THE NEVER TWICE" aria-labelledby="h-p10">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">10</div>
+    <header class="kicker rv">
+      <span>FEATURED 10 — BEHAVIORAL SYSTEMS &amp; PSYCHOLOGY RESEARCH</span>
+      <span class="tag win">CORE RESEARCH INITIATIVE</span>
+      <span class="tag live">FLUTTER + AI COMPANION</span>
+    </header>
+    <h2 id="h-p10" class="h-giant rv" style="--d:.05s">NEVER TWICE<span style="color:var(--red)">.</span><br><span class="outline wcond">HABITS WITHOUT</span><br>THE SHAME<span style="color:var(--red)">.</span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>RESEARCH:</b> COGNITIVE FRICTION · ANTI-STREAK PSYCHOLOGY · BEHAVIORAL RETENTION</span>
+      <span><b>COMPANION:</b> "INK" NIGHTLY AI REFLECTION (9:30 PM)</span>
+      <span><b>STACK:</b> FLUTTER (MOBILE) · CLOUDFLARE WORKERS · LOCAL-FIRST DB</span>
+    </div>
+    <p class="thesis rv" style="--d:.2s">Built from ground-up behavioral research on why habit trackers fail. Standard apps gamify streaks, creating shame spirals when a streak breaks. The Never Twice is structured like an honest notebook: non-punitive cumulative counts, concrete if-then implementation plans, and Ink — a nightly empathetic AI that reviews your day and rewrites tomorrow.</p>
+
+    <div class="gr gr-2" style="margin-top:40px">
+      <div class="rv" style="--d:.1s">
+        <div class="research-card">
+          <span class="tag exp" style="margin-bottom:12px">// THE PSYCHOLOGICAL ARCHITECTURE</span>
+          <h3 style="font-weight:900;font-size:24px;text-transform:uppercase;margin-bottom:14px">BEHAVIORAL DESIGN CONTRACT</h3>
+          <p style="font-size:14.5px;line-height:1.65;color:var(--ink2);margin-bottom:18px">
+            Never Twice rejects the artificial dopamine trap of traditional productivity software. Our published research targets 3 critical cognitive flaws:
+          </p>
+          <div style="display:flex;flex-direction:column;gap:12px;font-family:var(--mono);font-size:12px">
+            <div style="padding:12px;background:var(--paper);border:1px solid var(--line2);border-radius:var(--radius-sm)">
+              <b style="color:var(--red)">01 / ANTI-STREAK LOGIC:</b> Breaking a 30-day streak doesn't reset you to zero. You did 30 days. The app preserves your cumulative reality.
+            </div>
+            <div style="padding:12px;background:var(--paper);border:1px solid var(--line2);border-radius:var(--radius-sm)">
+              <b style="color:var(--red)">02 / IF-THEN INTENTIONS:</b> Cognitive psychology proves implementation intentions ("If [Situation X], Then [Action Y]") double follow-through compared to generic reminders.
+            </div>
+            <div style="padding:12px;background:var(--paper);border:1px solid var(--line2);border-radius:var(--radius-sm)">
+              <b style="color:var(--red)">03 / NIGHTLY "INK" AI (9:30 PM):</b> An unhurried, philosophical voice that never blames. It reads what happened today and helps design a realistic tomorrow.
+            </div>
+          </div>
+
+          <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+            <a class="ctl button btn-primary" href="https://never-twice-waitlist.repbotworker.workers.dev/" target="_blank" rel="noopener" id="p-link-never-twice" style="padding:12px 22px;background:var(--red);color:var(--paper);border-color:var(--red)">
+              CLICK ME — VISIT NEVER TWICE ↗
+            </a>
+            <a class="ctl button" href="https://repbot-waitlist.repbotworker.workers.dev/" target="_blank" rel="noopener" id="p-link-rebutt" style="padding:12px 22px">
+              CLICK ME — VISIT REBUTT (REPBOT) ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s">
+        <div class="readout" style="padding:24px">
+          <span class="mono" style="color:var(--red);display:block;margin-bottom:12px;font-weight:700">// THE NEVER TWICE SPECIFICATIONS</span>
+          <div style="display:flex;flex-direction:column;gap:14px;font-family:var(--mono);font-size:12px">
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:8px">
+              <span>PRODUCT CLASS</span><span class="v">NOTEBOOK-FIRST HABIT SYSTEM</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:8px">
+              <span>CORE PHILOSOPHY</span><span class="v">MORTALITY &amp; HONEST TIME</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:8px">
+              <span>NIGHTLY AI ENGINE</span><span class="v">INK COMPANION (CHATTERBOX)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:8px">
+              <span>CLIENT RUNTIME</span><span class="v">FLUTTER (PORTRAIT-ONLY)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding-bottom:4px">
+              <span>RELATED WORK</span><span class="v">REPBOT (ON-DEVICE VISION COACH)</span>
+            </div>
+          </div>
+          <div style="margin-top:20px;padding:14px;background:var(--paper);border-radius:var(--radius-sm);border:1px solid var(--line2);font-size:13px;line-height:1.55;color:var(--ink2)">
+            <b>Companion App — RepBot (Rebutt):</b> Alongside Never Twice, I built RepBot: an Android camera-based AI fitness coach that uses on-device Google ML Kit pose detection for real-time rep counting and a "RepGate" feature which locks distracting social apps until you finish your physical reps.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 / ZERO-TOKEN INSTAGRAM AUTOMATION PIPELINE ============ -->
+<section id="p11" class="spread" data-page="P.P11" data-name="INSTAGRAM PIPELINE" aria-labelledby="h-p11">
+  <div class="spread-inner rv-scope">
+    <div class="big-num" aria-hidden="true">11</div>
+    <header class="kicker rv">
+      <span>FEATURED 11 — AUTONOMOUS MEDIA GENERATION</span>
+      <span class="tag win">ZERO-TOKEN PIPELINE</span>
+      <span class="tag exp">JSON-TO-VIDEO ENGINE</span>
+    </header>
+    <h2 id="h-p11" class="h-giant rv" style="--d:.05s">ONE JSON<span style="color:var(--red)">.</span><br><span class="outline wcond">FULL VIDEOS</span><br>&amp; CAROUSELS<span style="color:var(--red)">.</span></h2>
+    <div class="meta-row rv" style="--d:.15s">
+      <span><b>PIPELINE:</b> ZERO-TOKEN PROCEDURAL GENERATOR (NO LLM REQUIRED)</span>
+      <span><b>AUTOMATION:</b> PYTHON INSTAGRAPI RUNNER WITH JITTERED INTERVALS</span>
+      <span><b>OUTPUT:</b> 1:1 BOILING CAROUSEL GIFS &amp; SUBTITLED REELS</span>
+    </div>
+    <p class="thesis rv" style="--d:.2s">A complete local autonomous content production line built for the Never Twice brand. Takes a single declarative spec.json and generates frame-by-frame animated boiling GIF carousels and subtitled video reels with custom typography and audio—completely eliminating API inference costs. Then automatically publishes to Instagram via an anti-bot queue runner.</p>
+
+    <div class="gr gr-2" style="margin-top:40px">
+      <div class="rv" style="--d:.1s">
+        <div class="pipeline-card">
+          <span class="tag exp" style="margin-bottom:12px">// DETERMINISTIC RENDERING PIPELINE</span>
+          <h3 style="font-weight:900;font-size:24px;text-transform:uppercase;margin-bottom:14px">HOW ZERO-TOKEN GENERATION WORKS</h3>
+          <p style="font-size:14.5px;line-height:1.65;color:var(--ink2);margin-bottom:16px">
+            Instead of spending expensive LLM tokens on generative video engines, the Never Twice pipeline treats slides and videos as deterministic layout graphs:
+          </p>
+          <pre style="background:var(--paper);border:1px solid var(--line2);padding:14px;border-radius:var(--radius-sm);font-family:var(--mono);font-size:11px;color:var(--ink);line-height:1.55;overflow-x:auto">
+{
+  "series": "Never Twice / Mind Traps",
+  "palette": { "paper": "#f1ede3", "ink": "#14120f", "accent": "#c93a1e" },
+  "slides": [
+    { "type": "cover", "headline": ["STOP COUNTING", "THE STREAKS."], "character": "ink-thinking.svg" },
+    { "type": "body", "lead": "The guilt is what breaks you, not the skipped day.", "character": "ink-calm.svg" }
+  ]
+}
+          </pre>
+          <p style="font-size:13.5px;line-height:1.6;color:var(--ink2);margin-top:12px">
+            The NodeJS pipeline (<code>build-carousel.mjs</code>) rasterizes 6 unique boiling frames per character, computes letter-spacing and typography flow, overlays atmospheric textures, and renders ready-to-post 1080×1080 slides.
+          </p>
+        </div>
+      </div>
+
+      <div class="rv" style="--d:.2s">
+        <div class="readout" style="padding:24px">
+          <span class="mono" style="color:var(--red);display:block;margin-bottom:12px;font-weight:700">// AUTONOMOUS QUEUE RUNNER &amp; UPLOADER</span>
+          <p style="font-size:14px;line-height:1.6;color:var(--ink);margin-bottom:16px">
+            The companion Python queue runner (<code>auto_upload_carousels.py</code> + <code>instagram_uploader.py</code>) completely automates distribution:
+          </p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;font-family:var(--mono);font-size:11.5px">
+            <li style="border-bottom:1px solid var(--line);padding-bottom:8px">
+              <b style="color:var(--red)">• MOOD CLASSIFICATION:</b> Automatically categorizes posts (emotional, tactical, deep) and matches them to curated tracks from Instagram's official audio catalog.
+            </li>
+            <li style="border-bottom:1px solid var(--line);padding-bottom:8px">
+              <b style="color:var(--red)">• HUMAN-LIKE PACING:</b> Uploads are spaced with random 4 to 6 minute jitter to protect the account from spam flags and rate limits.
+            </li>
+            <li style="border-bottom:1px solid var(--line);padding-bottom:8px">
+              <b style="color:var(--red)">• MULTI-SLIDE AUDIO SYNC:</b> Renders high-res slide formats so Instagram mobile seamlessly streams the audio track across all carousel frames.
+            </li>
+            <li>
+              <b style="color:var(--red)">• LIVE TELEMETRY:</b> Full session management with checkpoint resumes and instant error notifications.
+            </li>
+          </ul>
         </div>
       </div>
     </div>

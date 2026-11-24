@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Off the map / DEB Field Archive</title>
+<meta name="description" content="This page is not in the archive. Return to the field index.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f1ede3">
+<meta property="og:type" content="website">
+<meta property="og:title" content="404 — Off the map / DEB Field Archive">
+<meta property="og:description" content="This page is not in the archive. Return to the field index.">
+<meta property="og:image" content="images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="home">
+<a class="skiplink" href="#nf">Skip to content</a>
+<div id="noise" aria-hidden="true"></div>
+<canvas id="trail" aria-hidden="true"></canvas>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursorTag" aria-hidden="true">OPEN</div>
+<div id="progress" aria-hidden="true"></div>
+<div id="curtain" aria-hidden="true"></div>
+
+<nav id="siteNav" aria-label="Site">
+  <a class="brand" href="index.html">DEB <span class="brand-sub hide-mobile">— FIELD ARCHIVE</span></a>
+  <div class="nav-links">
+    <a href="projects.html">Projects</a>
+    <a href="achievements.html">Wins</a>
+    <a href="anime.html">Anime</a>
+    <a href="music.html">Music</a>
+    <a href="cinema.html">Cinema</a>
+    <a href="gaming.html">Games</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">Index +</button>
+  </div>
+</nav>
+
+<div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-head"><h2>Field Index</h2><button id="tocClose">Close ×</button></div>
+  <div class="toc-grid">
+    <div>
+      <p class="toc-label">Lost?</p>
+      <ul class="toc-list">
+        <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Field Archive / Cover</span><span class="leader"></span><span class="t-pg">Home ↗</span></a></li>
+        <li><a href="index.html#junction"><span class="t-no">01</span><span class="t-title">The Junction</span><span class="leader"></span><span class="t-pg">P.002</span></a></li>
+        <li><a href="index.html#work"><span class="t-no">02</span><span class="t-title">Selected Builds</span><span class="leader"></span><span class="t-pg">P.003</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="toc-label">Elsewhere in the archive</p>
+      <ul class="toc-list">
+        <li><a href="projects.html"><span class="t-no">A</span><span class="t-title">Projects Dossier</span><span class="leader"></span><span class="t-pg">09 builds ↗</span></a></li>
+        <li><a href="achievements.html"><span class="t-no">B</span><span class="t-title">Achievements &amp; Honors</span><span class="leader"></span><span class="t-pg">Wins ↗</span></a></li>
+        <li><a href="index.html#contact"><span class="t-no">C</span><span class="t-title">Open Channel</span><span class="leader"></span><span class="t-pg">Contact ↗</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="toc-foot">DEBARGHA SARKAR / 2026 — SOFTWARE × HARDWARE × SYSTEMS — KOLKATA, IN</p>
+</div>
+
+<main>
+<section id="nf" class="notfound" aria-labelledby="nf-title">
+  <div class="nf-grid">
+    <div>
+      <p class="section-tag">Error 404 / Off the map</p>
+      <h1 id="nf-title">4<span>0</span>4<span class="red">.</span></h1>
+      <p>This page is not in the archive. It may have been renamed, moved, or never built in the first place. The index is still where it should be.</p>
+      <a class="btn btn-primary" href="index.html" style="margin-top:24px">Return to the cover <span class="arw" aria-hidden="true">↖</span></a>
+    </div>
+    <nav class="nf-links" aria-label="Recovery links">
+      <a href="index.html"><span>00 / Field Archive</span><span aria-hidden="true">↗</span></a>
+      <a href="projects.html"><span>01 / Projects Dossier</span><span aria-hidden="true">↗</span></a>
+      <a href="achievements.html"><span>02 / Wins &amp; Honors</span><span aria-hidden="true">↗</span></a>
+      <a href="index.html#contact"><span>03 / Open Channel</span><span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</section>
+</main>
+
+<footer class="home-footer">
+  <div class="footer-inner">
+    <div class="footer-colophon" style="border-top:1px solid var(--pline);margin-top:0">
+      <span>DEBARGHA SARKAR / FIELD ARCHIVE / 2026</span>
+      <span>404 — not found</span>
+      <span>Kolkata, India</span>
+      <span>Still building.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

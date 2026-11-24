@@ -9,6 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f1ede3">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DEB — Anime Dimension / Dragon Ball Super, Attack on Titan &amp; More">
+<meta property="og:description" content="Debargha Sarkar — anime sanctuary: Dragon Ball Super in authentic Goku Orange & Saiyan Blue, Colossal Titan, Evangelion Unit-01, Monster, Vinland Saga.">
+<meta property="og:image" content="images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DEB — Anime Dimension / Dragon Ball Super, Attack on Titan &amp; More">
+<meta name="twitter:description" content="Debargha Sarkar — anime sanctuary: Dragon Ball Super in authentic Goku Orange & Saiyan Blue, Colossal Titan, Evangelion Unit-01, Monster, Vinland Saga.">
+<meta name="twitter:image" content="images/og.jpg">
 
 <style>
   /* ============ AUTHENTIC ANIME DIMENSION COLOR SCHEMES ============ */
@@ -140,24 +151,30 @@
 <canvas id="trail" aria-hidden="true"></canvas>
 <div id="cursor" aria-hidden="true"></div>
 <div id="cursorTag" aria-hidden="true">OPEN</div>
+<div id="progress" aria-hidden="true"></div>
+<div id="curtain" aria-hidden="true"></div>
 
 <!-- NAVIGATION -->
 <nav id="siteNav" aria-label="Site">
-  <a class="brand" href="index.html">← DEB <span class="hide-mobile">— BACK TO HOME</span></a>
-  <div style="display:flex;align-items:center;gap:12px">
-    <a class="tag hide-mobile" href="projects.html" style="text-decoration:none;border-color:var(--yellow);color:var(--yellow)">PROJECTS</a>
-    <a class="tag hide-mobile" href="achievements.html" style="text-decoration:none;border-color:var(--red);color:var(--red)">ACHIEVEMENTS</a>
-    <a class="tag hide-mobile" href="music.html" style="text-decoration:none">MUSIC</a>
-    <a class="tag hide-mobile" href="cinema.html" style="text-decoration:none">CINEMA</a>
-    <a class="tag hide-mobile" href="gaming.html" style="text-decoration:none">GAMES</a>
-    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">INDEX +</button>
+  <a class="brand" href="index.html">DEB <span class="brand-sub hide-mobile">— FIELD ARCHIVE</span></a>
+  <div class="nav-links">
+    <a href="projects.html">Projects</a>
+    <a href="achievements.html">Wins</a>
+    <a href="anime.html" aria-current="page">Anime</a>
+    <a href="music.html">Music</a>
+    <a href="cinema.html">Cinema</a>
+    <a href="gaming.html">Games</a>
+    <button id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc">Index +</button>
   </div>
 </nav>
 
 <!-- TOC -->
 <div id="toc" role="dialog" aria-modal="true" aria-label="Table of contents">
   <div class="toc-head"><h2>Anime Index</h2><button id="tocClose">CLOSE ×</button></div>
-  <ul class="toc-list">
+  <div class="toc-grid">
+      <div>
+        <p class="toc-label">On this page</p>
+        <ul class="toc-list">
     <li><a href="index.html"><span class="t-no">←</span><span class="t-title">Back to Main Junction</span><span class="leader"></span><span class="t-pg">HOME ↗</span></a></li>
     <li><a href="#cover"><span class="t-no">00</span><span class="t-title">Anime Cover</span><span class="leader"></span><span class="t-pg">P.A00</span></a></li>
     <li><a href="#m-db"><span class="t-no">01</span><span class="t-title">Dragon Ball Super (#1 All-Time / Goku Gi Orange &amp; Blue)</span><span class="leader"></span><span class="t-pg">P.A01</span></a></li>
@@ -167,6 +184,19 @@
     <li><a href="#m-vinland"><span class="t-no">05</span><span class="t-title">Vinland Saga (“I Have No Enemies”)</span><span class="leader"></span><span class="t-pg">P.A05</span></a></li>
     <li><a href="#m-spy"><span class="t-no">06</span><span class="t-title">Spy × Family &amp; My Hero Academia</span><span class="leader"></span><span class="t-pg">P.A06</span></a></li>
   </ul>
+      </div>
+      <div>
+        <p class="toc-label">Elsewhere in the archive</p>
+        <ul class="toc-list">
+        <li><a href="index.html"><span class="t-no">↗</span><span class="t-title">Field Archive / Cover</span><span class="leader"></span><span class="t-pg">Home</span></a></li>
+        <li><a href="projects.html"><span class="t-no">↗</span><span class="t-title">Projects Dossier</span><span class="leader"></span><span class="t-pg">09 builds</span></a></li>
+        <li><a href="achievements.html"><span class="t-no">↗</span><span class="t-title">Achievements &amp; Honors</span><span class="leader"></span><span class="t-pg">Wins</span></a></li>
+        <li><a href="music.html"><span class="t-no">↗</span><span class="t-title">Music Sanctuary</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="cinema.html"><span class="t-no">↗</span><span class="t-title">Cinema Vault</span><span class="leader"></span><span class="t-pg">06 plates</span></a></li>
+        <li><a href="gaming.html"><span class="t-no">↗</span><span class="t-title">Gaming Archive</span><span class="leader"></span><span class="t-pg">04 plates</span></a></li>
+        </ul>
+      </div>
+    </div>
   <p class="toc-foot">DEBARGHA SARKAR / 2026 — ANIME REALM</p>
 </div>
 
@@ -218,7 +248,7 @@
     
     <div class="anime-header-card">
       <header class="kicker rv">
-        <span class="db-orange">🔥 #1 ALL-TIME FAVORITE ANIME</span>
+        <span class="db-orange">★ #1 ALL-TIME FAVORITE ANIME</span>
         <span class="tag win" style="background:#ff5500;color:#000;border-color:#ff5500;font-weight:900">ドラゴンボール超 // GOD KI</span>
         <span class="tag" style="background:#0038a8;color:#fff;border-color:#0066ff">SUPER SAIYAN BLUE</span>
       </header>
@@ -243,11 +273,11 @@
     <div class="gr gr-2" style="margin-top:44px">
       <div class="rv" style="--d:.1s">
         <div class="media-img-frame" style="border-color:#ff5500;box-shadow:0 0 35px rgba(255,85,0,0.2)">
-          <img src="images/dragonball-hero.jpg" alt="Dragon Ball Super - Goku Ultra Instinct" onerror="this.style.display='none'">
+          <img src="images/dragonball-hero.jpg" alt="Dragon Ball Super archive plate — orange orbital motif" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#ff5500;font-size:32px;margin-bottom:8px">⚡</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: GOKU ULTRA INSTINCT / SUPER SAIYAN BLUE</span>
-            <span style="font-size:11px;color:#fed7aa;margin-top:6px">Place image file in: <code>images/dragonball-hero.jpg</code></span>
+            <span style="color:#ff5500;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — GOKU ULTRA INSTINCT / SUPER SAIYAN BLUE</span>
+            <span style="font-size:11px;color:#fed7aa;margin-top:6px">drop file at <code>images/dragonball-hero.jpg</code></span>
           </div>
         </div>
         <div class="fig-label" style="color:#fed7aa">
@@ -337,12 +367,12 @@
 
       <!-- RIGHT COLUMN: COLOSSAL TITAN IMAGE FRAME -->
       <div class="rv" style="--d:.2s">
-        <div class="media-img-frame" style="border:2px solid #dc2626;box-shadow:0 0 35px rgba(220,38,38,0.25);min-height:460px">
-          <img src="images/aot-colossal-titan.jpg" alt="Attack on Titan - Colossal Titan on the Right" onerror="this.style.display='none'">
+        <div class="media-img-frame" style="border:2px solid #dc2626;box-shadow:0 0 35px rgba(220,38,38,0.25)">
+          <img src="images/aot-colossal-titan.jpg" alt="Attack on Titan archive plate — red concentric rings" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#dc2626;font-size:36px;margin-bottom:8px">🧱</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: COLOSSAL TITAN ON THE RIGHT</span>
-            <span style="font-size:11px;color:#fca5a5;margin-top:6px">Place image in: <code>images/aot-colossal-titan.jpg</code></span>
+            <span style="color:#dc2626;font-size:36px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — COLOSSAL TITAN ON THE RIGHT</span>
+            <span style="font-size:11px;color:#fca5a5;margin-top:6px">drop file at <code>images/aot-colossal-titan.jpg</code></span>
             <span style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px">Peering over the 50-meter Eldian stone wall</span>
           </div>
         </div>
@@ -388,11 +418,11 @@
     <div class="gr gr-2" style="margin-top:44px">
       <div class="rv" style="--d:.1s">
         <div class="media-img-frame" style="border:2px solid #9333ea;box-shadow:0 0 35px rgba(147,51,234,0.25)">
-          <img src="images/evangelion-unit01.jpg" alt="Neon Genesis Evangelion - Unit-01" onerror="this.style.display='none'">
+          <img src="images/evangelion-unit01.jpg" alt="Neon Genesis Evangelion archive plate — violet orbit system" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#22c55e;font-size:32px;margin-bottom:8px">⚠️</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: EVA UNIT-01 &amp; A.T. FIELD</span>
-            <span style="font-size:11px;color:#d8b4fe;margin-top:6px">Place image in: <code>images/evangelion-unit01.jpg</code></span>
+            <span style="color:#22c55e;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — EVA UNIT-01 &amp; A.T. FIELD</span>
+            <span style="font-size:11px;color:#d8b4fe;margin-top:6px">drop file at <code>images/evangelion-unit01.jpg</code></span>
           </div>
         </div>
         <div class="fig-label" style="color:#d8b4fe">
@@ -445,11 +475,11 @@
     <div class="gr gr-2" style="margin-top:44px">
       <div class="rv" style="--d:.1s">
         <div class="media-img-frame" style="border:2px solid #b91c1c">
-          <img src="images/monster-johan.jpg" alt="Monster - Johan Liebert" onerror="this.style.display='none'">
+          <img src="images/monster-johan.jpg" alt="Monster archive plate — deep crimson signal field" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#b91c1c;font-size:32px;margin-bottom:8px">🩸</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: JOHAN LIEBERT &amp; DR. TENMA</span>
-            <span style="font-size:11px;color:#fca5a5;margin-top:6px">Place image in: <code>images/monster-johan.jpg</code></span>
+            <span style="color:#b91c1c;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — JOHAN LIEBERT &amp; DR. TENMA</span>
+            <span style="font-size:11px;color:#fca5a5;margin-top:6px">drop file at <code>images/monster-johan.jpg</code></span>
           </div>
         </div>
       </div>
@@ -498,11 +528,11 @@
     <div class="gr gr-2" style="margin-top:44px">
       <div class="rv" style="--d:.1s">
         <div class="media-img-frame" style="border:2px solid #0284c7">
-          <img src="images/vinland-thorfinn.jpg" alt="Vinland Saga - Thorfinn" onerror="this.style.display='none'">
+          <img src="images/vinland-thorfinn.jpg" alt="Vinland Saga archive plate — blue northern orbit" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#0284c7;font-size:32px;margin-bottom:8px">❄️</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: THORFINN "I HAVE NO ENEMIES"</span>
-            <span style="font-size:11px;color:#bae6fd;margin-top:6px">Place image in: <code>images/vinland-thorfinn.jpg</code></span>
+            <span style="color:#0284c7;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — THORFINN "I HAVE NO ENEMIES"</span>
+            <span style="font-size:11px;color:#bae6fd;margin-top:6px">drop file at <code>images/vinland-thorfinn.jpg</code></span>
           </div>
         </div>
       </div>
@@ -550,11 +580,11 @@
     <div class="gr gr-2" style="margin-top:44px">
       <div class="rv" style="--d:.1s">
         <div class="media-img-frame" style="border:2px solid #ec4899">
-          <img src="images/spy-mha.jpg" alt="Spy x Family and MHA" onerror="this.style.display='none'">
+          <img src="images/spy-mha.jpg" alt="Spy × Family and My Hero Academia archive plate — pink halftone" loading="lazy" onerror="this.style.display='none'">
           <div class="media-placeholder-hint">
-            <span style="color:#ec4899;font-size:32px;margin-bottom:8px">🥜</span>
-            <span style="color:#fff;font-weight:900;font-size:16px">PICTURE: ANYA FORGER &amp; ALL MIGHT</span>
-            <span style="font-size:11px;color:#fbcfe8;margin-top:6px">Place image in: <code>images/spy-mha.jpg</code></span>
+            <span style="color:#ec4899;font-size:32px;margin-bottom:8px">✕</span>
+            <span style="color:#fff;font-weight:900;font-size:16px">PLATE MISSING — ANYA FORGER &amp; ALL MIGHT</span>
+            <span style="font-size:11px;color:#fbcfe8;margin-top:6px">drop file at <code>images/spy-mha.jpg</code></span>
           </div>
         </div>
       </div>
